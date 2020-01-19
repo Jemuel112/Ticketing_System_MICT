@@ -21,6 +21,7 @@ class CreateMTicketsTable extends Migration
             $table->string('og_status')->nullable();
             $table->string('acknowledge_by')->nullable();
             $table->string('assigned_by')->nullable();
+            $table->string('assisted_by')->nullable();
             $table->string('accomplished_by')->nullable();
             $table->string('category');
             $table->string('sys_category')->nullable();

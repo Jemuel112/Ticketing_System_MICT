@@ -92,7 +92,7 @@
                             {{--Reportedy by--}}
                             <div class="col-lg-3 col-sm-3">
                                 <label>Reported By</label>
-                                <input class="form-control" style="width: 100%;" type="text" name="" placeholder="Name"
+                                <input class="form-control" style="width: 100%;" type="text" name="reported_by" placeholder="Name"
                                 >
                             </div>
                             {{--End Reported by--}}
@@ -102,7 +102,7 @@
                             <div class="col-lg-3 col-sm-3">
                                 <label for="reqb">Request By</label>
                                 @if(Auth::user()->department == 'Administrator' || Auth::user()->department == "MICT")
-                                    <select class="form-control select2bs4" id="reqb" style="width: 100%;">
+                                    <select class="form-control select2bs4" id="reqb" name="request_by" style="width: 100%;" required>
                                         <option value=""></option>
                                         @foreach($departments as $department)
                                             <option
@@ -110,7 +110,7 @@
                                         @endforeach
                                     </select>
                                 @else
-                                    <select class="form-control select2bs4" id="reqb"
+                                    <select class="form-control select2bs4" id="reqb" name="request_by"
                                             style="width: 100%;"
                                             disabled>
                                         <option
@@ -124,7 +124,7 @@
                             <div class="col-lg-3 col-sm-3">
                                 <label>Status</label>
                                 @if(Auth::user()->department == 'Administrator' || Auth::user()->department == 'MICT')
-                                    <select class="form-control select2bs4"
+                                    <select class="form-control select2bs4" name="status"
                                             style="width: 100%;"
                                             id="status">
                                         <option value="Active" selected>Active</option>
@@ -134,7 +134,7 @@
                                         <option value="Closed">Closed</option>
                                     </select>
                                 @else
-                                    <select class="form-control select2bs4"
+                                    <select class="form-control select2bs4" name="status"
                                             style="width: 100%;"
                                             id="status"
                                             disabled>
@@ -148,7 +148,7 @@
                             <div class="col-lg-3 col-sm-3">
                                 <div id="dogs" hidden>
                                     <label for="ogs">On-Going Status</label>
-                                    <select class="form-control select2bs4"
+                                    <select class="form-control select2bs4" name="og_status"
                                             id="ogs"
                                             style="width: 100%;"
                                             disabled
@@ -166,7 +166,7 @@
                             <div class="col-md-6" id="dogst1" hidden>
                                 <label for="ogst"><br>Select Date to start</label>
                                 <div class="input-group date" id="datetimepickers" data-target-input="nearest">
-                                    <input type="text" class="form-control datetimepicker-input"
+                                    <input type="text" class="form-control datetimepicker-input" name="start_at"
                                            data-target="#datetimepickers"/>
                                     <div class="input-group-append" data-target="#datetimepickers"
                                          data-toggle="datetimepicker">
@@ -177,7 +177,7 @@
                             <div class="col-md-6" id="dogst2" hidden>
                                 <label for="ogst"><br>Select Deadline</label>
                                 <div class="input-group date" id="datetimepickerd" data-target-input="nearest">
-                                    <input type="text" class="form-control datetimepicker-input"
+                                    <input type="text" class="form-control datetimepicker-input" name="end_at"
                                            data-target="#datetimepickerd"/>
                                     <div class="input-group-append" data-target="#datetimepickerd"
                                          data-toggle="datetimepicker">
@@ -189,7 +189,7 @@
                             {{--Acknoledge--}}
                             <div class="col-lg-3 col-md-3">
                                 <label for="ackn"><br>Acknowledge by</label>
-                                <select class="form-control select2bs4" id="ackn"
+                                <select class="form-control select2bs4" id="ackn" name="acknowledge_by"
                                         style="width: 100%;"
                                         @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
                                         @else
@@ -207,7 +207,7 @@
                             {{--Assigned--}}
                             <div class="col-lg-3 col-md-3">
                                 <label><br>Assigned to</label>
-                                <select class="form-control select2bs4"
+                                <select class="form-control select2bs4" name="assigned_by"
                                         data-placeholder="Assigned to..."
                                         multiple="multiple" style="width: 100%;"
                                         @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
@@ -226,7 +226,7 @@
                             {{--Assisted--}}
                             <div class="col-lg-3 col-md-3">
                                 <label><br>Assisted By</label>
-                                <select class="form-control select2bs4"
+                                <select class="form-control select2bs4" name="assisted_by"
                                         data-placeholder="Assisted by..."
                                         multiple="multiple" style="width: 100%;"
                                         @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
@@ -245,7 +245,7 @@
                             {{--Accompleshed--}}
                             <div class="col-lg-3 col-md-3">
                                 <label><br>Accomplished by</label>
-                                <select class="form-control select2bs4"
+                                <select class="form-control select2bs4" name="accomplished_by"
                                         data-placeholder="Accomplished by..."
                                         multiple="multiple" style="width: 100%;"
                                         @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
@@ -263,7 +263,7 @@
 
                             <div class="col-lg-4 col-md-4">
                                 <label><br>Category</label>
-                                <select class="form-control select2bs4" id="category"
+                                <select class="form-control select2bs4" id="category" name="category"
                                         style="width: 100%;">
                                     <option></option>
                                     <option value="System">System</option>
@@ -288,7 +288,7 @@
                             @if(Auth::user()->department == "Administrator"|| Auth::user()->department == "MICT")
                                 <div id="dsystem" class="col-lg-4 col-md-4" hidden>
                                     <label><br>System Category</label>
-                                    <select id="system" class="form-control select2bs4" id="syscategory"
+                                    <select id="system" class="form-control select2bs4" id="syscategory" name="sys_category"
                                             style="width: 100%;"
                                             disabled>
                                         {{--                                    <option></option>--}}
@@ -311,7 +311,7 @@
                             @if(Auth::user()->department == "Administrator" || Auth::user()->departement == "MICT")
                                 <div class="col-lg-4 col-md-4">
                                     <label><br>Level of Priority</label>
-                                    <select class="form-control select2bs4" id="lop"
+                                    <select class="form-control select2bs4" id="lop" name="lop"
                                             style="width: 100%;">
                                         <option></option>
                                         <option>Low</option>
@@ -325,7 +325,7 @@
                                 <label> <br>
                                     Issue / Concerns
                                 </label>
-                                <textarea name="concents" value="{{Auth::user()->fname}} {{Auth::user()->lanme}}"
+                                <textarea name="concenrs" value="{{Auth::user()->fname}} {{Auth::user()->lanme}}"
                                           id="act" class="textarea" placeholder="Place some text here"
                                           style="width: 100%; height: 250px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
                             </div>
