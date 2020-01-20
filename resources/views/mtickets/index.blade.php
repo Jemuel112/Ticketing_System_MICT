@@ -236,8 +236,8 @@
                             {{--Assigned--}}
                             <div class="col-lg-3 col-md-3">
                                 <label><br>Assigned to</label>
-                                <select class="form-control select2bs4 @error("assigned_by")is-invalid @enderror"
-                                        value="{{old('assigned_by')}}" name="assigned_by"
+                                <select class="form-control select2bs4 @error("assigned_to")is-invalid @enderror"
+                                        value="{{old('assigned_to')}}" name="assigned_to"
                                         data-placeholder="Assigned to..."
                                         multiple="multiple" style="width: 100%;"
                                         @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
@@ -345,9 +345,9 @@
                                 </div>
                             @endif
 
-                            @if(Auth::user()->department == 'MICT' || Auth::user()->departement == 'Administrator')
+                            @if(Auth::user()->department == 'MICT' || Auth::user()->department == 'Administrator')
                                 <div class="col-lg-4 col-md-4">
-                                    <label><br>Level of Prioritys</label>
+                                    <label><br>Level of Priority</label>
                                     <select class="form-control select2bs4 @error("lop")is-invalid @enderror"
                                             value="{{old('lop')}}" id="lop" name="lop"
                                             style="width: 100%;">
