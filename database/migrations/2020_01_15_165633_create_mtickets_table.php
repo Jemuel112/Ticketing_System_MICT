@@ -26,9 +26,10 @@ class CreateMTicketsTable extends Migration
             $table->string('category');
             $table->string('sys_category')->nullable();
             $table->string('lop')->nullable();
-            $table->longText('concenrs');
+            $table->longText('concerns');
             $table->dateTime('start_at')->nullable();
             $table->dateTime('end_at')->nullable();
+            $table->boolean('is_new')->default(true);
             $table->timestamps();
         });
     }
