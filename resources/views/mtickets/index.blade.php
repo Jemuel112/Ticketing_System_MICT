@@ -1,8 +1,9 @@
 @extends('layouts.master')
 
 @section('title', 'Create New Tickets | ')
-@include('layouts.scripts')
 @section('content')
+    @include('layouts.scripts')
+
     <!-- Content Wrapper. Contains page content -->
     <form action="/Create_MICT_Tickets" method="POST">
 
@@ -12,7 +13,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Create Ticket</h1>
+                            <h1>Create Tickets</h1>
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->
@@ -156,7 +157,7 @@
                                     </select>
                                 @else
                                     <select class="form-control select2bs4 @error("status")is-invalid @enderror"
-                                            value="{{old('status')}}" name="status"
+                                            name="status"
                                             style="width: 100%;"
                                             id="status"
                                     >
@@ -171,7 +172,7 @@
                                 <div id="dogs" hidden>
                                     <label for="ogs">On-Going Status</label>
                                     <select class="form-control select2bs4 @error("og_status")is-invalid @enderror"
-                                            value="{{old('og_status')}}" name="og_status"
+                                            name="og_status"
                                             id="ogs"
                                             style="width: 100%;"
                                             disabled
@@ -295,14 +296,14 @@
                             <div class="col-lg-4 col-md-4">
                                 <label><br>Category</label>
                                 <select class="form-control select2bs4 @error("category")is-invalid @enderror"
-                                        value="{{old('category')}}" id="category" name="category"
+                                        id="category" name="category"
                                         style="width: 100%;">
                                     <option></option>
-                                    <option value="System">System</option>
-                                    <option value="Software">Software</option>
-                                    <option value="Hardware">Hardware</option>
-                                    <option value="Network">Network</option>
-                                    <option value="Others">Others</option>
+                                    <option value="System" {{ old('category') == 'System' ? 'selected':''}}>System</option>
+                                    <option value="Software" {{ old('category') == 'Software' ? 'selected':''}}>Software</option>
+                                    <option value="Hardware" {{ old('category') == 'Hardware' ? 'selected':''}}>Hardware</option>
+                                    <option value="Network" {{ old('category') == 'Network' ? 'selected':''}}>Network</option>
+                                    <option value="Others" {{ old('category') == 'Others' ? 'selected':''}}>Others</option>
                                 </select>
                             </div>
 
@@ -323,37 +324,37 @@
                                     <label><br>System Category</label>
                                     <select id="system"
                                             class="form-control select2bs4 @error("sys_category")is-invalid @enderror"
-                                            value="{{old('sys_category')}}" id="syscategory"
+                                            id="syscategory"
                                             name="sys_category"
                                             style="width: 100%;"
                                             disabled>
                                         {{--                                    <option></option>--}}
-                                        <option value="Bixbox">Bixbox</option>
-                                        <option value="PACS">PACS</option>
-                                        <option value="LIS - SYSMEX">LIS - SYSMEX</option>
-                                        <option value="LIS - MARSMAN">LIS - MARSMAN</option>
-                                        <option value="LIS - J&J">LIS - J&J</option>
-                                        <option value="DMS">DMS</option>
-                                        <option value="ACC PAC">ACC PAC</option>
-                                        <option value="MEDEXPRESS">MEDEXPRESS</option>
-                                        <option value="ACCESS DB">ACCESS DB</option>
-                                        <option value="ASSET">ASSET TRACER</option>
-                                        <option value="CHEQUE TRACER">CHEQUE TRACER</option>
-                                        <option value="Others">Others</option>
+                                        <option value="Bixbox" {{ old('sys_category') == 'Bixbox' ? 'selected':''}}>Bixbox</option>
+                                        <option value="PACS" {{ old('sys_category') == 'PACS' ? 'selected':''}}>PACS</option>
+                                        <option value="LIS - SYSMEX" {{ old('sys_category') == 'LIS - SYSMEX' ? 'selected':''}}>LIS - SYSMEX</option>
+                                        <option value="LIS - MARSMAN" {{ old('sys_category') == 'LIS' ? 'selected':''}}>LIS - MARSMAN</option>
+                                        <option value="LIS - J&J" {{ old('sys_category') == 'LIS - J&J' ? 'selected':''}}>LIS - J&J</option>
+                                        <option value="DMS" {{ old('sys_category') == 'DMS' ? 'selected':''}}>DMS</option>
+                                        <option value="ACC PAC" {{ old('sys_category') == 'ACC PAC' ? 'selected':''}}>ACC PAC</option>
+                                        <option value="MEDEXPRESS" {{ old('sys_category') == 'MEDEXPRESS' ? 'selected':''}}>MEDEXPRESS</option>
+                                        <option value="ACCESS DB" {{ old('sys_category') == 'ACCESS DB' ? 'selected':''}}>ACCESS DB</option>
+                                        <option value="ASSET" {{ old('sys_category') == 'ASSET' ? 'selected':''}}>ASSET TRACER</option>
+                                        <option value="CHEQUE TRACER" {{ old('sys_category') == 'CHEQUE TRACER' ? 'selected':''}}>CHEQUE TRACER</option>
+                                        <option value="Others" {{ old('sys_category') == 'Others' ? 'selected':''}}>Others</option>
                                     </select>
                                 </div>
                             @endif
 
-                            @if(Auth::user()->department == "Administrator" || Auth::user()->departement == "MICT")
+                            @if(Auth::user()->department == 'MICT' || Auth::user()->departement == 'Administrator')
                                 <div class="col-lg-4 col-md-4">
-                                    <label><br>Level of Priority</label>
+                                    <label><br>Level of Prioritys</label>
                                     <select class="form-control select2bs4 @error("lop")is-invalid @enderror"
                                             value="{{old('lop')}}" id="lop" name="lop"
                                             style="width: 100%;">
                                         <option></option>
-                                        <option>Low</option>
-                                        <option>Medium</option>
-                                        <option>High</option>
+                                        <option value="Low" {{ old('lop') == 'Low' ? 'selected':''}}>Low</option>
+                                        <option value="Medium" {{ old('lop') == 'Medium' ? 'selected':''}}>Medium</option>
+                                        <option value="High" {{ old('lop') == 'High' ? 'selected':''}}>High</option>
                                     </select>
                                 </div>
                             @endif
