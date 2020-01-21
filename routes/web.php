@@ -23,7 +23,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware('auth');
 
-Route::resource('/Create_MICT_Tickets', 'mTicketsController');
+Route::resource('/MICT-Tickets', 'mTicketsController');
 
 
 //Route::get('/departments', 'DepartmentsController@index');

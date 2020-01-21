@@ -14,17 +14,18 @@ class MTicketsController extends Controller
     {
         $this->middleware('disablepreventback');
         $this->middleware('auth');
-        $this->middleware('auth.am')->except('index','store','allticket');
+        $this->middleware('auth.am')->except('index','create','store');
 
-    }
-
-    public function alltickets()
-    {
-        $mtickets = mTicket::all();
-        return view('/alltickets', compact('mtickets'));
     }
 
     public function index(Request $request)
+    {
+        $tickets = mTicket::all();
+        return view('mtickets.index', compact('tickets'));
+
+    }
+
+    public function create()
     {
         $departments = Department::all();
         $micts = User::select('fname')
@@ -35,7 +36,7 @@ class MTicketsController extends Controller
                 ['department', '=', 'Administrator']
             ])
             ->get();
-        return view('mtickets.index', compact('departments', 'micts'));
+        return view('mtickets.create', compact('departments', 'micts'));
     }
 
     public function store(Request $request)
