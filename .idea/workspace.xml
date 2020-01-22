@@ -3,13 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e46f795c-50de-4821-94e9-0a47af70672e" name="Default Changelist" comment="Innitial Commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/AccessAE.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/AccessAE.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/AccessAM.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/AccessAM.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/AccessAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/AccessAdmin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/AccessEngineering.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/AccessEngineering.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/AccessMICT.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/AccessMICT.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_01_15_165633_create_mtickets_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_01_15_165633_create_mtickets_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/mtickets/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mtickets/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/mtickets/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mtickets/show.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -222,5 +217,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="378" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1579685213526" />
+    <state x="339" y="162" key="run.anything.popup" timestamp="1579708484926">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1579708484926" />
   </component>
 </project>

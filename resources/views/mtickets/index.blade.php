@@ -9,7 +9,7 @@
                 <table id="department1" class="nowrap compact table table-bordered table-striped">
                     <thead>
                     <tr>
-                        <th width="5%">Ticket No.</th>
+                        <th>Ticket no.</th>
                         <th>Reported by</th>
                         <th>Department</th>
                         <th>Category</th>
@@ -51,7 +51,18 @@
         </section>
     </div>
     <script>
-        $("#department1").DataTable();
+        $("#department1").DataTable({
+            "columns": [
+                { "width": "1%" },
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+
+            ]
+        });
     </script>
 
 @endsection
