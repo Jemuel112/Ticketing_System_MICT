@@ -7,6 +7,7 @@ use App\mTicket;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 
 class MTicketsController extends Controller
 {
@@ -14,8 +15,8 @@ class MTicketsController extends Controller
     {
         $this->middleware('disablepreventback');
         $this->middleware('auth');
-       //$this->middleware('auth.am')->except('index','store','allticket');
-        $this->middleware('auth.admin')->only('index','store','allticket');
+        //$this->middleware('auth.am')->except('index','store','allticket');
+        $this->middleware('auth.admin')->only('index', 'store', 'allticket');
 
     }
 
@@ -24,8 +25,8 @@ class MTicketsController extends Controller
         $tickets = mTicket::all();
         return view('mtickets.index', compact('tickets'));
     }
-    
-        public function create(Request $request)
+
+    public function create(Request $request)
     {
         $departments = Department::all();
         $micts = User::select('fname')
@@ -41,7 +42,9 @@ class MTicketsController extends Controller
 
     public function store(Request $request)
     {
-//        dd($request);
+
+        dd( Input::all() );
+//                dd($request);
         if (Auth::user()->department == 'Administrator') {
 //            dd($request);
             if ($request->status == 'On-Going') {
@@ -63,9 +66,11 @@ class MTicketsController extends Controller
                     'category' => 'required',
                     'sys_category' => '',
                     'concerns' => 'required|min:8',
-                    'lop' => 'required'
+                    'lop' => 'required',
+                    'created_by' => '',
+                    'created_at' => '',
                 ]);
-            }else{
+            } else {
                 $data = request()->validate([
                     'create_at' => '',
                     'reported_by' => 'required',
@@ -78,7 +83,8 @@ class MTicketsController extends Controller
                     'category' => 'required',
                     'sys_category' => '',
                     'concerns' => 'required|min:8',
-                    'lop' => 'required'
+                    'lop' => 'required',
+                    'created_by' => '',
                 ]);
             }
 
@@ -95,9 +101,10 @@ class MTicketsController extends Controller
                     'status' => 'required',
                     'category' => 'required',
                     'concerns' => 'required|min:8',
-                    'lop' => 'required'
+                    'lop' => 'required',
+                    'created_by' => '',
                 ]);
-            }else{
+            } else {
                 $data = request()->validate([
                     'reported_by' => 'required',
                     'request_by' => 'required',
@@ -105,23 +112,26 @@ class MTicketsController extends Controller
                     'acknowledge_by' => 'required',
                     'category' => 'required',
                     'concerns' => 'required|min:8',
-                    'lop' => 'required'
+                    'lop' => 'required',
+                    'created_by' => '',
                 ]);
             }
 
-        }else{
+        } else {
             $data = request()->validate([
                 'reported_by' => 'required',
                 'request_by' => 'required',
                 'status' => 'required',
                 'category' => 'required',
                 'concerns' => 'required|min:8',
+                'created_by' => '',
             ]);
-//            dd($data);
         }
-
-//        $task->start_date = Carbon::now();
+        $ticket = new mTicket;
+        $ticket->created_at = 'created_at';
+        $ticket->created_by = 'created_by';
+        $ticket->save();
         mTicket::create($data);
-        return redirect('/');
+        return view('mtickets.index');
     }
 }

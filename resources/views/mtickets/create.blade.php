@@ -6,7 +6,7 @@
 @section('content')
 
     <!-- Content Wrapper. Contains page content -->
-    <form action="/Create_MICT_Tickets" method="POST">
+    <form action="/MICT-Tickets" method="POST">
 
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -51,7 +51,7 @@
                                     <div class="form-group">
                                         <div class="input-group date"
                                              data-target-input="nearest">
-                                            <input type="text" name="create_at" id="datetimepicker7"
+                                            <input type="text" name="created_at" id="datetimepicker7"
                                                    class="form-control datetimepicker-input"
                                                    data-target="#datetimepicker7">
                                             <div class="input-group-append" data-target="#datetimepicker7"
@@ -228,7 +228,7 @@
                                     <option></option>
                                     @foreach($micts as $mict)
                                         <option
-                                            value="{{$mict->fname}}">{{$mict->fname}}</option>
+                                            value="{{$mict->fname}}" {{ old('acknowledge_by') == $mict->fname ? 'selected':''}}>{{$mict->fname}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -330,7 +330,7 @@
                                             style="width: 100%;"
                                             disabled>
                                         {{--                                    <option></option>--}}
-                                        <option value="Bixbox" {{ old('sys_category') == 'Bixbox' ? 'selected':''}}>Bixbox</option>
+                                        <option value="Bizbox" {{ old('sys_category') == 'Bizbox' ? 'selected':''}}>Bizbox</option>
                                         <option value="PACS" {{ old('sys_category') == 'PACS' ? 'selected':''}}>PACS</option>
                                         <option value="LIS - SYSMEX" {{ old('sys_category') == 'LIS - SYSMEX' ? 'selected':''}}>LIS - SYSMEX</option>
                                         <option value="LIS - MARSMAN" {{ old('sys_category') == 'LIS' ? 'selected':''}}>LIS - MARSMAN</option>
