@@ -19,6 +19,6 @@ class AccessMICT
         if (Auth::user()->department == 'MICT') {
             return $next($request);
         }
-        return redirect('/home');
+        return redirect()->back();
     }
 }

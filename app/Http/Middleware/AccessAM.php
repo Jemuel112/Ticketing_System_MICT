@@ -22,7 +22,6 @@ class AccessAM
         elseif (Auth::user()->department == 'MICT'){
             return $next($request);
         }
-        return redirect('/dashboard');
-
+        return redirect()->back();
     }
 }
