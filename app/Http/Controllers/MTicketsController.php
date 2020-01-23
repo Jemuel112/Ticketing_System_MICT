@@ -6,10 +6,8 @@ use App\Department;
 use App\mTicket;
 use App\User;
 use Carbon\Carbon;
-use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Input;
 
 class MTicketsController extends Controller
 {
@@ -17,7 +15,7 @@ class MTicketsController extends Controller
     {
         $this->middleware('disablepreventback');
         $this->middleware('auth');
-        $this->middleware('auth.am')->except('index', 'store','create');
+        $this->middleware('auth.am')->except('index', 'store','create','show');
 //        $this->middleware('auth.admin')->only('index', 'store', 'allticket');
 
     }
@@ -28,7 +26,7 @@ class MTicketsController extends Controller
         return view('mtickets.index', compact('tickets'));
     }
 
-    public function create(Request $request)
+    public function create()
     {
         $departments = Department::all();
         $micts = User::select('fname')
@@ -161,5 +159,19 @@ class MTicketsController extends Controller
         }
 
         return redirect('/MICT-Tickets');
+    }
+
+    public function show(mTicket $mTicket)
+    {
+        $departments = Department::all();
+        $micts = User::select('fname')
+            ->Where([
+                ['department', '=', 'MICT']
+            ])
+            ->orwhere([
+                ['department', '=', 'Administrator']
+            ])
+            ->get();
+        return view('mtickets.show', compact('mTicket','micts','departments'));
     }
 }
