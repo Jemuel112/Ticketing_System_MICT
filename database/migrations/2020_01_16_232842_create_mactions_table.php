@@ -15,6 +15,8 @@ class CreateMactionsTable extends Migration
     {
         Schema::create('mactions', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->longText('actions');
+            $table->bigIncrements('id_mticket');
             $table->timestamps();
         });
     }

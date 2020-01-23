@@ -6,11 +6,11 @@
     <div class="content-wrapper">
         <section class="content-header">
             <div class="col-12">
-                <table id="department1" class="nowrap compact table table-bordered table-striped">
+                <table id="department1" class="compact table table-bordered table-striped">
                     <thead>
                     <tr>
-                        <th>Ticket no.</th>
-                        <th>Reported by</th>
+                        <th width="10%">Ticket #</th>
+                        <th >Reported by</th>
                         <th>Department</th>
                         <th>Category</th>
                         <th>Issue/Concerns</th>
@@ -18,6 +18,17 @@
                         <th>Action</th>
                     </tr>
                     </thead>
+                    @foreach($tickets as $ticket)
+                        <tr>
+                            <td width="10%" style="text-align: center" >{{$ticket->id}}</td>
+                            <td width="10%" style="text-align: center">{{$ticket->reported_by}}</td>
+                            <td width="10%" style="text-align: center">{{$ticket->request_by}}</td>
+                            <td width="10%" style="text-align: center">{{$ticket->category}}</td>
+                            <td width="50%">{{$ticket->concerns}}</td>
+                            <td width="10%">{{$ticket->lop}}</td>
+                            <td>Edti</td>
+                        </tr>
+                    @endforeach
                     {{--        @foreach($users as $key => $user)--}}
                     {{--            <tr>--}}
                     {{--                <td>{{$user->id}}</td>--}}
@@ -51,18 +62,7 @@
         </section>
     </div>
     <script>
-        $("#department1").DataTable({
-            "columns": [
-                { "width": "1%" },
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-
-            ]
-        });
+        $("#department1").DataTable();
     </script>
 
 @endsection

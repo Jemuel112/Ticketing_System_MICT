@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Department;
 use App\mTicket;
 use App\User;
+use Carbon\Carbon;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
@@ -15,8 +17,8 @@ class MTicketsController extends Controller
     {
         $this->middleware('disablepreventback');
         $this->middleware('auth');
-        //$this->middleware('auth.am')->except('index','store','allticket');
-        $this->middleware('auth.admin')->only('index', 'store', 'allticket');
+        $this->middleware('auth.am')->except('index', 'store', 'allticket');
+//        $this->middleware('auth.admin')->only('index', 'store', 'allticket');
 
     }
 
@@ -42,17 +44,13 @@ class MTicketsController extends Controller
 
     public function store(Request $request)
     {
-
-        dd( Input::all() );
-//                dd($request);
+        $tickets = new mTicket();
+//        dd( Input::all() );
         if (Auth::user()->department == 'Administrator') {
 //            dd($request);
             if ($request->status == 'On-Going') {
 //                dd($request->status);
                 $data = request()->validate([
-                    'og_status' => 'required',
-                    'start_at' => 'required',
-                    'end_at' => 'required',
                     'og_status' => 'required',
                     'start_at' => 'required',
                     'end_at' => 'required',
@@ -70,6 +68,8 @@ class MTicketsController extends Controller
                     'created_by' => '',
                     'created_at' => '',
                 ]);
+                $tickets->start_at = date('Y-m-d H:i:s', strtotime($request->start_at));
+                $tickets->end_at = date('Y-m-d H:i:s', strtotime($request->end_at));
             } else {
                 $data = request()->validate([
                     'create_at' => '',
@@ -127,11 +127,28 @@ class MTicketsController extends Controller
                 'created_by' => '',
             ]);
         }
-        $ticket = new mTicket;
-        $ticket->created_at = 'created_at';
-        $ticket->created_by = 'created_by';
-        $ticket->save();
-        mTicket::create($data);
-        return view('mtickets.index');
+        $tickets->og_status = $request->og_status;
+        $tickets->reported_by = $request->reported_by;
+        $tickets->request_by = $request->request_by;
+        $tickets->acknowledge_by = $request->acknowledge_by;
+        $tickets->assigned_to = $request->assigned_to;
+        $tickets->assisted_by = $request->assisted_by;
+        $tickets->accomplished_by = $request->accomplished_by;
+        $tickets->status = $request->status;
+        $tickets->category = $request->category;
+        $tickets->sys_category = $request->sys_category;
+        $tickets->concerns = $request->concerns;
+        $tickets->lop = $request->lop;
+        $tickets->created_by = $request->created_by;
+        if (is_null($request->created_at)) {
+//            dd($request->created_at);
+            $tickets->save();
+        }else{
+            $tickets->created_at = date('Y-m-d H:i:s', strtotime($request->created_at));
+            $tickets->updated_at = Carbon::now();
+            $tickets->save(['timestamps' => false]);
+        }
+
+        return redirect('/MICT-Tickets');
     }
 }

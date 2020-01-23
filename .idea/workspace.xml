@@ -4,7 +4,13 @@
     <list default="true" id="e46f795c-50de-4821-94e9-0a47af70672e" name="Default Changelist" comment="Innitial Commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MTicketsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MTicketsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/mTicket.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/mTicket.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_01_15_165633_create_mtickets_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_01_15_165633_create_mtickets_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_01_16_232630_create_mcomments_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_01_16_232630_create_mcomments_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_01_16_232842_create_mactions_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_01_16_232842_create_mactions_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/mtickets/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mtickets/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mtickets/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mtickets/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,6 +188,8 @@
       <workItem from="1579369026196" duration="235000" />
       <workItem from="1579425876148" duration="30675000" />
       <workItem from="1579684910019" duration="208000" />
+      <workItem from="1579794180637" duration="257000" />
+      <workItem from="1579798764178" duration="470000" />
     </task>
     <servers />
   </component>
@@ -209,17 +217,25 @@
     <option name="LAST_COMMIT_MESSAGE" value="Innitial Commit" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="0" y="0" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1579794438180">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="0" y="0" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1579794438180" />
     <state x="184" y="7" key="SettingsEditor" timestamp="1579685119649">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="7" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1579685119649" />
-    <state x="378" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1579685213526">
+    <state x="378" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1579798765938">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="378" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1579685213526" />
+    <state x="378" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1579798765938" />
     <state x="339" y="162" key="run.anything.popup" timestamp="1579708484926">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1579708484926" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1579763360959">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1579763360959" />
   </component>
 </project>
