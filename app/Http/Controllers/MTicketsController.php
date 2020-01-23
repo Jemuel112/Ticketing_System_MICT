@@ -17,7 +17,7 @@ class MTicketsController extends Controller
     {
         $this->middleware('disablepreventback');
         $this->middleware('auth');
-        $this->middleware('auth.am')->except('index', 'store', 'allticket');
+        $this->middleware('auth.am')->except('index', 'store','create');
 //        $this->middleware('auth.admin')->only('index', 'store', 'allticket');
 
     }
@@ -87,7 +87,12 @@ class MTicketsController extends Controller
                     'created_by' => '',
                 ]);
             }
-
+            $assign = $request->input('assigned_to');
+            $assisted = $request->input('assisted_by');
+            $accomplished = $request->input('accomplished_by');
+            $tickets->assigned_to = implode(',', $assign);
+            $tickets->assisted_by = implode(',', $assisted);
+            $tickets->accomplished_by = implode(',', $accomplished);
 
         } elseif (Auth::user()->department == 'MICT') {
             if ($request->status == 'On-Going') {
@@ -116,7 +121,12 @@ class MTicketsController extends Controller
                     'created_by' => '',
                 ]);
             }
-
+            $assign = $request->input('assigned_to');
+            $assisted = $request->input('assisted_by');
+            $accomplished = $request->input('accomplished_by');
+            $tickets->assigned_to = implode(',', $assign);
+            $tickets->assisted_by = implode(',', $assisted);
+            $tickets->accomplished_by = implode(',', $accomplished);
         } else {
             $data = request()->validate([
                 'reported_by' => 'required',
@@ -139,12 +149,6 @@ class MTicketsController extends Controller
         $tickets->created_by = $request->created_by;
         $tickets->recommendation = $request->recommendation;
 
-        $assign = $request->input('assigned_to');
-        $assisted = $request->input('assisted_by');
-        $accomplished = $request->input('accomplished_by');
-        $tickets->assigned_to = implode(',', $assign);
-        $tickets->assisted_by = implode(',', $assisted);
-        $tickets->accomplished_by = implode(',', $accomplished);
 //        dd($tickets->assigned_to);
 
         if (is_null($request->created_at)) {

@@ -25,8 +25,9 @@
                             <td width="10%" style="text-align: center">{{$ticket->request_by}}</td>
                             <td width="10%" style="text-align: center">{{$ticket->category}}</td>
                             <td width="50%" >{{ \Illuminate\Support\Str::limit($ticket->concerns, 100, $end='...') }}</td>
-                            <td width="10%">{{$ticket->lop}}</td>
-                            <td>Edti</td>
+                            @if($ticket->lop == )
+                            <td></td>
+                            <td></td>
                         </tr>
                     @endforeach
                     {{--        @foreach($users as $key => $user)--}}
@@ -62,7 +63,9 @@
         </section>
     </div>
     <script>
-        $("#department1").DataTable();
+        $("#department1").DataTable( {
+            "order": [[ 0, "desc" ]]
+        } );
     </script>
 
 @endsection
