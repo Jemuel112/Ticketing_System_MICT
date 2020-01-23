@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title', 'Create New Tickets | ')
-    @include('layouts.scripts')
+@include('layouts.scripts')
 
 @section('content')
 
@@ -157,9 +157,14 @@
                                         <option value="On-Going" {{ old('status') == 'On-Going' ? 'selected':''}}>
                                             On-Going
                                         </option>
-                                        <option value="Resolve" {{ old('status') == 'Resolve' ? 'selected':''}}>Resolve</option>
-                                        <option value="Duplicate" {{ old('status') == 'Duplicate' ? 'selected':''}}>Duplicate</option>
-                                        <option value="Closed" {{ old('status') == 'Closed' ? 'selected':''}}>Closed</option>
+                                        <option value="Resolve" {{ old('status') == 'Resolve' ? 'selected':''}}>
+                                            Resolve
+                                        </option>
+                                        <option value="Duplicate" {{ old('status') == 'Duplicate' ? 'selected':''}}>
+                                            Duplicate
+                                        </option>
+                                        <option value="Closed" {{ old('status') == 'Closed' ? 'selected':''}}>Closed
+                                        </option>
                                     </select>
                                 @else
                                     <select class="form-control select2bs4 @error("status")is-invalid @enderror"
@@ -184,9 +189,17 @@
                                             disabled
                                     >
                                         <option></option>
-                                        <option value="Pending For Spare" {{ old('og_status') == 'Pending For Spare' ? 'selected':''}}>Pending For Spare</option>
-                                        <option value="Under Observation" {{ old('og_status') == 'Under Observation' ? 'selected':''}}>Under Observation</option>
-                                        <option value="Others" {{ old('og_status') == 'Others' ? 'selected':''}}>Others</option>
+                                        <option
+                                            value="Pending For Spare" {{ old('og_status') == 'Pending For Spare' ? 'selected':''}}>
+                                            Pending For Spare
+                                        </option>
+                                        <option
+                                            value="Under Observation" {{ old('og_status') == 'Under Observation' ? 'selected':''}}>
+                                            Under Observation
+                                        </option>
+                                        <option value="Others" {{ old('og_status') == 'Others' ? 'selected':''}}>
+                                            Others
+                                        </option>
                                     </select>
                                 </div>
                             </div>
@@ -305,11 +318,18 @@
                                         id="category" name="category"
                                         style="width: 100%;">
                                     <option></option>
-                                    <option value="System" {{ old('category') == 'System' ? 'selected':''}}>System</option>
-                                    <option value="Software" {{ old('category') == 'Software' ? 'selected':''}}>Software</option>
-                                    <option value="Hardware" {{ old('category') == 'Hardware' ? 'selected':''}}>Hardware</option>
-                                    <option value="Network" {{ old('category') == 'Network' ? 'selected':''}}>Network</option>
-                                    <option value="Others" {{ old('category') == 'Others' ? 'selected':''}}>Others</option>
+                                    <option value="System" {{ old('category') == 'System' ? 'selected':''}}>System
+                                    </option>
+                                    <option value="Software" {{ old('category') == 'Software' ? 'selected':''}}>
+                                        Software
+                                    </option>
+                                    <option value="Hardware" {{ old('category') == 'Hardware' ? 'selected':''}}>
+                                        Hardware
+                                    </option>
+                                    <option value="Network" {{ old('category') == 'Network' ? 'selected':''}}>Network
+                                    </option>
+                                    <option value="Others" {{ old('category') == 'Others' ? 'selected':''}}>Others
+                                    </option>
                                 </select>
                             </div>
 
@@ -335,18 +355,45 @@
                                             style="width: 100%;"
                                             disabled>
                                         {{--                                    <option></option>--}}
-                                        <option value="Bizbox" {{ old('sys_category') == 'Bizbox' ? 'selected':''}}>Bizbox</option>
-                                        <option value="PACS" {{ old('sys_category') == 'PACS' ? 'selected':''}}>PACS</option>
-                                        <option value="LIS - SYSMEX" {{ old('sys_category') == 'LIS - SYSMEX' ? 'selected':''}}>LIS - SYSMEX</option>
-                                        <option value="LIS - MARSMAN" {{ old('sys_category') == 'LIS' ? 'selected':''}}>LIS - MARSMAN</option>
-                                        <option value="LIS - J&J" {{ old('sys_category') == 'LIS - J&J' ? 'selected':''}}>LIS - J&J</option>
-                                        <option value="DMS" {{ old('sys_category') == 'DMS' ? 'selected':''}}>DMS</option>
-                                        <option value="ACC PAC" {{ old('sys_category') == 'ACC PAC' ? 'selected':''}}>ACC PAC</option>
-                                        <option value="MEDEXPRESS" {{ old('sys_category') == 'MEDEXPRESS' ? 'selected':''}}>MEDEXPRESS</option>
-                                        <option value="ACCESS DB" {{ old('sys_category') == 'ACCESS DB' ? 'selected':''}}>ACCESS DB</option>
-                                        <option value="ASSET" {{ old('sys_category') == 'ASSET' ? 'selected':''}}>ASSET TRACER</option>
-                                        <option value="CHEQUE TRACER" {{ old('sys_category') == 'CHEQUE TRACER' ? 'selected':''}}>CHEQUE TRACER</option>
-                                        <option value="Others" {{ old('sys_category') == 'Others' ? 'selected':''}}>Others</option>
+                                        <option value="Bizbox" {{ old('sys_category') == 'Bizbox' ? 'selected':''}}>
+                                            Bizbox
+                                        </option>
+                                        <option value="PACS" {{ old('sys_category') == 'PACS' ? 'selected':''}}>PACS
+                                        </option>
+                                        <option
+                                            value="LIS - SYSMEX" {{ old('sys_category') == 'LIS - SYSMEX' ? 'selected':''}}>
+                                            LIS - SYSMEX
+                                        </option>
+                                        <option value="LIS - MARSMAN" {{ old('sys_category') == 'LIS' ? 'selected':''}}>
+                                            LIS - MARSMAN
+                                        </option>
+                                        <option
+                                            value="LIS - J&J" {{ old('sys_category') == 'LIS - J&J' ? 'selected':''}}>
+                                            LIS - J&J
+                                        </option>
+                                        <option value="DMS" {{ old('sys_category') == 'DMS' ? 'selected':''}}>DMS
+                                        </option>
+                                        <option value="ACC PAC" {{ old('sys_category') == 'ACC PAC' ? 'selected':''}}>
+                                            ACC PAC
+                                        </option>
+                                        <option
+                                            value="MEDEXPRESS" {{ old('sys_category') == 'MEDEXPRESS' ? 'selected':''}}>
+                                            MEDEXPRESS
+                                        </option>
+                                        <option
+                                            value="ACCESS DB" {{ old('sys_category') == 'ACCESS DB' ? 'selected':''}}>
+                                            ACCESS DB
+                                        </option>
+                                        <option value="ASSET" {{ old('sys_category') == 'ASSET' ? 'selected':''}}>ASSET
+                                            TRACER
+                                        </option>
+                                        <option
+                                            value="CHEQUE TRACER" {{ old('sys_category') == 'CHEQUE TRACER' ? 'selected':''}}>
+                                            CHEQUE TRACER
+                                        </option>
+                                        <option value="Others" {{ old('sys_category') == 'Others' ? 'selected':''}}>
+                                            Others
+                                        </option>
                                     </select>
                                 </div>
                             @endif
@@ -359,7 +406,8 @@
                                             style="width: 100%;">
                                         <option></option>
                                         <option value="Low" {{ old('lop') == 'Low' ? 'selected':''}}>Low</option>
-                                        <option value="Medium" {{ old('lop') == 'Medium' ? 'selected':''}}>Medium</option>
+                                        <option value="Medium" {{ old('lop') == 'Medium' ? 'selected':''}}>Medium
+                                        </option>
                                         <option value="High" {{ old('lop') == 'High' ? 'selected':''}}>High</option>
                                     </select>
                                 </div>
@@ -372,7 +420,7 @@
                                 <textarea name="concerns"
                                           placeholder="Place some text here"
                                           class="@error("concerns")is-invalid @enderror"
-                                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{old('concerns')}}</textarea>
+                                          style="resize: none;width: 100%; height: 150px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{old('concerns')}}</textarea>
                             </div>
                         </div>
                     </div>
@@ -394,7 +442,6 @@
                                         class="fas fa-minus"></i></button>
                             </div>
                         </div>
-                        <!-- /.card-header -->
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-lg-12">
@@ -402,13 +449,18 @@
                                     <textarea id="act" class="textarea" placeholder="Place some text here"
                                               style="width: 100%; height: 250px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
                                 </div>
+                                <div class="col-lg-12">
+                                    <label>Remarks/Recommendations</label>
+                                    <textarea name="recommendation"
+                                              placeholder="Place some text here"
+                                              class="@error("concerns")is-invalid @enderror"
+                                              style="resize: none;width: 100%; height: 150px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{old('recommendation')}}</textarea>
+                                </div>
                             </div>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
-                            Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples and
-                            information about
-                            the plugin.
+
                         </div>
                     </div>
                     <br>
@@ -442,9 +494,6 @@
         $("#datetimepickerd").on("change.datetimepicker", function (e) {
             $('#datetimepickers').datetimepicker('maxDate', e.date);
         });
-    </script>
-    <script>
-
         //Initialize Select2 Elements
         $('.select2').select2();
 
@@ -536,8 +585,6 @@
                 $("#dact").prop("hidden", true);
             }
         });
-    </script>
-    <script>
         window.onload = function exampleFunction() {
             // Function to executed
             if ($('#status').val() == "On-Going") {

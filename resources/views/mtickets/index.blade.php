@@ -6,10 +6,10 @@
     <div class="content-wrapper">
         <section class="content-header">
             <div class="col-12">
-                <table id="department1" class="compact table table-bordered table-striped">
+                <table id="department1" class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                        <th width="10%">Ticket #</th>
+                        <th>Ticket #</th>
                         <th >Reported by</th>
                         <th>Department</th>
                         <th>Category</th>
@@ -24,7 +24,7 @@
                             <td width="10%" style="text-align: center">{{$ticket->reported_by}}</td>
                             <td width="10%" style="text-align: center">{{$ticket->request_by}}</td>
                             <td width="10%" style="text-align: center">{{$ticket->category}}</td>
-                            <td width="50%">{{$ticket->concerns}}</td>
+                            <td width="50%" >{{ \Illuminate\Support\Str::limit($ticket->concerns, 100, $end='...') }}</td>
                             <td width="10%">{{$ticket->lop}}</td>
                             <td>Edti</td>
                         </tr>
