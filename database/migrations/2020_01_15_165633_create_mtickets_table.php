@@ -19,6 +19,8 @@ class CreateMTicketsTable extends Migration
             $table->string('request_by')->nullable();
             $table->string('status')->nullable();
             $table->string('og_status')->nullable();
+            $table->dateTime('start_at')->nullable();
+            $table->dateTime('end_at')->nullable();
             $table->string('acknowledge_by')->nullable();
             $table->string('assigned_to')->nullable();
             $table->string('assisted_by')->nullable();
@@ -28,8 +30,6 @@ class CreateMTicketsTable extends Migration
             $table->string('lop')->nullable();
             $table->longText('concerns')->nullable();
             $table->longText('recommendation')->nullable();
-            $table->dateTime('start_at')->nullable();
-            $table->dateTime('end_at')->nullable();
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
             $table->boolean('is_new')->default(true);

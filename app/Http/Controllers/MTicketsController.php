@@ -131,15 +131,21 @@ class MTicketsController extends Controller
         $tickets->reported_by = $request->reported_by;
         $tickets->request_by = $request->request_by;
         $tickets->acknowledge_by = $request->acknowledge_by;
-        $tickets->assigned_to = $request->assigned_to;
-        $tickets->assisted_by = $request->assisted_by;
-        $tickets->accomplished_by = $request->accomplished_by;
         $tickets->status = $request->status;
         $tickets->category = $request->category;
         $tickets->sys_category = $request->sys_category;
         $tickets->concerns = $request->concerns;
         $tickets->lop = $request->lop;
         $tickets->created_by = $request->created_by;
+
+        $assign = $request->input('assigned_to');
+        $assisted = $request->input('assisted_by');
+        $accomplished = $request->input('accomplished_by');
+        $tickets->assigned_to = implode(',', $assign);
+        $tickets->assigned_to = implode(',', $assisted);
+        $tickets->assigned_to = implode(',', $accomplished);
+//        dd($tickets->assigned_to);
+
         if (is_null($request->created_at)) {
 //            dd($request->created_at);
             $tickets->save();

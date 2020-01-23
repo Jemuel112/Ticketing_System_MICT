@@ -243,7 +243,7 @@
                             <div class="col-lg-3 col-md-3">
                                 <label><br>Assigned to</label>
                                 <select class="form-control select2bs4 @error("assigned_to")is-invalid @enderror"
-                                        value="{{old('assigned_to')}}" name="assigned_to"
+                                        value="{{old('assigned_to')}}" name="assigned_to[]"
                                         data-placeholder="Assigned to..."
                                         multiple="multiple" style="width: 100%;"
                                         @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
@@ -263,7 +263,7 @@
                             <div class="col-lg-3 col-md-3">
                                 <label><br>Assisted By</label>
                                 <select class="form-control select2bs4 @error("assisted_by")is-invalid @enderror"
-                                        value="{{old('assisted_by')}}" name="assisted_by"
+                                        value="{{old('assisted_by')}}" name="assisted_by[]"
                                         data-placeholder="Assisted by..."
                                         multiple="multiple" style="width: 100%;"
                                         @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
@@ -283,7 +283,7 @@
                             <div class="col-lg-3 col-md-3">
                                 <label><br>Accomplished by</label>
                                 <select class="form-control select2bs4 @error("accomplished_by")is-invalid @enderror"
-                                        value="{{old('accomplished_by')}}" name="accomplished_by"
+                                        value="{{old('accomplished_by')}}" name="accomplished_by[]"
                                         data-placeholder="Accomplished by..."
                                         multiple="multiple" style="width: 100%;"
                                         @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
