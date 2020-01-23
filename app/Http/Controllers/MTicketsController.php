@@ -15,14 +15,23 @@ class MTicketsController extends Controller
     {
         $this->middleware('disablepreventback');
         $this->middleware('auth');
-        $this->middleware('auth.am')->except('index', 'store','create','show');
+        $this->middleware('auth.am')->except('index', 'store', 'create', 'show');
 //        $this->middleware('auth.admin')->only('index', 'store', 'allticket');
 
     }
 
     public function index(Request $request)
     {
-        $tickets = mTicket::all();
+        if (Auth::user()->department == "Administrator" || Auth::user()->department == "MICT") {
+            $tickets = mTicket::all();
+        } else {
+//            dd(Auth::user()->department);
+            $dept = Auth::user()->department;
+            $tickets = mTicket::where([
+                ['request_by', '=', $dept]
+            ])
+                ->get();
+        }
         return view('mtickets.index', compact('tickets'));
     }
 
@@ -38,6 +47,21 @@ class MTicketsController extends Controller
             ])
             ->get();
         return view('mtickets.create', compact('departments', 'micts'));
+    }
+
+    public function show($id)
+    {
+        $ticket = mTicket::findOrFail($id);
+        $departments = Department::all();
+        $micts = User::select('fname')
+            ->Where([
+                ['department', '=', 'MICT']
+            ])
+            ->orwhere([
+                ['department', '=', 'Administrator']
+            ])
+            ->get();
+        return view('mtickets.show', compact('ticket', 'micts', 'departments'));
     }
 
     public function store(Request $request)
@@ -85,13 +109,18 @@ class MTicketsController extends Controller
                     'created_by' => '',
                 ]);
             }
-            $assign = $request->input('assigned_to');
-            $assisted = $request->input('assisted_by');
-            $accomplished = $request->input('accomplished_by');
-            $tickets->assigned_to = implode(',', $assign);
-            $tickets->assisted_by = implode(',', $assisted);
-            $tickets->accomplished_by = implode(',', $accomplished);
-
+            if (!is_null($request->assigned_to)) {
+                $assign = $request->input('assigned_to');
+                $tickets->assigned_to = implode(',', $assign);
+            }
+            if (!is_null($request->assisted_by)) {
+                $assisted = $request->input('assisted_by');
+                $tickets->assisted_by = implode(',', $assisted);
+            }
+            if (!is_null($request->accomplished_by)) {
+                $accomplished = $request->input('accomplished_by');
+                $tickets->accomplished_by = implode(',', $accomplished);
+            }
         } elseif (Auth::user()->department == 'MICT') {
             if ($request->status == 'On-Going') {
                 $data = request()->validate([
@@ -152,7 +181,7 @@ class MTicketsController extends Controller
         if (is_null($request->created_at)) {
 //            dd($request->created_at);
             $tickets->save();
-        }else{
+        } else {
             $tickets->created_at = date('Y-m-d H:i:s', strtotime($request->created_at));
             $tickets->updated_at = Carbon::now();
             $tickets->save(['timestamps' => false]);
@@ -161,17 +190,5 @@ class MTicketsController extends Controller
         return redirect('/MICT-Tickets');
     }
 
-    public function show(mTicket $mTicket)
-    {
-        $departments = Department::all();
-        $micts = User::select('fname')
-            ->Where([
-                ['department', '=', 'MICT']
-            ])
-            ->orwhere([
-                ['department', '=', 'Administrator']
-            ])
-            ->get();
-        return view('mtickets.show', compact('mTicket','micts','departments'));
-    }
+
 }

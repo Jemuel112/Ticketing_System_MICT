@@ -34,7 +34,7 @@
                                 <td style="text-align: center">{{$ticket->id}}</td>
                                 <td style="text-align: center">{{$ticket->reported_by}}</td>
                                 <td style="text-align: center">{{$ticket->request_by}}</td>
-                                <td style="text-align: center">{{$ticket->status}}</td>
+                                <td style="text-align: center;font-size: 10px">{{$ticket->status}}</td>
                                 <td style="text-align: center">{{$ticket->category}}</td>
                                 <td width="50%">{{ \Illuminate\Support\Str::limit($ticket->concerns, 100, $end='...') }}</td>
                                 @if($ticket->lop == 'High')

@@ -13,7 +13,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Show Ticket Number ({{dd($mTicket)}})</h1>
+                            <h1>Show Ticket Number ({{$ticket->id}})</h1>
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->
@@ -55,7 +55,7 @@
                                 <label>Reported by
                                 </label>
                                 <input class="form-control @error("reported_by")is-invalid @enderror"
-                                       value="{{$mTicket->reported_by}}"
+                                       value="{{$ticket->reported_by}}"
                                        style="width: 100%;" type="text" name="reported_by" placeholder="Name"
                                 >
                             </div>
