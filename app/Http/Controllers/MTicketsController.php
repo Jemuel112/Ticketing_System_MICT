@@ -16,6 +16,7 @@ class MTicketsController extends Controller
         $this->middleware('disablepreventback');
         $this->middleware('auth');
         $this->middleware('auth.am')->except('index', 'store', 'create', 'show');
+        $this->middleware('editvalid')->only('show');
 //        $this->middleware('auth.admin')->only('index', 'store', 'allticket');
 
     }

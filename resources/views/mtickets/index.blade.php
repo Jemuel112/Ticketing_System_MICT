@@ -6,10 +6,10 @@
     <div class="content-wrapper">
         <section class="content-header">
             <div class="col-12">
-                <table id="department1" class="table table-md table-bordered table-striped">
+                <table id="department1" class="wrap compact table table-bordered table-striped ">
                     <thead>
                     <tr>
-                        <th>Ticket #</th>
+                        <th><p style="font-size: 8px">Ticket #</p></th>
                         <th>Reported by</th>
                         <th>Department</th>
                         <th>Status</th>
@@ -20,23 +20,24 @@
                     </tr>
                     </thead>
                     @foreach($tickets as $ticket)
-                        @if($ticket->status == 'Active')
-                            <tr class="table-success">
-                        @elseif($ticket->status == 'On-Going')
-                            <tr class="table-warning">
-                        @elseif($ticket->status == 'Resolve')
-                            <tr class="table-info">
-                        @elseif($ticket->status == 'Duplicate')
-                            <tr class="table-active">
-                        @else
-                            <tr class="table-danger">
-                                @endif
+{{--                        @if($ticket->status == 'Active')--}}
+{{--                            <tr class="table-success">--}}
+{{--                        @elseif($ticket->status == 'On-Going')--}}
+{{--                            <tr class="table-warning">--}}
+{{--                        @elseif($ticket->status == 'Resolve')--}}
+{{--                            <tr class="table-info">--}}
+{{--                        @elseif($ticket->status == 'Duplicate')--}}
+{{--                            <tr class="table-active">--}}
+{{--                        @else--}}
+{{--                            <tr class="table-danger">--}}
+{{--                                @endif--}}
+                    <tr  >
                                 <td style="text-align: center">{{$ticket->id}}</td>
                                 <td style="text-align: center">{{$ticket->reported_by}}</td>
                                 <td style="text-align: center">{{$ticket->request_by}}</td>
                                 <td style="text-align: center;font-size: 10px">{{$ticket->status}}</td>
                                 <td style="text-align: center">{{$ticket->category}}</td>
-                                <td width="50%">{{ \Illuminate\Support\Str::limit($ticket->concerns, 100, $end='...') }}</td>
+                                <td width="60%">{{ \Illuminate\Support\Str::limit($ticket->concerns, 150, $end='...') }}</td>
                                 @if($ticket->lop == 'High')
                                     <td class="bg-danger"></td>
                                 @elseif($ticket->lop == 'Medium')
@@ -48,14 +49,14 @@
                                 @endif
                                 <td>
                                     <div class="row">
-                                    <a style="margin: 2px"
-                                       class="btn btn-sm btn-outline-primary"
-                                       href="/MICT-Tickets/{{$ticket->id}}"
-                                    ><i class="fal fa-eye"></i></a>
-                                    <a style="margin: 2px"
-                                       class="btn btn-sm btn-outline-primary"
-                                       href="/MICT-Tickets/{{$ticket->id}}/edit"
-                                    ><i class="fal fa-pencil-alt"></i></a>
+                                        <a style="margin: 2px"
+                                           class="btn btn-sm btn-outline-primary"
+                                           href="/MICT-Tickets/{{$ticket->id}}"
+                                        ><i class="fal fa-eye"></i></a>
+                                        <a style="margin: 2px"
+                                           class="btn btn-sm btn-outline-primary"
+                                           href="/MICT-Tickets/{{$ticket->id}}/edit"
+                                        ><i class="fal fa-pencil-alt"></i></a>
                                     </div>
                                 </td>
                             </tr>
