@@ -8,6 +8,7 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 
 class MTicketsController extends Controller
 {
@@ -23,6 +24,7 @@ class MTicketsController extends Controller
 
     public function index(Request $request)
     {
+
         if (Auth::user()->department == "Administrator" || Auth::user()->department == "MICT") {
             $tickets = mTicket::all();
         } else {
@@ -67,8 +69,9 @@ class MTicketsController extends Controller
 
     public function store(Request $request)
     {
+
         $tickets = new mTicket();
-//        dd( Input::all() );
+        dd( Input::all() );
         if (Auth::user()->department == 'Administrator') {
 //            dd($request);
             if ($request->status == 'On-Going') {

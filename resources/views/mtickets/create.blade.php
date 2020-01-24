@@ -124,7 +124,7 @@
                                 @if(Auth::user()->department == 'Administrator' || Auth::user()->department == "MICT")
                                     <select class="form-control select2bs4 @error("request_by")is-invalid @enderror"
                                             id="reqb" name="request_by"
-                                            style="width: 100%;" required>
+                                            style="width: 100%;">
                                         <option value=""></option>
                                         @foreach($departments as $department)
                                             <option
@@ -133,12 +133,9 @@
                                     </select>
                                 @else
                                     <select class="form-control select2bs4 @error("request_by")is-invalid @enderror"
-                                            value="{{old('request_by')}}"
                                             id="reqb" name="request_by"
-                                            style="width: 100%;"
-                                    >
-                                        <option
-                                            value="{{Auth::user()->department}}">{{Auth::user()->department}}</option>
+                                            style="width: 100%;" readonly>
+                                        <option value="{{Auth::user()->department}}" select>{{Auth::user()->department}}</option>
                                     </select>
                                 @endif
                             </div>
