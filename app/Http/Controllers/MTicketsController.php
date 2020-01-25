@@ -71,7 +71,7 @@ class MTicketsController extends Controller
     {
 
         $tickets = new mTicket();
-        dd( Input::all() );
+//        dd( Input::all() );
         if (Auth::user()->department == 'Administrator') {
 //            dd($request);
             if ($request->status == 'On-Going') {
