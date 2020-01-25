@@ -6,7 +6,7 @@
 @section('content')
 
     <!-- Content Wrapper. Contains page content -->
-    <form action="/MICT-Tickets" method="POST">
+    <form action="/MICT-Tickets" id="myForm" method="POST">
 
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -481,6 +481,19 @@
         </footer>
 
     </form>
+    <script>
+        $(window).on("beforeunload", function() {
+            return "Are you sure? You didn't finish the form!";
+        });
+        $(document).ready(function() {
+            $("#myForm").on("submit", function(e) {
+                //check form to make sure it is kosher
+                //remove the ev
+                $(window).off("beforeunload");
+                return true;
+            });
+        });
+    </script>
     <script type="text/javascript">
         $("#datetimepickers").datetimepicker();
         $("#datetimepickerd").datetimepicker({
