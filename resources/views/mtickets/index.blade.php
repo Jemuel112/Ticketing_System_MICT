@@ -6,17 +6,17 @@
     <div class="content-wrapper">
         <section class="content-header">
             <div class="col-12">
-                <table id="department1" class="wrap compact table table-bordered table-striped ">
+                <table id="department1" class="wrap compact table table-hover table-bordered table-striped ">
                     <thead>
                     <tr>
-                        <th><p style="font-size: 8px">Ticket #</p></th>
-                        <th>Reported by</th>
-                        <th>Department</th>
-                        <th>Status</th>
-                        <th>Category</th>
-                        <th>Issue/Concerns</th>
-                        <th>LOP</th>
-                        <th>Action</th>
+                        <th>Ticket&nbsp;#</th>
+                        <th width="12%">Reported by</th>
+                        <th width="12%">Department</th>
+                        <th width="12%">Status</th>
+                        <th width="12%">Category</th>
+                        <th width="30%">Issue&nbsp;/&nbsp;Concerns</th>
+                        <th width="10%">LOP</th>
+                        <th width="12%">Action</th>
                     </tr>
                     </thead>
                     @foreach($tickets as $ticket)
@@ -32,12 +32,12 @@
 {{--                            <tr class="table-danger">--}}
 {{--                                @endif--}}
                     <tr  >
-                                <td style="text-align: center">{{$ticket->id}}</td>
-                                <td style="text-align: center">{{$ticket->reported_by}}</td>
-                                <td style="text-align: center">{{$ticket->request_by}}</td>
-                                <td style="text-align: center;font-size: 10px">{{$ticket->status}}</td>
-                                <td style="text-align: center">{{$ticket->category}}</td>
-                                <td width="60%">{{ \Illuminate\Support\Str::limit($ticket->concerns, 150, $end='...') }}</td>
+                                <td >{{$ticket->id}}</td>
+                                <td >{{$ticket->reported_by}}</td>
+                                <td >{{$ticket->request_by}}</td>
+                                <td >{{$ticket->status}}</td>
+                                <td >{{$ticket->category}}</td>
+                                <td>{{ \Illuminate\Support\Str::limit($ticket->concerns, 150, $end='...') }}</td>
                                 @if($ticket->lop == 'High')
                                     <td class="bg-danger"></td>
                                 @elseif($ticket->lop == 'Medium')
@@ -52,11 +52,11 @@
                                         <a style="margin: 2px"
                                            class="btn btn-sm btn-outline-primary"
                                            href="/MICT-Tickets/{{$ticket->id}}"
-                                        ><i class="fal fa-eye"></i></a>
+                                        ><i class="fal fa-eye"></i> View</a>
                                         <a style="margin: 2px"
                                            class="btn btn-sm btn-outline-primary"
                                            href="/MICT-Tickets/{{$ticket->id}}/edit"
-                                        ><i class="fal fa-pencil-alt"></i></a>
+                                        ><i class="fal fa-pencil-alt"></i> Edit</a>
                                     </div>
                                 </td>
                             </tr>

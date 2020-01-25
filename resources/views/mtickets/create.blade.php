@@ -134,8 +134,8 @@
                                 @else
                                     <select class="form-control select2bs4 @error("request_by")is-invalid @enderror"
                                             id="reqb" name="request_by"
-                                            style="width: 100%;" readonly>
-                                        <option value="{{Auth::user()->department}}" select>{{Auth::user()->department}}</option>
+                                            style="width: 100%;">
+                                        <option value="{{Auth::user()->department}}">{{Auth::user()->department}}</option>
                                     </select>
                                 @endif
                             </div>
@@ -166,7 +166,7 @@
                                 @else
                                     <select class="form-control select2bs4 @error("status")is-invalid @enderror"
                                             name="status"
-                                            style="width: 100%;"
+                                            style="width: 100%; "
                                             id="status"
                                     >
                                         <option value="Active" selected>Active</option>

@@ -5,7 +5,7 @@
     @include('layouts.scripts')
 
     <!-- Content Wrapper. Contains page content -->
-    <form action="/Create_MICT_Tickets" method="POST">
+    <form action="/Create_MICT_Tickets" method="POST" id="myForm">
 
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -354,7 +354,7 @@
                                 <textarea name="concerns"
                                           placeholder="Place some text here"
                                           class="@error("concerns")is-invalid @enderror"
-                                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" disabled>{{$ticket->concerns}}</textarea>
+                                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" readonly>{{$ticket->concerns}}</textarea>
                             </div>
                         </div>
                     </div>
@@ -413,6 +413,19 @@
         </footer>
 
     </form>
+    <script>
+        $(window).on("beforeunload", function() {
+            return "Are you sure? You didn't finish the form!";
+        });
+        $(document).ready(function() {
+            $("#myForm").on("submit", function(e) {
+                //check form to make sure it is kosher
+                //remove the ev
+                $(window).off("beforeunload");
+                return true;
+            });
+        });
+    </script>
     <script type="text/javascript">
         $('#reqb').prop('disabled', true);
         $('#report').prop('disabled', true);
