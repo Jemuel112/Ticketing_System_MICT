@@ -20,8 +20,12 @@
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>0</h3>
-                            <p>New Orders</p>
+                            @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
+                            <h3>{{\App\mTicket::where('status', '=', 'Active')->count() }}</h3>
+                                @else
+                                <h3>{{\App\mTicket::where('request_by','=',\Illuminate\Support\Facades\Auth::user()->department)->where('status', '=','Active')->count() }}</h3>
+                            @endif
+                            <p>Active Tickets</p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-tags"></i>
@@ -34,9 +38,11 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>0<sup style="font-size: 20px"></sup></h3>
-
-
+                            @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
+                                <h3>{{\App\mTicket::where('status', '=', 'On-Going')->count() }}</h3>
+                            @else
+                                <h3>{{\App\mTicket::where('request_by','=',\Illuminate\Support\Facades\Auth::user()->department)->where('status', '=','On-Going')->count() }}</h3>
+                            @endif
                             <p>On-Going Tickets</p>
                         </div>
                         <div class="icon">
@@ -50,8 +56,11 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3>0</h3>
-
+                            @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
+                                <h3>{{\App\mTicket::where('status', '=', 'Resolve')->count() }}</h3>
+                            @else
+                                <h3>{{\App\mTicket::where('request_by','=',\Illuminate\Support\Facades\Auth::user()->department)->where('status', '=','Resolve')->count() }}</h3>
+                            @endif
                             <p>Resolved Tickets</p>
                         </div>
                         <div class="icon">
@@ -65,12 +74,15 @@
                     <!-- small box -->
                     <div class="small-box bg-danger">
                         <div class="inner">
-                            <h3>0</h3>
-
+                            @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
+                                <h3>{{\App\mTicket::where('status', '=', 'Closed')->count() }}</h3>
+                            @else
+                                <h3>{{\App\mTicket::where('request_by','=',\Illuminate\Support\Facades\Auth::user()->department)->where('status', '=','Closed')->count() }}</h3>
+                            @endif
                             <p>Closed Tickets</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-pie-graph"></i>
+                            <i class="far fa-chart-pie"></i>
                         </div>
                         <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>

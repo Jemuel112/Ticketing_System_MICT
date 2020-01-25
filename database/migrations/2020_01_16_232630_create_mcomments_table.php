@@ -15,6 +15,8 @@ class CreateMcommentsTable extends Migration
     {
         Schema::create('mcomments', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->longText('comments');
+            $table->bigInteger('id_mticket');
             $table->timestamps();
         });
     }

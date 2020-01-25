@@ -19,6 +19,8 @@ class AccessAE
         if (Auth::user()->department == 'Administrator' || 'Engineering') {
             return $next($request);
         }
-        return redirect('/dashboard');
+//        return redirect('/dashboard');
+        return redirect()->back();
+
     }
 }

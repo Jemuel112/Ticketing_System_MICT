@@ -19,6 +19,6 @@ class AccessAdmin
         if (Auth::user()->department == 'Administrator') {
             return $next($request);
         }
-        return redirect('/dashboard');
+        return redirect()->back();
     }
 }

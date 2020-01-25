@@ -1,6 +1,6 @@
 <!-- Font Awesome -->
-<link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-
+{{--<link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">--}}
+<link rel="stylesheet" href="../../plugins/fontawesome-pro/css/all.min.css">
 <!-- overlayScrollbars -->
 <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
 
