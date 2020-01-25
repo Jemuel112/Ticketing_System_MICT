@@ -47,86 +47,72 @@
                         </p>
                     </a>
                 </li>
-
-                @if(Auth::user()->department == "Administrator")
-                    <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fal fa-ticket-alt"></i>
-                            <p>
-                                Tickets
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="/MICT-Tickets" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>All Tickets</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>My Tickets</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon far fa-file-invoice"></i>
-                            <p>
-                                Reports
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>All Tickets</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>My Tickets</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                @else
-                    <li class="nav-item">
-                        <a href="/MICT-Tickets" class="nav-link">
-                            <i class="nav-icon fad fa-list-alt"></i>
-                            <p>
-                                My Ticket
-                            </p>
-                        </a>
-                    </li>
-                @endif
-
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fal fa-ticket-alt"></i>
+                        <p>
+                            Tickets
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/MICT-Tickets" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>All Tickets</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>My Tickets</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon far fa-file-invoice"></i>
+                        <p>
+                            Reports
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>All Tickets</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>My Tickets</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="nav-header">
                     SETTINGS
                 </li>
                 @if(Auth::user()->department == 'MICT' || Auth::user()->department == 'Administrator' )
-                    <li class="nav-item">
-                        <a href="/users" class="nav-link">
-                            <i class="nav-icon fas fa-users"></i>
-                            <p>
-                                Users
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/departments" class="nav-link">
-                            <i class="nav-icon far fa-building"></i>
-                            <p>
-                                Departments
-                            </p>
-                        </a>
-                    </li>
+                <li class="nav-item">
+                    <a href="/users" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Users
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/departments" class="nav-link">
+                        <i class="nav-icon far fa-building"></i>
+                        <p>
+                            Departments
+                        </p>
+                    </a>
+                </li>
                 @endif
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('logout') }}"

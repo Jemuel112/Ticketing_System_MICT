@@ -1,20 +1,11 @@
 @extends('layouts.master')
 
 @section('title', 'Create New Tickets | ')
-<<<<<<< HEAD
 @section('content')
     @include('layouts.scripts')
 
     <!-- Content Wrapper. Contains page content -->
     <form action="/Create_MICT_Tickets" method="POST">
-=======
-@include('layouts.scripts')
-
-@section('content')
-
-    <!-- Content Wrapper. Contains page content -->
-    <form action="/MICT-Tickets" method="POST">
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
 
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -22,7 +13,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Create Tickets</h1>
+                            <h1>Show Ticket Number ({{$ticket->id}})</h1>
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->
@@ -41,68 +32,6 @@
             @csrf
             @method('POST')
             <section class="content" onload="functionToBeExecuted">
-
-                @if(Auth::user()->department == 'Administrator')
-                    <div class="card card-default">
-                        <div class="card-header">
-                            <h3 class="card-title">Date</h3>
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
-                                        class="fas fa-minus"></i></button>
-                            </div>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label>Create At</label>
-                                    <div class="form-group">
-                                        <div class="input-group date"
-                                             data-target-input="nearest">
-<<<<<<< HEAD
-                                            <input type="text" name="create_at" id="datetimepicker7"
-=======
-                                            <input type="text" name="created_at" id="datetimepicker7"
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
-                                                   class="form-control datetimepicker-input"
-                                                   data-target="#datetimepicker7">
-                                            <div class="input-group-append" data-target="#datetimepicker7"
-                                                 data-toggle="datetimepicker">
-                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                            </div>
-                                        </div>
-<<<<<<< HEAD
-=======
-                                        <input class="form-control"
-                                               value="{{Auth::User()->username}}"
-                                               style="width: 100%;" type="text" name="created_by" placeholder="Name"
-                                               hidden
-                                        >
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
-                                    </div>
-
-                                </div>
-                                {{--                                <div class="col-md-6">--}}
-                                {{--                                    <label>Update Date</label>--}}
-                                {{--                                    <div class="form-group">--}}
-                                {{--                                        <div class="input-group date"--}}
-                                {{--                                             data-target-input="nearest">--}}
-                                {{--                                            <input type="text" id="datetimepicker8"--}}
-                                {{--                                                   class="form-control datetimepicker-input"--}}
-                                {{--                                                   data-target="#datetimepicker8"/>--}}
-                                {{--                                            <div class="input-group-append" data-target="#datetimepicker8"--}}
-                                {{--                                                 data-toggle="datetimepicker">--}}
-                                {{--                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>--}}
-                                {{--                                            </div>--}}
-                                {{--                                        </div>--}}
-                                {{--                                    </div>--}}
-                                {{--                                </div>--}}
-                            </div>
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-                @endif
-
 
                 <div class="card card-default">
                     <div class="card-header">
@@ -126,7 +55,7 @@
                                 <label>Reported by
                                 </label>
                                 <input class="form-control @error("reported_by")is-invalid @enderror"
-                                       value="{{old('reported_by')}}"
+                                       value="{{$ticket->reported_by}}"
                                        style="width: 100%;" type="text" name="reported_by" placeholder="Name"
                                 >
                             </div>
@@ -139,11 +68,7 @@
                                 @if(Auth::user()->department == 'Administrator' || Auth::user()->department == "MICT")
                                     <select class="form-control select2bs4 @error("request_by")is-invalid @enderror"
                                             id="reqb" name="request_by"
-<<<<<<< HEAD
                                             style="width: 100%;" required>
-=======
-                                            style="width: 100%;">
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
                                         <option value=""></option>
                                         @foreach($departments as $department)
                                             <option
@@ -152,18 +77,12 @@
                                     </select>
                                 @else
                                     <select class="form-control select2bs4 @error("request_by")is-invalid @enderror"
-<<<<<<< HEAD
                                             value="{{old('request_by')}}"
                                             id="reqb" name="request_by"
                                             style="width: 100%;"
                                     >
                                         <option
                                             value="{{Auth::user()->department}}">{{Auth::user()->department}}</option>
-=======
-                                            id="reqb" name="request_by"
-                                            style="width: 100%;" readonly>
-                                        <option value="{{Auth::user()->department}}" select>{{Auth::user()->department}}</option>
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
                                     </select>
                                 @endif
                             </div>
@@ -182,20 +101,9 @@
                                         <option value="On-Going" {{ old('status') == 'On-Going' ? 'selected':''}}>
                                             On-Going
                                         </option>
-<<<<<<< HEAD
                                         <option value="Resolve" {{ old('status') == 'Resolve' ? 'selected':''}}>Resolve</option>
                                         <option value="Duplicate" {{ old('status') == 'Duplicate' ? 'selected':''}}>Duplicate</option>
                                         <option value="Closed" {{ old('status') == 'Closed' ? 'selected':''}}>Closed</option>
-=======
-                                        <option value="Resolve" {{ old('status') == 'Resolve' ? 'selected':''}}>
-                                            Resolve
-                                        </option>
-                                        <option value="Duplicate" {{ old('status') == 'Duplicate' ? 'selected':''}}>
-                                            Duplicate
-                                        </option>
-                                        <option value="Closed" {{ old('status') == 'Closed' ? 'selected':''}}>Closed
-                                        </option>
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
                                     </select>
                                 @else
                                     <select class="form-control select2bs4 @error("status")is-invalid @enderror"
@@ -220,23 +128,9 @@
                                             disabled
                                     >
                                         <option></option>
-<<<<<<< HEAD
                                         <option value="Pending For Spare" {{ old('og_status') == 'Pending For Spare' ? 'selected':''}}>Pending For Spare</option>
                                         <option value="Under Observation" {{ old('og_status') == 'Under Observation' ? 'selected':''}}>Under Observation</option>
                                         <option value="Others" {{ old('og_status') == 'Others' ? 'selected':''}}>Others</option>
-=======
-                                        <option
-                                            value="Pending For Spare" {{ old('og_status') == 'Pending For Spare' ? 'selected':''}}>
-                                            Pending For Spare
-                                        </option>
-                                        <option
-                                            value="Under Observation" {{ old('og_status') == 'Under Observation' ? 'selected':''}}>
-                                            Under Observation
-                                        </option>
-                                        <option value="Others" {{ old('og_status') == 'Others' ? 'selected':''}}>
-                                            Others
-                                        </option>
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
                                     </select>
                                 </div>
                             </div>
@@ -283,11 +177,7 @@
                                     <option></option>
                                     @foreach($micts as $mict)
                                         <option
-<<<<<<< HEAD
                                             value="{{$mict->fname}}">{{$mict->fname}}</option>
-=======
-                                            value="{{$mict->fname}}" {{ old('acknowledge_by') == $mict->fname ? 'selected':''}}>{{$mict->fname}}</option>
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
                                     @endforeach
                                 </select>
                             </div>
@@ -297,11 +187,7 @@
                             <div class="col-lg-3 col-md-3">
                                 <label><br>Assigned to</label>
                                 <select class="form-control select2bs4 @error("assigned_to")is-invalid @enderror"
-<<<<<<< HEAD
                                         value="{{old('assigned_to')}}" name="assigned_to"
-=======
-                                        value="{{old('assigned_to')}}" name="assigned_to[]"
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
                                         data-placeholder="Assigned to..."
                                         multiple="multiple" style="width: 100%;"
                                         @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
@@ -321,11 +207,7 @@
                             <div class="col-lg-3 col-md-3">
                                 <label><br>Assisted By</label>
                                 <select class="form-control select2bs4 @error("assisted_by")is-invalid @enderror"
-<<<<<<< HEAD
                                         value="{{old('assisted_by')}}" name="assisted_by"
-=======
-                                        value="{{old('assisted_by')}}" name="assisted_by[]"
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
                                         data-placeholder="Assisted by..."
                                         multiple="multiple" style="width: 100%;"
                                         @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
@@ -345,11 +227,7 @@
                             <div class="col-lg-3 col-md-3">
                                 <label><br>Accomplished by</label>
                                 <select class="form-control select2bs4 @error("accomplished_by")is-invalid @enderror"
-<<<<<<< HEAD
                                         value="{{old('accomplished_by')}}" name="accomplished_by"
-=======
-                                        value="{{old('accomplished_by')}}" name="accomplished_by[]"
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
                                         data-placeholder="Accomplished by..."
                                         multiple="multiple" style="width: 100%;"
                                         @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
@@ -371,26 +249,11 @@
                                         id="category" name="category"
                                         style="width: 100%;">
                                     <option></option>
-<<<<<<< HEAD
                                     <option value="System" {{ old('category') == 'System' ? 'selected':''}}>System</option>
                                     <option value="Software" {{ old('category') == 'Software' ? 'selected':''}}>Software</option>
                                     <option value="Hardware" {{ old('category') == 'Hardware' ? 'selected':''}}>Hardware</option>
                                     <option value="Network" {{ old('category') == 'Network' ? 'selected':''}}>Network</option>
                                     <option value="Others" {{ old('category') == 'Others' ? 'selected':''}}>Others</option>
-=======
-                                    <option value="System" {{ old('category') == 'System' ? 'selected':''}}>System
-                                    </option>
-                                    <option value="Software" {{ old('category') == 'Software' ? 'selected':''}}>
-                                        Software
-                                    </option>
-                                    <option value="Hardware" {{ old('category') == 'Hardware' ? 'selected':''}}>
-                                        Hardware
-                                    </option>
-                                    <option value="Network" {{ old('category') == 'Network' ? 'selected':''}}>Network
-                                    </option>
-                                    <option value="Others" {{ old('category') == 'Others' ? 'selected':''}}>Others
-                                    </option>
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
                                 </select>
                             </div>
 
@@ -416,7 +279,6 @@
                                             style="width: 100%;"
                                             disabled>
                                         {{--                                    <option></option>--}}
-<<<<<<< HEAD
                                         <option value="Bixbox" {{ old('sys_category') == 'Bixbox' ? 'selected':''}}>Bixbox</option>
                                         <option value="PACS" {{ old('sys_category') == 'PACS' ? 'selected':''}}>PACS</option>
                                         <option value="LIS - SYSMEX" {{ old('sys_category') == 'LIS - SYSMEX' ? 'selected':''}}>LIS - SYSMEX</option>
@@ -429,47 +291,6 @@
                                         <option value="ASSET" {{ old('sys_category') == 'ASSET' ? 'selected':''}}>ASSET TRACER</option>
                                         <option value="CHEQUE TRACER" {{ old('sys_category') == 'CHEQUE TRACER' ? 'selected':''}}>CHEQUE TRACER</option>
                                         <option value="Others" {{ old('sys_category') == 'Others' ? 'selected':''}}>Others</option>
-=======
-                                        <option value="Bizbox" {{ old('sys_category') == 'Bizbox' ? 'selected':''}}>
-                                            Bizbox
-                                        </option>
-                                        <option value="PACS" {{ old('sys_category') == 'PACS' ? 'selected':''}}>PACS
-                                        </option>
-                                        <option
-                                            value="LIS - SYSMEX" {{ old('sys_category') == 'LIS - SYSMEX' ? 'selected':''}}>
-                                            LIS - SYSMEX
-                                        </option>
-                                        <option value="LIS - MARSMAN" {{ old('sys_category') == 'LIS' ? 'selected':''}}>
-                                            LIS - MARSMAN
-                                        </option>
-                                        <option
-                                            value="LIS - J&J" {{ old('sys_category') == 'LIS - J&J' ? 'selected':''}}>
-                                            LIS - J&J
-                                        </option>
-                                        <option value="DMS" {{ old('sys_category') == 'DMS' ? 'selected':''}}>DMS
-                                        </option>
-                                        <option value="ACC PAC" {{ old('sys_category') == 'ACC PAC' ? 'selected':''}}>
-                                            ACC PAC
-                                        </option>
-                                        <option
-                                            value="MEDEXPRESS" {{ old('sys_category') == 'MEDEXPRESS' ? 'selected':''}}>
-                                            MEDEXPRESS
-                                        </option>
-                                        <option
-                                            value="ACCESS DB" {{ old('sys_category') == 'ACCESS DB' ? 'selected':''}}>
-                                            ACCESS DB
-                                        </option>
-                                        <option value="ASSET" {{ old('sys_category') == 'ASSET' ? 'selected':''}}>ASSET
-                                            TRACER
-                                        </option>
-                                        <option
-                                            value="CHEQUE TRACER" {{ old('sys_category') == 'CHEQUE TRACER' ? 'selected':''}}>
-                                            CHEQUE TRACER
-                                        </option>
-                                        <option value="Others" {{ old('sys_category') == 'Others' ? 'selected':''}}>
-                                            Others
-                                        </option>
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
                                     </select>
                                 </div>
                             @endif
@@ -482,12 +303,7 @@
                                             style="width: 100%;">
                                         <option></option>
                                         <option value="Low" {{ old('lop') == 'Low' ? 'selected':''}}>Low</option>
-<<<<<<< HEAD
                                         <option value="Medium" {{ old('lop') == 'Medium' ? 'selected':''}}>Medium</option>
-=======
-                                        <option value="Medium" {{ old('lop') == 'Medium' ? 'selected':''}}>Medium
-                                        </option>
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
                                         <option value="High" {{ old('lop') == 'High' ? 'selected':''}}>High</option>
                                     </select>
                                 </div>
@@ -500,11 +316,7 @@
                                 <textarea name="concerns"
                                           placeholder="Place some text here"
                                           class="@error("concerns")is-invalid @enderror"
-<<<<<<< HEAD
                                           style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{old('concerns')}}</textarea>
-=======
-                                          style="resize: none;width: 100%; height: 150px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{old('concerns')}}</textarea>
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
                             </div>
                         </div>
                     </div>
@@ -526,10 +338,7 @@
                                         class="fas fa-minus"></i></button>
                             </div>
                         </div>
-<<<<<<< HEAD
                         <!-- /.card-header -->
-=======
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-lg-12">
@@ -537,27 +346,13 @@
                                     <textarea id="act" class="textarea" placeholder="Place some text here"
                                               style="width: 100%; height: 250px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
                                 </div>
-<<<<<<< HEAD
-=======
-                                <div class="col-lg-12">
-                                    <label>Remarks/Recommendations</label>
-                                    <textarea name="recommendation"
-                                              placeholder="Place some text here"
-                                              class="@error("concerns")is-invalid @enderror"
-                                              style="resize: none;width: 100%; height: 150px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{old('recommendation')}}</textarea>
-                                </div>
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
                             </div>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
-<<<<<<< HEAD
                             Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples and
                             information about
                             the plugin.
-=======
-
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
                         </div>
                     </div>
                     <br>
@@ -570,12 +365,7 @@
         <!-- /.content-wrapper -->
         <footer class="main-footer">
             <div class="float-right">
-<<<<<<< HEAD
                 <button type="submit" class="btn btn-primary">Submit</button>
-=======
-                <button type="submit" class="btn btn-primary"><i class="nav-icon fal fa-plus-circle"></i>
-                    Submit</button>
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
 
             </div>
             <strong>Copyright &copy; 2020 <a href="https://www.mcuhospital.org/">MCU Hospital</a>.</strong> All
@@ -596,12 +386,9 @@
         $("#datetimepickerd").on("change.datetimepicker", function (e) {
             $('#datetimepickers').datetimepicker('maxDate', e.date);
         });
-<<<<<<< HEAD
     </script>
     <script>
 
-=======
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
         //Initialize Select2 Elements
         $('.select2').select2();
 
@@ -693,11 +480,8 @@
                 $("#dact").prop("hidden", true);
             }
         });
-<<<<<<< HEAD
     </script>
     <script>
-=======
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
         window.onload = function exampleFunction() {
             // Function to executed
             if ($('#status').val() == "On-Going") {

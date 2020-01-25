@@ -22,11 +22,8 @@ Route::group(['middleware' => ['auth']], function() {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware('auth');
-<<<<<<< HEAD
-Route::resource('/MICT-Tickets', 'mTicketsController');
-=======
+
 Route::resource('/MICT-Tickets', 'mTicketsController',['only'=> ['index','create','store','show','edit']]);
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
 
 
 //Route::get('/departments', 'DepartmentsController@index');
@@ -53,8 +50,4 @@ Auth::routes([
 ]);
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/logout',function (){
-    return view('auth.login');
-});
 

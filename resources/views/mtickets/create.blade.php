@@ -1,11 +1,12 @@
 @extends('layouts.master')
 
 @section('title', 'Create New Tickets | ')
+@include('layouts.scripts')
+
 @section('content')
-    @include('layouts.scripts')
 
     <!-- Content Wrapper. Contains page content -->
-    <form action="/Create_MICT_Tickets" method="POST">
+    <form action="/MICT-Tickets" method="POST">
 
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -13,11 +14,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-<<<<<<< HEAD
                             <h1>Create Tickets</h1>
-=======
-                            <h1>Ticket Number {{$ticket->id}}</h1>
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->
@@ -37,7 +34,6 @@
             @method('POST')
             <section class="content" onload="functionToBeExecuted">
 
-<<<<<<< HEAD
                 @if(Auth::user()->department == 'Administrator')
                     <div class="card card-default">
                         <div class="card-header">
@@ -55,7 +51,7 @@
                                     <div class="form-group">
                                         <div class="input-group date"
                                              data-target-input="nearest">
-                                            <input type="text" name="create_at" id="datetimepicker7"
+                                            <input type="text" name="created_at" id="datetimepicker7"
                                                    class="form-control datetimepicker-input"
                                                    data-target="#datetimepicker7">
                                             <div class="input-group-append" data-target="#datetimepicker7"
@@ -63,6 +59,11 @@
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                             </div>
                                         </div>
+                                        <input class="form-control"
+                                               value="{{Auth::User()->username}}"
+                                               style="width: 100%;" type="text" name="created_by" placeholder="Name"
+                                               hidden
+                                        >
                                     </div>
 
                                 </div>
@@ -88,8 +89,6 @@
                 @endif
 
 
-=======
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
                 <div class="card card-default">
                     <div class="card-header">
                         <h3 class="card-title">Ticket Info</h3>
@@ -112,14 +111,8 @@
                                 <label>Reported by
                                 </label>
                                 <input class="form-control @error("reported_by")is-invalid @enderror"
-<<<<<<< HEAD
                                        value="{{old('reported_by')}}"
                                        style="width: 100%;" type="text" name="reported_by" placeholder="Name"
-=======
-                                       value="{{$ticket->reported_by}}"
-                                       style="width: 100%;" type="text" name="reported_by" placeholder="Name"
-                                       id="report"
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
                                 >
                             </div>
                             {{--End Reported by--}}
@@ -131,11 +124,7 @@
                                 @if(Auth::user()->department == 'Administrator' || Auth::user()->department == "MICT")
                                     <select class="form-control select2bs4 @error("request_by")is-invalid @enderror"
                                             id="reqb" name="request_by"
-<<<<<<< HEAD
                                             style="width: 100%;" required>
-=======
-                                            style="width: 100%;">
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
                                         <option value=""></option>
                                         @foreach($departments as $department)
                                             <option
@@ -158,7 +147,6 @@
                             {{--Status--}}
                             <div class="col-lg-3 col-sm-3">
                                 <label>Status</label>
-<<<<<<< HEAD
                                 @if(Auth::user()->department == 'Administrator' || Auth::user()->department == 'MICT')
                                     <select class="form-control select2bs4 @error("status")is-invalid @enderror"
                                             name="status"
@@ -169,9 +157,14 @@
                                         <option value="On-Going" {{ old('status') == 'On-Going' ? 'selected':''}}>
                                             On-Going
                                         </option>
-                                        <option value="Resolve" {{ old('status') == 'Resolve' ? 'selected':''}}>Resolve</option>
-                                        <option value="Duplicate" {{ old('status') == 'Duplicate' ? 'selected':''}}>Duplicate</option>
-                                        <option value="Closed" {{ old('status') == 'Closed' ? 'selected':''}}>Closed</option>
+                                        <option value="Resolve" {{ old('status') == 'Resolve' ? 'selected':''}}>
+                                            Resolve
+                                        </option>
+                                        <option value="Duplicate" {{ old('status') == 'Duplicate' ? 'selected':''}}>
+                                            Duplicate
+                                        </option>
+                                        <option value="Closed" {{ old('status') == 'Closed' ? 'selected':''}}>Closed
+                                        </option>
                                     </select>
                                 @else
                                     <select class="form-control select2bs4 @error("status")is-invalid @enderror"
@@ -182,27 +175,6 @@
                                         <option value="Active" selected>Active</option>
                                     </select>
                                 @endif
-=======
-                                <select class="form-control select2bs4 @error("status")is-invalid @enderror"
-                                        name="status"
-                                        style="width: 100%;"
-                                        id="status"
-                                        disabled>
-                                    {{--                                        {{$ticket->status == $user->department  ? 'selected' : ''}}--}}
-                                    <option value="Active" {{ $ticket->status == 'Active' ? 'selected' :''}}>Active
-                                    </option>
-                                    <option value="On-Going" {{ $ticket->status == 'On-Going' ? 'selected':''}}>
-                                        On-Going
-                                    </option>
-                                    <option value="Resolve" {{ $ticket->status == 'Resolve' ? 'selected':''}}>Resolve
-                                    </option>
-                                    <option value="Duplicate" {{ $ticket->status == 'Duplicate' ? 'selected':''}}>
-                                        Duplicate
-                                    </option>
-                                    <option value="Closed" {{ $ticket->status == 'Closed' ? 'selected':''}}>Closed
-                                    </option>
-                                </select>
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
                             </div>
                             {{--End Status--}}
 
@@ -215,14 +187,6 @@
                                             id="ogs"
                                             style="width: 100%;"
                                             disabled
-<<<<<<< HEAD
-                                    >
-                                        <option></option>
-                                        <option value="Pending For Spare" {{ old('og_status') == 'Pending For Spare' ? 'selected':''}}>Pending For Spare</option>
-                                        <option value="Under Observation" {{ old('og_status') == 'Under Observation' ? 'selected':''}}>Under Observation</option>
-                                        <option value="Others" {{ old('og_status') == 'Others' ? 'selected':''}}>Others</option>
-=======
-
                                     >
                                         <option></option>
                                         <option
@@ -236,7 +200,6 @@
                                         <option value="Others" {{ old('og_status') == 'Others' ? 'selected':''}}>
                                             Others
                                         </option>
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
                                     </select>
                                 </div>
                             </div>
@@ -249,11 +212,7 @@
                                     <input type="text"
                                            class="form-control datetimepicker-input @error("start_at")is-invalid @enderror"
                                            value="{{old('start_at')}}" name="start_at"
-<<<<<<< HEAD
                                            data-target="#datetimepickers"/>
-=======
-                                           data-target="#datetimepickers" disabled/>
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
                                     <div class="input-group-append" data-target="#datetimepickers"
                                          data-toggle="datetimepicker">
                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -266,11 +225,7 @@
                                     <input type="text"
                                            class="form-control datetimepicker-input @error("end_at")is-invalid @enderror"
                                            value="{{old('end_at')}}" name="end_at"
-<<<<<<< HEAD
                                            data-target="#datetimepickerd"/>
-=======
-                                           data-target="#datetimepickerd" disabled/>
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
                                     <div class="input-group-append" data-target="#datetimepickerd"
                                          data-toggle="datetimepicker">
                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -291,7 +246,7 @@
                                     <option></option>
                                     @foreach($micts as $mict)
                                         <option
-                                            value="{{$mict->fname}}">{{$mict->fname}}</option>
+                                            value="{{$mict->fname}}" {{ old('acknowledge_by') == $mict->fname ? 'selected':''}}>{{$mict->fname}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -301,7 +256,7 @@
                             <div class="col-lg-3 col-md-3">
                                 <label><br>Assigned to</label>
                                 <select class="form-control select2bs4 @error("assigned_to")is-invalid @enderror"
-                                        value="{{old('assigned_to')}}" name="assigned_to"
+                                        value="{{old('assigned_to')}}" name="assigned_to[]"
                                         data-placeholder="Assigned to..."
                                         multiple="multiple" style="width: 100%;"
                                         @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
@@ -321,7 +276,7 @@
                             <div class="col-lg-3 col-md-3">
                                 <label><br>Assisted By</label>
                                 <select class="form-control select2bs4 @error("assisted_by")is-invalid @enderror"
-                                        value="{{old('assisted_by')}}" name="assisted_by"
+                                        value="{{old('assisted_by')}}" name="assisted_by[]"
                                         data-placeholder="Assisted by..."
                                         multiple="multiple" style="width: 100%;"
                                         @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
@@ -341,7 +296,7 @@
                             <div class="col-lg-3 col-md-3">
                                 <label><br>Accomplished by</label>
                                 <select class="form-control select2bs4 @error("accomplished_by")is-invalid @enderror"
-                                        value="{{old('accomplished_by')}}" name="accomplished_by"
+                                        value="{{old('accomplished_by')}}" name="accomplished_by[]"
                                         data-placeholder="Accomplished by..."
                                         multiple="multiple" style="width: 100%;"
                                         @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
@@ -361,31 +316,20 @@
                                 <label><br>Category</label>
                                 <select class="form-control select2bs4 @error("category")is-invalid @enderror"
                                         id="category" name="category"
-<<<<<<< HEAD
                                         style="width: 100%;">
                                     <option></option>
-                                    <option value="System" {{ old('category') == 'System' ? 'selected':''}}>System</option>
-                                    <option value="Software" {{ old('category') == 'Software' ? 'selected':''}}>Software</option>
-                                    <option value="Hardware" {{ old('category') == 'Hardware' ? 'selected':''}}>Hardware</option>
-                                    <option value="Network" {{ old('category') == 'Network' ? 'selected':''}}>Network</option>
-                                    <option value="Others" {{ old('category') == 'Others' ? 'selected':''}}>Others</option>
-=======
-                                        style="width: 100%;"
-                                        disabled>
-                                    <option></option>
-                                    <option value="System" {{ $ticket->category == 'System' ? 'selected':''}}>System
+                                    <option value="System" {{ old('category') == 'System' ? 'selected':''}}>System
                                     </option>
-                                    <option value="Software" {{ $ticket->category == 'Software' ? 'selected':''}}>
+                                    <option value="Software" {{ old('category') == 'Software' ? 'selected':''}}>
                                         Software
                                     </option>
-                                    <option value="Hardware" {{ $ticket->category == 'Hardware' ? 'selected':''}}>
+                                    <option value="Hardware" {{ old('category') == 'Hardware' ? 'selected':''}}>
                                         Hardware
                                     </option>
-                                    <option value="Network" {{ $ticket->category == 'Network' ? 'selected':''}}>Network
+                                    <option value="Network" {{ old('category') == 'Network' ? 'selected':''}}>Network
                                     </option>
-                                    <option value="Others" {{ $ticket->category == 'Others' ? 'selected':''}}>Others
+                                    <option value="Others" {{ old('category') == 'Others' ? 'selected':''}}>Others
                                     </option>
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
                                 </select>
                             </div>
 
@@ -401,7 +345,6 @@
                             </div>
                             {{--                        @endif--}}
 
-<<<<<<< HEAD
                             @if(Auth::user()->department == "Administrator"|| Auth::user()->department == "MICT")
                                 <div id="dsystem" class="col-lg-4 col-md-4" hidden>
                                     <label><br>System Category</label>
@@ -412,18 +355,45 @@
                                             style="width: 100%;"
                                             disabled>
                                         {{--                                    <option></option>--}}
-                                        <option value="Bixbox" {{ old('sys_category') == 'Bixbox' ? 'selected':''}}>Bixbox</option>
-                                        <option value="PACS" {{ old('sys_category') == 'PACS' ? 'selected':''}}>PACS</option>
-                                        <option value="LIS - SYSMEX" {{ old('sys_category') == 'LIS - SYSMEX' ? 'selected':''}}>LIS - SYSMEX</option>
-                                        <option value="LIS - MARSMAN" {{ old('sys_category') == 'LIS' ? 'selected':''}}>LIS - MARSMAN</option>
-                                        <option value="LIS - J&J" {{ old('sys_category') == 'LIS - J&J' ? 'selected':''}}>LIS - J&J</option>
-                                        <option value="DMS" {{ old('sys_category') == 'DMS' ? 'selected':''}}>DMS</option>
-                                        <option value="ACC PAC" {{ old('sys_category') == 'ACC PAC' ? 'selected':''}}>ACC PAC</option>
-                                        <option value="MEDEXPRESS" {{ old('sys_category') == 'MEDEXPRESS' ? 'selected':''}}>MEDEXPRESS</option>
-                                        <option value="ACCESS DB" {{ old('sys_category') == 'ACCESS DB' ? 'selected':''}}>ACCESS DB</option>
-                                        <option value="ASSET" {{ old('sys_category') == 'ASSET' ? 'selected':''}}>ASSET TRACER</option>
-                                        <option value="CHEQUE TRACER" {{ old('sys_category') == 'CHEQUE TRACER' ? 'selected':''}}>CHEQUE TRACER</option>
-                                        <option value="Others" {{ old('sys_category') == 'Others' ? 'selected':''}}>Others</option>
+                                        <option value="Bizbox" {{ old('sys_category') == 'Bizbox' ? 'selected':''}}>
+                                            Bizbox
+                                        </option>
+                                        <option value="PACS" {{ old('sys_category') == 'PACS' ? 'selected':''}}>PACS
+                                        </option>
+                                        <option
+                                            value="LIS - SYSMEX" {{ old('sys_category') == 'LIS - SYSMEX' ? 'selected':''}}>
+                                            LIS - SYSMEX
+                                        </option>
+                                        <option value="LIS - MARSMAN" {{ old('sys_category') == 'LIS' ? 'selected':''}}>
+                                            LIS - MARSMAN
+                                        </option>
+                                        <option
+                                            value="LIS - J&J" {{ old('sys_category') == 'LIS - J&J' ? 'selected':''}}>
+                                            LIS - J&J
+                                        </option>
+                                        <option value="DMS" {{ old('sys_category') == 'DMS' ? 'selected':''}}>DMS
+                                        </option>
+                                        <option value="ACC PAC" {{ old('sys_category') == 'ACC PAC' ? 'selected':''}}>
+                                            ACC PAC
+                                        </option>
+                                        <option
+                                            value="MEDEXPRESS" {{ old('sys_category') == 'MEDEXPRESS' ? 'selected':''}}>
+                                            MEDEXPRESS
+                                        </option>
+                                        <option
+                                            value="ACCESS DB" {{ old('sys_category') == 'ACCESS DB' ? 'selected':''}}>
+                                            ACCESS DB
+                                        </option>
+                                        <option value="ASSET" {{ old('sys_category') == 'ASSET' ? 'selected':''}}>ASSET
+                                            TRACER
+                                        </option>
+                                        <option
+                                            value="CHEQUE TRACER" {{ old('sys_category') == 'CHEQUE TRACER' ? 'selected':''}}>
+                                            CHEQUE TRACER
+                                        </option>
+                                        <option value="Others" {{ old('sys_category') == 'Others' ? 'selected':''}}>
+                                            Others
+                                        </option>
                                     </select>
                                 </div>
                             @endif
@@ -436,76 +406,12 @@
                                             style="width: 100%;">
                                         <option></option>
                                         <option value="Low" {{ old('lop') == 'Low' ? 'selected':''}}>Low</option>
-                                        <option value="Medium" {{ old('lop') == 'Medium' ? 'selected':''}}>Medium</option>
+                                        <option value="Medium" {{ old('lop') == 'Medium' ? 'selected':''}}>Medium
+                                        </option>
                                         <option value="High" {{ old('lop') == 'High' ? 'selected':''}}>High</option>
                                     </select>
                                 </div>
                             @endif
-=======
-                            <div id="dsystem" class="col-lg-4 col-md-4" hidden>
-                                <label><br>System Category</label>
-                                <select id="system"
-                                        class="form-control select2bs4 @error("sys_category")is-invalid @enderror"
-                                        name="sys_category"
-                                        style="width: 100%;"
-                                        disabled>
-                                    <option></option>
-                                    {{--                                    <option></option>--}}
-                                    <option value="Bixbox" {{  $ticket->sys_category == 'Bixbox' ? 'selected':''}}>
-                                        Bixbox
-                                    </option>
-                                    <option value="PACS" {{ $ticket->sys_category == 'PACS' ? 'selected':''}}>PACS
-                                    </option>
-                                    <option
-                                        value="LIS - SYSMEX" {{ $ticket->sys_category == 'LIS - SYSMEX' ? 'selected':''}}>
-                                        LIS - SYSMEX
-                                    </option>
-                                    <option value="LIS - MARSMAN" {{ $ticket->sys_category == 'LIS' ? 'selected':''}}>
-                                        LIS - MARSMAN
-                                    </option>
-                                    <option
-                                        value="LIS - J&J" {{ $ticket->sys_category == 'LIS - J&J' ? 'selected':''}}>
-                                        LIS - J&J
-                                    </option>
-                                    <option value="DMS" {{ $ticket->sys_category == 'DMS' ? 'selected':''}}>DMS
-                                    </option>
-                                    <option value="ACC PAC" {{ $ticket->sys_category == 'ACC PAC' ? 'selected':''}}>
-                                        ACC PAC
-                                    </option>
-                                    <option
-                                        value="MEDEXPRESS" {{ $ticket->sys_category == 'MEDEXPRESS' ? 'selected':''}}>
-                                        MEDEXPRESS
-                                    </option>
-                                    <option
-                                        value="ACCESS DB" {{ $ticket->sys_category == 'ACCESS DB' ? 'selected':''}}>
-                                        ACCESS DB
-                                    </option>
-                                    <option value="ASSET" {{ $ticket->sys_category == 'ASSET' ? 'selected':''}}>ASSET
-                                        TRACER
-                                    </option>
-                                    <option
-                                        value="CHEQUE TRACER" {{ $ticket->sys_category == 'CHEQUE TRACER' ? 'selected':''}}>
-                                        CHEQUE TRACER
-                                    </option>
-                                    <option value="Others" {{ $ticket->sys_category == 'Others' ? 'selected':''}}>
-                                        Others
-                                    </option>
-                                </select>
-                            </div>
-
-                            <div class="col-lg-4 col-md-4">
-                                <label><br>Level of Priority</label>
-                                <select class="form-control select2bs4 @error("lop")is-invalid @enderror"
-                                        value="{{old('lop')}}" id="lop" name="lop"
-                                        style="width: 100%;"
-                                        disabled>
-                                    <option></option>
-                                    <option value="Low" {{ $ticket->lop == 'Low' ? 'selected':''}}>Low</option>
-                                    <option value="Medium" {{ $ticket->lop == 'Medium' ? 'selected':''}}>Medium</option>
-                                    <option value="High" {{ $ticket->lop == 'High' ? 'selected':''}}>High</option>
-                                </select>
-                            </div>
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
 
                             <div class="col-lg-12 col-md-12">
                                 <label> <br>
@@ -514,11 +420,7 @@
                                 <textarea name="concerns"
                                           placeholder="Place some text here"
                                           class="@error("concerns")is-invalid @enderror"
-<<<<<<< HEAD
-                                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{old('concerns')}}</textarea>
-=======
-                                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" disabled>{{$ticket->concerns}}</textarea>
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
+                                          style="resize: none;width: 100%; height: 150px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{old('concerns')}}</textarea>
                             </div>
                         </div>
                     </div>
@@ -540,7 +442,6 @@
                                         class="fas fa-minus"></i></button>
                             </div>
                         </div>
-                        <!-- /.card-header -->
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-lg-12">
@@ -548,13 +449,18 @@
                                     <textarea id="act" class="textarea" placeholder="Place some text here"
                                               style="width: 100%; height: 250px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
                                 </div>
+                                <div class="col-lg-12">
+                                    <label>Remarks/Recommendations</label>
+                                    <textarea name="recommendation"
+                                              placeholder="Place some text here"
+                                              class="@error("concerns")is-invalid @enderror"
+                                              style="resize: none;width: 100%; height: 150px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{old('recommendation')}}</textarea>
+                                </div>
                             </div>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
-                            Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples and
-                            information about
-                            the plugin.
+
                         </div>
                     </div>
                     <br>
@@ -567,7 +473,8 @@
         <!-- /.content-wrapper -->
         <footer class="main-footer">
             <div class="float-right">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary"><i class="nav-icon fal fa-plus-circle"></i>
+                    Submit</button>
 
             </div>
             <strong>Copyright &copy; 2020 <a href="https://www.mcuhospital.org/">MCU Hospital</a>.</strong> All
@@ -578,13 +485,6 @@
 
     </form>
     <script type="text/javascript">
-<<<<<<< HEAD
-=======
-        $('#reqb').prop('disabled', true);
-        $('#report').prop('disabled', true);
-
-
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
         $("#datetimepickers").datetimepicker();
         $("#datetimepickerd").datetimepicker({
             useCurrent: false
@@ -595,9 +495,6 @@
         $("#datetimepickerd").on("change.datetimepicker", function (e) {
             $('#datetimepickers').datetimepicker('maxDate', e.date);
         });
-    </script>
-    <script>
-
         //Initialize Select2 Elements
         $('.select2').select2();
 
@@ -616,11 +513,6 @@
             placeholder: "Select...",
             allowClear: true
         });
-<<<<<<< HEAD
-=======
-
-
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
         $selectElement = $('#ackn').select2({
             theme: 'bootstrap4',
             placeholder: "Select...",
@@ -636,11 +528,7 @@
             placeholder: "Select Category",
             allowClear: true
         });
-<<<<<<< HEAD
         $selectElement = $('#syscategory').select2({
-=======
-        $selectElement = $('#system').select2({
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
             theme: 'bootstrap4',
             placeholder: "Select Category",
             allowClear: true
@@ -652,20 +540,14 @@
         });
         $('#status').change(function () {
             if ($(this).val() == "On-Going") {
-<<<<<<< HEAD
                 $("#ogs").prop("disabled", false);
-=======
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
                 $("#dogs").prop("hidden", false);
                 $("#dogst1").prop("disabled", false);
                 $("#dogst1").prop("hidden", false);
                 $("#dogst2").prop("disabled", false);
                 $("#dogst2").prop("hidden", false);
             } else {
-<<<<<<< HEAD
                 $("#ogs").prop("disabled", true);
-=======
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
                 $("#dogs").prop("hidden", true);
                 $("#dogst1").prop("disabled", true);
                 $("#dogst1").prop("hidden", true);
@@ -675,29 +557,19 @@
         });
         $('#category').change(function () {
             if ($(this).val() == "System") {
-<<<<<<< HEAD
                 $("#system").prop("disabled", false);
                 $("#dsystem").prop("hidden", false);
             } else {
                 $("#system").prop("disabled", true);
-=======
-                $("#dsystem").prop("hidden", false);
-            } else {
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
                 $("#dsystem").prop("hidden", true);
             }
         });
         $('#category').change(function () {
             if ($(this).val() == "Others") {
-<<<<<<< HEAD
                 $("#other").prop("disabled", false);
                 $("#dother").prop("hidden", false);
             } else {
                 $("#other").prop("disabled", true);
-=======
-                $("#dother").prop("hidden", false);
-            } else {
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
                 $("#dother").prop("hidden", true);
             }
         });
@@ -714,25 +586,17 @@
                 $("#dact").prop("hidden", true);
             }
         });
-    </script>
-    <script>
         window.onload = function exampleFunction() {
             // Function to executed
             if ($('#status').val() == "On-Going") {
-<<<<<<< HEAD
                 $("#ogs").prop("disabled", false);
-=======
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
                 $("#dogs").prop("hidden", false);
                 $("#dogst1").prop("disabled", false);
                 $("#dogst1").prop("hidden", false);
                 $("#dogst2").prop("disabled", false);
                 $("#dogst2").prop("hidden", false);
             } else {
-<<<<<<< HEAD
                 $("#ogs").prop("disabled", true);
-=======
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
                 $("#dogs").prop("hidden", true);
                 $("#dogst1").prop("disabled", true);
                 $("#dogst1").prop("hidden", true);
@@ -740,7 +604,6 @@
                 $("#dogst2").prop("hidden", true);
             }
             if ($('#category').val() == "System") {
-<<<<<<< HEAD
                 $("#system").prop("disabled", false);
                 $("#dsystem").prop("hidden", false);
             } else {
@@ -752,15 +615,6 @@
                 $("#dother").prop("hidden", false);
             } else {
                 $("#other").prop("disabled", true);
-=======
-                $("#dsystem").prop("hidden", false);
-            } else {
-                $("#dsystem").prop("hidden", true);
-            }
-            if ($('#category').val() == "Others") {
-                $("#dother").prop("hidden", false);
-            } else {
->>>>>>> b8d4b8d47da0e18a6139b71a33632b3eece8ba3b
                 $("#dother").prop("hidden", true);
             }
             if ($('#status').val() == "Closed") {
