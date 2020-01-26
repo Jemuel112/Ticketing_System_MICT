@@ -6,57 +6,52 @@
     <div class="content-wrapper">
         <section class="content-header">
             <div class="col-12">
-                <table id="department1" class="wrap compact table table-hover table-bordered table-striped ">
+                <table id="department1"
+                       class="wrap compact table table-responsive-sm table-hover table-borderedless table-striped ">
                     <thead>
                     <tr>
-                        <th>Ticket&nbsp;#</th>
-                        <th width="12%">Reported by</th>
-                        <th width="12%">Department</th>
-                        <th width="12%">Status</th>
-                        <th width="12%">Category</th>
+                        <th hidden>Sample Text</th>
+                        <th width="6%">Ticket&nbsp;#</th>
+                        <th width="10%">Reported&nbsp;by</th>
+                        <th width="10%">Department</th>
+                        <th width="10%">Status</th>
+                        <th width="10%">Category</th>
                         <th width="30%">Issue&nbsp;/&nbsp;Concerns</th>
-                        <th width="10%">LOP</th>
-                        <th width="12%">Action</th>
+                        <th width="14%">Action</th>
                     </tr>
                     </thead>
                     @foreach($tickets as $ticket)
-{{--                        @if($ticket->status == 'Active')--}}
-{{--                            <tr class="table-success">--}}
-{{--                        @elseif($ticket->status == 'On-Going')--}}
-{{--                            <tr class="table-warning">--}}
-{{--                        @elseif($ticket->status == 'Resolve')--}}
-{{--                            <tr class="table-info">--}}
-{{--                        @elseif($ticket->status == 'Duplicate')--}}
-{{--                            <tr class="table-active">--}}
-{{--                        @else--}}
-{{--                            <tr class="table-danger">--}}
-{{--                                @endif--}}
-                    <tr  >
-                                <td >{{$ticket->id}}</td>
-                                <td >{{$ticket->reported_by}}</td>
-                                <td >{{$ticket->request_by}}</td>
-                                <td >{{$ticket->status}}</td>
-                                <td >{{$ticket->category}}</td>
-                                <td>{{ \Illuminate\Support\Str::limit($ticket->concerns, 150, $end='...') }}</td>
-                                @if($ticket->lop == 'High')
-                                    <td class="bg-danger"></td>
-                                @elseif($ticket->lop == 'Medium')
-                                    <td class="bg-warning"></td>
-                                @elseif($ticket->lop == 'Low')
-                                    <td class="bg-success"></td>
+                        @if($ticket->lop == 'High')
+                            <tr class="table-danger">
+                        @elseif($ticket->lop == 'Medium')
+                            <tr class="table-warning">
+                        @elseif($ticket->lop == 'Low')
+                            <tr class="table-info">
                                 @else
-                                    <td class="bg-info"></td>
-                                @endif
+                            <tr class="table-dark">
+
+                            @endif
+
+                                <td hidden>{{$ticket->is_new}}</td>
+                                <td>{{$ticket->id}}</td>
+                                <td>{{$ticket->reported_by}}</td>
+                                <td>{{$ticket->request_by}}</td>
+                                <td>{{$ticket->status}}</td>
+                                <td>{{$ticket->category}}</td>
+                                <td>{{ \Illuminate\Support\Str::limit($ticket->concerns, 150, $end='...') }}</td>
+
                                 <td>
                                     <div class="row">
+
                                         <a style="margin: 2px"
                                            class="btn btn-sm btn-outline-primary"
                                            href="/MICT-Tickets/{{$ticket->id}}"
-                                        ><i class="fal fa-eye"></i> View</a>
+                                        ><i class="fal fa-eye"></i></a>
+
                                         <a style="margin: 2px"
                                            class="btn btn-sm btn-outline-primary"
                                            href="/MICT-Tickets/{{$ticket->id}}/edit"
-                                        ><i class="fal fa-pencil-alt"></i> Edit</a>
+                                        ><i class="fal fa-pencil-alt"></i></a>
                                     </div>
                                 </td>
                             </tr>

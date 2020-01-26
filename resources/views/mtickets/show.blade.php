@@ -1,11 +1,11 @@
 @extends('layouts.master')
 
 @section('title', 'Create New Tickets | ')
-@section('content')
-    @include('layouts.scripts')
+@include('layouts.scripts')
 
+@section('content')
     <!-- Content Wrapper. Contains page content -->
-    <form action="/Create_MICT_Tickets" method="POST" id="myForm">
+    <form action='/MICT-Tickets/comments/{{$ticket->id}}' method="POST" id="myForm">
 
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -73,7 +73,7 @@
                                         <option value=""></option>
                                         @foreach($departments as $department)
                                             <option
-                                                value="{{$department->dept_name}}" {{ old('request_by') == $department->dept_name ? 'selected':''}}>{{$department->dept_name}}</option>
+                                                value="{{$department->dept_name}}" {{ $ticket->request_by == $department->dept_name ? 'selected':''}}>{{$department->dept_name}}</option>
                                         @endforeach
                                     </select>
                                 @else
@@ -127,14 +127,14 @@
                                     >
                                         <option></option>
                                         <option
-                                            value="Pending For Spare" {{ old('og_status') == 'Pending For Spare' ? 'selected':''}}>
+                                            value="Pending For Spare" {{ $ticket->og_status == 'Pending For Spare' ? 'selected':''}}>
                                             Pending For Spare
                                         </option>
                                         <option
-                                            value="Under Observation" {{ old('og_status') == 'Under Observation' ? 'selected':''}}>
+                                            value="Under Observation" {{ $ticket->og_status == 'Under Observation' ? 'selected':''}}>
                                             Under Observation
                                         </option>
-                                        <option value="Others" {{ old('og_status') == 'Others' ? 'selected':''}}>
+                                        <option value="Others" {{ $ticket->og_status == 'Others' ? 'selected':''}}>
                                             Others
                                         </option>
                                     </select>
@@ -148,7 +148,7 @@
                                 <div class="input-group date" id="datetimepickers" data-target-input="nearest">
                                     <input type="text"
                                            class="form-control datetimepicker-input @error("start_at")is-invalid @enderror"
-                                           value="{{old('start_at')}}" name="start_at"
+                                           value="{{date('m/d/Y h:i', strtotime($ticket->start_at))}}" name="start_at"
                                            data-target="#datetimepickers" disabled/>
                                     <div class="input-group-append" data-target="#datetimepickers"
                                          data-toggle="datetimepicker">
@@ -161,7 +161,7 @@
                                 <div class="input-group date" id="datetimepickerd" data-target-input="nearest">
                                     <input type="text"
                                            class="form-control datetimepicker-input @error("end_at")is-invalid @enderror"
-                                           value="{{old('end_at')}}" name="end_at"
+                                           value="{{date('m/d/Y h:i', strtotime($ticket->end_at))}}" name="end_at"
                                            data-target="#datetimepickerd" disabled/>
                                     <div class="input-group-append" data-target="#datetimepickerd"
                                          data-toggle="datetimepicker">
@@ -174,16 +174,13 @@
                             <div class="col-lg-3 col-md-3">
                                 <label for="ackn"><br>Acknowledge by</label>
                                 <select class="form-control select2bs4 @error("acknowledge_by")is-invalid @enderror"
-                                        value="{{old('acknowledge_by')}}" id="ackn" name="acknowledge_by"
+                                        id="ackn" name="acknowledge_by[]"
                                         style="width: 100%;"
-                                        @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
-                                        @else
-                                        disabled
-                                    @endif>
+                                        disabled>
                                     <option></option>
                                     @foreach($micts as $mict)
                                         <option
-                                            value="{{$mict->fname}}">{{$mict->fname}}</option>
+                                            value="{{$mict->fname}}" {{ $ticket->acknowledge_by == $mict->fname ? 'selected':''}}>{{$mict->fname}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -192,18 +189,18 @@
                             {{--Assigned--}}
                             <div class="col-lg-3 col-md-3">
                                 <label><br>Assigned to</label>
+                                @php
+                                    $selected = explode(",", $ticket->assigned_to)
+                                @endphp
                                 <select class="form-control select2bs4 @error("assigned_to")is-invalid @enderror"
-                                        value="{{old('assigned_to')}}" name="assigned_to"
+                                        value="{{old('assigned_to')}}" name="assigned_to[]"
                                         data-placeholder="Assigned to..."
                                         multiple="multiple" style="width: 100%;"
-                                        @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
-                                        @else
-                                        disabled
-                                    @endif>
+                                        disabled>
                                     <option></option>
                                     @foreach($micts as $mict)
                                         <option
-                                            value="{{$mict->fname}}">{{$mict->fname}}</option>
+                                            value="{{$mict->fname}}" {{ (in_array($mict->fname, $selected)) ? 'selected' : '' }}>{{$mict->fname}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -212,18 +209,18 @@
                             {{--Assisted--}}
                             <div class="col-lg-3 col-md-3">
                                 <label><br>Assisted By</label>
+                                @php
+                                    $selected = explode(",", $ticket->assisted_by)
+                                @endphp
                                 <select class="form-control select2bs4 @error("assisted_by")is-invalid @enderror"
-                                        value="{{old('assisted_by')}}" name="assisted_by"
+                                        value="{{old('assisted_by')}}" name="assisted_by[]"
                                         data-placeholder="Assisted by..."
                                         multiple="multiple" style="width: 100%;"
-                                        @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
-                                        @else
-                                        disabled
-                                    @endif>
+                                        disabled>
                                     <option></option>
                                     @foreach($micts as $mict)
                                         <option
-                                            value="{{$mict->fname}}">{{$mict->fname}}</option>
+                                            value="{{$mict->fname}}" {{ (in_array($mict->fname, $selected)) ? 'selected' : '' }}>{{$mict->fname}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -232,18 +229,18 @@
                             {{--Accompleshed--}}
                             <div class="col-lg-3 col-md-3">
                                 <label><br>Accomplished by</label>
+                                @php
+                                    $selected = explode(",", $ticket->accomplished_by)
+                                @endphp
                                 <select class="form-control select2bs4 @error("accomplished_by")is-invalid @enderror"
-                                        value="{{old('accomplished_by')}}" name="accomplished_by"
+                                        value="{{old('accomplished_by')}}" name="accomplished_by[]"
                                         data-placeholder="Accomplished by..."
                                         multiple="multiple" style="width: 100%;"
-                                        @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
-                                        @else
-                                        disabled
-                                    @endif>
+                                        disabled>
                                     <option></option>
                                     @foreach($micts as $mict)
                                         <option
-                                            value="{{$mict->fname}}">{{$mict->fname}}</option>
+                                            value="{{$mict->fname}}" {{ (in_array($mict->fname, $selected)) ? 'selected' : '' }}>{{$mict->fname}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -354,17 +351,27 @@
                                 <textarea name="concerns"
                                           placeholder="Place some text here"
                                           class="@error("concerns")is-invalid @enderror"
-                                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" readonly>{{$ticket->concerns}}</textarea>
+                                          style="resize: none ;width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
+                                          readonly>{{$ticket->concerns}}</textarea>
+                            </div>
+                            <div class="col-lg-12 col-md-12">
+
+                                <label><br>Additional Comments</label>
+                                <textarea name="comment"
+                                          placeholder="Enter your comments here"
+                                          class="is-invalid"
+                                          style="resize: none ;width: 100%; height: 75px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
+                                          ></textarea>
                             </div>
                         </div>
                     </div>
                     <!-- /.card-body -->
-                    <div class="card-footer">
-                        Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples
-                        and
-                        information about
-                        the plugin.
-                    </div>
+                    {{--                    <div class="card-footer">--}}
+                    {{--                        Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples--}}
+                    {{--                        and--}}
+                    {{--                        information about--}}
+                    {{--                        the plugin.--}}
+                    {{--                    </div>--}}
                 </div>
                 <div id="dact" hidden>
                     <div class="card card-default">
@@ -376,22 +383,32 @@
                                         class="fas fa-minus"></i></button>
                             </div>
                         </div>
+
                         <!-- /.card-header -->
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-lg-12">
                                     <label></label>
-                                    <textarea id="act" class="textarea" placeholder="Place some text here"
+                                    <textarea id="act" name="action" class="textarea" placeholder="Place some text here"
                                               style="width: 100%; height: 250px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                </div>
+                                <div class="col-lg-12 col-md-12">
+                                    <label>Remarks / Recomendation</label>
+                                    <textarea name="recommendation"
+                                              placeholder="Enter your comments here"
+                                              class="is-invalid"
+                                              style="resize: none ;width: 100%; height: 75px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
+                                              readonly>{{$ticket->recommendation}}</textarea>
                                 </div>
                             </div>
                         </div>
+
                         <!-- /.card-body -->
-                        <div class="card-footer">
-                            Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples and
-                            information about
-                            the plugin.
-                        </div>
+{{--                        <div class="card-footer">--}}
+{{--                            Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples and--}}
+{{--                            information about--}}
+{{--                            the plugin.--}}
+{{--                        </div>--}}
                     </div>
                     <br>
                 </div>
@@ -414,11 +431,11 @@
 
     </form>
     <script>
-        $(window).on("beforeunload", function() {
+        $(window).on("beforeunload", function () {
             return "Are you sure? You didn't finish the form!";
         });
-        $(document).ready(function() {
-            $("#myForm").on("submit", function(e) {
+        $(document).ready(function () {
+            $("#myForm").on("submit", function (e) {
                 //check form to make sure it is kosher
                 //remove the ev
                 $(window).off("beforeunload");

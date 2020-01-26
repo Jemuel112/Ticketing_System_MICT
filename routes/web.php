@@ -24,6 +24,7 @@ Route::get('/dashboard', function () {
 })->middleware('auth');
 
 Route::resource('/MICT-Tickets', 'mTicketsController',['only'=> ['index','create','store','show','edit']]);
+Route::post('/MICT-Tickets/comments/{comment}', 'mTicketsController@comment');
 
 
 //Route::get('/departments', 'DepartmentsController@index');

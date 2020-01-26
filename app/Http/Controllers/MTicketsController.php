@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Department;
 use App\mTicket;
 use App\User;
+use App\mcomments;
+use App\mactions;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,10 +18,40 @@ class MTicketsController extends Controller
     {
         $this->middleware('disablepreventback');
         $this->middleware('auth');
-        $this->middleware('auth.am')->except('index', 'store', 'create', 'show');
+        $this->middleware('auth.am')->except('index', 'store', 'create', 'show','comment');
         $this->middleware('editvalid')->only('show');
 //        $this->middleware('auth.admin')->only('index', 'store', 'allticket');
 
+    }
+
+    public function comment(Request $request, $id)
+    {
+//        $ticket = mTicket::findOrFail($id);
+//        dd($request->recommendation);
+        $data = request()->validate([
+            'action' => 'required'
+        ]);
+
+        $action = new mactions();
+        $action->actions = $request->action;
+        $action->id_mticket = $id;
+        $action->id_user = Auth::user()->id;
+        $action->save();
+
+        if (!is_null($request->comment)) {
+            $comment = new mcomments();
+            $comment->comments = 'comment';
+            $comment->id_user = Auth::user()->id;
+            $comment->id_mticket = $id;
+            $comment->save();
+        }
+        if(!is_null($request->recommendation)){
+            $ticket = mTicket::findOrFail($id);
+            $ticket->recommendation = $request->recommendation;
+            $ticket->save();
+        }
+
+        return view('mtickets.index');
     }
 
     public function index(Request $request)
@@ -71,7 +103,6 @@ class MTicketsController extends Controller
     {
 
         $tickets = new mTicket();
-        dd( Input::all() );
         if (Auth::user()->department == 'Administrator') {
 //            dd($request);
             if ($request->status == 'On-Going') {
@@ -94,6 +125,7 @@ class MTicketsController extends Controller
                     'created_by' => '',
                     'created_at' => '',
                 ]);
+
                 $tickets->start_at = date('Y-m-d H:i:s', strtotime($request->start_at));
                 $tickets->end_at = date('Y-m-d H:i:s', strtotime($request->end_at));
             } else {
@@ -189,6 +221,22 @@ class MTicketsController extends Controller
             $tickets->created_at = date('Y-m-d H:i:s', strtotime($request->created_at));
             $tickets->updated_at = Carbon::now();
             $tickets->save(['timestamps' => false]);
+        }
+
+        if(!is_null($request->action)){
+            $data = request()->validate([
+                'action' => 'required'
+            ]);
+            $action = new mactions();
+            $action->actions = $request->action;
+            $action->id_mticket = $tickets->id;
+            $action->id_user = Auth::user()->id;
+            if ($request->shared === "on" ){
+                $action->shared = 1;
+            }else{
+                $action->shared = 0;
+            }
+            $action->save();
         }
 
         return redirect('/MICT-Tickets');

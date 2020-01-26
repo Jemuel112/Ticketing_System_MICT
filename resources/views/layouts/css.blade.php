@@ -1,5 +1,4 @@
 <!-- Font Awesome -->
-{{--<link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">--}}
 <link rel="stylesheet" href="../../plugins/fontawesome-pro/css/all.min.css">
 <!-- overlayScrollbars -->
 <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
@@ -20,7 +19,10 @@
 <!-- DataTables -->
 <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.css">
 
+{{--Check Box --}}
+<link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
 
-{{--<link rel="stylesheet" href="../../plugins/tempusdominus/tempusdominus-bootstrap-4.min.css">--}}
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
+<link rel="stylesheet" href="../../plugins/tempusdominus/tempusdominus-bootstrap-4.min.css">
+
+{{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />--}}

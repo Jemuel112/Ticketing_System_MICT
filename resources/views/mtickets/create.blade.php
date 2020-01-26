@@ -35,10 +35,11 @@
             <section class="content" onload="functionToBeExecuted">
 
                 @if(Auth::user()->department == 'Administrator')
-                    <div class="card card-default">
+                    <div class="card card-secondary">
                         <div class="card-header">
                             <h3 class="card-title">Date</h3>
                             <div class="card-tools">
+                                &nbsp;
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
                                         class="fas fa-minus"></i></button>
                             </div>
@@ -89,12 +90,13 @@
                 @endif
 
 
-                <div class="card card-default">
+                <div class="card card-secondary">
                     <div class="card-header">
                         <h3 class="card-title">Ticket Info</h3>
 
                         {{--Date--}}
                         <div class="card-tools">
+                            &nbsp;
                             <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
                                     class="fas fa-minus"></i></button>
                         </div>
@@ -135,7 +137,8 @@
                                     <select class="form-control select2bs4 @error("request_by")is-invalid @enderror"
                                             id="reqb" name="request_by"
                                             style="width: 100%;">
-                                        <option value="{{Auth::user()->department}}">{{Auth::user()->department}}</option>
+                                        <option
+                                            value="{{Auth::user()->department}}">{{Auth::user()->department}}</option>
                                     </select>
                                 @endif
                             </div>
@@ -415,22 +418,22 @@
                                     Issue / Concerns
                                 </label>
                                 <textarea name="concerns"
-                                          placeholder="Place some text here"
+                                          placeholder="What can I help you"
                                           class="@error("concerns")is-invalid @enderror"
                                           style="resize: none;width: 100%; height: 150px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{old('concerns')}}</textarea>
                             </div>
                         </div>
                     </div>
                     <!-- /.card-body -->
-                    <div class="card-footer">
-                        Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples
-                        and
-                        information about
-                        the plugin.
-                    </div>
+                    {{--                    <div class="card-footer">--}}
+                    {{--                        Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples--}}
+                    {{--                        and--}}
+                    {{--                        information about--}}
+                    {{--                        the plugin.--}}
+                    {{--                    </div>--}}
                 </div>
                 <div id="dact" hidden>
-                    <div class="card card-default">
+                    <div class="card card-secondary">
                         <div class="card-header">
                             <h3 class="card-title">Actions Taken</h3>
 
@@ -441,9 +444,15 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
+                                <div class=" col-lg-12 container-fluid">
+                                    <div class="icheck-danger float-right">
+                                        <input type="checkbox" name="shared" id="checkboxDanger2">
+                                        <label for="checkboxDanger2">Share info</label>
+                                    </div>
+                                </div>
                                 <div class="col-lg-12">
                                     <label></label>
-                                    <textarea id="act" class="textarea" placeholder="Place some text here"
+                                    <textarea id="act" name="action" class="textarea" placeholder="Place some text here"
                                               style="width: 100%; height: 250px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
                                 </div>
                                 <div class="col-lg-12">
@@ -471,7 +480,8 @@
         <footer class="main-footer">
             <div class="float-right">
                 <button type="submit" class="btn btn-primary"><i class="nav-icon fal fa-plus-circle"></i>
-                    Submit</button>
+                    Submit
+                </button>
 
             </div>
             <strong>Copyright &copy; 2020 <a href="https://www.mcuhospital.org/">MCU Hospital</a>.</strong> All
@@ -482,11 +492,11 @@
 
     </form>
     <script>
-        $(window).on("beforeunload", function() {
+        $(window).on("beforeunload", function () {
             return "Are you sure? You didn't finish the form!";
         });
-        $(document).ready(function() {
-            $("#myForm").on("submit", function(e) {
+        $(document).ready(function () {
+            $("#myForm").on("submit", function (e) {
                 //check form to make sure it is kosher
                 //remove the ev
                 $(window).off("beforeunload");

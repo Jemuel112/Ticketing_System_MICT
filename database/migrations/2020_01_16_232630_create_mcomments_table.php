@@ -17,6 +17,7 @@ class CreateMcommentsTable extends Migration
             $table->bigIncrements('id');
             $table->longText('comments');
             $table->bigInteger('id_mticket');
+            $table->bigInteger('id_user');
             $table->timestamps();
         });
     }
