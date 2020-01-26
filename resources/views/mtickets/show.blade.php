@@ -387,6 +387,14 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <div class="row">
+                                @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
+                                <div class=" col-lg-12 container-fluid">
+                                    <div class="icheck-danger float-right">
+                                        <input type="checkbox" name="shared" id="checkboxDanger2">
+                                        <label for="checkboxDanger2">Share info</label>
+                                    </div>
+                                </div>
+                                @endif
                                 <div class="col-lg-12">
                                     <label></label>
                                     <textarea id="act" name="action" class="textarea" placeholder="Place some text here"

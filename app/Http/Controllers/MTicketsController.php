@@ -28,19 +28,17 @@ class MTicketsController extends Controller
     {
 //        $ticket = mTicket::findOrFail($id);
 //        dd($request->recommendation);
-        $data = request()->validate([
-            'action' => 'required'
-        ]);
-
+        if(!is_null($request->action)){
         $action = new mactions();
         $action->actions = $request->action;
         $action->id_mticket = $id;
         $action->id_user = Auth::user()->id;
         $action->save();
+        }
 
         if (!is_null($request->comment)) {
             $comment = new mcomments();
-            $comment->comments = 'comment';
+            $comment->comments = $request->comment;
             $comment->id_user = Auth::user()->id;
             $comment->id_mticket = $id;
             $comment->save();
@@ -51,7 +49,7 @@ class MTicketsController extends Controller
             $ticket->save();
         }
 
-        return view('mtickets.index');
+        return redirect('/MICT-Tickets');
     }
 
     public function index(Request $request)
