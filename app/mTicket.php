@@ -8,8 +8,4 @@ class mTicket extends Model
 {
     protected $guarded =[];
 
-    public function comments()
-    {
-
-    }
 }

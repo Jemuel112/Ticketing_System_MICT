@@ -28,15 +28,17 @@ class MTicketsController extends Controller
     {
         $name = Auth::user()->fname;
 //        $tickets = mTicket::where('category','LIKE',$name);
-        $tickets = DB::table('m_tickets')->keyBy('assigned_to');
-
-//        $data = Post::select('id', 'name')
-//            ->whereIn('id', $order)
-//            ->orderByRaw(\DB::raw("FIELD(id, ".implode(",",$order).")"))
-//            ->get();
+//        $tickets = DB::table('m_tickets')->keyBy('assigned_to');
+//        $query="SELECT * FROM m_tickets WHERE ({implode(',',assigned_to)}) IN $name";
         //        assigned_to
-        dd($tickets);
-        return view('mtickets.show', compact('tickets'));
+//        $query = mTicket::where('assigned_to', 'Administrator')->count();
+
+        $query = mTicket::all();
+        $querys = $query->where('assigned_to','=','Administrator');
+
+        dd($querys);
+
+//        return view('mtickets.show', compact('tickets'));
     }
 
     public function index(Request $request)
