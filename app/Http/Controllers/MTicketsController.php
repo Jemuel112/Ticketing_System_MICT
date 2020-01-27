@@ -73,13 +73,13 @@ class MTicketsController extends Controller
 
     public function show($id)
     {
+        $ticket = mTicket::findOrFail($id);
         $comments = mcomments::Where([['id_mticket','=',$id]])->orderBy('created_at', 'DESC')->get()->groupBy(function($item) {
             return $item->created_at->format('Y-m-d');
         });
         $actions = mactions::Where([['id_mticket','=',$id]])->orderBy('created_at', 'DESC')->get()->groupBy(function($item) {
             return $item->created_at->format('Y-m-d');
         });
-        $ticket = mTicket::findOrFail($id);
         $departments = Department::all();
         $micts = User::select('fname')
             ->Where([

@@ -18,7 +18,7 @@ class CreateMactionsTable extends Migration
             $table->longText('actions');
             $table->bigInteger('id_mticket');
             $table->bigInteger('id_user');
-            $table->boolean('shared')->default(1);
+            $table->boolean('shared')->default(0);
             $table->timestamps();
         });
     }

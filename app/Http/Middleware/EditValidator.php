@@ -19,7 +19,7 @@ class EditValidator
     public function handle($request, Closure $next)
     {
         $ticket = $request->MICT_Ticket;
-        $ticket = mTicket::where('id', '=', $ticket)->first();
+        $ticket = mTicket::findOrFail($ticket);
         if (Auth::user()->department == 'Administrator' || Auth::user()->department == 'MICT') {
             return $next($request);
         }elseif($ticket->request_by == Auth::user()->department){

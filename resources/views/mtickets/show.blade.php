@@ -353,7 +353,7 @@
                                           placeholder="Place some text here"
                                           class="@error("concerns")is-invalid @enderror"
                                           style="resize: none ;width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
-                                          readonly>{{$ticket->concerns}}</textarea>
+                                          disabled>{{$ticket->concerns}}</textarea>
                             </div>
                             <div class="col-lg-12 col-md-12">
 
@@ -375,11 +375,12 @@
                     {{--                    </div>--}}
                 </div>
                 <div id="dact" hidden>
-                    <div class="card card-default">
+                    <div class="card card-cyan">
                         <div class="card-header">
                             <h3 class="card-title">Actions Taken</h3>
 
                             <div class="card-tools">
+                                &nbsp;
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
                                         class="fas fa-minus"></i></button>
                             </div>
@@ -395,17 +396,17 @@
                                             <label for="checkboxDanger2">Share info</label>
                                         </div>
                                     </div>
+                                    <div class="col-lg-12">
+                                        <label></label>
+                                        <textarea id="act" name="action" class="textarea"
+                                                  placeholder="Place some text here"
+                                                  style="width: 100%; height: 250px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                    </div>
                                 @endif
-                                <div class="col-lg-12">
-                                    <label></label>
-                                    <textarea id="act" name="action" class="textarea" placeholder="Place some text here"
-                                              style="width: 100%; height: 250px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-                                </div>
                                 <div class="col-lg-12 col-md-12">
                                     <label>Remarks / Recomendation</label>
                                     <textarea name="recommendation"
-                                              placeholder="Enter your comments here"
-                                              class="is-invalid"
+                                              placeholder="Enter Recommendation here"
                                               style="resize: none ;width: 100%; height: 75px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
                                               readonly>{{$ticket->recommendation}}</textarea>
                                 </div>
@@ -425,53 +426,59 @@
 
             </section>
 
-            <section class="content">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h4>Actions Taken</h4>
+            @forelse($actions as $action => $contents)
+                <section class="content">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h4>Actions Taken</h4>
+                            </div>
                         </div>
-                    </div>
-                    <!-- Timelime example  -->
-                    <div class="row">
-                        <div class="col-md-10">
-                            <!-- The time line -->
-                            <div class="timeline">
-                                <!-- timeline time label -->
-                                @foreach($actions as $action => $contents)
+                        <!-- Timelime example  -->
+                        <div class="row">
+                            <div class="col-md-10">
+                                <!-- The time line -->
+                                <div class="timeline">
+                                    <!-- timeline time label -->
                                     <div class="time-label">
-                                        <span class="bg-gradient-indigo">{{$action}}</span>
+                                        <span class="bg-gradient-indigo">{{date('M d, Y', strtotime($action))}}</span>
                                     </div>
                                     <!-- /.timeline-label -->
                                     <!-- timeline item -->
                                     @foreach($contents as $content)
-                                        <div>
-                                            <i class="fas fa-envelope bg-blue"></i>
-                                            <div class="timeline-item">
-                                                <span class="time"><i class="fas fa-clock"></i> {{date(' h:i A', strtotime($content->created_at))}}</span>
-                                                <h3 class="timeline-header"><a href="#">{{app\User::findOrFail($content->id_user)->fname}}</a></h3>
-                                                <div class="timeline-body">
-                                                    {!!  $content->actions !!}
+                                        @if($content->shared == 1 || Auth::user()->department == 'Administrator' || Auth::user()->department == 'MICT')
+                                            <div>
+                                                <i class="fas fa-envelope bg-blue"></i>
+                                                <div class="timeline-item">
+                                                    <span class="time"><i class="fas fa-clock"></i> {{date(' h:i A', strtotime($content->created_at))}}</span>
+                                                    <h3 class="timeline-header"><a
+                                                            href="#">{{app\User::findOrFail($content->id_user)->fname}} {{app\User::findOrFail($content->id_user)->lname}}</a>
+                                                    </h3>
+                                                    <div class="timeline-body">
+                                                        {!!  $content->actions !!}
+                                                    </div>
+                                                    {{--                                        <div class="timeline-footer">--}}
+                                                    {{--                                        </div>--}}
                                                 </div>
-                                                {{--                                        <div class="timeline-footer">--}}
-                                                {{--                                        </div>--}}
                                             </div>
-                                        </div>
+                                    @endif
                                 @endforeach
-
-                            @endforeach
-                            <!-- END timeline item -->
-                                <div>
-                                    <i class="fas fa-clock bg-gray"></i>
+                                <!-- END timeline item -->
+                                    <div>
+                                        <i class="fas fa-clock bg-gray"></i>
+                                    </div>
                                 </div>
                             </div>
+                            <!-- /.col -->
                         </div>
-                        <!-- /.col -->
                     </div>
-                </div>
-                <!-- /.timeline -->
+                    <!-- /.timeline -->
+                </section>
+                                @empty
+                                @endforelse
 
-            </section>
+
+
         </div>
         <!-- /.content -->
         <!-- /.content-wrapper -->
