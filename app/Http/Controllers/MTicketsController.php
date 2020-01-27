@@ -10,6 +10,7 @@ use App\mactions;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 
 class MTicketsController extends Controller
@@ -21,35 +22,21 @@ class MTicketsController extends Controller
         $this->middleware('auth.am')->except('index', 'store', 'create', 'show','comment');
         $this->middleware('editvalid')->only('show');
 //        $this->middleware('auth.admin')->only('index', 'store', 'allticket');
-
     }
 
-    public function comment(Request $request, $id)
+    public function myTickets()
     {
-//        $ticket = mTicket::findOrFail($id);
-//        dd($request->recommendation);
-        if(!is_null($request->action)){
-        $action = new mactions();
-        $action->actions = $request->action;
-        $action->id_mticket = $id;
-        $action->id_user = Auth::user()->id;
-        $action->save();
-        }
+        $name = Auth::user()->fname;
+//        $tickets = mTicket::where('category','LIKE',$name);
+        $tickets = DB::table('m_tickets')->keyBy('assigned_to');
 
-        if (!is_null($request->comment)) {
-            $comment = new mcomments();
-            $comment->comments = $request->comment;
-            $comment->id_user = Auth::user()->id;
-            $comment->id_mticket = $id;
-            $comment->save();
-        }
-        if(!is_null($request->recommendation)){
-            $ticket = mTicket::findOrFail($id);
-            $ticket->recommendation = $request->recommendation;
-            $ticket->save();
-        }
-
-        return redirect('/MICT-Tickets');
+//        $data = Post::select('id', 'name')
+//            ->whereIn('id', $order)
+//            ->orderByRaw(\DB::raw("FIELD(id, ".implode(",",$order).")"))
+//            ->get();
+        //        assigned_to
+        dd($tickets);
+        return view('mtickets.show', compact('tickets'));
     }
 
     public function index(Request $request)
@@ -84,6 +71,12 @@ class MTicketsController extends Controller
 
     public function show($id)
     {
+        $comments = mcomments::Where([['id_mticket','=',$id]])->orderBy('created_at', 'DESC')->get()->groupBy(function($item) {
+            return $item->created_at->format('Y-m-d');
+        });
+        $actions = mactions::Where([['id_mticket','=',$id]])->orderBy('created_at', 'DESC')->get()->groupBy(function($item) {
+            return $item->created_at->format('Y-m-d');
+        });
         $ticket = mTicket::findOrFail($id);
         $departments = Department::all();
         $micts = User::select('fname')
@@ -94,7 +87,7 @@ class MTicketsController extends Controller
                 ['department', '=', 'Administrator']
             ])
             ->get();
-        return view('mtickets.show', compact('ticket', 'micts', 'departments'));
+        return view('mtickets.show', compact('ticket', 'micts', 'departments','comments','actions'));
     }
 
     public function store(Request $request)
@@ -240,5 +233,32 @@ class MTicketsController extends Controller
         return redirect('/MICT-Tickets');
     }
 
+    public function comment(Request $request, $id)
+    {
+//        $ticket = mTicket::findOrFail($id);
+//        dd($request->recommendation);
+        if(!is_null($request->action)){
+            $action = new mactions();
+            $action->actions = $request->action;
+            $action->id_mticket = $id;
+            $action->id_user = Auth::user()->id;
+            $action->save();
+        }
+
+        if (!is_null($request->comment)) {
+            $comment = new mcomments();
+            $comment->comments = $request->comment;
+            $comment->id_user = Auth::user()->id;
+            $comment->id_mticket = $id;
+            $comment->save();
+        }
+        if(!is_null($request->recommendation)){
+            $ticket = mTicket::findOrFail($id);
+            $ticket->recommendation = $request->recommendation;
+            $ticket->save();
+        }
+
+        return redirect('/MICT-Tickets');
+    }
 
 }

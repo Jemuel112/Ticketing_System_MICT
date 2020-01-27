@@ -19,7 +19,7 @@ class Users extends AbstractWidget
      *
      * @var int|float
      */
-    public $reloadTimeout = 2;
+//    public $reloadTimeout = 2;
 
     /**
      * Treat this method as a controller action.

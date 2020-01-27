@@ -13,7 +13,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Ticket Number {{$ticket->id}}</h1>
+                            <h1>Ticket # {{$ticket->id}}</h1>
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->
@@ -33,12 +33,13 @@
             @method('POST')
             <section class="content" onload="functionToBeExecuted">
 
-                <div class="card card-default">
+                <div class="card card-cyan">
                     <div class="card-header">
                         <h3 class="card-title">Ticket Info</h3>
 
                         {{--Date--}}
                         <div class="card-tools">
+                            &nbsp;
                             <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
                                     class="fas fa-minus"></i></button>
                         </div>
@@ -361,7 +362,7 @@
                                           placeholder="Enter your comments here"
                                           class="is-invalid"
                                           style="resize: none ;width: 100%; height: 75px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
-                                          ></textarea>
+                                ></textarea>
                             </div>
                         </div>
                     </div>
@@ -388,12 +389,12 @@
                         <div class="card-body">
                             <div class="row">
                                 @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
-                                <div class=" col-lg-12 container-fluid">
-                                    <div class="icheck-danger float-right">
-                                        <input type="checkbox" name="shared" id="checkboxDanger2">
-                                        <label for="checkboxDanger2">Share info</label>
+                                    <div class=" col-lg-12 container-fluid">
+                                        <div class="icheck-danger float-right">
+                                            <input type="checkbox" name="shared" id="checkboxDanger2">
+                                            <label for="checkboxDanger2">Share info</label>
+                                        </div>
                                     </div>
-                                </div>
                                 @endif
                                 <div class="col-lg-12">
                                     <label></label>
@@ -412,15 +413,63 @@
                         </div>
 
                         <!-- /.card-body -->
-{{--                        <div class="card-footer">--}}
-{{--                            Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples and--}}
-{{--                            information about--}}
-{{--                            the plugin.--}}
-{{--                        </div>--}}
+                        {{--                        <div class="card-footer">--}}
+                        {{--                            Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples and--}}
+                        {{--                            information about--}}
+                        {{--                            the plugin.--}}
+                        {{--                        </div>--}}
                     </div>
                     <br>
                 </div>
 
+
+            </section>
+
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h4>Actions Taken</h4>
+                        </div>
+                    </div>
+                    <!-- Timelime example  -->
+                    <div class="row">
+                        <div class="col-md-10">
+                            <!-- The time line -->
+                            <div class="timeline">
+                                <!-- timeline time label -->
+                                @foreach($actions as $action => $contents)
+                                    <div class="time-label">
+                                        <span class="bg-gradient-indigo">{{$action}}</span>
+                                    </div>
+                                    <!-- /.timeline-label -->
+                                    <!-- timeline item -->
+                                    @foreach($contents as $content)
+                                        <div>
+                                            <i class="fas fa-envelope bg-blue"></i>
+                                            <div class="timeline-item">
+                                                <span class="time"><i class="fas fa-clock"></i> {{date(' h:i A', strtotime($content->created_at))}}</span>
+                                                <h3 class="timeline-header"><a href="#">{{app\User::findOrFail($content->id_user)->fname}}</a></h3>
+                                                <div class="timeline-body">
+                                                    {!!  $content->actions !!}
+                                                </div>
+                                                {{--                                        <div class="timeline-footer">--}}
+                                                {{--                                        </div>--}}
+                                            </div>
+                                        </div>
+                                @endforeach
+
+                            @endforeach
+                            <!-- END timeline item -->
+                                <div>
+                                    <i class="fas fa-clock bg-gray"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </div>
+                <!-- /.timeline -->
 
             </section>
         </div>
