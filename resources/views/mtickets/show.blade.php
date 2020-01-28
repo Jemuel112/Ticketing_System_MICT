@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'View Ticket # $tickets | ')
+@section('title', 'View Ticket | ')
 @include('layouts.scripts')
 
 @section('content')
@@ -362,30 +362,25 @@
                                           class="is-invalid"
                                           style="resize: none ;width: 100%; height: 75px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
                                 ></textarea>
+                                <br> &nbsp;
                             </div>
 
+                            @forelse($comments as $comment)
+                                <div class="col-md-12">
+                                    <div class="post clearfix ">
+                                        <div class="user-block">
+                                            <img class="img-circle img-bordered-sm" src="../../img/MCU.png"
+                                                 alt="User Image">
+                                            <span class="username"><a href="#">{{app\User::findOrFail($comment->id_user)->fname}} {{app\User::findOrFail($comment->id_user)->lname}}</a></span>
+                                            <span class="description float-right">{{date('M d, Y h:iA', strtotime($comment->created_at))}}</span>
+                                            <span class="container container-fluid">{{$comment->comments}}</span>
+                                        </div>
 
-
-                            <div class="col-md-10">
-                                <div class="post clearfix">
-                                    <div class="user-block">
-                                        <img class="img-circle img-bordered-sm" src="../../dist/img/user7-128x128.jpg" alt="User Image">
-                                        <span class="username">
-                          <a href="#">Sarah Ross</a>
-                          <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
-                        </span>
-                                        <span class="description">Sent you a message - 3 days ago</span>
                                     </div>
-                                    <!-- /.user-block -->
-                                    <p>
-                                        Lorem ipsum represents a long-held tradition for designers,
-                                        typographers and the like. Some people hate it and argue for
-                                        its demise, but others ignore the hate as they create awesome
-                                        tools to help create filler text for everyone from bacon lovers
-                                        to Charlie Sheen fans.
-                                    </p>
                                 </div>
-                            </div>
+                            @empty
+                            @endforelse
+
                         </div>
                     </div>
                     <!-- /.card-body -->
