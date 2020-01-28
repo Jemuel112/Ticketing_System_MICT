@@ -1,13 +1,13 @@
 @extends('layouts.master')
 
-@section('title', 'Create New Tickets | ')
+@section('title', 'MICT Tickets | ')
 @include('layouts.scripts')
 @section('content')
     <div class="content-wrapper">
         <section class="content-header">
             <div class="col-12">
                 <table id="department1"
-                       class="wrap compact table table-responsive-sm table-hover table-borderedless table-striped ">
+                       class="wrap compact table table-responsive-sm table-hover table-bordered table-striped ">
                     <thead>
                     <tr>
                         <th hidden>Sample Text</th>
@@ -27,16 +27,29 @@
                             <tr class="table-warning">
                         @elseif($ticket->lop == 'Low')
                             <tr class="table-info">
-                                @else
+                        @else
                             <tr class="table-dark">
-
-                            @endif
-
+                                @endif
                                 <td hidden>{{$ticket->is_new}}</td>
                                 <td>{{$ticket->id}}</td>
                                 <td>{{$ticket->reported_by}}</td>
                                 <td>{{$ticket->request_by}}</td>
-                                <td>{{$ticket->status}}</td>
+                                @if($ticket->status == 'Active')
+                                    <td style="text-align: center"><span
+                                            class="badge badge-primary col-md-12">Active</span></td>
+                                @elseif($ticket->status == 'On-Going')
+                                    <td style="text-align: center"><span
+                                            class="badge badge-warning   col-md-12">On-Going</span></td>
+                                @elseif($ticket->status == 'Resolve')
+                                    <td style="text-align: center"><span
+                                            class="badge badge-success col-md-12">Resolve</span></td>
+                                @elseif($ticket->status == 'Duplicate')
+                                    <td style="text-align: center"><span
+                                            class="badge badge-primary col-md-12">Duplicate</span></td>
+                                @elseif($ticket->status == 'Closed')
+                                    <td style="text-align: center"><span
+                                            class="badge badge-danger col-md-12">Closed</span></td>
+                                @endif
                                 <td>{{$ticket->category}}</td>
                                 <td>{{ \Illuminate\Support\Str::limit($ticket->concerns, 150, $end='...') }}</td>
 

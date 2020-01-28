@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Create New Tickets | ')
+@section('title', 'View Ticket # $tickets | ')
 @include('layouts.scripts')
 
 @section('content')
@@ -356,13 +356,35 @@
                                           disabled>{{$ticket->concerns}}</textarea>
                             </div>
                             <div class="col-lg-12 col-md-12">
-
                                 <label><br>Additional Comments</label>
                                 <textarea name="comment"
                                           placeholder="Enter your comments here"
                                           class="is-invalid"
                                           style="resize: none ;width: 100%; height: 75px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
                                 ></textarea>
+                            </div>
+
+
+
+                            <div class="col-md-10">
+                                <div class="post clearfix">
+                                    <div class="user-block">
+                                        <img class="img-circle img-bordered-sm" src="../../dist/img/user7-128x128.jpg" alt="User Image">
+                                        <span class="username">
+                          <a href="#">Sarah Ross</a>
+                          <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
+                        </span>
+                                        <span class="description">Sent you a message - 3 days ago</span>
+                                    </div>
+                                    <!-- /.user-block -->
+                                    <p>
+                                        Lorem ipsum represents a long-held tradition for designers,
+                                        typographers and the like. Some people hate it and argue for
+                                        its demise, but others ignore the hate as they create awesome
+                                        tools to help create filler text for everyone from bacon lovers
+                                        to Charlie Sheen fans.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -412,7 +434,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <!-- /.card-body -->
                         {{--                        <div class="card-footer">--}}
                         {{--                            Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples and--}}
@@ -422,24 +443,24 @@
                     </div>
                     <br>
                 </div>
-
-
             </section>
 
-            @forelse($actions as $action => $contents)
-                <section class="content">
-                    <div class="container-fluid">
-                        <div class="row mb-2">
-                            <div class="col-sm-6">
-                                <h4>Actions Taken</h4>
-                            </div>
+
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h4>Actions Taken</h4>
                         </div>
-                        <!-- Timelime example  -->
-                        <div class="row">
-                            <div class="col-md-10">
-                                <!-- The time line -->
-                                <div class="timeline">
-                                    <!-- timeline time label -->
+                    </div>
+                    <!-- Timelime example  -->
+                    <div class="row">
+                        <div class="col-md-10">
+                            <!-- The time line -->
+                            <div class="timeline">
+                                <!-- timeline time label -->
+                                @forelse($actions as $action => $contents)
+
                                     <div class="time-label">
                                         <span class="bg-gradient-indigo">{{date('M d, Y', strtotime($action))}}</span>
                                     </div>
@@ -455,7 +476,7 @@
                                                             href="#">{{app\User::findOrFail($content->id_user)->fname}} {{app\User::findOrFail($content->id_user)->lname}}</a>
                                                     </h3>
                                                     <div class="timeline-body">
-                                                        {!!  $content->actions !!}
+                                                        {!!$content->actions!!}
                                                     </div>
                                                     {{--                                        <div class="timeline-footer">--}}
                                                     {{--                                        </div>--}}
@@ -467,16 +488,15 @@
                                     <div>
                                         <i class="fas fa-clock bg-gray"></i>
                                     </div>
-                                </div>
                             </div>
-                            <!-- /.col -->
                         </div>
+                        <!-- /.col -->
                     </div>
-                    <!-- /.timeline -->
-                </section>
-                                @empty
-                                @endforelse
-
+                    @empty
+                    @endforelse
+                </div>
+                <!-- /.timeline -->
+            </section>
 
 
         </div>

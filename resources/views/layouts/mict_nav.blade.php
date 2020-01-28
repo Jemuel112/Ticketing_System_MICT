@@ -48,7 +48,7 @@
                     </a>
                 </li>
 
-                @if(Auth::user()->department == "Administrator")
+                @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fal fa-ticket-alt"></i>
@@ -65,7 +65,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="/MyTickets" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>My Tickets</p>
                                 </a>

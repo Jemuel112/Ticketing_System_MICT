@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Create New Tickets | ')
+@section('title', 'Create New Ticket | ')
 @include('layouts.scripts')
 
 @section('content')

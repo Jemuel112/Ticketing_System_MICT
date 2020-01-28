@@ -5,10 +5,12 @@
       <change beforePath="$PROJECT_DIR$/.idea/MCU_MICT.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/MCU_MICT.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MTicketsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MTicketsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/EditValidator.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/EditValidator.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_01_16_232842_create_mactions_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_01_16_232842_create_mactions_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/mict_nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/mict_nav.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mtickets/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mtickets/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mtickets/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mtickets/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/mtickets/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mtickets/show.blade.php" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -142,23 +144,23 @@
       <recent name="C:\Users\Jemuel\Desktop\MICT - Copy\MCU_MICT\app\Widgets" />
     </key>
   </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
   <component name="RunManager">
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner scope="XML" />
       <method v="2" />
     </configuration>
-  </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -196,6 +198,7 @@
       <workItem from="1580085106349" duration="869000" />
       <workItem from="1580087474512" duration="23069000" />
       <workItem from="1580143469627" duration="5650000" />
+      <workItem from="1580172287481" duration="7757000" />
     </task>
     <servers />
   </component>
