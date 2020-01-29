@@ -55,7 +55,6 @@
 
                                 <td>
                                     <div class="row">
-
                                         <a style="margin: 2px"
                                            class="btn btn-sm btn-outline-primary"
                                            href="/MICT-Tickets/{{$ticket->id}}"

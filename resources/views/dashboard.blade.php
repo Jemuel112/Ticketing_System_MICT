@@ -21,8 +21,8 @@
                     <div class="small-box bg-info">
                         <div class="inner">
                             @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
-                            <h3>{{\App\mTicket::where('status', '=', 'Active')->count() }}</h3>
-                                @else
+                                <h3>{{\App\mTicket::where('status', '=', 'Active')->count() }}</h3>
+                            @else
                                 <h3>{{\App\mTicket::where('request_by','=',\Illuminate\Support\Facades\Auth::user()->department)->where('status', '=','Active')->count() }}</h3>
                             @endif
                             <p>Active Tickets</p>
@@ -90,13 +90,115 @@
                 <!-- ./col -->
             </div>
         </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card card-cyan">
+                        <div class="card-header">
+                            <h3 class="card-title">Active Tickets</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
+                                        class="fas fa-minus"></i></button>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <div class="row">
+
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                        {{--                        <div class="card-footer">--}}
+                        {{--                            Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples and--}}
+                        {{--                            information about--}}
+                        {{--                            the plugin.--}}
+                        {{--                        </div>--}}
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card card-yellow">
+                        <div class="card-header">
+                            <h3 class="card-title">On-Going Tickets</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
+                                        class="fas fa-minus"></i></button>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <div class="row">
+
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                        {{--                        <div class="card-footer">--}}
+                        {{--                            Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples and--}}
+                        {{--                            information about--}}
+                        {{--                            the plugin.--}}
+                        {{--                        </div>--}}
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card card-green">
+                        <div class="card-header">
+                            <h3 class="card-title">Resolved Tickets</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
+                                        class="fas fa-minus"></i></button>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <div class="row">
+
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                        {{--                        <div class="card-footer">--}}
+                        {{--                            Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples and--}}
+                        {{--                            information about--}}
+                        {{--                            the plugin.--}}
+                        {{--                        </div>--}}
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card card-red">
+                        <div class="card-header">
+                            <h3 class="card-title">Closed Tickets</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
+                                        class="fas fa-minus"></i></button>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <div class="row">
+
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                        {{--                        <div class="card-footer">--}}
+                        {{--                            Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples and--}}
+                        {{--                            information about--}}
+                        {{--                            the plugin.--}}
+                        {{--                        </div>--}}
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
     </div>
 
     <footer class="main-footer">
         <div class="float-right d-none d-sm-block">
             <b>Version</b> 1.0.0
         </div>
-        <strong>Copyright &copy; 2020 <a tabindex="1" href="https://www.mcuhospital.org/">MCU Hospital</a>.</strong> All rights
+        <strong>Copyright &copy; 2020 <a tabindex="1" href="https://www.mcuhospital.org/">MCU Hospital</a>.</strong> All
+        rights
         reserved.
     </footer>
     @include('layouts.scripts')

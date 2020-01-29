@@ -60,11 +60,6 @@
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                             </div>
                                         </div>
-                                        <input class="form-control"
-                                               value="{{Auth::User()->username}}"
-                                               style="width: 100%;" type="text" name="created_by" placeholder="Name"
-                                               hidden
-                                        >
                                     </div>
 
                                 </div>

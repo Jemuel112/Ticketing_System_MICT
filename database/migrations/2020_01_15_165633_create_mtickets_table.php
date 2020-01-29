@@ -33,6 +33,7 @@ class CreateMTicketsTable extends Migration
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
             $table->boolean('is_new')->default(true);
+            $table->dateTime('finished_at')->nullable();
             $table->timestamps();
         });
     }

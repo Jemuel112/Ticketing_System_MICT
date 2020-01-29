@@ -131,7 +131,6 @@ class MTicketsController extends Controller
                     'sys_category' => '',
                     'concerns' => 'required|min:8',
                     'lop' => 'required',
-                    'created_by' => '',
                     'created_at' => '',
                 ]);
 
@@ -151,7 +150,6 @@ class MTicketsController extends Controller
                     'sys_category' => '',
                     'concerns' => 'required|min:8',
                     'lop' => 'required',
-                    'created_by' => '',
                 ]);
             }
         } elseif (Auth::user()->department == 'MICT') {
@@ -167,7 +165,6 @@ class MTicketsController extends Controller
                     'category' => 'required',
                     'concerns' => 'required|min:8',
                     'lop' => 'required',
-                    'created_by' => '',
                 ]);
                 $tickets->start_at = date('Y-m-d H:i:s', strtotime($request->start_at));
                 $tickets->end_at = date('Y-m-d H:i:s', strtotime($request->end_at));
@@ -180,7 +177,6 @@ class MTicketsController extends Controller
                     'category' => 'required',
                     'concerns' => 'required|min:8',
                     'lop' => 'required',
-                    'created_by' => '',
                 ]);
             }
         } else {
@@ -190,7 +186,6 @@ class MTicketsController extends Controller
                 'status' => 'required',
                 'category' => 'required',
                 'concerns' => 'required|min:8',
-                'created_by' => '',
             ]);
         }
 
@@ -215,7 +210,7 @@ class MTicketsController extends Controller
         $tickets->sys_category = $request->sys_category;
         $tickets->concerns = $request->concerns;
         $tickets->lop = $request->lop;
-        $tickets->created_by = $request->created_by;
+        $tickets->created_by = Auth::user()->fname;
         $tickets->recommendation = $request->recommendation;
 
 //        dd($tickets->assigned_to);
@@ -300,7 +295,6 @@ class MTicketsController extends Controller
                     'sys_category' => '',
                     'concerns' => 'required|min:8',
                     'lop' => 'required',
-                    'created_by' => '',
                     'created_at' => '',
                 ]);
 
@@ -320,7 +314,6 @@ class MTicketsController extends Controller
                     'sys_category' => '',
                     'concerns' => 'required|min:8',
                     'lop' => 'required',
-                    'created_by' => '',
                 ]);
             }
         } elseif (Auth::user()->department == 'MICT') {
@@ -336,7 +329,6 @@ class MTicketsController extends Controller
                     'category' => 'required',
                     'concerns' => 'required|min:8',
                     'lop' => 'required',
-                    'created_by' => '',
                 ]);
                 $ticket->start_at = date('Y-m-d H:i:s', strtotime($request->start_at));
                 $ticket->end_at = date('Y-m-d H:i:s', strtotime($request->end_at));
@@ -349,7 +341,6 @@ class MTicketsController extends Controller
                     'category' => 'required',
                     'concerns' => 'required|min:8',
                     'lop' => 'required',
-                    'created_by' => '',
                 ]);
             }
         }
@@ -398,7 +389,7 @@ class MTicketsController extends Controller
         $ticket->sys_category = $request->sys_category;
         $ticket->concerns = $request->concerns;
         $ticket->lop = $request->lop;
-        $ticket->created_by = $request->created_by;
+        $ticket->updated_by = Auth::user()->fname;
         $ticket->recommendation = $request->recommendation;
 
         $ticket->update();
