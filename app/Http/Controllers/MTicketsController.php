@@ -43,13 +43,14 @@ class MTicketsController extends Controller
     {
 
         if (Auth::user()->department == "Administrator" || Auth::user()->department == "MICT") {
-            $tickets = mTicket::all();
+            $tickets = mTicket::orderBy('id', 'DESC')->get();
         } else {
 //            dd(Auth::user()->department);
             $dept = Auth::user()->department;
             $tickets = mTicket::where([
                 ['request_by', '=', $dept]
             ])
+                ->orderBy('id', 'DESC')
                 ->get();
         }
         return view('mtickets.index', compact('tickets'));
@@ -117,11 +118,11 @@ class MTicketsController extends Controller
         if ($request->status == "Closed" || $request->status == "Resolve") {
             if (!is_null($request->finished_at)) {
                 $tickets->finished_at = date('Y-m-d H:i:s', strtotime($request->finished_at));
-            }else{
+            } else {
                 $tickets->finished_at = date('Y-m-d H:i:s', strtotime(Carbon::now()));
             }
         }
-        if($request->status != "Active"){
+        if ($request->status != "Active") {
             $tickets->is_new = false;
         }
 
@@ -358,8 +359,6 @@ class MTicketsController extends Controller
                 ]);
             }
         }
-
-
         if (!is_null($request->assigned_to)) {
             $assign = $request->input('assigned_to');
             $ticket->assigned_to = implode(',', $assign);
@@ -404,13 +403,13 @@ class MTicketsController extends Controller
         $ticket->updated_by = Auth::user()->fname;
         $ticket->recommendation = $request->recommendation;
 
-        $ticket->update();
+        $ticket->save();
         return redirect('/MICT-Tickets');
 
     }
-
-    public function serviceReport(Request $request)
-    {
-        dd($request);
-    }
+//
+//    public function report()
+//    {
+//        dd();
+//    }
 }

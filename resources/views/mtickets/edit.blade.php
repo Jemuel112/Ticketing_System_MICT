@@ -5,35 +5,35 @@
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
-    <form action='/MICT-Tickets/{{$ticket->id}}' method="POST" id="myForm">
-        @csrf
-        @method('PUT')
-        <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <section class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1>Ticket # {{$ticket->id}}</h1>
-                        </div>
+
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Ticket # {{$ticket->id}}</h1>
                     </div>
-                </div><!-- /.container-fluid -->
-                {{--            SHOW USERS ERRORS--}}
-                @if($errors->count()>0)
-                    <div style="" class="alert alert-danger">
-                        @foreach($errors->all() as $error)
-                            {{$error}} <br>
-                        @endforeach
-                    </div>
-                @endif
-                {{--            END SHOW USERS ERRORS--}}
-            </section>
+                </div>
+            </div><!-- /.container-fluid -->
+            {{--            SHOW USERS ERRORS--}}
+            @if($errors->count()>0)
+                <div style="" class="alert alert-danger">
+                    @foreach($errors->all() as $error)
+                        {{$error}} <br>
+                    @endforeach
+                </div>
+            @endif
+            {{--            END SHOW USERS ERRORS--}}
+        </section>
 
-            <!-- Main content -->
+        <!-- Main content -->
 
 
-            <section class="content" onload="functionToBeExecuted">
-
+        <section class="content" onload="functionToBeExecuted">
+            <form action='/MICT-Tickets/{{$ticket->id}}' method="POST" id="myForm">
+                @csrf
+                @method('PUT')
                 @if(Auth::user()->department == 'Administrator')
                     <div class="card card-cyan">
                         <div class="card-header">
@@ -55,7 +55,7 @@
                                             <input type="text" name="created_at" id="datetimepicker7"
                                                    class="form-control datetimepicker-input"
                                                    data-target="#datetimepicker7"
-                                            value="{{date('m/d/Y h:i', strtotime($ticket->create_at)) ?? date('m/d/Y h:i', strtotime(created_at))}}">
+                                                   value="{{date('m/d/Y h:i', strtotime($ticket->create_at)) ?? date('m/d/Y h:i', strtotime(created_at))}}">
                                             <div class="input-group-append" data-target="#datetimepicker7"
                                                  data-toggle="datetimepicker">
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -111,7 +111,7 @@
                                 <input class="form-control @error("reported_by")is-invalid @enderror"
                                        value="{{$ticket->reported_by ?? old(reported_by)}}"
                                        style="width: 100%;" type="text" name="reported_by" placeholder="Name"
-                                       >
+                                >
                             </div>
                             {{--End Reported by--}}
 
@@ -150,17 +150,17 @@
                                         style="width: 100%;"
                                         id="status">
                                     {{--                                        {{$ticket->status == $user->department  ? 'selected' : ''}}--}}
-                                    <option value="Active" {{ $ticket->status == 'Active' ? 'selected' :''}}>Active
+                                    <option value="Active" {{ old('status') ?? $ticket->status == 'Active' ? 'selected' :''}}>Active
                                     </option>
-                                    <option value="On-Going" {{ $ticket->status == 'On-Going' ? 'selected':''}}>
+                                    <option value="On-Going" {{ old('status') ?? $ticket->status == 'On-Going' ? 'selected':''}}>
                                         On-Going
                                     </option>
-                                    <option value="Resolve" {{ $ticket->status == 'Resolve' ? 'selected':''}}>Resolve
+                                    <option value="Resolve" {{ old('status') ?? $ticket->status == 'Resolve' ? 'selected':''}}>Resolve
                                     </option>
-                                    <option value="Duplicate" {{ $ticket->status == 'Duplicate' ? 'selected':''}}>
+                                    <option value="Duplicate" {{ old('status') ?? $ticket->status == 'Duplicate' ? 'selected':''}}>
                                         Duplicate
                                     </option>
-                                    <option value="Closed" {{ $ticket->status == 'Closed' ? 'selected':''}}>Closed
+                                    <option value="Closed" {{ old('status') ?? $ticket->status == 'Closed' ? 'selected':''}}>Closed
                                     </option>
                                 </select>
                             </div>
@@ -176,14 +176,14 @@
                                             style="width: 100%;">
                                         <option></option>
                                         <option
-                                            value="Pending For Spare" {{ $ticket->og_status == 'Pending For Spare' ? 'selected':''}}>
+                                            value="Pending For Spare" {{ old('og_status') ?? $ticket->og_status == 'Pending For Spare' ? 'selected':''}}>
                                             Pending For Spare
                                         </option>
                                         <option
-                                            value="Under Observation" {{ $ticket->og_status == 'Under Observation' ? 'selected':''}}>
+                                            value="Under Observation" {{ old('og_status') ?? $ticket->og_status == 'Under Observation' ? 'selected':''}}>
                                             Under Observation
                                         </option>
-                                        <option value="Others" {{ $ticket->og_status == 'Others' ? 'selected':''}}>
+                                        <option value="Others" {{ old('og_status') ?? $ticket->og_status == 'Others' ? 'selected':''}}>
                                             Others
                                         </option>
                                     </select>
@@ -197,7 +197,8 @@
                                 <div class="input-group date" id="datetimepickers" data-target-input="nearest">
                                     <input type="text"
                                            class="form-control datetimepicker-input @error("start_at")is-invalid @enderror"
-                                           value="{{date('m/d/Y h:i', strtotime($ticket->start_at || old('start_at')))}}" name="start_at"
+                                           value="{{ \Carbon\Carbon::now() ?? date('m/d/Y h:i', strtotime($ticket->start_at || old('start_at')))}}"
+                                           name="start_at"
                                            data-target="#datetimepickers"/>
                                     <div class="input-group-append" data-target="#datetimepickers"
                                          data-toggle="datetimepicker">
@@ -210,7 +211,7 @@
                                 <div class="input-group date" id="datetimepickerd" data-target-input="nearest">
                                     <input type="text"
                                            class="form-control datetimepicker-input @error("end_at")is-invalid @enderror"
-                                           value="{{date('m/d/Y h:i', strtotime($ticket->end_at))}}" name="end_at"
+                                           value="{{ \Carbon\Carbon::now() ?? date('m/d/Y h:i', strtotime($ticket->end_at))}}" name="end_at"
                                            data-target="#datetimepickerd"/>
                                     <div class="input-group-append" data-target="#datetimepickerd"
                                          data-toggle="datetimepicker">
@@ -411,8 +412,10 @@
                                         <div class="user-block">
                                             <img class="img-circle img-bordered-sm" src="../../img/MCU.png"
                                                  alt="User Image">
-                                            <span class="username"><a href="#">{{app\User::findOrFail($comment->id_user)->fname}} {{app\User::findOrFail($comment->id_user)->lname}}</a></span>
-                                            <span class="description float-right">{{date('M d, Y h:iA', strtotime($comment->created_at))}}</span>
+                                            <span class="username"><a
+                                                    href="#">{{app\User::findOrFail($comment->id_user)->fname}} {{app\User::findOrFail($comment->id_user)->lname}}</a></span>
+                                            <span
+                                                class="description float-right">{{date('M d, Y h:iA', strtotime($comment->created_at))}}</span>
                                             <span class="container container-fluid">{{$comment->comments}}</span>
                                         </div>
 
@@ -475,84 +478,25 @@
                         {{--                            the plugin.--}}
                         {{--                        </div>--}}
                     </div>
-                    <br>
                 </div>
-            </section>
+            </form>
+        </section>
+    </div>
 
-<form action="">
-            <section class="content">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h4>Actions Taken</h4>
-                        </div>
-                    </div>
-                    <!-- Timelime example  -->
-                    <div class="row">
-                        <div class="col-md-12">
-                            <!-- The time line -->
-                            <div class="timeline">
-                                <!-- timeline time label -->
-                                @forelse($actions as $action => $contents)
-                                    <div class="time-label">
-                                        <span class="bg-gradient-indigo">{{date('M d, Y', strtotime($action))}}</span>
-                                    </div>
-                                    <!-- /.timeline-label -->
-                                    <!-- timeline item -->
-                                    @foreach($contents as $key => $content)
-                                        @if($content->shared == 1 || Auth::user()->department == 'Administrator' || Auth::user()->department == 'MICT')
-                                            <div>
-                                                <i class="fas fa-envelope bg-blue"></i>
-                                                <div class="timeline-item">
-                                                    <div class="icheck-danger float-right">
-                                                        <input type="checkbox" name="report[]" id="checkboxDanger[{{$key}}]">
-                                                        <label for="checkboxDanger[{{$key}}]">Add to report &nbsp;</label>
-                                                    </div>
-                                                    <span class="time"><i class="fas fa-clock"></i> {{date(' h:i A', strtotime($content->created_at))}}</span>
-                                                    <h3 class="timeline-header"><a
-                                                            href="#">{{app\User::findOrFail($content->id_user)->fname}} {{app\User::findOrFail($content->id_user)->lname}}</a>
-                                                    </h3>
-                                                    <div class="timeline-body">
-                                                        {!!$content->actions!!}
-                                                    </div>
-                                                    {{--                                        <div class="timeline-footer">--}}
-                                                    {{--                                        </div>--}}
-                                                </div>
-                                            </div>
-                                    @endif
-                                @endforeach
-                                <!-- END timeline item -->
-                                    <div>
-                                        <i class="fas fa-clock bg-gray"></i>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary float-right">Generate Service report</button>
-
-                            </div>
-                        </div>
-                        <!-- /.col -->
-                    </div>
-                    @empty
-                    @endforelse
-                </div>
-                <!-- /.timeline -->
-            </section>
-</form>
+    <footer class="main-footer">
+        <div class="float-right">
+            <button type="submit" class="btn btn-primary" form="myForm">Submit</button>
 
         </div>
-        <!-- /.content -->
-        <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            <div class="float-right">
-                <button type="submit" class="btn btn-primary">Submit</button>
+        <strong>Copyright &copy; 2020 <a href="https://www.mcuhospital.org/">MCU Hospital</a>.</strong> All
+        rights
+        reserved.
+        <b>Version</b> 1.0.0
+    </footer>
 
-            </div>
-            <strong>Copyright &copy; 2020 <a href="https://www.mcuhospital.org/">MCU Hospital</a>.</strong> All
-            rights
-            reserved.
-            <b>Version</b> 1.0.0
-        </footer>
+    <!-- /.content -->
+    <!-- /.content-wrapper -->
 
-    </form>
     <script>
         $(window).on("beforeunload", function () {
             return "Are you sure? You didn't finish the form!";

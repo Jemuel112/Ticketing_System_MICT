@@ -7,6 +7,7 @@
         <section class="content-header">
             <div class="col-12">
                 <table id="department1"
+                       style="width: 100%"
                        class="wrap compact table table-responsive-sm table-hover table-borderedless table-striped ">
                     <thead>
                     <tr>
@@ -28,35 +29,35 @@
                         @elseif($ticket->lop == 'Low')
                             <tr class="table-info">
                         @else
-                            <tr class="table-dark">
+                            <tr>
                                 @endif
                                 <td hidden>{{$ticket->is_new}}</td>
-                                <td>{{$ticket->id}}</td>
-                                <td>{{$ticket->reported_by}}</td>
-                                <td>{{$ticket->request_by}}</td>
+                                <td style="text-align: center; vertical-align: middle;">{{$ticket->id}}</td>
+                                <td style="text-align: center; vertical-align: middle;">{{$ticket->reported_by}}</td>
+                                <td style="text-align: center; vertical-align: middle;">{{$ticket->request_by}}</td>
 
                                 @if($ticket->status == 'Active')
-                                    <td style="text-align: center">
-                                        @if($ticket->is_new = 1) <span class="badge badge-danger col-md-12">New</span>@endif
+                                    <td style="text-align: center; vertical-align: middle;">
+                                        @if($ticket->is_new = 1) <span style="margin-bottom: 3px;" class="badge badge-danger col-md-12">New</span>@endif
                                         <span class="badge badge-primary col-md-12">Active</span></td>
                                 @elseif($ticket->status == 'On-Going')
-                                    <td style="text-align: center"><span
+                                    <td style="text-align: center; vertical-align: middle;"><span
                                             class="badge badge-warning   col-md-12">On-Going</span></td>
                                 @elseif($ticket->status == 'Resolve')
-                                    <td style="text-align: center"><span
+                                    <td style="text-align: center; vertical-align: middle;"><span
                                             class="badge badge-success col-md-12">Resolve</span></td>
                                 @elseif($ticket->status == 'Duplicate')
-                                    <td style="text-align: center"><span
+                                    <td style="text-align: center; vertical-align: middle;"><span
                                             class="badge badge-primary col-md-12">Duplicate</span></td>
                                 @elseif($ticket->status == 'Closed')
-                                    <td style="text-align: center"><span
+                                    <td style="text-align: center; vertical-align: middle;"><span
                                             class="badge badge-danger col-md-12">Closed</span></td>
                                 @endif
-                                <td>{{$ticket->category}}</td>
-                                <td>{{ \Illuminate\Support\Str::limit($ticket->concerns, 150, $end='...') }}</td>
+                                <td style="text-align: center; vertical-align: middle;">{{$ticket->category}}</td>
+                                <td style="text-align: center; vertical-align: middle;">{{ \Illuminate\Support\Str::limit($ticket->concerns, 100, $end='...') }}</td>
 
                                 <td>
-                                    <div class="row">
+                                    <div style="text-align: center; vertical-align: middle;">
                                         <a style="margin: 2px"
                                            class="btn btn-sm btn-outline-primary"
                                            href="/MICT-Tickets/{{$ticket->id}}"

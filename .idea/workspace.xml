@@ -4,7 +4,9 @@
     <list default="true" id="e46f795c-50de-4821-94e9-0a47af70672e" name="Default Changelist" comment="Innitial Commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MTicketsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MTicketsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/mtickets/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mtickets/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mtickets/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mtickets/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -196,7 +198,7 @@
       <workItem from="1580087474512" duration="23069000" />
       <workItem from="1580143469627" duration="5650000" />
       <workItem from="1580172287481" duration="21348000" />
-      <workItem from="1580314542248" duration="14263000" />
+      <workItem from="1580314542248" duration="26275000" />
     </task>
     <servers />
   </component>
@@ -245,10 +247,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="490" y="276" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1579844943911" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1579708484926">
+    <state x="339" y="162" key="run.anything.popup" timestamp="1580400882832">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1579708484926" />
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1580400882832" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1580381270009">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
