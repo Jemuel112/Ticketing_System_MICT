@@ -7,7 +7,7 @@
         <section class="content-header">
             <div class="col-12">
                 <table id="department1"
-                       class="wrap compact table table-responsive-sm table-hover table-bordered table-striped ">
+                       class="wrap compact table table-responsive-sm table-hover table-borderedless table-striped ">
                     <thead>
                     <tr>
                         <th hidden>Sample Text</th>
@@ -34,9 +34,11 @@
                                 <td>{{$ticket->id}}</td>
                                 <td>{{$ticket->reported_by}}</td>
                                 <td>{{$ticket->request_by}}</td>
+
                                 @if($ticket->status == 'Active')
-                                    <td style="text-align: center"><span
-                                            class="badge badge-primary col-md-12">Active</span></td>
+                                    <td style="text-align: center">
+                                        @if($ticket->is_new = 1) <span class="badge badge-danger col-md-12">New</span>@endif
+                                        <span class="badge badge-primary col-md-12">Active</span></td>
                                 @elseif($ticket->status == 'On-Going')
                                     <td style="text-align: center"><span
                                             class="badge badge-warning   col-md-12">On-Going</span></td>

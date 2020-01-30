@@ -19,7 +19,7 @@ class MTicketsController extends Controller
     {
         $this->middleware('disablepreventback');
         $this->middleware('auth');
-        $this->middleware('auth.am')->except('index', 'store', 'create', 'show','comment');
+        $this->middleware('auth.am')->except('index', 'store', 'create', 'show', 'comment');
         $this->middleware('editvalid')->only('show');
 //        $this->middleware('auth.admin')->only('index', 'store', 'allticket');
     }
@@ -33,7 +33,7 @@ class MTicketsController extends Controller
         //        assigned_to
 //        $query = mTicket::where('assigned_to', 'Administrator')->count();
 
-        $tickets = mTicket::where([['assigned_to', 'Like', '%'."$name".'%']])->get();
+        $tickets = mTicket::where([['assigned_to', 'Like', '%' . "$name" . '%']])->get();
 //        dd($tickets);
 
         return view('mtickets.index', compact('tickets'));
@@ -72,8 +72,8 @@ class MTicketsController extends Controller
     public function show($id)
     {
         $ticket = mTicket::findOrFail($id);
-        $comments = mcomments::Where([['id_mticket','=',$id]])->orderBy('created_at', 'DESC')->get();
-        $actions = mactions::Where([['id_mticket','=',$id]])->orderBy('created_at', 'DESC')->get()->groupBy(function($item) {
+        $comments = mcomments::Where([['id_mticket', '=', $id]])->orderBy('created_at', 'DESC')->get();
+        $actions = mactions::Where([['id_mticket', '=', $id]])->orderBy('created_at', 'DESC')->get()->groupBy(function ($item) {
             return $item->created_at->format('Y-m-d');
         });
         $departments = Department::all();
@@ -86,14 +86,16 @@ class MTicketsController extends Controller
             ])
             ->get();
 //        dd($comments);
-        return view('mtickets.show', compact('ticket', 'micts', 'departments','comments','actions'));
+        return view('mtickets.show', compact('ticket', 'micts', 'departments', 'comments', 'actions'));
     }
 
     public function edit($id)
     {
         $ticket = mTicket::findOrFail($id);
-        $comments = mcomments::Where([['id_mticket','=',$id]])->orderBy('created_at', 'DESC')->get();
-        $actions = mactions::Where([['id_mticket','=',$id]])->orderBy('created_at', 'DESC')->get()->groupBy(function($item) {
+        $ticket->is_new = 0;
+        $ticket->save();
+        $comments = mcomments::Where([['id_mticket', '=', $id]])->orderBy('created_at', 'DESC')->get();
+        $actions = mactions::Where([['id_mticket', '=', $id]])->orderBy('created_at', 'DESC')->get()->groupBy(function ($item) {
             return $item->created_at->format('Y-m-d');
         });
         $departments = Department::all();
@@ -105,13 +107,24 @@ class MTicketsController extends Controller
                 ['department', '=', 'Administrator']
             ])
             ->get();
-        return view('mtickets.edit', compact('ticket', 'micts', 'departments','comments','actions'));
+        return view('mtickets.edit', compact('ticket', 'micts', 'departments', 'comments', 'actions'));
     }
 
     public function store(Request $request)
     {
-
         $tickets = new mTicket();
+
+        if ($request->status == "Closed" || $request->status == "Resolve") {
+            if (!is_null($request->finished_at)) {
+                $tickets->finished_at = date('Y-m-d H:i:s', strtotime($request->finished_at));
+            }else{
+                $tickets->finished_at = date('Y-m-d H:i:s', strtotime(Carbon::now()));
+            }
+        }
+        if($request->status != "Active"){
+            $tickets->is_new = false;
+        }
+
         if (Auth::user()->department == 'Administrator') {
 //            dd($request);
             if ($request->status == 'On-Going') {
@@ -213,6 +226,7 @@ class MTicketsController extends Controller
         $tickets->created_by = Auth::user()->fname;
         $tickets->recommendation = $request->recommendation;
 
+
 //        dd($tickets->assigned_to);
 
         if (is_null($request->created_at)) {
@@ -224,7 +238,7 @@ class MTicketsController extends Controller
             $tickets->save(['timestamps' => false]);
         }
 
-        if(!is_null($request->action)){
+        if (!is_null($request->action)) {
             $data = request()->validate([
                 'action' => 'required'
             ]);
@@ -232,9 +246,9 @@ class MTicketsController extends Controller
             $action->actions = $request->action;
             $action->id_mticket = $tickets->id;
             $action->id_user = Auth::user()->id;
-            if ($request->shared === "on" ){
+            if ($request->shared === "on") {
                 $action->shared = 1;
-            }else{
+            } else {
                 $action->shared = 0;
             }
             $action->save();
@@ -247,7 +261,7 @@ class MTicketsController extends Controller
     {
 //        $ticket = mTicket::findOrFail($id);
 //        dd($request->all());
-        if(!is_null($request->action)){
+        if (!is_null($request->action)) {
             $action = new mactions();
             $action->actions = $request->action;
             $action->id_mticket = $id;
@@ -262,7 +276,7 @@ class MTicketsController extends Controller
             $comment->id_mticket = $id;
             $comment->save();
         }
-        if(!is_null($request->recommendation)){
+        if (!is_null($request->recommendation)) {
             $ticket = mTicket::findOrFail($id);
             $ticket->recommendation = $request->recommendation;
             $ticket->save();
@@ -346,8 +360,6 @@ class MTicketsController extends Controller
         }
 
 
-
-
         if (!is_null($request->assigned_to)) {
             $assign = $request->input('assigned_to');
             $ticket->assigned_to = implode(',', $assign);
@@ -360,7 +372,7 @@ class MTicketsController extends Controller
             $accomplished = $request->input('accomplished_by');
             $ticket->accomplished_by = implode(',', $accomplished);
         }
-        if(!is_null($request->action)){
+        if (!is_null($request->action)) {
             $action = new mactions();
             $action->actions = $request->action;
             $action->id_mticket = $id;
@@ -374,7 +386,7 @@ class MTicketsController extends Controller
             $comment->id_mticket = $id;
             $comment->save();
         }
-        if(!is_null($request->recommendation)){
+        if (!is_null($request->recommendation)) {
             $ticket = mTicket::findOrFail($id);
             $ticket->recommendation = $request->recommendation;
             $ticket->save();

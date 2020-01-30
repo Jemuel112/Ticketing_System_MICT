@@ -47,7 +47,7 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <label>Create At</label>
                                     <div class="form-group">
                                         <div class="input-group date"
@@ -63,21 +63,21 @@
                                     </div>
 
                                 </div>
-                                {{--                                <div class="col-md-6">--}}
-                                {{--                                    <label>Update Date</label>--}}
-                                {{--                                    <div class="form-group">--}}
-                                {{--                                        <div class="input-group date"--}}
-                                {{--                                             data-target-input="nearest">--}}
-                                {{--                                            <input type="text" id="datetimepicker8"--}}
-                                {{--                                                   class="form-control datetimepicker-input"--}}
-                                {{--                                                   data-target="#datetimepicker8"/>--}}
-                                {{--                                            <div class="input-group-append" data-target="#datetimepicker8"--}}
-                                {{--                                                 data-toggle="datetimepicker">--}}
-                                {{--                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>--}}
-                                {{--                                            </div>--}}
-                                {{--                                        </div>--}}
-                                {{--                                    </div>--}}
-                                {{--                                </div>--}}
+                                <div class="col-md-6">
+                                    <label>Finished At</label>
+                                    <div class="form-group">
+                                        <div class="input-group date"
+                                             data-target-input="nearest">
+                                            <input type="text" name="finished_at" id="datetimepicker8"
+                                                   class="form-control datetimepicker-input"
+                                                   data-target="#datetimepicker8"/>
+                                            <div class="input-group-append" data-target="#datetimepicker8"
+                                                 data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <!-- /.card-body -->

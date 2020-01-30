@@ -34,6 +34,58 @@
 
             <section class="content" onload="functionToBeExecuted">
 
+                @if(Auth::user()->department == 'Administrator')
+                    <div class="card card-secondary">
+                        <div class="card-header">
+                            <h3 class="card-title">Date</h3>
+                            <div class="card-tools">
+                                &nbsp;
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
+                                        class="fas fa-minus"></i></button>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Create At</label>
+                                    <div class="form-group">
+                                        <div class="input-group date"
+                                             data-target-input="nearest">
+                                            <input type="text" name="created_at" id="datetimepicker7"
+                                                   class="form-control datetimepicker-input"
+                                                   data-target="#datetimepicker7"
+                                            value="{{date('m/d/Y h:i', strtotime($ticket->create_at)) ?? date('m/d/Y h:i', strtotime(old(create_at)))}}">
+                                            <div class="input-group-append" data-target="#datetimepicker7"
+                                                 data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Finished At</label>
+                                    <div class="form-group">
+                                        <div class="input-group date"
+                                             data-target-input="nearest">
+                                            <input type="text" name="finished_at" id="datetimepicker8"
+                                                   class="form-control datetimepicker-input"
+                                                   data-target="#datetimepicker8"
+                                                   value="{{date('m/d/Y h:i', strtotime($ticket->finished_at)) ?? date('m/d/Y h:i', strtotime(old(finished_at))) }}">>
+                                            <div class="input-group-append" data-target="#datetimepicker8"
+                                                 data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                @endif
+
                 <div class="card card-cyan">
                     <div class="card-header">
                         <h3 class="card-title">Ticket Info</h3>
