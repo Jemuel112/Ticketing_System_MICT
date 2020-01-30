@@ -150,17 +150,25 @@
                                         style="width: 100%;"
                                         id="status">
                                     {{--                                        {{$ticket->status == $user->department  ? 'selected' : ''}}--}}
-                                    <option value="Active" {{ old('status') ?? $ticket->status == 'Active' ? 'selected' :''}}>Active
+                                    <option
+                                        value="Active" {{ (old('status') ?? $ticket->status) == 'Active' ? 'selected' :''}}>
+                                        Active
                                     </option>
-                                    <option value="On-Going" {{ old('status') ?? $ticket->status == 'On-Going' ? 'selected':''}}>
+                                    <option
+                                        value="On-Going" {{ (old('status') ?? $ticket->status) == 'On-Going' ? 'selected':''}}>
                                         On-Going
                                     </option>
-                                    <option value="Resolve" {{ old('status') ?? $ticket->status == 'Resolve' ? 'selected':''}}>Resolve
+                                    <option
+                                        value="Resolve" {{ (old('status') ?? $ticket->status) == 'Resolve' ? 'selected':''}}>
+                                        Resolve
                                     </option>
-                                    <option value="Duplicate" {{ old('status') ?? $ticket->status == 'Duplicate' ? 'selected':''}}>
+                                    <option
+                                        value="Duplicate" {{  (old('status') ?? $ticket->status) == 'Duplicate' ? 'selected':''}}>
                                         Duplicate
                                     </option>
-                                    <option value="Closed" {{ old('status') ?? $ticket->status == 'Closed' ? 'selected':''}}>Closed
+                                    <option
+                                        value="Closed" {{  (old('status') ?? $ticket->status) == 'Closed' ? 'selected':''}}>
+                                        Closed
                                     </option>
                                 </select>
                             </div>
@@ -183,7 +191,8 @@
                                             value="Under Observation" {{ old('og_status') ?? $ticket->og_status == 'Under Observation' ? 'selected':''}}>
                                             Under Observation
                                         </option>
-                                        <option value="Others" {{ old('og_status') ?? $ticket->og_status == 'Others' ? 'selected':''}}>
+                                        <option
+                                            value="Others" {{ old('og_status') ?? $ticket->og_status == 'Others' ? 'selected':''}}>
                                             Others
                                         </option>
                                     </select>
@@ -211,7 +220,8 @@
                                 <div class="input-group date" id="datetimepickerd" data-target-input="nearest">
                                     <input type="text"
                                            class="form-control datetimepicker-input @error("end_at")is-invalid @enderror"
-                                           value="{{ \Carbon\Carbon::now() ?? date('m/d/Y h:i', strtotime($ticket->end_at))}}" name="end_at"
+                                           value="{{ \Carbon\Carbon::now() ?? date('m/d/Y h:i', strtotime($ticket->end_at))}}"
+                                           name="end_at"
                                            data-target="#datetimepickerd"/>
                                     <div class="input-group-append" data-target="#datetimepickerd"
                                          data-toggle="datetimepicker">
@@ -394,7 +404,7 @@
                                 <textarea name="concerns"
                                           placeholder="Place some text here"
                                           class="@error("concerns")is-invalid @enderror"
-                                          style="resize: none ;width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{$ticket->concerns}}</textarea>
+                                          style="resize: none ;width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ old('concerns') ?? $ticket->concerns }}</textarea>
                             </div>
                             <div class="col-lg-12 col-md-12">
                                 <label><br>Additional Comments</label>
@@ -402,7 +412,7 @@
                                           placeholder="Enter your comments here"
                                           class="is-invalid"
                                           style="resize: none ;width: 100%; height: 75px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
-                                ></textarea>
+                                >{{old('comment')}}</textarea>
                                 <br> &nbsp;
                             </div>
 
@@ -460,14 +470,14 @@
                                         <label></label>
                                         <textarea id="act" name="action" class="textarea"
                                                   placeholder="Place some text here"
-                                                  style="width: 100%; height: 250px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                                  style="width: 100%; height: 250px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{old('action')}}</textarea>
                                     </div>
                                 @endif
                                 <div class="col-lg-12 col-md-12">
                                     <label>Remarks / Recomendation</label>
                                     <textarea name="recommendation"
                                               placeholder="Enter Recommendation here"
-                                              style="resize: none ;width: 100%; height: 75px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{$ticket->recommendation}}</textarea>
+                                              style="resize: none ;width: 100%; height: 75px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{old('recommendation') ?? $ticket->recommendation}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -480,6 +490,60 @@
                     </div>
                 </div>
             </form>
+        </section>
+        <section class="container">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h4>Actions Taken</h4>
+                </div>
+            </div>
+            <!-- Timelime example  -->
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- The time line -->
+                    <div class="timeline">
+                        <!-- timeline time label -->
+                        @forelse($actions as $action => $contents)
+                            <div class="time-label">
+                                <span class="bg-gradient-indigo">{{date('M d, Y', strtotime($action))}}</span>
+                            </div>
+                            <!-- /.timeline-label -->
+                            <!-- timeline item -->
+                            @foreach($contents as $key => $content)
+                                @if($content->shared == 1 || Auth::user()->department == 'Administrator' || Auth::user()->department == 'MICT')
+                                    <div>
+                                        <i class="fas fa-envelope bg-blue"></i>
+                                        <div class="timeline-item">
+                                            <div class="icheck-danger float-right">
+                                                <input type="checkbox" name="action_id[]"
+                                                       value="{{$content->id}}"
+                                                       id="checkboxDanger[{{$key}}]">
+                                                <label for="checkboxDanger[{{$key}}]">Add to report
+                                                    &nbsp;</label>
+                                            </div>
+                                            <span class="time"><i class="fas fa-clock"></i> {{date(' h:i A', strtotime($content->created_at))}}</span>
+                                            <h3 class="timeline-header"><a
+                                                    href="#">{{app\User::findOrFail($content->id_user)->fname}} {{app\User::findOrFail($content->id_user)->lname}}</a>
+                                            </h3>
+                                            <div class="timeline-body">
+                                                {!!$content->actions!!}
+                                            </div>
+                                            {{--                                        <div class="timeline-footer">--}}
+                                            {{--                                        </div>--}}
+                                        </div>
+                                    </div>
+                            @endif
+                        @endforeach
+                        <!-- END timeline item -->
+                            <div>
+                                <i class="fas fa-clock bg-gray"></i>
+                            </div>
+                    </div>
+                </div>
+                <!-- /.col -->
+            </div>
+            @empty
+            @endforelse
         </section>
     </div>
 

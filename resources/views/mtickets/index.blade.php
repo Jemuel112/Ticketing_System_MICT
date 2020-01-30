@@ -38,7 +38,9 @@
 
                                 @if($ticket->status == 'Active')
                                     <td style="text-align: center; vertical-align: middle;">
-                                        @if($ticket->is_new = 1) <span style="margin-bottom: 3px;" class="badge badge-danger col-md-12">New</span>@endif
+                                        @if($ticket->is_new == true)
+                                            <span style="margin-bottom: 2px;" class="badge badge-danger col-sm-12">New</span>
+                                        @endif
                                         <span class="badge badge-primary col-md-12">Active</span></td>
                                 @elseif($ticket->status == 'On-Going')
                                     <td style="text-align: center; vertical-align: middle;"><span
