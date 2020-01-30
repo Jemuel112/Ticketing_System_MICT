@@ -35,7 +35,7 @@
             <section class="content" onload="functionToBeExecuted">
 
                 @if(Auth::user()->department == 'Administrator')
-                    <div class="card card-secondary">
+                    <div class="card card-cyan">
                         <div class="card-header">
                             <h3 class="card-title">Date</h3>
                             <div class="card-tools">
@@ -55,7 +55,7 @@
                                             <input type="text" name="created_at" id="datetimepicker7"
                                                    class="form-control datetimepicker-input"
                                                    data-target="#datetimepicker7"
-                                            value="{{date('m/d/Y h:i', strtotime($ticket->create_at)) ?? date('m/d/Y h:i', strtotime(old(create_at)))}}">
+                                            value="{{date('m/d/Y h:i', strtotime($ticket->create_at)) ?? date('m/d/Y h:i', strtotime(created_at))}}">
                                             <div class="input-group-append" data-target="#datetimepicker7"
                                                  data-toggle="datetimepicker">
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -72,7 +72,7 @@
                                             <input type="text" name="finished_at" id="datetimepicker8"
                                                    class="form-control datetimepicker-input"
                                                    data-target="#datetimepicker8"
-                                                   value="{{date('m/d/Y h:i', strtotime($ticket->finished_at)) ?? date('m/d/Y h:i', strtotime(old(finished_at))) }}">>
+                                                   value="{{date('m/d/Y h:i', strtotime($ticket->finished_at)) ?? date('m/d/Y h:i', strtotime(old(finished_at))) }}">
                                             <div class="input-group-append" data-target="#datetimepicker8"
                                                  data-toggle="datetimepicker">
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -479,7 +479,7 @@
                 </div>
             </section>
 
-
+<form action="">
             <section class="content">
                 <div class="container-fluid">
                     <div class="row mb-2">
@@ -489,22 +489,25 @@
                     </div>
                     <!-- Timelime example  -->
                     <div class="row">
-                        <div class="col-md-10">
+                        <div class="col-md-12">
                             <!-- The time line -->
                             <div class="timeline">
                                 <!-- timeline time label -->
                                 @forelse($actions as $action => $contents)
-
                                     <div class="time-label">
                                         <span class="bg-gradient-indigo">{{date('M d, Y', strtotime($action))}}</span>
                                     </div>
                                     <!-- /.timeline-label -->
                                     <!-- timeline item -->
-                                    @foreach($contents as $content)
+                                    @foreach($contents as $key => $content)
                                         @if($content->shared == 1 || Auth::user()->department == 'Administrator' || Auth::user()->department == 'MICT')
                                             <div>
                                                 <i class="fas fa-envelope bg-blue"></i>
                                                 <div class="timeline-item">
+                                                    <div class="icheck-danger float-right">
+                                                        <input type="checkbox" name="report[]" id="checkboxDanger[{{$key}}]">
+                                                        <label for="checkboxDanger[{{$key}}]">Add to report &nbsp;</label>
+                                                    </div>
                                                     <span class="time"><i class="fas fa-clock"></i> {{date(' h:i A', strtotime($content->created_at))}}</span>
                                                     <h3 class="timeline-header"><a
                                                             href="#">{{app\User::findOrFail($content->id_user)->fname}} {{app\User::findOrFail($content->id_user)->lname}}</a>
@@ -522,6 +525,8 @@
                                     <div>
                                         <i class="fas fa-clock bg-gray"></i>
                                     </div>
+                                    <button type="submit" class="btn btn-primary float-right">Generate Service report</button>
+
                             </div>
                         </div>
                         <!-- /.col -->
@@ -531,7 +536,7 @@
                 </div>
                 <!-- /.timeline -->
             </section>
-
+</form>
 
         </div>
         <!-- /.content -->

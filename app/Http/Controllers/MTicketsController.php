@@ -408,4 +408,9 @@ class MTicketsController extends Controller
         return redirect('/MICT-Tickets');
 
     }
+
+    public function serviceReport(Request $request)
+    {
+        dd($request);
+    }
 }
