@@ -3,9 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="e46f795c-50de-4821-94e9-0a47af70672e" name="Default Changelist" comment="Innitial Commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MTicketsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MTicketsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Widgets/ActiveWidget.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Widgets/ActiveWidget.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Widgets/ClosedWidget.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Widgets/ClosedWidget.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Widgets/OnGoingWidget.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Widgets/OnGoingWidget.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Widgets/ResolvedWidget.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Widgets/ResolvedWidget.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/mtickets/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mtickets/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/mtickets/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mtickets/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/widgets/active_widget.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/widgets/active_widget.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/widgets/closed_widget.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/widgets/closed_widget.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/widgets/on_going_widget.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/widgets/on_going_widget.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/widgets/resolved_widget.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/widgets/resolved_widget.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,7 +203,7 @@
       <workItem from="1580087474512" duration="23069000" />
       <workItem from="1580143469627" duration="5650000" />
       <workItem from="1580172287481" duration="21348000" />
-      <workItem from="1580314542248" duration="29483000" />
+      <workItem from="1580314542248" duration="31730000" />
     </task>
     <servers />
   </component>
@@ -229,10 +236,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="0" y="0" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1579794438180" />
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1579862009245">
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1580408539108">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1579862009245" />
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1580408539108" />
     <state x="184" y="7" key="SettingsEditor" timestamp="1579860613081">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

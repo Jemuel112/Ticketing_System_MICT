@@ -55,7 +55,7 @@
                                             <input type="text" name="created_at" id="datetimepicker7"
                                                    class="form-control datetimepicker-input"
                                                    data-target="#datetimepicker7"
-                                                   value="{{date('m/d/Y h:i', strtotime($ticket->create_at)) ?? date('m/d/Y h:i', strtotime(created_at))}}">
+                                                   value="{{date('m/d/Y h:i A', strtotime($ticket->created_at))}}">
                                             <div class="input-group-append" data-target="#datetimepicker7"
                                                  data-toggle="datetimepicker">
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -72,7 +72,9 @@
                                             <input type="text" name="finished_at" id="datetimepicker8"
                                                    class="form-control datetimepicker-input"
                                                    data-target="#datetimepicker8"
-                                                   value="{{date('m/d/Y h:i', strtotime($ticket->finished_at)) ?? date('m/d/Y h:i', strtotime(old(finished_at))) }}">
+                                                   @if(!is_null($ticket->finished_at))
+                                                   value="{{date('m/d/Y h:i A', strtotime($ticket->finished_at))}}"
+                                                @endif>
                                             <div class="input-group-append" data-target="#datetimepicker8"
                                                  data-toggle="datetimepicker">
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -206,7 +208,7 @@
                                 <div class="input-group date" id="datetimepickers" data-target-input="nearest">
                                     <input type="text"
                                            class="form-control datetimepicker-input @error("start_at")is-invalid @enderror"
-                                           value="{{ \Carbon\Carbon::now() ?? date('m/d/Y h:i', strtotime($ticket->start_at || old('start_at')))}}"
+                                           value="{{date('m/d/Y h:i', strtotime($ticket->start_at))}}"
                                            name="start_at"
                                            data-target="#datetimepickers"/>
                                     <div class="input-group-append" data-target="#datetimepickers"
@@ -220,7 +222,7 @@
                                 <div class="input-group date" id="datetimepickerd" data-target-input="nearest">
                                     <input type="text"
                                            class="form-control datetimepicker-input @error("end_at")is-invalid @enderror"
-                                           value="{{ \Carbon\Carbon::now() ?? date('m/d/Y h:i', strtotime($ticket->end_at))}}"
+                                           value="{{date('m/d/Y h:i', strtotime($ticket->end_at))}}"
                                            name="end_at"
                                            data-target="#datetimepickerd"/>
                                     <div class="input-group-append" data-target="#datetimepickerd"
