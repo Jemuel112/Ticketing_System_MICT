@@ -3,6 +3,7 @@
 namespace App\Widgets;
 
 use App\mTicket;
+use Illuminate\Support\Facades\Auth;
 use Arrilot\Widgets\AbstractWidget;
 
 class ActiveWidget extends AbstractWidget
@@ -29,7 +30,7 @@ class ActiveWidget extends AbstractWidget
     {
         //
         $tickets = mTicket::where('status', '=', 'Active')->count();
-        $utickets = mTicket::where('request_by','=',\Illuminate\Support\Facades\Auth::user()->department)->where('status', '=','Active')->count();
+        $utickets = mTicket::where('request_by','=',Auth::user()->department)->where('status', '=','Active')->count();
         return view('widgets.active_widget', [
             'config' => $this->config,
             'tickets' => $tickets,

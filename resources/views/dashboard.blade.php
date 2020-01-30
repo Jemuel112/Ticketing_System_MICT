@@ -50,7 +50,7 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <div class="row">
-
+                                @widget('active_table')
                             </div>
                         </div>
                         <!-- /.card-body -->
