@@ -13,14 +13,15 @@ class ActiveTable extends AbstractWidget
      *
      * @var array
      */
-    protected $config = [];
+    public $config = [
+    ];
 
     /**
      * The number of seconds before each reload.
      *
      * @var int|float
      */
-    public $reloadTimeout = 1;
+    public $reloadTimeout = 5;
 
 
     /**
@@ -30,14 +31,14 @@ class ActiveTable extends AbstractWidget
     public function run()
     {
         //
-//        if(Auth::user()->department == "Administrator" || Auth::user()->department =="MICT"){
-        $tickets = mTicket::where('status', '=', 'Active')->get();
-//        }else{
-//        $tickets = mTicket::where('request_by','=', Auth::user()->department)->where('status', '=','Active')->get();
-//        }
+        if(Auth::user()->department == "Administrator" || Auth::user()->department =="MICT"){
+        $tickets1 = mTicket::where('status', '=', 'Active')->paginate(5);
+        }else{
+        $tickets1 = mTicket::where('request_by','=', Auth::user()->department)->where('status', '=','Active')->paginate(5);
+        }
         return view('widgets.active_table', [
             'config' => $this->config,
-            'tickets' => $tickets,
+            'tickets1' => $tickets1,
         ]);
     }
 }

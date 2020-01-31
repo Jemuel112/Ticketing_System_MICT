@@ -18,20 +18,21 @@
             <div class="row">
 
                 <div class="col-lg-3 col-6">
-                @asyncWidget('active_widget')
+                    @widget('active_widget')
                 </div>
                 <!-- ./col -->
                 <div class="col-lg-3 col-6">
-                    @asyncWidget('on_going_widget')
+                    @widget('on_going_widget')
 
                 </div>
                 <!-- ./col -->
                 <div class="col-lg-3 col-6">
-                    @asyncWidget('resolved_widget')
+                    @widget('resolved_widget')
                 </div>
                 <!-- ./col -->
                 <div class="col-lg-3 col-6">
-                    @asyncWidget('closed_widget')
+                    @widget('closed_widget')
+{{--                    {{ $tickets->links() }}--}}
                 </div>
                 <!-- ./col -->
             </div>
@@ -49,9 +50,8 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <div class="row">
-                                @widget('active_table')
-                            </div>
+                            @widget('active_table',['count' =>5])
+
                         </div>
                         <!-- /.card-body -->
                         {{--                        <div class="card-footer">--}}
