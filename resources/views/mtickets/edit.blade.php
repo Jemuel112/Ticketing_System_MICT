@@ -493,59 +493,66 @@
                 </div>
             </form>
         </section>
+
         <section class="container">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h4>Actions Taken</h4>
-                </div>
-            </div>
-            <!-- Timelime example  -->
-            <div class="row">
-                <div class="col-md-12">
-                    <!-- The time line -->
-                    <div class="timeline">
-                        <!-- timeline time label -->
-                        @forelse($actions as $action => $contents)
-                            <div class="time-label">
-                                <span class="bg-gradient-indigo">{{date('M d, Y', strtotime($action))}}</span>
-                            </div>
-                            <!-- /.timeline-label -->
-                            <!-- timeline item -->
-                            @foreach($contents as $key => $content)
-                                @if($content->shared == 1 || Auth::user()->department == 'Administrator' || Auth::user()->department == 'MICT')
-                                    <div>
-                                        <i class="fas fa-envelope bg-blue"></i>
-                                        <div class="timeline-item">
-                                            <div class="icheck-danger float-right">
-                                                <input type="checkbox" name="action_id[]"
-                                                       value="{{$content->id}}"
-                                                       id="checkboxDanger[{{$key}}]">
-                                                <label for="checkboxDanger[{{$key}}]">Add to report
-                                                    &nbsp;</label>
-                                            </div>
-                                            <span class="time"><i class="fas fa-clock"></i> {{date(' h:i A', strtotime($content->created_at))}}</span>
-                                            <h3 class="timeline-header"><a
-                                                    href="#">{{app\User::findOrFail($content->id_user)->fname}} {{app\User::findOrFail($content->id_user)->lname}}</a>
-                                            </h3>
-                                            <div class="timeline-body">
-                                                {!!$content->actions!!}
-                                            </div>
-                                            {{--                                        <div class="timeline-footer">--}}
-                                            {{--                                        </div>--}}
-                                        </div>
-                                    </div>
-                            @endif
-                        @endforeach
-                        <!-- END timeline item -->
-                            <div>
-                                <i class="fas fa-clock bg-gray"></i>
-                            </div>
+            <form action="/MICT-Tickets/reports/{{$ticket->id}}" method="POST">
+                @csrf
+                @method('POST')
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h4>Actions Taken</h4>
                     </div>
                 </div>
-                <!-- /.col -->
-            </div>
-            @empty
-            @endforelse
+                <!-- Timelime example  -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- The time line -->
+                        <div class="timeline">
+                            <!-- timeline time label -->
+                            @forelse($actions as $action => $contents)
+                                <div class="time-label">
+                                    <span class="bg-gradient-indigo">{{date('M d, Y', strtotime($action))}}</span>
+                                </div>
+                                <!-- /.timeline-label -->
+                                <!-- timeline item -->
+                                @foreach($contents as $key => $content)
+                                    @if($content->shared == 1 || Auth::user()->department == 'Administrator' || Auth::user()->department == 'MICT')
+                                        <div>
+                                            <i class="fas fa-envelope bg-blue"></i>
+                                            <div class="timeline-item">
+                                                <div class="icheck-danger float-right">
+                                                    <input type="checkbox" name="action_id[]"
+                                                           value="{{$content->id}}"
+                                                           id="checkboxDanger[{{$key}}]">
+                                                    <label for="checkboxDanger[{{$key}}]">Add to report
+                                                        &nbsp;</label>
+                                                </div>
+                                                <span class="time"><i class="fas fa-clock"></i> {{date(' h:i A', strtotime($content->created_at))}}</span>
+                                                <h3 class="timeline-header"><a
+                                                        href="#">{{app\User::findOrFail($content->id_user)->fname}} {{app\User::findOrFail($content->id_user)->lname}}</a>
+                                                </h3>
+                                                <div class="timeline-body">
+                                                    {!!$content->actions!!}
+                                                </div>
+                                                {{--                                        <div class="timeline-footer">--}}
+                                                {{--                                        </div>--}}
+                                            </div>
+                                        </div>
+                                @endif
+                            @endforeach
+                            <!-- END timeline item -->
+                                <div>
+                                    <i class="fas fa-clock bg-gray"></i>
+                                    <button type="submit" class="float-right">Generate Report</button>
+
+                                </div>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                @empty
+                @endforelse
+            </form>
         </section>
     </div>
 

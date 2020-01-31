@@ -17,7 +17,13 @@
                         <th width="10%">Department</th>
                         <th width="10%">Status</th>
                         <th width="10%">Category</th>
-                        <th width="30%">Issue&nbsp;/&nbsp;Concerns</th>
+
+                        @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
+                            <th width="30%" style="text-align: center">Created At</th>
+                        @else
+                            <th width="30%">Issue / Concerns</th>
+                        @endif
+
                         <th width="14%">Action</th>
                     </tr>
                     </thead>
@@ -39,7 +45,8 @@
                                 @if($ticket->status == 'Active')
                                     <td style="text-align: center; vertical-align: middle;">
                                         @if($ticket->is_new == true)
-                                            <span style="margin-bottom: 2px;" class="badge badge-danger col-sm-12">New</span>
+                                            <span style="margin-bottom: 2px;"
+                                                  class="badge badge-danger col-sm-12">New</span>
                                         @endif
                                         <span class="badge badge-primary col-md-12">Active</span></td>
                                 @elseif($ticket->status == 'On-Going')
@@ -56,20 +63,24 @@
                                             class="badge badge-danger col-md-12">Closed</span></td>
                                 @endif
                                 <td style="text-align: center; vertical-align: middle;">{{$ticket->category}}</td>
-                                <td style="text-align: center; vertical-align: middle;">{{ \Illuminate\Support\Str::limit($ticket->concerns, 100, $end='...') }}</td>
-
+                                @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
+                                    <td style="text-align: center; vertical-align: middle;">{{$ticket->created_at}}</td>
+                                @else
+                                    <td style="text-align: center; vertical-align: middle;">{{ \Illuminate\Support\Str::limit($ticket->concerns, 100, $end='...') }}</td>
+                                @endif
                                 <td>
-                                    <div style="text-align: center; vertical-align: middle;">
-                                        <a style="margin: 2px"
-                                           class="btn btn-sm btn-outline-primary"
-                                           href="/MICT-Tickets/{{$ticket->id}}"
-                                        ><i class="fal fa-eye"></i></a>
-
+                                    @if(Auth::user()->department == "MICT" || Auth::user()->department == "Administrator")
                                         <a style="margin: 2px"
                                            class="btn btn-sm btn-outline-primary"
                                            href="/MICT-Tickets/{{$ticket->id}}/edit"
-                                        ><i class="fal fa-pencil-alt"></i></a>
-                                    </div>
+                                        ><i class="fal fa-pencil-alt"></i> Edit</a>
+                                    @else
+
+                                        <a style="margin: 2px"
+                                           class="btn btn-sm btn-primary"
+                                           href="/MICT-Tickets/{{$ticket->id}}"
+                                        ><i class="fal fa-eye"></i> View</a>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach
