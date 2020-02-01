@@ -21,7 +21,6 @@ class MTicketsController extends Controller
         $this->middleware('auth');
         $this->middleware('auth.am')->except('index', 'store', 'create', 'show', 'comment');
         $this->middleware('editvalid')->only('show');
-        $this->middleware('sreport')->only('report');
 
 //        $this->middleware('auth.admin')->only('index', 'store', 'allticket');
     }
@@ -413,6 +412,6 @@ class MTicketsController extends Controller
 
     public function report(Request $request)
     {
-        dd($request->action_id);
+        dd($request->ticket_id);
     }
 }

@@ -26,7 +26,7 @@ Route::get('/dashboard', function () {
 Route::resource('/MICT-Tickets', 'mTicketsController',['only'=> ['index','create','store','show','edit','update']]);
 Route::post('/MICT-Tickets/comments/{comment}', 'mTicketsController@comment');
 Route::get('/MyTickets', 'mTicketsController@myTickets');
-Route::get('/MICT-Tickets/reports/{report}', 'mTicketsController@report')->middleware('sreport');
+Route::post('/MICT-Tickets/report', 'mTicketsController@report');
 
 
 

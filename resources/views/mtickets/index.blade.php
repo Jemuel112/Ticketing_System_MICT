@@ -12,14 +12,14 @@
                     <thead>
                     <tr>
                         <th hidden>Sample Text</th>
-                        <th width="6%">Ticket&nbsp;#</th>
-                        <th width="10%">Reported&nbsp;by</th>
-                        <th width="10%">Department</th>
-                        <th width="10%">Status</th>
-                        <th width="10%">Category</th>
+                        <th width="6%" style="text-align: center">Ticket&nbsp;#</th>
+                        <th style="text-align: center">Reported&nbsp;by</th>
+                        <th style="text-align: center">Department</th>
+                        <th style="text-align: center">Status</th>
+                        <th style="text-align: center">Category</th>
 
                         @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
-                            <th width="30%" style="text-align: center">Created At</th>
+                            <th style="text-align: center">Created At</th>
                         @else
                             <th width="30%">Issue / Concerns</th>
                         @endif
@@ -38,7 +38,7 @@
                             <tr>
                                 @endif
                                 <td hidden>{{$ticket->is_new}}</td>
-                                <td style="text-align: center; vertical-align: middle;">{{$ticket->id}}</td>
+                                <td style="text-align: center; vertical-align: middle;">{{ str_pad($ticket->id,5,'0',STR_PAD_LEFT) }}</td>
                                 <td style="text-align: center; vertical-align: middle;">{{$ticket->reported_by}}</td>
                                 <td style="text-align: center; vertical-align: middle;">{{$ticket->request_by}}</td>
 
@@ -64,7 +64,7 @@
                                 @endif
                                 <td style="text-align: center; vertical-align: middle;">{{$ticket->category}}</td>
                                 @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
-                                    <td style="text-align: center; vertical-align: middle;">{{$ticket->created_at}}</td>
+                                    <td style="text-align: center; vertical-align: middle;">{{ date('F d, Y   h:i A', strtotime($ticket->created_at))}}</td>
                                 @else
                                     <td style="text-align: center; vertical-align: middle;">{{ \Illuminate\Support\Str::limit($ticket->concerns, 100, $end='...') }}</td>
                                 @endif

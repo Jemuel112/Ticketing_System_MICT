@@ -12,7 +12,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Ticket # {{$ticket->id}}</h1>
+                        <h1>Ticket # {{str_pad($ticket->id,5,'0',STR_PAD_LEFT)}}</h1>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
@@ -495,10 +495,10 @@
         </section>
 
         <section class="container-fluid">
-            <form action="/MICT-Tickets/reports/{{$ticket->id}}" method="POST">
-                <input type="text" value="{{$ticket->id}}" hidden>
+            <form action="/MICT-Tickets/report" method="POST" id="myForm2">
+                <input type="text" name="ticket_id" value="{{$ticket->id}}" hidden>
                 @csrf
-                @method('GET')
+                @method('POST')
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <h4>Actions Taken</h4>
@@ -577,6 +577,17 @@
         });
         $(document).ready(function () {
             $("#myForm").on("submit", function (e) {
+                //check form to make sure it is kosher
+                //remove the ev
+                $(window).off("beforeunload");
+                return true;
+            });
+        });
+        $(window).on("beforeunload", function () {
+            return "Are you sure? You didn't finish the form!";
+        });
+        $(document).ready(function () {
+            $("#myForm2").on("submit", function (e) {
                 //check form to make sure it is kosher
                 //remove the ev
                 $(window).off("beforeunload");
