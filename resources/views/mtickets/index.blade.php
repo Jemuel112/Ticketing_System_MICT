@@ -7,7 +7,8 @@
         <section class="content-header">
             <div class="col-12">
                 <table id="department1"
-                       class="wrap compact table table-responsive-sm table-hover table-bordered table-striped ">
+                       style="width: 100%"
+                       class="wrap compact table table-responsive-sm table-hover table-borderedless table-striped ">
                     <thead>
                     <tr>
                         <th hidden>Sample Text</th>
@@ -16,7 +17,13 @@
                         <th width="10%">Department</th>
                         <th width="10%">Status</th>
                         <th width="10%">Category</th>
-                        <th width="30%">Issue&nbsp;/&nbsp;Concerns</th>
+
+                        @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
+                            <th width="30%" style="text-align: center">Created At</th>
+                        @else
+                            <th width="30%">Issue / Concerns</th>
+                        @endif
+
                         <th width="14%">Action</th>
                     </tr>
                     </thead>
@@ -28,44 +35,52 @@
                         @elseif($ticket->lop == 'Low')
                             <tr class="table-info">
                         @else
-                            <tr class="table-dark">
+                            <tr>
                                 @endif
                                 <td hidden>{{$ticket->is_new}}</td>
-                                <td>{{$ticket->id}}</td>
-                                <td>{{$ticket->reported_by}}</td>
-                                <td>{{$ticket->request_by}}</td>
+                                <td style="text-align: center; vertical-align: middle;">{{$ticket->id}}</td>
+                                <td style="text-align: center; vertical-align: middle;">{{$ticket->reported_by}}</td>
+                                <td style="text-align: center; vertical-align: middle;">{{$ticket->request_by}}</td>
+
                                 @if($ticket->status == 'Active')
-                                    <td style="text-align: center"><span
-                                            class="badge badge-primary col-md-12">Active</span></td>
+                                    <td style="text-align: center; vertical-align: middle;">
+                                        @if($ticket->is_new == true)
+                                            <span style="margin-bottom: 2px;"
+                                                  class="badge badge-danger col-sm-12">New</span>
+                                        @endif
+                                        <span class="badge badge-primary col-md-12">Active</span></td>
                                 @elseif($ticket->status == 'On-Going')
-                                    <td style="text-align: center"><span
+                                    <td style="text-align: center; vertical-align: middle;"><span
                                             class="badge badge-warning   col-md-12">On-Going</span></td>
                                 @elseif($ticket->status == 'Resolve')
-                                    <td style="text-align: center"><span
+                                    <td style="text-align: center; vertical-align: middle;"><span
                                             class="badge badge-success col-md-12">Resolve</span></td>
                                 @elseif($ticket->status == 'Duplicate')
-                                    <td style="text-align: center"><span
+                                    <td style="text-align: center; vertical-align: middle;"><span
                                             class="badge badge-primary col-md-12">Duplicate</span></td>
                                 @elseif($ticket->status == 'Closed')
-                                    <td style="text-align: center"><span
+                                    <td style="text-align: center; vertical-align: middle;"><span
                                             class="badge badge-danger col-md-12">Closed</span></td>
                                 @endif
-                                <td>{{$ticket->category}}</td>
-                                <td>{{ \Illuminate\Support\Str::limit($ticket->concerns, 150, $end='...') }}</td>
-
+                                <td style="text-align: center; vertical-align: middle;">{{$ticket->category}}</td>
+                                @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
+                                    <td style="text-align: center; vertical-align: middle;">{{$ticket->created_at}}</td>
+                                @else
+                                    <td style="text-align: center; vertical-align: middle;">{{ \Illuminate\Support\Str::limit($ticket->concerns, 100, $end='...') }}</td>
+                                @endif
                                 <td>
-                                    <div class="row">
-
-                                        <a style="margin: 2px"
-                                           class="btn btn-sm btn-outline-primary"
-                                           href="/MICT-Tickets/{{$ticket->id}}"
-                                        ><i class="fal fa-eye"></i></a>
-
+                                    @if(Auth::user()->department == "MICT" || Auth::user()->department == "Administrator")
                                         <a style="margin: 2px"
                                            class="btn btn-sm btn-outline-primary"
                                            href="/MICT-Tickets/{{$ticket->id}}/edit"
-                                        ><i class="fal fa-pencil-alt"></i></a>
-                                    </div>
+                                        ><i class="fal fa-pencil-alt"></i> Edit</a>
+                                    @else
+
+                                        <a style="margin: 2px"
+                                           class="btn btn-sm btn-primary"
+                                           href="/MICT-Tickets/{{$ticket->id}}"
+                                        ><i class="fal fa-eye"></i> View</a>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach
