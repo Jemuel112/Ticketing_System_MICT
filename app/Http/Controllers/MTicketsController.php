@@ -412,6 +412,8 @@ class MTicketsController extends Controller
 
     public function report(Request $request)
     {
-        dd($request->ticket_id);
+        $ticket = mTicket::findOrFail($request->ticket_id);
+        $actions = $request->action_id;
+        return view('mtickets.report', compact('actions', 'ticket'));
     }
 }
