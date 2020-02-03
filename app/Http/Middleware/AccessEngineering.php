@@ -10,7 +10,7 @@ class AccessEngineering
     /**
      * Handle an incoming request.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\
      * @param \Closure $next
      * @return mixed
      */

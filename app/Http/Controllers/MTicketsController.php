@@ -40,7 +40,7 @@ class MTicketsController extends Controller
         return view('mtickets.index', compact('tickets'));
     }
 
-    public function index(Request $request)
+    public function index()
     {
 
         if (Auth::user()->department == "Administrator" || Auth::user()->department == "MICT") {
@@ -414,6 +414,14 @@ class MTicketsController extends Controller
     {
         $ticket = mTicket::findOrFail($request->ticket_id);
         $actions = $request->action_id;
-        return view('mtickets.report', compact('actions', 'ticket'));
+        $micts = User::select('fname')
+            ->Where([
+                ['department', '=', 'MICT']
+            ])
+            ->orwhere([
+                ['department', '=', 'Administrator']
+            ])
+            ->get();
+        return view('mtickets.report', compact('actions', 'ticket','micts'));
     }
 }

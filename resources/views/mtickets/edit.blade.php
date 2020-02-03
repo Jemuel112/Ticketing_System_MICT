@@ -345,8 +345,8 @@
                                         style="width: 100%;">
                                     <option></option>
                                     {{--                                    <option></option>--}}
-                                    <option value="Bixbox" {{  $ticket->sys_category == 'Bixbox' ? 'selected':''}}>
-                                        Bixbox
+                                    <option value="Bizbox" {{  $ticket->sys_category == 'Bizbox' ? 'selected':''}}>
+                                        Bizbox
                                     </option>
                                     <option value="PACS" {{ $ticket->sys_category == 'PACS' ? 'selected':''}}>PACS
                                     </option>
