@@ -254,7 +254,7 @@
                                     $selected = explode(",", $ticket->assigned_to)
                                 @endphp
                                 <select class="form-control select2bs4 @error("assigned_to")is-invalid @enderror"
-                                        value="{{old('assigned_to')}}" name="assigned_to[]"
+                                        name="assigned_to[]"
                                         data-placeholder="Assigned to..."
                                         multiple="multiple" style="width: 100%;">
                                     <option></option>
