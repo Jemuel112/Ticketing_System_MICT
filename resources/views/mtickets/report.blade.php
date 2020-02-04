@@ -18,7 +18,10 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h2 class="page-header">
-                            <i class="fa fa-globe"></i> MICT Service Report
+                            <img src="../../img/MCU.png"
+                                 alt="MCU Logo"
+                                 class=" img-circle elevation-3"
+                                 style="opacity: .8; width: 50px"> MICT Service Report
                             {{--                                <small class="pull-right"></small>--}}
                         </h2>
                     </div>
@@ -52,8 +55,7 @@
                                     {{ (in_array($mict->fname, $selected)) ? "($mict->fname) " : '' }}
                                 @endforeach
                             </td>
-                            <td class="main_print"><strong>Title: </strong>{{$ticket->category}}
-                                - {{$ticket->sys_category}}</td>
+                            <td class="main_print"><strong>Title: </strong>{{$ticket->category}} @if(!is_null($ticket->sys_category))({{$ticket->sys_category}})@endif</td>
                             <td class="main_print"><strong>Status: </strong>{{$ticket->status}}</td>
                         </tr>
 
