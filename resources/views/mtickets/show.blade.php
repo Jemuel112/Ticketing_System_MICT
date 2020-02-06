@@ -13,7 +13,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Ticket # {{$ticket->id}}</h1>
+                            <h1>Ticket # {{str_pad($ticket->id,5,'0',STR_PAD_LEFT)}}</h1>
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->
@@ -59,6 +59,9 @@
                                        value="{{$ticket->reported_by}}"
                                        style="width: 100%;" type="text" name="reported_by" placeholder="Name"
                                        id="report"
+                                       @if($ticket->status != 'Active')
+                                       disabled
+                                       @endif
                                 >
                             </div>
                             {{--End Reported by--}}
@@ -522,8 +525,8 @@
         });
     </script>
     <script type="text/javascript">
-        $('#reqb').prop('disabled', true);
-        $('#report').prop('disabled', true);
+        // $('#reqb').prop('disabled', true);
+        // $('#report').prop('disabled', true);
 
 
         $("#datetimepickers").datetimepicker();

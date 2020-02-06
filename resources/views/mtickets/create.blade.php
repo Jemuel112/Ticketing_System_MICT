@@ -18,15 +18,15 @@
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->
-                {{--            SHOW USERS ERRORS--}}
-                @if($errors->count()>0)
-                    <div style="" class="alert alert-danger">
-                        @foreach($errors->all() as $error)
-                            {{$error}} <br>
-                        @endforeach
-                    </div>
-                @endif
-                {{--            END SHOW USERS ERRORS--}}
+                {{--                --}}{{--            SHOW USERS ERRORS--}}
+                {{--                @if($errors->count()>0)--}}
+                {{--                    <div style="" class="alert alert-danger">--}}
+                {{--                        @foreach($errors->all() as $error)--}}
+                {{--                            {{$error}} <br>--}}
+                {{--                        @endforeach--}}
+                {{--                    </div>--}}
+                {{--                @endif--}}
+                {{--                --}}{{--            END SHOW USERS ERRORS--}}
             </section>
 
             <!-- Main content -->
@@ -98,26 +98,26 @@
                         {{--End Data--}}
                     </div>
                     <!-- /.card-header -->
-
                     <div class="card-body">
                         <div class="row">
-
-
                             {{--Reportedy by--}}
                             <div class="col-lg-3 col-sm-3">
-                                <label>Reported by
-                                </label>
+                                <label @error('reported_by') class="text-red" @enderror>Reported by</label>
+                                @error('reported_by')
+                                <span class="text-red">{{$message}}</span>
+                                @enderror
                                 <input class="form-control @error("reported_by")is-invalid @enderror"
                                        value="{{old('reported_by')}}"
                                        style="width: 100%;" type="text" name="reported_by" placeholder="Name"
                                 >
                             </div>
                             {{--End Reported by--}}
-
-
                             {{--Request by--}}
                             <div class="col-lg-3 col-sm-3">
-                                <label for="reqb">Request By</label>
+                                <label for="reqb" @error('request_by') class="text-red" @enderror>Request By</label>
+                                @error('request_by')
+                                <span class="text-red">{{$message}}</span>
+                                @enderror
                                 @if(Auth::user()->department == 'Administrator' || Auth::user()->department == "MICT")
                                     <select class="form-control select2bs4 @error("request_by")is-invalid @enderror"
                                             id="reqb" name="request_by"
@@ -141,7 +141,10 @@
 
                             {{--Status--}}
                             <div class="col-lg-3 col-sm-3">
-                                <label>Status</label>
+                                <label @error('status') class="text-red" @enderror>Status</label>
+                                @error('status')
+                                <span class="text-red">{{$message}}</span>
+                                @enderror
                                 @if(Auth::user()->department == 'Administrator' || Auth::user()->department == 'MICT')
                                     <select class="form-control select2bs4 @error("status")is-invalid @enderror"
                                             name="status"
@@ -176,7 +179,10 @@
                             {{--On-Going Status--}}
                             <div class="col-lg-3 col-sm-3">
                                 <div id="dogs" hidden>
-                                    <label for="ogs">On-Going Status</label>
+                                    <label for="ogs"  @error('og_status') class="text-red" @enderror>On-Going Status</label>
+                                    @error('og_status')
+                                    <span class="text-red">{{$message}}</span>
+                                    @enderror
                                     <select class="form-control select2bs4 @error("og_status")is-invalid @enderror"
                                             name="og_status"
                                             id="ogs"
@@ -202,7 +208,10 @@
 
 
                             <div class="col-md-6" id="dogst1" hidden>
-                                <label for="ogst"><br>Select Date to start</label>
+                                <label for="ogst" @error('start_at') class="text-red" @enderror><br>Select Date to start</label>
+                                @error('start_at')
+                                <span class="text-red">{{$message}}</span>
+                                @enderror
                                 <div class="input-group date" id="datetimepickers" data-target-input="nearest">
                                     <input type="text"
                                            class="form-control datetimepicker-input @error("start_at")is-invalid @enderror"
@@ -215,7 +224,10 @@
                                 </div>
                             </div>
                             <div class="col-md-6" id="dogst2" hidden>
-                                <label for="ogst"><br>Select Deadline</label>
+                                <label for="ogst" @error('end_at') class="text-red" @enderror><br>Select Deadline</label>
+                                @error('end_at')
+                                <span class="text-red">{{$message}}</span>
+                                @enderror
                                 <div class="input-group date" id="datetimepickerd" data-target-input="nearest">
                                     <input type="text"
                                            class="form-control datetimepicker-input @error("end_at")is-invalid @enderror"
@@ -230,7 +242,10 @@
 
                             {{--Acknoledge--}}
                             <div class="col-lg-3 col-md-3">
-                                <label for="ackn"><br>Acknowledge by</label>
+                                <label for="ackn" @error('acknowledge_by') class="text-red" @enderror><br>Acknowledge by</label>
+                                @error('acknowledge_by')
+                                <span class="text-red">{{$message}}</span>
+                                @enderror
                                 <select class="form-control select2bs4 @error("acknowledge_by")is-invalid @enderror"
                                         value="{{old('acknowledge_by')}}" id="ackn" name="acknowledge_by"
                                         style="width: 100%;"
@@ -308,7 +323,10 @@
                             {{-- End Accompleshed--}}
 
                             <div class="col-lg-4 col-md-4">
-                                <label><br>Category</label>
+                                <label @error('category') class="text-red" @enderror><br>Category</label>
+                                @error('category')
+                                <span class="text-red">{{$message}}</span>
+                                @enderror
                                 <select class="form-control select2bs4 @error("category")is-invalid @enderror"
                                         id="category" name="category"
                                         style="width: 100%;">
@@ -342,7 +360,10 @@
 
                             @if(Auth::user()->department == "Administrator"|| Auth::user()->department == "MICT")
                                 <div id="dsystem" class="col-lg-4 col-md-4" hidden>
-                                    <label><br>System Category</label>
+                                    <label @error('sys_category') class="text-red" @enderror><br>System Category</label>
+                                    @error('sys_category')
+                                    <span class="text-red">{{$message}}</span>
+                                    @enderror
                                     <select id="system"
                                             class="form-control select2bs4 @error("sys_category")is-invalid @enderror"
                                             id="syscategory"
@@ -395,7 +416,10 @@
 
                             @if(Auth::user()->department == 'MICT' || Auth::user()->department == 'Administrator')
                                 <div class="col-lg-4 col-md-4">
-                                    <label><br>Level of Priority</label>
+                                    <label @error('lop') class="text-red" @enderror><br>Level of Priority</label>
+                                    @error('lop')
+                                    <span class="text-red">{{$message}}</span>
+                                    @enderror
                                     <select class="form-control select2bs4 @error("lop")is-invalid @enderror"
                                             value="{{old('lop')}}" id="lop" name="lop"
                                             style="width: 100%;">
@@ -409,9 +433,10 @@
                             @endif
 
                             <div class="col-lg-12 col-md-12">
-                                <label> <br>
-                                    Issue / Concerns
-                                </label>
+                                <label @error('concerns') class="text-red" @enderror><br>Issue / Concerns</label>
+                                @error('concerns')
+                                <span class="text-red">{{$message}}</span>
+                                @enderror
                                 <textarea name="concerns"
                                           placeholder="What can I help you"
                                           class="@error("concerns")is-invalid @enderror"

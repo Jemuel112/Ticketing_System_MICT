@@ -5,7 +5,10 @@
 
 @section('content')
     <style>
-        .main_print{border: 3px solid black;font-size: 19px}
+        .main_print{
+            border: 3px solid black;
+            font-size: 19px
+        }
     </style>
 
     <!-- Content Wrapper. Contains page content -->
