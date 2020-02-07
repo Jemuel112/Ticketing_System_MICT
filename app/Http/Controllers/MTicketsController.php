@@ -217,7 +217,7 @@ class MTicketsController extends Controller
         return redirect('/MICT-Tickets');
     }
 
-    public function update(Request $request, $id)
+    public function update(TicketFormRequest $request, $id)
     {
         $ticket = mTicket::findOrFail($id);
 //        dd($id);
@@ -225,71 +225,16 @@ class MTicketsController extends Controller
         if (Auth::user()->department == 'Administrator') {
 //            dd($request);
             if ($request->status == 'On-Going') {
-//                dd($request->status);
-                $data = request()->validate([
-                    'og_status' => 'required',
-                    'start_at' => 'required',
-                    'end_at' => 'required',
-                    'reported_by' => 'required',
-                    'request_by' => 'required',
-                    'acknowledge_by' => 'required',
-                    'assigned_to' => '',
-                    'assisted_by' => '',
-                    'accomplished_by' => '',
-                    'status' => 'required',
-                    'category' => 'required',
-                    'sys_category' => '',
-                    'concerns' => 'required|min:8',
-                    'lop' => 'required',
-                    'created_at' => '',
-                ]);
-
                 $ticket->start_at = date('Y-m-d H:i:s', strtotime($request->start_at));
                 $ticket->end_at = date('Y-m-d H:i:s', strtotime($request->end_at));
-            } else {
-                $data = request()->validate([
-                    'create_at' => '',
-                    'reported_by' => 'required',
-                    'request_by' => 'required',
-                    'acknowledge_by' => 'required',
-                    'assigned_to' => '',
-                    'assisted_by' => '',
-                    'accomplished_by' => '',
-                    'status' => 'required',
-                    'category' => 'required',
-                    'sys_category' => '',
-                    'concerns' => 'required|min:8',
-                    'lop' => 'required',
-                ]);
             }
         } elseif (Auth::user()->department == 'MICT') {
             if ($request->status == 'On-Going') {
-                $data = request()->validate([
-                    'og_status' => 'required',
-                    'start_at' => 'required',
-                    'end_at' => 'required',
-                    'reported_by' => 'required',
-                    'request_by' => 'required',
-                    'acknowledge_by' => 'required',
-                    'status' => 'required',
-                    'category' => 'required',
-                    'concerns' => 'required|min:8',
-                    'lop' => 'required',
-                ]);
                 $ticket->start_at = date('Y-m-d H:i:s', strtotime($request->start_at));
                 $ticket->end_at = date('Y-m-d H:i:s', strtotime($request->end_at));
-            } else {
-                $data = request()->validate([
-                    'reported_by' => 'required',
-                    'request_by' => 'required',
-                    'status' => 'required',
-                    'acknowledge_by' => 'required',
-                    'category' => 'required',
-                    'concerns' => 'required|min:8',
-                    'lop' => 'required',
-                ]);
             }
         }
+
         if (!is_null($request->assigned_to)) {
             $assign = $request->input('assigned_to');
             $ticket->assigned_to = implode(',', $assign);

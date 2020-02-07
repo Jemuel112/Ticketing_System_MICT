@@ -17,13 +17,13 @@
                 </div>
             </div><!-- /.container-fluid -->
             {{--            SHOW USERS ERRORS--}}
-            @if($errors->count()>0)
-                <div style="" class="alert alert-danger">
-                    @foreach($errors->all() as $error)
-                        {{$error}} <br>
-                    @endforeach
-                </div>
-            @endif
+{{--            @if($errors->count()>0)--}}
+{{--                <div style="" class="alert alert-danger">--}}
+{{--                    @foreach($errors->all() as $error)--}}
+{{--                        {{$error}} <br>--}}
+{{--                    @endforeach--}}
+{{--                </div>--}}
+{{--            @endif--}}
             {{--            END SHOW USERS ERRORS--}}
         </section>
 
@@ -108,8 +108,10 @@
 
                             {{--Reportedy by--}}
                             <div class="col-lg-3 col-sm-3">
-                                <label>Reported by
-                                </label>
+                                <label @error('reported_by') class="text-red" @enderror>Reported by</label>
+                                @error('reported_by')
+                                <span class="text-red">{{$message}}</span>
+                                @enderror
                                 <input class="form-control @error("reported_by")is-invalid @enderror"
                                        value="{{$ticket->reported_by ?? old(reported_by)}}"
                                        style="width: 100%;" type="text" name="reported_by" placeholder="Name"
@@ -120,7 +122,10 @@
 
                             {{--Request by--}}
                             <div class="col-lg-3 col-sm-3">
-                                <label for="reqb">Request By</label>
+                                <label for="reqb" @error('request_by') class="text-red" @enderror>Request By</label>
+                                @error('request_by')
+                                <span class="text-red">{{$message}}</span>
+                                @enderror
                                 @if(Auth::user()->department == 'Administrator' || Auth::user()->department == "MICT")
                                     <select class="form-control select2bs4 @error("request_by")is-invalid @enderror"
                                             id="reqb" name="request_by"
@@ -146,7 +151,10 @@
 
                             {{--Status--}}
                             <div class="col-lg-3 col-sm-3">
-                                <label>Status</label>
+                                <label for="reqb" @error('request_by') class="text-red" @enderror>Request By</label>
+                                @error('request_by')
+                                <span class="text-red">{{$message}}</span>
+                                @enderror
                                 <select class="form-control select2bs4 @error("status")is-invalid @enderror"
                                         name="status"
                                         style="width: 100%;"
@@ -179,7 +187,10 @@
                             {{--On-Going Status--}}
                             <div class="col-lg-3 col-sm-3">
                                 <div id="dogs" hidden>
-                                    <label for="ogs">On-Going Status</label>
+                                    <label for="ogs" @error('og_status') class="text-red" @enderror>On-Going Status</label>
+                                    @error('og_status')
+                                    <span class="text-red">{{$message}}</span>
+                                    @enderror
                                     <select class="form-control select2bs4 @error("og_status")is-invalid @enderror"
                                             name="og_status"
                                             id="ogs"
@@ -204,7 +215,10 @@
 
 
                             <div class="col-md-6" id="dogst1" hidden>
-                                <label for="ogst"><br>Select Date to start</label>
+                                <label for="ogst" @error('start_at') class="text-red" @enderror><br>Select Date to start</label>
+                                @error('start_at')
+                                <span class="text-red">{{$message}}</span>
+                                @enderror
                                 <div class="input-group date" id="datetimepickers" data-target-input="nearest">
                                     <input type="text"
                                            class="form-control datetimepicker-input @error("start_at")is-invalid @enderror"
@@ -218,7 +232,10 @@
                                 </div>
                             </div>
                             <div class="col-md-6" id="dogst2" hidden>
-                                <label for="ogst"><br>Select Deadline</label>
+                                <label for="ogst"  @error('end_at') class="text-red" @enderror><br>Select Deadline</label>
+                                @error('end_at')
+                                <span class="text-red">{{$message}}</span>
+                                @enderror
                                 <div class="input-group date" id="datetimepickerd" data-target-input="nearest">
                                     <input type="text"
                                            class="form-control datetimepicker-input @error("end_at")is-invalid @enderror"
@@ -234,7 +251,10 @@
 
                             {{--Acknoledge--}}
                             <div class="col-lg-3 col-md-3">
-                                <label for="ackn"><br>Acknowledge by</label>
+                                <label for="ackn" @error('acknowledge_by') class="text-red" @enderror><br>Acknowledge by</label>
+                                @error('end_at')
+                                <span class="text-red">{{$message}}</span>
+                                @enderror
                                 <select class="form-control select2bs4 @error("acknowledge_by")is-invalid @enderror"
                                         id="ackn" name="acknowledge_by"
                                         style="width: 100%;">
@@ -273,7 +293,7 @@
                                     $selected = explode(",", $ticket->assisted_by)
                                 @endphp
                                 <select class="form-control select2bs4 @error("assisted_by")is-invalid @enderror"
-                                        value="{{old('assisted_by')}}" name="assisted_by[]"
+                                        name="assisted_by[]"
                                         data-placeholder="Assisted by..."
                                         multiple="multiple" style="width: 100%;">
                                     <option></option>
@@ -292,7 +312,7 @@
                                     $selected = explode(",", $ticket->accomplished_by)
                                 @endphp
                                 <select class="form-control select2bs4 @error("accomplished_by")is-invalid @enderror"
-                                        value="{{old('accomplished_by')}}" name="accomplished_by[]"
+                                        name="accomplished_by[]"
                                         data-placeholder="Accomplished by..."
                                         multiple="multiple" style="width: 100%;">
                                     <option></option>
@@ -305,7 +325,10 @@
                             {{-- End Accompleshed--}}
 
                             <div class="col-lg-4 col-md-4">
-                                <label><br>Category</label>
+                                <label  @error('category') class="text-red" @enderror><br>Category</label>
+                                @error('category')
+                                <span class="text-red">{{$message}}</span>
+                                @enderror
                                 <select class="form-control select2bs4 @error("category")is-invalid @enderror"
                                         id="category" name="category"
                                         style="width: 100%;">
@@ -338,7 +361,10 @@
                             {{--                        @endif--}}
 
                             <div id="dsystem" class="col-lg-4 col-md-4" hidden>
-                                <label><br>System Category</label>
+                                <label @error('sys_category') class="text-red" @enderror><br>System Category</label>
+                                @error('sys_category')
+                                <span class="text-red">{{$message}}</span>
+                                @enderror
                                 <select id="system"
                                         class="form-control select2bs4 @error("sys_category")is-invalid @enderror"
                                         name="sys_category"
@@ -388,7 +414,10 @@
                             </div>
 
                             <div class="col-lg-4 col-md-4">
-                                <label><br>Level of Priority</label>
+                                <label  @error('lop') class="text-red" @enderror><br>Level of Priority</label>
+                                @error('lop')
+                                <span class="text-red">{{$message}}</span>
+                                @enderror
                                 <select class="form-control select2bs4 @error("lop")is-invalid @enderror"
                                         value="{{old('lop')}}" id="lop" name="lop"
                                         style="width: 100%;">
@@ -400,12 +429,12 @@
                             </div>
 
                             <div class="col-lg-12 col-md-12">
-                                <label> <br>
-                                    Issue / Concerns
-                                </label>
+                                <label  @error('concerns') class="text-red" @enderror><br>Issue / Concerns</label>
+                                @error('concerns')
+                                <span class="text-red">{{$message}}</span>
+                                @enderror
                                 <textarea name="concerns"
-                                          placeholder="Place some text here"
-                                          class="@error("concerns")is-invalid @enderror"
+                                          placeholder=""
                                           style="resize: none ;width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ old('concerns') ?? $ticket->concerns }}</textarea>
                             </div>
                             <div class="col-lg-12 col-md-12">

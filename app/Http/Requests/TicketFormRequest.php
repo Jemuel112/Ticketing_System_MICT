@@ -50,7 +50,7 @@ class TicketFormRequest extends FormRequest
                         'category.required' => 'is required',
                         'concerns.required' => 'is required',
                         'concerns.min' => 'must be at least 8 characters',
-                        'lop.required' => 'required',
+                        'lop.required' => 'is required',
                     ])];
             } else {
                 return [
@@ -70,7 +70,7 @@ class TicketFormRequest extends FormRequest
                         'category.required' => 'is required',
                         'concerns.required' => 'is required',
                         'concerns.min' => 'must be at least 8 characters',
-                        'lop.required' => 'required',
+                        'lop.required' => 'is required',
                     ])];
             }
         } elseif (Auth::user()->department == 'MICT') {
@@ -98,7 +98,7 @@ class TicketFormRequest extends FormRequest
                         'category.required' => 'is required',
                         'concerns.required' => 'is required',
                         'concerns.min' => 'must be at least 8 characters',
-                        'lop.required' => 'required',
+                        'lop.required' => 'is required',
                     ])];
             } else {
                 return [
@@ -118,7 +118,7 @@ class TicketFormRequest extends FormRequest
                         'category.required' => 'is required',
                         'concerns.required' => 'is required',
                         'concerns.min' => 'must be at least 8 characters',
-                        'lop.required' => 'required',
+                        'lop.required' => 'is required',
                     ])];
             }
         } else {
