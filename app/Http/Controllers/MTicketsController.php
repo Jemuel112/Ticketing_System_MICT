@@ -37,8 +37,9 @@ class MTicketsController extends Controller
 
         $tickets = mTicket::where([['assigned_to', 'Like', '%' . "$name" . '%']])->get();
 //        dd($tickets);
+        $title = 'My Tickets';
 
-        return view('mtickets.index', compact('tickets'));
+        return view('mtickets.index', compact('tickets', 'title'));
     }
 
     public function index()
@@ -55,7 +56,8 @@ class MTicketsController extends Controller
                 ->orderBy('id', 'DESC')
                 ->get();
         }
-        return view('mtickets.index', compact('tickets'));
+        $title = 'All Tickets';
+        return view('mtickets.index', compact('tickets','title'));
     }
 
     public function create()
