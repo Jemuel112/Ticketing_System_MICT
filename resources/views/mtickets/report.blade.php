@@ -54,9 +54,10 @@
                                 @php
                                     $selected = explode(",", $ticket->accomplished_by)
                                 @endphp
-                                @foreach($micts as $mict)
+                                @forelse($micts as $mict)
                                     {{ (in_array($mict->fname, $selected)) ? "($mict->fname) " : '' }}
-                                @endforeach
+                                    @empty
+                                @endforelse
                             </td>
                             <td class="main_print"><strong>Title: </strong>{{$ticket->category}} @if(!is_null($ticket->sys_category))({{$ticket->sys_category}})@endif</td>
                             <td class="main_print"><strong>Status: </strong>{{$ticket->status}}</td>
@@ -69,12 +70,13 @@
 
                         <tr class="main_print">
                             <td colspan="3" ><strong>Services Rendered: </strong>
-                                @foreach($actions as $action)
+                                @forelse($actions as $action)
                                     @php
                                         $content = \App\mactions::find($action);
                                     @endphp
                                     {!!$content->actions!!}
-                                @endforeach
+                                    @empty
+                                @endforelse
                             </td>
                         </tr>
 

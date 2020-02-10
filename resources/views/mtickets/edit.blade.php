@@ -540,20 +540,24 @@
                         <h4>Actions Taken</h4>
                     </div>
                 </div>
+
+
                 <!-- Timelime example  -->
                 <div class="row">
                     <div class="col-md-12">
                         <!-- The time line -->
-                        @forelse($actions as $action => $contents)
                         <div class="timeline">
                             <!-- timeline time label -->
+                            @forelse($actions as $action => $contents)
+                            @foreach($contents as $key => $content)
+                                @if($content->shared == 1 || Auth::user()->department == 'Administrator' || Auth::user()->department == 'MICT')
                                 <div class="time-label">
+
                                     <span class="bg-gradient-indigo">{{date('M d, Y', strtotime($action))}}</span>
                                 </div>
                                 <!-- /.timeline-label -->
                                 <!-- timeline item -->
-                                @foreach($contents as $key => $content)
-                                    @if($content->shared == 1 || Auth::user()->department == 'Administrator' || Auth::user()->department == 'MICT')
+
                                         <div>
                                             <i class="fas fa-envelope bg-blue"></i>
                                             <div class="timeline-item">
@@ -578,19 +582,19 @@
                                         </div>
                                 @endif
                             @endforeach
+                        @empty
+                        @endforelse
                             <!-- END timeline item -->
                             <div>
                                 <i class="fas fa-clock bg-gray"></i>
+                                <button type="submit" class="float-right">Generate Report</button>
                             </div>
                         </div>
                     </div>
                     <!-- /.col -->
                 </div>
-                @empty
-                @endforelse
-                <div class="row">
-                    <button type="submit" class="float-right">Generate Report</button>
-                </div>
+
+
             </form>
         </section>
     </div>

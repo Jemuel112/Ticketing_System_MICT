@@ -17,7 +17,7 @@
                         </div>
                     </div>
                 </div>
-<!-- /.container-fluid -->
+                <!-- /.container-fluid -->
             </section>
 
             <!-- Main content -->
@@ -25,13 +25,13 @@
             @method('POST')
             <section class="content" onload="functionToBeExecuted">
                 @if(!is_null($ticket->acknowledge_by))
-                <div class="callout callout-info">
-{{--                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>--}}
-                    {{--                    <h5><i class="icon fas fa-exclamation-triangle"></i></h5>--}}
-                    Editing of Ticket is disabled when an MICT Staff Acknowledge it.
-                    <br>
-                    If you want to edit your concerns just put it in the comment section.
-                </div>
+                    <div class="callout callout-info">
+                        {{--                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>--}}
+                        {{--                    <h5><i class="icon fas fa-exclamation-triangle"></i></h5>--}}
+                        Editing of Ticket is disabled when an MICT Staff Acknowledge it.
+                        <br>
+                        If you want to edit your concerns just put it in the comment section.
+                    </div>
                 @endif
                 <div class="card card-cyan">
                     <div class="card-header">
@@ -61,7 +61,7 @@
                                        id="report"
                                        @if($ticket->status != 'Active')
                                        disabled
-                                       @endif
+                                    @endif
                                 >
                             </div>
                             {{--End Reported by--}}
@@ -74,7 +74,7 @@
                                     <select class="form-control select2bs4 @error("request_by")is-invalid @enderror"
                                             id="reqb" name="request_by"
                                             style="width: 100%;"
-                                            disabled    >
+                                            disabled>
                                         <option value=""></option>
                                         @foreach($departments as $department)
                                             <option
@@ -375,8 +375,10 @@
                                         <div class="user-block">
                                             <img class="img-circle img-bordered-sm" src="../../img/MCU.png"
                                                  alt="User Image">
-                                            <span class="username"><a href="#">{{app\User::findOrFail($comment->id_user)->fname}} {{app\User::findOrFail($comment->id_user)->lname}}</a></span>
-                                            <span class="description float-right">{{date('M d, Y h:iA', strtotime($comment->created_at))}}</span>
+                                            <span class="username"><a
+                                                    href="#">{{app\User::findOrFail($comment->id_user)->fname}} {{app\User::findOrFail($comment->id_user)->lname}}</a></span>
+                                            <span
+                                                class="description float-right">{{date('M d, Y h:iA', strtotime($comment->created_at))}}</span>
                                             <span class="container container-fluid">{{$comment->comments}}</span>
                                         </div>
 
@@ -444,53 +446,63 @@
                 </div>
             </section>
 
-            <section class="content">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h4>Actions Taken</h4>
-                        </div>
+            <section class="container-fluid">
+                <input type="text" name="ticket_id" value="{{$ticket->id}}" hidden>
+                @csrf
+                @method('POST')
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h4>Actions Taken</h4>
                     </div>
-                    <!-- Timelime example  -->
-                    @forelse($actions as $action => $contents)
-                    <div class="row">
-                        <div class="col-md-10">
-                            <!-- The time line -->
-                            <div class="timeline">
-                                <!-- timeline time label -->
-                                    <div class="time-label">
-                                        <span class="bg-gradient-indigo">{{date('M d, Y', strtotime($action))}}</span>
-                                    </div>
-                                    <!-- /.timeline-label -->
-                                    <!-- timeline item -->
-                                    @foreach($contents as $content)
-                                            <div>
-                                                <i class="fas fa-envelope bg-blue"></i>
-                                                <div class="timeline-item">
-                                                    <span class="time"><i class="fas fa-clock"></i> {{date(' h:i A', strtotime($content->created_at))}}</span>
-                                                    <h3 class="timeline-header"><a
-                                                            href="#">{{app\User::findOrFail($content->id_user)->fname}} {{app\User::findOrFail($content->id_user)->lname}}</a>
-                                                    </h3>
-                                                    <div class="timeline-body">
-                                                        {!!$content->actions!!}
-                                                    </div>
-                                                    {{--                                        <div class="timeline-footer">--}}
-                                                    {{--                                        </div>--}}
+                </div>
+
+
+                <!-- Timelime example  -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- The time line -->
+                        <div class="timeline">
+                            <!-- timeline time label -->
+                            @forelse($actions as $action => $contents)
+                                @foreach($contents as $key => $content)
+                                    @if($content->shared == 1 || Auth::user()->department == 'Administrator' || Auth::user()->department == 'MICT')
+                                        <div class="time-label">
+
+                                            <span
+                                                class="bg-gradient-indigo">{{date('M d, Y', strtotime($action))}}</span>
+                                        </div>
+                                        <!-- /.timeline-label -->
+                                        <!-- timeline item -->
+
+                                        <div>
+                                            <i class="fas fa-envelope bg-blue"></i>
+                                            <div class="timeline-item">
+                                                <div class="icheck-danger float-right">
                                                 </div>
+                                                <span class="time"><i class="fas fa-clock"></i> {{date(' h:i A', strtotime($content->created_at))}}</span>
+                                                <h3 class="timeline-header"><a
+                                                        href="#">{{app\User::findOrFail($content->id_user)->fname}} {{app\User::findOrFail($content->id_user)->lname}}</a>
+                                                </h3>
+                                                <div class="timeline-body">
+                                                    {{--                                                    echo strip_tags($content->actions)--}}
+                                                    {!! $content->actions !!}
+                                                </div>
+                                                {{--                                        <div class="timeline-footer">--}}
+                                                {{--                                        </div>--}}
                                             </div>
-                                @endforeach
-                                <!-- END timeline item -->
-                                    <div>
-                                        <i class="fas fa-clock bg-gray"></i>
-                                    </div>
+                                        </div>
+                                @endif
+                            @endforeach
+                        @empty
+                        @endforelse
+                        <!-- END timeline item -->
+                            <div>
+                                <i class="fas fa-clock bg-gray"></i>
                             </div>
                         </div>
-                        <!-- /.col -->
                     </div>
-                    @empty
-                    @endforelse
+                    <!-- /.col -->
                 </div>
-                <!-- /.timeline -->
             </section>
 
 
@@ -525,8 +537,6 @@
     <script type="text/javascript">
         // $('#reqb').prop('disabled', true);
         // $('#report').prop('disabled', true);
-
-
         $("#datetimepickers").datetimepicker();
         $("#datetimepickerd").datetimepicker({
             useCurrent: false
