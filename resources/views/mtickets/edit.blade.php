@@ -113,7 +113,7 @@
                                 <span class="text-red">{{$message}}</span>
                                 @enderror
                                 <input class="form-control @error("reported_by")is-invalid @enderror"
-                                       value="{{$ticket->reported_by ?? old(reported_by)}}"
+                                       value="{{$ticket->reported_by}}"
                                        style="width: 100%;" type="text" name="reported_by" placeholder="Name"
                                 >
                             </div>
@@ -261,7 +261,7 @@
                                         id="ackn" name="acknowledge_by"
                                         style="width: 100%;"
                                         @if(Auth::user()->department != "Administrator")
-                                        disabled
+                                        readonly
                                         @endif>
                                     <option></option>
                                     @foreach($micts as $mict)
@@ -528,6 +528,8 @@
             </form>
         </section>
 
+
+
         <section class="container-fluid">
             <form action="/MICT-Tickets/report" method="POST" id="myForm2">
                 <input type="text" name="ticket_id" value="{{$ticket->id}}" hidden>
@@ -542,9 +544,9 @@
                 <div class="row">
                     <div class="col-md-12">
                         <!-- The time line -->
+                        @forelse($actions as $action => $contents)
                         <div class="timeline">
                             <!-- timeline time label -->
-                            @forelse($actions as $action => $contents)
                                 <div class="time-label">
                                     <span class="bg-gradient-indigo">{{date('M d, Y', strtotime($action))}}</span>
                                 </div>
@@ -558,8 +560,8 @@
                                                 <div class="icheck-danger float-right">
                                                     <input type="checkbox" name="action_id[]"
                                                            value="{{$content->id}}"
-                                                           id="checkboxDanger[{{$key}}]">
-                                                    <label for="checkboxDanger[{{$key}}]">Add to report
+                                                           id="checkboxDanger[{{$content->id}}]">
+                                                    <label for="checkboxDanger[{{$content->id}}]">Add to report
                                                         &nbsp;</label>
                                                 </div>
                                                 <span class="time"><i class="fas fa-clock"></i> {{date(' h:i A', strtotime($content->created_at))}}</span>
@@ -567,7 +569,8 @@
                                                         href="#">{{app\User::findOrFail($content->id_user)->fname}} {{app\User::findOrFail($content->id_user)->lname}}</a>
                                                 </h3>
                                                 <div class="timeline-body">
-                                                    {!!$content->actions!!}
+{{--                                                    echo strip_tags($content->actions)--}}
+                                                    {!! $content->actions !!}
                                                 </div>
                                                 {{--                                        <div class="timeline-footer">--}}
                                                 {{--                                        </div>--}}
@@ -576,20 +579,26 @@
                                 @endif
                             @endforeach
                             <!-- END timeline item -->
-                                <div>
-                                    <i class="fas fa-clock bg-gray"></i>
-                                    <button type="submit" class="float-right">Generate Report</button>
-
-                                </div>
+                            <div>
+                                <i class="fas fa-clock bg-gray"></i>
+                            </div>
                         </div>
                     </div>
                     <!-- /.col -->
                 </div>
                 @empty
                 @endforelse
+                <div class="row">
+                    <button type="submit" class="float-right">Generate Report</button>
+                </div>
             </form>
         </section>
     </div>
+
+
+
+
+
 
     <footer class="main-footer">
         <div class="float-right">

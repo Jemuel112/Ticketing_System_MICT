@@ -227,10 +227,9 @@ class MTicketsController extends Controller
     public function update(TicketFormRequest $request, $id)
     {
         $ticket = mTicket::findOrFail($id);
-//        dd($id);
+//        dd($request);
 
         if (Auth::user()->department == 'Administrator') {
-//            dd($request);
             if ($request->status == 'On-Going') {
                 $ticket->start_at = date('Y-m-d H:i:s', strtotime($request->start_at));
                 $ticket->end_at = date('Y-m-d H:i:s', strtotime($request->end_at));

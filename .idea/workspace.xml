@@ -6,6 +6,7 @@
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MTicketsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MTicketsController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Requests/TicketFormRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/TicketFormRequest.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/mtickets/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mtickets/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mtickets/report.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mtickets/report.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/mtickets/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mtickets/show.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />

@@ -25,11 +25,19 @@ class TicketFormRequest extends FormRequest
      */
     public function rules(Request $request)
     {
-
+        if(Auth::user()->department == 'Administrator' || Auth::user()->department == 'MICT'){
+            if ($request->category == 'System'){
+                    $data = request()->validate([
+                        'sys_category' => 'required',
+                    ],[
+                        'sys_category.required' => 'is required'
+                    ]);
+            }
+        }
 
         if (Auth::user()->department == 'Administrator') {
             if ($request->status == 'On-Going') {
-
+                return [
                     $data = request()->validate([
                         'og_status' => 'required',
                         'start_at' => 'required',
@@ -53,9 +61,9 @@ class TicketFormRequest extends FormRequest
                         'concerns.required' => 'is required',
                         'concerns.min' => 'must be at least 8 characters',
                         'lop.required' => 'is required',
-                    ]);
+                    ])];
             } else {
-
+                return [
                     $data = request()->validate([
                         'reported_by' => 'required',
                         'request_by' => 'required',
@@ -73,11 +81,11 @@ class TicketFormRequest extends FormRequest
                         'concerns.required' => 'is required',
                         'concerns.min' => 'must be at least 8 characters',
                         'lop.required' => 'is required',
-                    ]);
+                    ])];
             }
         } elseif (Auth::user()->department == 'MICT') {
             if ($request->status == 'On-Going') {
-
+                return [
                     $data = request()->validate([
                         'og_status' => 'required',
                         'start_at' => 'required',
@@ -101,9 +109,9 @@ class TicketFormRequest extends FormRequest
                         'concerns.required' => 'is required',
                         'concerns.min' => 'must be at least 8 characters',
                         'lop.required' => 'is required',
-                    ]);
+                    ])];
             } else {
-
+                return [
                     $data = request()->validate([
                         'reported_by' => 'required',
                         'request_by' => 'required',
@@ -121,9 +129,10 @@ class TicketFormRequest extends FormRequest
                         'concerns.required' => 'is required',
                         'concerns.min' => 'must be at least 8 characters',
                         'lop.required' => 'is required',
-                    ]);
+                    ])];
             }
         } else {
+            return [
                 $data = request()->validate([
                     'reported_by' => 'required',
                     'request_by' => 'required',
@@ -137,18 +146,8 @@ class TicketFormRequest extends FormRequest
                     'category.required' => 'is required',
                     'concerns.required' => 'is required',
                     'concerns.min' => 'must be at least 8 characters',
-                ]);
+                ])];
         }
-        if(Auth::user()->department == 'Administrator' || Auth::user()->department == 'MICT'){
-            if ($request->category == 'System'){
-                request()->validate([
-                    'sys_category' => 'required',
-                ],[
-                    'sys_category.required' => 'is required'
-                ]);
-            }
-        }
-        return $data;
     }
 
 

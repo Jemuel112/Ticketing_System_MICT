@@ -24,11 +24,15 @@
             @csrf
             @method('POST')
             <section class="content" onload="functionToBeExecuted">
+                @if(!is_null($ticket->acknowledge_by))
                 <div class="callout callout-info">
 {{--                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>--}}
                     {{--                    <h5><i class="icon fas fa-exclamation-triangle"></i></h5>--}}
-                    Editing of Concerns is disabled when an MICT Staff Acknowledge it.
+                    Editing of Ticket is disabled when an MICT Staff Acknowledge it.
+                    <br>
+                    If you want to edit your concerns just put it in the comment section.
                 </div>
+                @endif
                 <div class="card card-cyan">
                     <div class="card-header">
                         <h3 class="card-title">Ticket Info</h3>
@@ -448,20 +452,18 @@
                         </div>
                     </div>
                     <!-- Timelime example  -->
+                    @forelse($actions as $action => $contents)
                     <div class="row">
                         <div class="col-md-10">
                             <!-- The time line -->
                             <div class="timeline">
                                 <!-- timeline time label -->
-                                @forelse($actions as $action => $contents)
-
                                     <div class="time-label">
                                         <span class="bg-gradient-indigo">{{date('M d, Y', strtotime($action))}}</span>
                                     </div>
                                     <!-- /.timeline-label -->
                                     <!-- timeline item -->
                                     @foreach($contents as $content)
-                                        @if($content->shared == 1 || Auth::user()->department == 'Administrator' || Auth::user()->department == 'MICT')
                                             <div>
                                                 <i class="fas fa-envelope bg-blue"></i>
                                                 <div class="timeline-item">
@@ -476,7 +478,6 @@
                                                     {{--                                        </div>--}}
                                                 </div>
                                             </div>
-                                    @endif
                                 @endforeach
                                 <!-- END timeline item -->
                                     <div>

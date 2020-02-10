@@ -12,10 +12,10 @@
     </style>
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="content-wrapper" >
         <div class="wrapper">
             <!-- Main content -->
-            <section class="invoice">
+            <section class="invoice" onload="window.print()">
 
                 <!-- title row -->
                 <div class="row">
@@ -113,9 +113,10 @@
             </section>
             <!-- /.content -->
         </div>
-
-
     </div>
+    <script>
+        window.onload = function() { window.print(); }
+    </script>
 @endsection
 
 @section('footer')
