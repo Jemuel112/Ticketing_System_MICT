@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('title', 'Create New Ticket | ')
-@include('layouts.scripts')
 
 @section('content')
 
@@ -18,15 +17,7 @@
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->
-                {{--                --}}{{--            SHOW USERS ERRORS--}}
-                {{--                @if($errors->count()>0)--}}
-                {{--                    <div style="" class="alert alert-danger">--}}
-                {{--                        @foreach($errors->all() as $error)--}}
-                {{--                            {{$error}} <br>--}}
-                {{--                        @endforeach--}}
-                {{--                    </div>--}}
-                {{--                @endif--}}
-                {{--                --}}{{--            END SHOW USERS ERRORS--}}
+
             </section>
 
             <!-- Main content -->
@@ -54,7 +45,8 @@
                                              data-target-input="nearest">
                                             <input type="text" name="created_at" id="datetimepicker7"
                                                    class="form-control datetimepicker-input"
-                                                   data-target="#datetimepicker7">
+                                                   data-target="#datetimepicker7"
+                                                   value="{{old('created_at')}}">
                                             <div class="input-group-append" data-target="#datetimepicker7"
                                                  data-toggle="datetimepicker">
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -70,7 +62,8 @@
                                              data-target-input="nearest">
                                             <input type="text" name="finished_at" id="datetimepicker8"
                                                    class="form-control datetimepicker-input"
-                                                   data-target="#datetimepicker8"/>
+                                                   data-target="#datetimepicker8"
+                                                   value="{{old('finished_at')}}">
                                             <div class="input-group-append" data-target="#datetimepicker8"
                                                  data-toggle="datetimepicker">
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -179,7 +172,8 @@
                             {{--On-Going Status--}}
                             <div class="col-lg-3 col-sm-3">
                                 <div id="dogs" hidden>
-                                    <label for="ogs"  @error('og_status') class="text-red" @enderror>On-Going Status</label>
+                                    <label for="ogs" @error('og_status') class="text-red" @enderror>On-Going
+                                        Status</label>
                                     @error('og_status')
                                     <span class="text-red">{{$message}}</span>
                                     @enderror
@@ -223,8 +217,10 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-md-6" id="dogst2" hidden>
-                                <label for="ogst" @error('end_at') class="text-red" @enderror><br>Select Deadline</label>
+                                <label for="ogst" @error('end_at') class="text-red" @enderror><br>Select
+                                    Deadline</label>
                                 @error('end_at')
                                 <span class="text-red">{{$message}}</span>
                                 @enderror
@@ -266,7 +262,7 @@
                             <div class="col-lg-3 col-md-3">
                                 <label><br>Assigned to</label>
                                 <select class="form-control select2bs4 @error("assigned_to")is-invalid @enderror"
-                                        value="{{old('assigned_to')}}" name="assigned_to[]"
+                                        name="assigned_to[]"
                                         data-placeholder="Assigned to..."
                                         multiple="multiple" style="width: 100%;"
                                         @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
@@ -286,7 +282,7 @@
                             <div class="col-lg-3 col-md-3">
                                 <label><br>Assisted By</label>
                                 <select class="form-control select2bs4 @error("assisted_by")is-invalid @enderror"
-                                        value="{{old('assisted_by')}}" name="assisted_by[]"
+                                        name="assisted_by[]"
                                         data-placeholder="Assisted by..."
                                         multiple="multiple" style="width: 100%;"
                                         @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
@@ -306,7 +302,7 @@
                             <div class="col-lg-3 col-md-3">
                                 <label><br>Accomplished by</label>
                                 <select class="form-control select2bs4 @error("accomplished_by")is-invalid @enderror"
-                                        value="{{old('accomplished_by')}}" name="accomplished_by[]"
+                                        name="accomplished_by[]"
                                         data-placeholder="Accomplished by..."
                                         multiple="multiple" style="width: 100%;"
                                         @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
@@ -512,7 +508,7 @@
         </footer>
 
     </form>
-    <script>
+    <script type="text/javascript">
         $(window).on("beforeunload", function () {
             return "Are you sure? You didn't finish the form!";
         });
@@ -526,9 +522,16 @@
         });
     </script>
     <script type="text/javascript">
-        $("#datetimepickers").datetimepicker();
+        $("#datetimepickers").datetimepicker({
+            icons: {
+                time: "far fa-clock"
+            }
+        });
         $("#datetimepickerd").datetimepicker({
-            useCurrent: false
+            useCurrent: false,
+            icons: {
+                time: "far fa-clock"
+            }
         });
         $("#datetimepickers").on("change.datetimepicker", function (e) {
             $('#datetimepickerd').datetimepicker('minDate', e.date);
@@ -536,6 +539,28 @@
         $("#datetimepickerd").on("change.datetimepicker", function (e) {
             $('#datetimepickers').datetimepicker('maxDate', e.date);
         });
+
+        $("#datetimepicker7").datetimepicker({
+            icons: {
+                time: "far fa-clock"
+            }
+        });
+        $("#datetimepicker8").datetimepicker({
+            useCurrent: false,
+            icons: {
+                time: "far fa-clock"
+            }
+        });
+
+        $("#datetimepicker7").on("change.datetimepicker", function (e) {
+            $('#datetimepicker8').datetimepicker('minDate', e.date);
+        });
+        $("#datetimepicker8").on("change.datetimepicker", function (e) {
+            $('#datetimepicker7').datetimepicker('maxDate', e.date);
+        });
+
+    </script>
+    <script>
         //Initialize Select2 Elements
         $('.select2').select2();
 
@@ -627,6 +652,8 @@
                 $("#dact").prop("hidden", true);
             }
         });
+    </script>
+    <script>
         window.onload = function exampleFunction() {
             // Function to executed
             if ($('#status').val() == "On-Going") {
@@ -675,3 +702,4 @@
 
 
 @section('footer',"<p></p>")
+@include('layouts.scripts')

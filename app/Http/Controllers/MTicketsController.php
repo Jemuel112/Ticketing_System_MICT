@@ -229,7 +229,13 @@ class MTicketsController extends Controller
     {
         $ticket = mTicket::findOrFail($id);
 //        dd($request);
-
+        if ($request->status == "Closed" || $request->status == "Resolve") {
+            if (!is_null($request->finished_at)) {
+                $ticket->finished_at = date('Y-m-d H:i:s', strtotime($request->finished_at));
+            } else {
+                $ticket->finished_at = date('Y-m-d H:i:s', strtotime(Carbon::now()));
+            }
+        }
         if (Auth::user()->department == 'Administrator') {
             if ($request->status == 'On-Going') {
                 $ticket->start_at = date('Y-m-d H:i:s', strtotime($request->start_at));
@@ -295,6 +301,10 @@ class MTicketsController extends Controller
     {
         $ticket = mTicket::findOrFail($request->ticket_id);
         $actions = $request->action_id;
+        if(is_null($actions)) {
+//        dd('suc');
+            return redirect()->back() ->with('alert', 'Unable to proceed no Action is selected');
+        }
         $micts = User::select('fname')
             ->Where([
                 ['department', '=', 'MICT']

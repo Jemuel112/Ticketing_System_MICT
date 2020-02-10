@@ -45,7 +45,7 @@ Route::get('/clear-cache', function() {
     Artisan::call('config:clear');
     Artisan::call('cache:clear');
     Artisan::call('config:cache');
-    return  'CACHE CLEARED'; //Return anything
+    return redirect()->back();
 });
 
 Auth::routes([
