@@ -446,65 +446,66 @@
                 </div>
             </section>
 
-            <section class="container-fluid">
-                <input type="text" name="ticket_id" value="{{$ticket->id}}" hidden>
-                @csrf
-                @method('POST')
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h4>Actions Taken</h4>
+            @if($shared > 0)
+                <section class="container-fluid">
+                    <input type="text" name="ticket_id" value="{{$ticket->id}}" hidden>
+                    @csrf
+                    @method('POST')
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h4>Actions Taken</h4>
+                        </div>
                     </div>
-                </div>
 
 
-                <!-- Timelime example  -->
-                <div class="row">
-                    <div class="col-md-12">
-                        <!-- The time line -->
-                        <div class="timeline">
-                            <!-- timeline time label -->
-                            @forelse($actions as $action => $contents)
-                                @foreach($contents as $key => $content)
-                                    @if($content->shared == 1 || Auth::user()->department == 'Administrator' || Auth::user()->department == 'MICT')
-                                        <div class="time-label">
+                    <!-- Timelime example  -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- The time line -->
+                            <div class="timeline">
+                                <!-- timeline time label -->
+                                @forelse($actions as $action => $contents)
+                                    @foreach($contents as $key => $content)
+                                        @if($content->shared == 1 || Auth::user()->department == 'Administrator' || Auth::user()->department == 'MICT')
+                                            <div class="time-label">
 
                                             <span
                                                 class="bg-gradient-indigo">{{date('M d, Y', strtotime($action))}}</span>
-                                        </div>
-                                        <!-- /.timeline-label -->
-                                        <!-- timeline item -->
-
-                                        <div>
-                                            <i class="fas fa-envelope bg-blue"></i>
-                                            <div class="timeline-item">
-                                                <div class="icheck-danger float-right">
-                                                </div>
-                                                <span class="time"><i class="fas fa-clock"></i> {{date(' h:i A', strtotime($content->created_at))}}</span>
-                                                <h3 class="timeline-header"><a
-                                                        href="#">{{app\User::findOrFail($content->id_user)->fname}} {{app\User::findOrFail($content->id_user)->lname}}</a>
-                                                </h3>
-                                                <div class="timeline-body">
-                                                    {{--                                                    echo strip_tags($content->actions)--}}
-                                                    {!! $content->actions !!}
-                                                </div>
-                                                {{--                                        <div class="timeline-footer">--}}
-                                                {{--                                        </div>--}}
                                             </div>
-                                        </div>
-                                @endif
-                            @endforeach
-                        @empty
-                        @endforelse
-                        <!-- END timeline item -->
-                            <div>
-                                <i class="fas fa-clock bg-gray"></i>
+                                            <!-- /.timeline-label -->
+                                            <!-- timeline item -->
+
+                                            <div>
+                                                <i class="fas fa-envelope bg-blue"></i>
+                                                <div class="timeline-item">
+                                                    <div class="icheck-danger float-right">
+                                                    </div>
+                                                    <span class="time"><i class="fas fa-clock"></i> {{date(' h:i A', strtotime($content->created_at))}}</span>
+                                                    <h3 class="timeline-header"><a
+                                                            href="#">{{app\User::findOrFail($content->id_user)->fname}} {{app\User::findOrFail($content->id_user)->lname}}</a>
+                                                    </h3>
+                                                    <div class="timeline-body">
+                                                        {{--                                                    echo strip_tags($content->actions)--}}
+                                                        {!! $content->actions !!}
+                                                    </div>
+                                                    {{--                                        <div class="timeline-footer">--}}
+                                                    {{--                                        </div>--}}
+                                                </div>
+                                            </div>
+                                    @endif
+                                @endforeach
+                            @empty
+                            @endforelse
+                            <!-- END timeline item -->
+                                <div>
+                                    <i class="fas fa-clock bg-gray"></i>
+                                </div>
                             </div>
                         </div>
+                        <!-- /.col -->
                     </div>
-                    <!-- /.col -->
-                </div>
-            </section>
-
+                </section>
+            @endif
 
         </div>
         <!-- /.content -->

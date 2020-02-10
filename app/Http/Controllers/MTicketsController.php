@@ -81,6 +81,7 @@ class MTicketsController extends Controller
         $actions = mactions::Where([['id_mticket', '=', $id]])->orderBy('created_at', 'DESC')->get()->groupBy(function ($item) {
             return $item->created_at->format('Y-m-d');
         });
+        $shared = mactions::Where([['id_mticket', '=', $id]])->Where('shared','=',True)->count();
         $departments = Department::all();
         $micts = User::select('fname')
             ->Where([
@@ -91,7 +92,7 @@ class MTicketsController extends Controller
             ])
             ->get();
 //        dd($comments);
-        return view('mtickets.show', compact('ticket', 'micts', 'departments', 'comments', 'actions'));
+        return view('mtickets.show', compact('ticket', 'micts', 'departments', 'comments', 'actions','shared'));
     }
 
     public function edit($id)
