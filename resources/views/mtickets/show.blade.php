@@ -16,23 +16,19 @@
                             <h1>Ticket # {{str_pad($ticket->id,5,'0',STR_PAD_LEFT)}}</h1>
                         </div>
                     </div>
-                </div><!-- /.container-fluid -->
-                {{--            SHOW USERS ERRORS--}}
-                @if($errors->count()>0)
-                    <div style="" class="alert alert-danger">
-                        @foreach($errors->all() as $error)
-                            {{$error}} <br>
-                        @endforeach
-                    </div>
-                @endif
-                {{--            END SHOW USERS ERRORS--}}
+                </div>
+<!-- /.container-fluid -->
             </section>
 
             <!-- Main content -->
             @csrf
             @method('POST')
             <section class="content" onload="functionToBeExecuted">
-
+                <div class="callout callout-info">
+{{--                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>--}}
+                    {{--                    <h5><i class="icon fas fa-exclamation-triangle"></i></h5>--}}
+                    Editing of Concerns is disabled when an MICT Staff Acknowledge it.
+                </div>
                 <div class="card card-cyan">
                     <div class="card-header">
                         <h3 class="card-title">Ticket Info</h3>
@@ -73,7 +69,8 @@
                                 @if(Auth::user()->department == 'Administrator' || Auth::user()->department == "MICT")
                                     <select class="form-control select2bs4 @error("request_by")is-invalid @enderror"
                                             id="reqb" name="request_by"
-                                            style="width: 100%;">
+                                            style="width: 100%;"
+                                            disabled    >
                                         <option value=""></option>
                                         @foreach($departments as $department)
                                             <option

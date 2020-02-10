@@ -97,6 +97,11 @@ class MTicketsController extends Controller
     public function edit($id)
     {
         $ticket = mTicket::findOrFail($id);
+
+        if(is_null($ticket->acknowledge_by)){
+            $ticket->acknowledge_by = Auth::user()->fname;
+            $ticket->save();
+        }
         $ticket->is_new = 0;
         $ticket->save();
         $comments = mcomments::Where([['id_mticket', '=', $id]])->orderBy('created_at', 'DESC')->get();

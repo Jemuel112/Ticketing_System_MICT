@@ -17,13 +17,13 @@
                 </div>
             </div><!-- /.container-fluid -->
             {{--            SHOW USERS ERRORS--}}
-{{--            @if($errors->count()>0)--}}
-{{--                <div style="" class="alert alert-danger">--}}
-{{--                    @foreach($errors->all() as $error)--}}
-{{--                        {{$error}} <br>--}}
-{{--                    @endforeach--}}
-{{--                </div>--}}
-{{--            @endif--}}
+            {{--            @if($errors->count()>0)--}}
+            {{--                <div style="" class="alert alert-danger">--}}
+            {{--                    @foreach($errors->all() as $error)--}}
+            {{--                        {{$error}} <br>--}}
+            {{--                    @endforeach--}}
+            {{--                </div>--}}
+            {{--            @endif--}}
             {{--            END SHOW USERS ERRORS--}}
         </section>
 
@@ -187,7 +187,8 @@
                             {{--On-Going Status--}}
                             <div class="col-lg-3 col-sm-3">
                                 <div id="dogs" hidden>
-                                    <label for="ogs" @error('og_status') class="text-red" @enderror>On-Going Status</label>
+                                    <label for="ogs" @error('og_status') class="text-red" @enderror>On-Going
+                                        Status</label>
                                     @error('og_status')
                                     <span class="text-red">{{$message}}</span>
                                     @enderror
@@ -232,7 +233,8 @@
                                 </div>
                             </div>
                             <div class="col-md-6" id="dogst2" hidden>
-                                <label for="ogst"  @error('end_at') class="text-red" @enderror><br>Select Deadline</label>
+                                <label for="ogst" @error('end_at') class="text-red" @enderror><br>Select
+                                    Deadline</label>
                                 @error('end_at')
                                 <span class="text-red">{{$message}}</span>
                                 @enderror
@@ -252,12 +254,15 @@
                             {{--Acknoledge--}}
                             <div class="col-lg-3 col-md-3">
                                 <label for="ackn" @error('acknowledge_by') class="text-red" @enderror><br>Acknowledge by</label>
-                                @error('end_at')
+                                @error('acknowledge_by')
                                 <span class="text-red">{{$message}}</span>
                                 @enderror
                                 <select class="form-control select2bs4 @error("acknowledge_by")is-invalid @enderror"
                                         id="ackn" name="acknowledge_by"
-                                        style="width: 100%;">
+                                        style="width: 100%;"
+                                        @if(Auth::user()->department != "Administrator")
+                                        disabled
+                                        @endif>
                                     <option></option>
                                     @foreach($micts as $mict)
                                         <option
@@ -325,7 +330,7 @@
                             {{-- End Accompleshed--}}
 
                             <div class="col-lg-4 col-md-4">
-                                <label  @error('category') class="text-red" @enderror><br>Category</label>
+                                <label @error('category') class="text-red" @enderror><br>Category</label>
                                 @error('category')
                                 <span class="text-red">{{$message}}</span>
                                 @enderror
@@ -414,7 +419,7 @@
                             </div>
 
                             <div class="col-lg-4 col-md-4">
-                                <label  @error('lop') class="text-red" @enderror><br>Level of Priority</label>
+                                <label @error('lop') class="text-red" @enderror><br>Level of Priority</label>
                                 @error('lop')
                                 <span class="text-red">{{$message}}</span>
                                 @enderror
@@ -429,7 +434,7 @@
                             </div>
 
                             <div class="col-lg-12 col-md-12">
-                                <label  @error('concerns') class="text-red" @enderror><br>Issue / Concerns</label>
+                                <label @error('concerns') class="text-red" @enderror><br>Issue / Concerns</label>
                                 @error('concerns')
                                 <span class="text-red">{{$message}}</span>
                                 @enderror
