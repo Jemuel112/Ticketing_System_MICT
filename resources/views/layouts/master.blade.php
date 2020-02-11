@@ -26,10 +26,9 @@
 <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
         <!-- Control sidebar content goes here -->
-        {{--        <h1>Sample Text</h1>--}}
+{{--                <h1>Sample Text</h1>--}}
     </aside>
     <!-- /.control-sidebar -->
-
     @hasSection('footer')
         @yield('footer')
     @else
@@ -43,7 +42,5 @@
     @endif
 </div>
 <!-- ./wrapper -->
-
-
 </body>
 </html>

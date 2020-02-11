@@ -7,16 +7,18 @@
     <style>
         .main_print{
             border: 3px solid black;
-            font-size: 19px
+            font-size: 19px;
         }
     </style>
+    <script>
+        window.onload = function() { window.print(); };
+    </script>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper" >
         <div class="wrapper">
             <!-- Main content -->
             <section class="invoice" onload="window.print()">
-
                 <!-- title row -->
                 <div class="row">
                     <div class="col-lg-12">
@@ -106,23 +108,15 @@
                     </table>
                 </div>
                 <!-- / Container -->
-
-
                 <!-- </div> -->
                 <!-- /.row -->
-
-
             </section>
             <!-- /.content -->
         </div>
     </div>
-    <script>
-        window.onload = function() { window.print(); };
-    </script>
 @endsection
-
 @section('footer')
     <div style="display: none">
-        page header
+        s
     </div>
 @endsection
