@@ -1,16 +1,70 @@
 @extends('layouts.master')
 
 @section('title', 'MICT Tickets | ')
-@include('layouts.scripts')
 @section('content')
     <div class="content-wrapper">
+
         <section class="content-header">
+            @if($errors->count()>0)
+                <div style="" class="alert alert-danger">
+                    @foreach($errors->all() as $error)
+                        {{$error}} <br>
+                    @endforeach
+                </div>
+            @endif
             <div class="card card-info">
                 <div class="card-header">
                     <h4>{{$title}}</h4>
                 </div>
                 <div class="card-body">
-                    <div class="col-12">
+                    <form action="/Sort" class="container-fluid" autocomplete="off" method="GET">
+                        @csrf
+                        @method('HEAD')
+                        <div class="row float-right">
+                            <div class="">
+                                <input type="text" class="form-control float-right" name="datefilter" placeholder="Date Range">
+                            </div>
+                            &nbsp;
+                            @if(Auth::user()->department == 'Administrator' || Auth::user()->department == 'MICT')
+                            <div class="">
+                                <select class="form-control select2bs4 col-md-7" name="department" id="deps"
+                                        style="width: 100%;">
+                                    <option value=""></option>
+                                    @foreach($departments as $department)
+                                        <option
+                                            value="{{$department->dept_name}}" {{ old('request_by') == $department->dept_name ? 'selected':''}}>{{$department->dept_name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                                &nbsp;
+                            @endif
+                            <div class="">
+                                <select class="form-control select2 col-md-7"
+                                        name="status" id="stats"
+                                        style="width: 100%;">
+                                    <option value=""></option>
+                                    <option value="Active" {{ old('status') == 'Active' ? 'selected' :''}}>Active
+                                    </option>
+                                    <option value="On-Going" {{ old('status') == 'On-Going' ? 'selected':''}}>
+                                        On-Going
+                                    </option>
+                                    <option value="Resolve" {{ old('status') == 'Resolve' ? 'selected':''}}>
+                                        Resolve
+                                    </option>
+                                    <option value="Duplicate" {{ old('status') == 'Duplicate' ? 'selected':''}}>
+                                        Duplicate
+                                    </option>
+                                    <option value="Closed" {{ old('status') == 'Closed' ? 'selected':''}}>Closed
+                                    </option>
+                                </select>
+                            </div>
+                            &nbsp;
+                            <button type="submit"  class="btn btn-info">Apply</button>
+                        </div>
+                    </form>
+                    <br>
+                    <br>
+                    <div class="col-12" style="overflow-x:auto;">
                         <table id="department1"
                                style="width: 100%"
                                class="wrap compact table table-responsive-sm table-hover table-borderedless table-striped ">
@@ -89,34 +143,6 @@
                                         </td>
                                     </tr>
                                     @endforeach
-                                    {{--        @foreach($users as $key => $user)--}}
-                                    {{--            <tr>--}}
-                                    {{--                <td>{{$user->id}}</td>--}}
-                                    {{--                <td>{{$user->username}}</td>--}}
-                                    {{--                <td>{{$user->fname}}</td>--}}
-                                    {{--                <td>{{$user->lname}}</td>--}}
-                                    {{--                <td>{{$user->department}}</td>--}}
-                                    {{--                <td class="">--}}
-                                    {{--                    @if($user->id == 1 )--}}
-                                    {{--                        <a style="margin: 2px"--}}
-                                    {{--                           class="col-lg-12 btn btn-sm btn-outline-primary float-lg-left"--}}
-                                    {{--                           href="/users/{{$user->id}}"--}}
-                                    {{--                        >Edit</a>--}}
-                                    {{--                    @else--}}
-                                    {{--                        <a style="margin: 2px"--}}
-                                    {{--                           class="col-lg-6 btn btn-sm btn-outline-primary float-lg-left"--}}
-                                    {{--                           href="/users/{{$user->id}}"--}}
-                                    {{--                        >Edit</a>--}}
-                                    {{--                        <form action="/users/{{$user->id}}" method="POST">--}}
-                                    {{--                            @method('DELETE')--}}
-                                    {{--                            @csrf--}}
-                                    {{--                            <button style="margin: 2px" type="submit" class="  col-lg-6 btn btn-sm btn-outline-danger">Delete--}}
-                                    {{--                            </button>--}}
-                                    {{--                        </form>--}}
-                                    {{--                    @endif--}}
-                                    {{--                </td>--}}
-                                    {{--            </tr>--}}
-                                    {{--        @endforeach--}}
                         </table>
                     </div>
                 </div>
@@ -127,6 +153,41 @@
         $("#department1").DataTable({
             "order": [[0, "desc"]]
         });
+
+        //Date range picker
+        $('input[name="datefilter"]').daterangepicker({
+            autoUpdateInput: false,
+            locale: {
+                cancelLabel: 'Clear'
+            }
+        });
+
+        $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+        });
+
+        $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) {
+            $(this).val('');
+        });
+
+        // $('.select2').select2({
+        //     theme: 'bootstrap4'
+        // });
+        // $('.select2bs4').select2({
+        //     theme: 'bootstrap4'
+        // });
+        $selectElement = $('#deps').select2({
+            theme: 'bootstrap4',
+            placeholder: "Department",
+            allowClear: true
+        });
+        $selectElement = $('#stats').select2({
+            theme: 'bootstrap4',
+            placeholder: "Status",
+            allowClear: true
+        });
     </script>
 
 @endsection
+
+@include('layouts.scripts')

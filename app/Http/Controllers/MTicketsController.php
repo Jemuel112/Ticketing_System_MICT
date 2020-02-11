@@ -8,6 +8,7 @@ use App\User;
 use App\mcomments;
 use App\mactions;
 use Carbon\Carbon;
+use DateTime;
 use Illuminate\Http\Request;
 use App\Http\Requests\TicketFormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -29,35 +30,57 @@ class MTicketsController extends Controller
     public function myTickets()
     {
         $name = Auth::user()->fname;
-//        $tickets = mTicket::where('category','LIKE',$name);
-//        $tickets = DB::table('m_tickets')->keyBy('assigned_to');
-//        $query="SELECT * FROM m_tickets WHERE ({implode(',',assigned_to)}) IN $name";
-        //        assigned_to
-//        $query = mTicket::where('assigned_to', 'Administrator')->count();
 
         $tickets = mTicket::where([['assigned_to', 'Like', '%' . "$name" . '%']])->get();
-//        dd($tickets);
         $title = 'My Tickets';
-
-        return view('mtickets.index', compact('tickets', 'title'));
+        $departments = Department::all();
+        return view('mtickets.index', compact('tickets', 'title', 'departments'));
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        $title = 'All Tickets';
 
         if (Auth::user()->department == "Administrator" || Auth::user()->department == "MICT") {
-            $tickets = mTicket::orderBy('id', 'DESC')->get();
+            $tickets = new mTicket;
         } else {
-//            dd(Auth::user()->department);
             $dept = Auth::user()->department;
             $tickets = mTicket::where([
                 ['request_by', '=', $dept]
-            ])
-                ->orderBy('id', 'DESC')
-                ->get();
+            ]);
+            $title = 'My Tickets';
         }
-        $title = 'All Tickets';
-        return view('mtickets.index', compact('tickets','title'));
+        $departments = Department::all();
+        if (!is_null($request->datefilter)) {
+            $range = explode(' - ', $request->datefilter);
+            if (DateTime::createFromFormat('m/d/Y', $range[0]) == FALSE) {
+                $error = \Illuminate\Validation\ValidationException::withMessages([
+                    'field_name_1' => ['Start Date format is invalid'],
+                ]);
+                throw $error;
+            }
+            if (DateTime::createFromFormat('m/d/Y', $range[1]) == FALSE) {
+                $error = \Illuminate\Validation\ValidationException::withMessages([
+                    'field_name_1' => ['End Date format is invalid'],
+                ]);
+                throw $error;
+            }
+            $range0 = date('Y-m-d', strtotime($range[0]));
+            $range1 = date('Y-m-d', strtotime($range[1]));
+            $tickets = $tickets->whereBetween('created_at', [$range0 . " 00:00:00", $range1 . " 23:59:59"]);
+        }
+        if (!is_null($request->department)) {
+            $tickets = $tickets->where([
+                ['request_by', '=', $request->department]
+            ]);
+        }
+        if (!is_null($request->status)) {
+            $tickets = $tickets->where([
+                ['status', '=', $request->status]
+            ]);
+        }
+       $tickets = $tickets->orderBy('id', 'DESC')->get();
+        return view('mtickets.index', compact('tickets', 'title', 'departments'));
     }
 
     public function create()
@@ -81,7 +104,7 @@ class MTicketsController extends Controller
         $actions = mactions::Where([['id_mticket', '=', $id]])->orderBy('created_at', 'DESC')->get()->groupBy(function ($item) {
             return $item->created_at->format('Y-m-d');
         });
-        $shared = mactions::Where([['id_mticket', '=', $id]])->Where('shared','=',True)->count();
+        $shared = mactions::Where([['id_mticket', '=', $id]])->Where('shared', '=', True)->count();
         $departments = Department::all();
         $micts = User::select('fname')
             ->Where([
@@ -91,15 +114,14 @@ class MTicketsController extends Controller
                 ['department', '=', 'Administrator']
             ])
             ->get();
-//        dd($comments);
-        return view('mtickets.show', compact('ticket', 'micts', 'departments', 'comments', 'actions','shared'));
+        return view('mtickets.show', compact('ticket', 'micts', 'departments', 'comments', 'actions', 'shared'));
     }
 
     public function edit($id)
     {
         $ticket = mTicket::findOrFail($id);
 
-        if(is_null($ticket->acknowledge_by)){
+        if (is_null($ticket->acknowledge_by)) {
             $ticket->acknowledge_by = Auth::user()->fname;
             $ticket->save();
         }
@@ -301,9 +323,9 @@ class MTicketsController extends Controller
     {
         $ticket = mTicket::findOrFail($request->ticket_id);
         $actions = $request->action_id;
-        if(is_null($actions)) {
+        if (is_null($actions)) {
 //        dd('suc');
-            return redirect()->back() ->with('alert', 'Unable to proceed no Action is selected');
+            return redirect()->back()->with('alert', 'Unable to proceed no Action is selected');
         }
         $micts = User::select('fname')
             ->Where([
