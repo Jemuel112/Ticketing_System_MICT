@@ -19,26 +19,25 @@
                 <div class="card-body">
                     <form action="/Sort" class="container-fluid" autocomplete="off" method="GET">
                         @csrf
-                        @method('HEAD')
-                        <div class="row float-right">
-                            <div class="">
-                                <input type="text" class="form-control float-right" name="datefilter" placeholder="Date Range">
+                        @method('GET')
+                        <div class="row float-right" style="width: 100%;">
+                            <div class="col-sm-3 col-lg-3" style="width: 100%;">
+                                <input type="text" class="form-control float-right" name="datefilter"
+                                       placeholder="Date Range">
                             </div>
-                            &nbsp;
                             @if(Auth::user()->department == 'Administrator' || Auth::user()->department == 'MICT')
-                            <div class="">
-                                <select class="form-control select2bs4 col-md-7" name="department" id="deps"
-                                        style="width: 100%;">
-                                    <option value=""></option>
-                                    @foreach($departments as $department)
-                                        <option
-                                            value="{{$department->dept_name}}" {{ old('request_by') == $department->dept_name ? 'selected':''}}>{{$department->dept_name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                                &nbsp;
+                                <div class="col-sm-3 col-lg-3">
+                                    <select class="form-control select2bs4 col-md-7" name="department" id="deps"
+                                            style="width: 100%;">
+                                        <option value=""></option>
+                                        @foreach($departments as $department)
+                                            <option
+                                                value="{{$department->dept_name}}" {{ old('request_by') == $department->dept_name ? 'selected':''}}>{{$department->dept_name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             @endif
-                            <div class="">
+                            <div class="col-sm-3 col-lg-3">
                                 <select class="form-control select2 col-md-7"
                                         name="status" id="stats"
                                         style="width: 100%;">
@@ -58,8 +57,9 @@
                                     </option>
                                 </select>
                             </div>
-                            &nbsp;
-                            <button type="submit"  class="btn btn-info">Apply</button>
+                            <div class="col-sm-3 col-lg-3">
+                                <button type="submit" class="btn btn-info col-12">Apply</button>
+                            </div>
                         </div>
                     </form>
                     <br>
@@ -151,22 +151,26 @@
     </div>
     <script>
         $("#department1").DataTable({
+            'processing': true,
             "order": [[0, "desc"]]
         });
 
         //Date range picker
         $('input[name="datefilter"]').daterangepicker({
+            showDropdowns: true,
+            minYear: 2020,
             autoUpdateInput: false,
+            autoclose: true,
             locale: {
                 cancelLabel: 'Clear'
             }
         });
 
-        $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
+        $('input[name="datefilter"]').on('apply.daterangepicker', function (ev, picker) {
             $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
         });
 
-        $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) {
+        $('input[name="datefilter"]').on('cancel.daterangepicker', function (ev, picker) {
             $(this).val('');
         });
 

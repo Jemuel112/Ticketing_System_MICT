@@ -538,7 +538,8 @@
     <script type="text/javascript">
         // $('#reqb').prop('disabled', true);
         // $('#report').prop('disabled', true);
-        $("#datetimepickers").datetimepicker();
+        $("#datetimepickers").datetimepicker({
+        });
         $("#datetimepickerd").datetimepicker({
             useCurrent: false
         });

@@ -68,18 +68,21 @@ class MTicketsController extends Controller
             $range0 = date('Y-m-d', strtotime($range[0]));
             $range1 = date('Y-m-d', strtotime($range[1]));
             $tickets = $tickets->whereBetween('created_at', [$range0 . " 00:00:00", $range1 . " 23:59:59"]);
+            $title = 'Sorted Tickets';
         }
         if (!is_null($request->department)) {
             $tickets = $tickets->where([
                 ['request_by', '=', $request->department]
             ]);
+            $title = 'Sorted Tickets';
         }
         if (!is_null($request->status)) {
             $tickets = $tickets->where([
                 ['status', '=', $request->status]
             ]);
+            $title = 'Sorted Tickets';
         }
-       $tickets = $tickets->orderBy('id', 'DESC')->get();
+        $tickets = $tickets->orderBy('id', 'DESC')->get();
         return view('mtickets.index', compact('tickets', 'title', 'departments'));
     }
 
@@ -148,7 +151,7 @@ class MTicketsController extends Controller
     {
         $tickets = new mTicket();
 
-        if ($request->status == "Closed" || $request->status == "Resolve") {
+        if ($request->status == "Closed" || $request->status == "Resolve" || $request->status == "Duplicate") {
             if (!is_null($request->finished_at)) {
                 $tickets->finished_at = date('Y-m-d H:i:s', strtotime($request->finished_at));
             } else {
@@ -195,12 +198,15 @@ class MTicketsController extends Controller
         $tickets->created_by = Auth::user()->fname;
         $tickets->recommendation = $request->recommendation;
 
-        if (is_null($request->created_at)) {
-            $tickets->save();
-        } else {
-            $tickets->created_at = date('Y-m-d H:i:s', strtotime($request->created_at));
+
+        if (!is_null($request->created_at)) {
+//           dd( Carbon::now() , date('Y-m-d H:i:s.u', strtotime($request->created_at)));
+            $tickets->created_at = date('Y-m-d H:i:s.u', strtotime($request->created_at));
             $tickets->updated_at = Carbon::now();
             $tickets->save(['timestamps' => false]);
+
+        } else {
+            $tickets->save();
         }
 
         if (!is_null($request->action)) {
