@@ -85,7 +85,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body" style="overflow-x:auto;">
-                            @widget('active_table')
+                            @asyncWidget('active_table')
                         </div>
                         <!-- /.card-body -->
                         {{--                        <div class="card-footer">--}}
@@ -106,9 +106,8 @@
                             </div>
                         </div>
                         <!-- /.card-header -->
-                        <div class="card-body">
-                            <div class="row">
-                            </div>
+                        <div class="card-body" style="overflow-x:auto;">
+                            @asyncWidget('on_going_table')
                         </div>
                         <!-- /.card-body -->
                         {{--                        <div class="card-footer">--}}

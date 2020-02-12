@@ -30,14 +30,15 @@ class ActiveTable extends AbstractWidget
      */
     public function run()
     {
-        $tickets = mTicket::where('status', '=', 'Active')->get()->groupBy(function ($item) {
-            return $item->request_by;
-        });
-//        if(Auth::user()->department == "Administrator" || Auth::user()->department =="MICT"){
+
+        if(Auth::user()->department == "Administrator" || Auth::user()->department =="MICT"){
 //        $tickets = mTicket::where('status', '=', 'Active')->get();
-//        }else{
-//        $tickets = mTicket::where('request_by','=', Auth::user()->department)->where('status', '=','Active')->get();
-//        }
+            $tickets = mTicket::where('status', '=', 'Active')->get()->groupBy(function ($item) {
+                return $item->request_by;
+            });
+        }else{
+        $tickets = mTicket::where('request_by','=', Auth::user()->department)->where('status', '=','Active')->get();
+        }
 //        dd($tickets);
         return view('widgets.active_table', [
             'config' => $this->config,
