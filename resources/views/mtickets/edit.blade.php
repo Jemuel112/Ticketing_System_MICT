@@ -223,9 +223,11 @@
                                 <div class="input-group date" id="datetimepickers" data-target-input="nearest">
                                     <input type="text"
                                            class="form-control datetimepicker-input @error("start_at")is-invalid @enderror"
+                                           @if(!is_null($ticket->start_at))
                                            value="{{date('m/d/Y h:i', strtotime($ticket->start_at))}}"
+                                           @endif
                                            name="start_at"
-                                           data-target="#datetimepickers"/>
+                                           data-target="#datetimepickers">
                                     <div class="input-group-append" data-target="#datetimepickers"
                                          data-toggle="datetimepicker">
                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -241,7 +243,9 @@
                                 <div class="input-group date" id="datetimepickerd" data-target-input="nearest">
                                     <input type="text"
                                            class="form-control datetimepicker-input @error("end_at")is-invalid @enderror"
+                                           @if(!is_null($ticket->end_at))
                                            value="{{date('m/d/Y h:i', strtotime($ticket->end_at))}}"
+                                           @endif     
                                            name="end_at"
                                            data-target="#datetimepickerd"/>
                                     <div class="input-group-append" data-target="#datetimepickerd"
@@ -262,7 +266,7 @@
                                         style="width: 100%;"
                                         @if(Auth::user()->department != "Administrator")
                                         readonly
-                                        @endif>
+                                    @endif>
                                     <option></option>
                                     @foreach($micts as $mict)
                                         <option
@@ -529,7 +533,6 @@
         </section>
 
 
-
         <section class="container-fluid">
             <form action="/MICT-Tickets/report" method="POST" id="myForm2">
                 <input type="text" name="ticket_id" value="{{$ticket->id}}" hidden>
@@ -549,14 +552,15 @@
                         <div class="timeline">
                             <!-- timeline time label -->
                             @forelse($actions as $action => $contents)
-                            @foreach($contents as $key => $content)
-                                @if($content->shared == 1 || Auth::user()->department == 'Administrator' || Auth::user()->department == 'MICT')
-                                <div class="time-label">
+                                @foreach($contents as $key => $content)
+                                    @if($content->shared == 1 || Auth::user()->department == 'Administrator' || Auth::user()->department == 'MICT')
+                                        <div class="time-label">
 
-                                    <span class="bg-gradient-indigo">{{date('M d, Y', strtotime($action))}}</span>
-                                </div>
-                                <!-- /.timeline-label -->
-                                <!-- timeline item -->
+                                            <span
+                                                class="bg-gradient-indigo">{{date('M d, Y', strtotime($action))}}</span>
+                                        </div>
+                                        <!-- /.timeline-label -->
+                                        <!-- timeline item -->
 
                                         <div>
                                             <i class="fas fa-envelope bg-blue"></i>
@@ -573,7 +577,7 @@
                                                         href="#">{{app\User::findOrFail($content->id_user)->fname}} {{app\User::findOrFail($content->id_user)->lname}}</a>
                                                 </h3>
                                                 <div class="timeline-body">
-{{--                                                    echo strip_tags($content->actions)--}}
+                                                    {{--                                                    echo strip_tags($content->actions)--}}
                                                     {!! $content->actions !!}
                                                 </div>
                                                 {{--                                        <div class="timeline-footer">--}}
@@ -584,7 +588,7 @@
                             @endforeach
                         @empty
                         @endforelse
-                            <!-- END timeline item -->
+                        <!-- END timeline item -->
                             <div>
                                 <i class="fas fa-clock bg-gray"></i>
                                 <button type="submit" class="float-right">Generate Report</button>
@@ -653,6 +657,29 @@
         $("#datetimepickerd").on("change.datetimepicker", function (e) {
             $('#datetimepickers').datetimepicker('maxDate', e.date);
         });
+
+
+        {{--        {{date('m/d/Y h:i A', strtotime($ticket->created_at))}}--}}
+
+
+        $("#datetimepicker7").datetimepicker({
+            icons: {
+                time: "far fa-clock"
+            }
+        });
+        $("#datetimepicker8").datetimepicker({
+            useCurrent: false,
+            icons: {
+                time: "far fa-clock"
+            },
+        });
+        $("#datetimepicker7").on("change.datetimepicker", function (e) {
+            $('#datetimepicker8').datetimepicker('minDate', e.date);
+        });
+        $("#datetimepicker8").on("change.datetimepicker", function (e) {
+            $('#datetimepicker7').datetimepicker('maxDate', e.date);
+        });
+
     </script>
     <script>
 
@@ -783,7 +810,7 @@
         }
         var msg = '{{Session::get('alert')}}';
         var exist = '{{Session::has('alert')}}';
-        if(exist){
+        if (exist) {
             alert(msg);
         }
     </script>
