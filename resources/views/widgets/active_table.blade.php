@@ -13,7 +13,7 @@
             <td>{{$ticket}}</td>
             <td>{{$inner->count()}}</td>
             <td>
-                <form action="/Sort">
+                <form action="/Sort" method="POST">
                     @csrf
                     @method('POST')
                     <input type="text" name="department" value="{{$ticket}}" hidden>

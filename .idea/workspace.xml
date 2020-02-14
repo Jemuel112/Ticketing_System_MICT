@@ -2,11 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e46f795c-50de-4821-94e9-0a47af70672e" name="Default Changelist" comment="Innitial Commit">
+      <change afterPath="$PROJECT_DIR$/app/Widgets/SoundNotification.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/Google_Event-1.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/widgets/sound_notification.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/mtickets/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mtickets/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/mtickets/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mtickets/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/master.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/widgets/active_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/widgets/active_table.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/widgets/on_going_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/widgets/on_going_table.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -144,17 +148,19 @@
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Github\Ticketing_System_MICT\public" />
+      <recent name="D:\Github\Ticketing_System_MICT\public\notification" />
+      <recent name="C:\Users\Jemuel\Desktop\New folder (10)\public\plugins\tempusdominus-bootstrap-4\js" />
+      <recent name="C:\Users\Jemuel\Desktop\MICT - Copy\MCU_MICT\resources\views\auth" />
+      <recent name="C:\Users\Jemuel\Desktop\New folder (7) - Copy\MCU_MICT\resources\views\layouts" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Github\Ticketing_System_MICT\resources\views\mtickets" />
       <recent name="D:\Desktop files\New folder (5)" />
       <recent name="C:\Users\Jemuel\Desktop\New folder (10)\public\plugins\tempusdominus" />
       <recent name="C:\Users\Jemuel\Desktop\New folder (10)\resources\views\users" />
       <recent name="C:\Users\Jemuel\Desktop\MICT - Copy\MCU_MICT\resources\views" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Jemuel\Desktop\New folder (10)\public\plugins\tempusdominus-bootstrap-4\js" />
-      <recent name="C:\Users\Jemuel\Desktop\MICT - Copy\MCU_MICT\resources\views\auth" />
-      <recent name="C:\Users\Jemuel\Desktop\New folder (7) - Copy\MCU_MICT\resources\views\layouts" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -224,6 +230,7 @@
       <workItem from="1581470584336" duration="7813000" />
       <workItem from="1581486805220" duration="10179000" />
       <workItem from="1581559085721" duration="5573000" />
+      <workItem from="1581643406310" duration="11838000" />
     </task>
     <servers />
   </component>
