@@ -1,12 +1,12 @@
-@if($notify > 0 && Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
 
-<audio src="Google_Event-1.mp3" id="my_audio" loop="loop"></audio>
 
-<script type="text/javascript">
-    window.onload=function(){
-        document.getElementById("my_audio").play();
-    }
-</script>
+@if($notify > 0)
+    <script type="text/javascript">
+        window.onload=function(){
+            document.getElementById("my_audio").play();
+        }
+    </script>
+    @endif
 
 {{--<script type="text/javascript">--}}
 {{--    window.onload=function(){--}}
@@ -28,4 +28,4 @@
 {{--        repeat();--}}
 {{--    }--}}
 {{--</script>--}}
-@endif
+
