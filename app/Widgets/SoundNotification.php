@@ -19,7 +19,7 @@ class SoundNotification extends AbstractWidget
      *
      * @var int|float
      */
-    public $reloadTimeout = 60;
+    public $reloadTimeout = 20;
 
     /**
      * Treat this method as a controller action.

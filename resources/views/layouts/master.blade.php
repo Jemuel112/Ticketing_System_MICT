@@ -10,6 +10,12 @@
 <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
+{{--<audio src="Google_Event-1.mp3" id="my_audio" loop="loop"></audio>--}}
+{{--<script type="text/javascript">--}}
+{{--    window.onload=function(){--}}
+{{--        document.getElementById("my_audio").play();--}}
+{{--    }--}}
+{{--</script>--}}
 @asyncWidget('sound_notification')
 <body class="hold-transition sidebar-mini layout-fixed layout-footer-fixed">
 <!-- Site wrapper -->
