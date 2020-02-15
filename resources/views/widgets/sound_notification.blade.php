@@ -1,12 +1,20 @@
+{{--<audio src="Google_Event-1.mp3" id="my_audio" loop="loop"></audio>--}}
 
+{{--@for ($i = 0; $i < 2; $i++)--}}
+@while (true)
+    <audio autoplay hidden>
+        <source src="Google_Event-1.mp3" type="audio/mpeg">
+    </audio>
+@endwhile
 
-@if($notify > 0)
-    <script type="text/javascript">
-        window.onload=function(){
-            document.getElementById("my_audio").play();
-        }
-    </script>
-    @endif
+{{--@endfor--}}
+
+{{--    <script type="text/javascript">--}}
+{{--        window.onload=function(){--}}
+{{--            document.getElementById("my_audio").play();--}}
+{{--        }--}}
+{{--    </script>--}}
+
 
 {{--<script type="text/javascript">--}}
 {{--    window.onload=function(){--}}
