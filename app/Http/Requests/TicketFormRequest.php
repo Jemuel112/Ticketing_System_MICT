@@ -30,7 +30,7 @@ class TicketFormRequest extends FormRequest
                     $data = request()->validate([
                         'sys_category' => 'required',
                     ],[
-                        'sys_category.required' => 'is required'
+                        'sys_category.required' => 'System Category is required'
                     ]);
             }
         }
@@ -50,17 +50,17 @@ class TicketFormRequest extends FormRequest
                         'concerns' => 'required|min:8',
                         'lop' => 'required',
                     ], [
-                        'og_status.required' => 'is required',
-                        'start_at.required' => 'is required',
-                        'end_at.required' => 'is required',
-                        'reported_by.required' => 'is required',
-                        'request_by.required' => 'is required',
-                        'acknowledge_by.required' => 'is required',
-                        'status.required' => 'is required',
-                        'category.required' => 'is required',
-                        'concerns.required' => 'is required',
-                        'concerns.min' => 'must be at least 8 characters',
-                        'lop.required' => 'is required',
+                        'og_status' => 'On-Going Status is required',
+                        'start_at' => 'Start Date is required',
+                        'end_at' => 'Deadline Date is required',
+                        'reported_by' => 'Reported by is required',
+                        'request_by' => 'Request by is required',
+                        'acknowledge_by' => 'Acknowledge by is required',
+                        'status' => 'Status is required',
+                        'category' => 'Category is required',
+                        'concerns.required' => 'Concerns is required',
+                        'concerns.min' => 'Concerns must be at least 8 characters',
+                        'lop.required' => 'Level of Priority is required',
                     ])];
             } else {
                 return [
@@ -73,14 +73,14 @@ class TicketFormRequest extends FormRequest
                         'concerns' => 'required|min:8',
                         'lop' => 'required',
                     ], [
-                        'reported_by.required' => 'is required',
-                        'request_by.required' => 'is required',
-                        'acknowledge_by.required' => 'is required',
-                        'status.required' => 'is required',
-                        'category.required' => 'is required',
-                        'concerns.required' => 'is required',
-                        'concerns.min' => 'must be at least 8 characters',
-                        'lop.required' => 'is required',
+                        'reported_by' => 'Reported by is required',
+                        'request_by' => 'Request by is required',
+                        'acknowledge_by' => 'Acknowledge by is required',
+                        'status' => 'Status is required',
+                        'category' => 'Category is required',
+                        'concerns.required' => 'Concerns is required',
+                        'concerns.min' => 'Concerns must be at least 8 characters',
+                        'lop.required' => 'Level of Priority is required',
                     ])];
             }
         } elseif (Auth::user()->department == 'MICT') {
@@ -98,17 +98,17 @@ class TicketFormRequest extends FormRequest
                         'concerns' => 'required|min:8',
                         'lop' => 'required',
                     ], [
-                        'og_status.required' => 'is required',
-                        'start_at.required' => 'is required',
-                        'end_at.required' => 'is required',
-                        'reported_by.required' => 'is required',
-                        'request_by.required' => 'is required',
-                        'acknowledge_by.required' => 'is required',
-                        'status.required' => 'is required',
-                        'category.required' => 'is required',
-                        'concerns.required' => 'is required',
-                        'concerns.min' => 'must be at least 8 characters',
-                        'lop.required' => 'is required',
+                        'og_status' => 'On-Going Status is required',
+                        'start_at' => 'Start Date is required',
+                        'end_at' => 'Deadline Date is required',
+                        'reported_by' => 'Reported by is required',
+                        'request_by' => 'Request by is required',
+                        'acknowledge_by' => 'Acknowledge by is required',
+                        'status' => 'Status is required',
+                        'category' => 'Category is required',
+                        'concerns.required' => 'Concerns is required',
+                        'concerns.min' => 'Concerns must be at least 8 characters',
+                        'lop.required' => 'Level of Priority is required',
                     ])];
             } else {
                 return [
@@ -121,14 +121,14 @@ class TicketFormRequest extends FormRequest
                         'concerns' => 'required|min:8',
                         'lop' => 'required',
                     ], [
-                        'reported_by.required' => 'is required',
-                        'request_by.required' => 'is required',
-                        'acknowledge_by.required' => 'is required',
-                        'status.required' => 'is required',
-                        'category.required' => 'is required',
-                        'concerns.required' => 'is required',
-                        'concerns.min' => 'must be at least 8 characters',
-                        'lop.required' => 'is required',
+                        'reported_by' => 'Reported by is required',
+                        'request_by' => 'Request by is required',
+                        'acknowledge_by' => 'Acknowledge by is required',
+                        'status' => 'Status is required',
+                        'category' => 'Category is required',
+                        'concerns.required' => 'Concerns is required',
+                        'concerns.min' => 'Concerns must be at least 8 characters',
+                        'lop.required' => 'Level of Priority is required',
                     ])];
             }
         } else {
@@ -140,12 +140,12 @@ class TicketFormRequest extends FormRequest
                     'category' => 'required',
                     'concerns' => 'required|min:8',
                 ], [
-                    'reported_by.required' => 'is required',
-                    'request_by.required' => 'is required',
-                    'status.required' => 'is required',
-                    'category.required' => 'is required',
-                    'concerns.required' => 'is required',
-                    'concerns.min' => 'must be at least 8 characters',
+                    'reported_by' => 'Reported by is required',
+                    'request_by' => 'Request by is required',
+                    'status' => 'Status is required',
+                    'category' => 'Category is required',
+                    'concerns.required' => 'Concerns is required',
+                    'concerns.min' => 'Concerns must be at least 8 characters',
                 ])];
         }
     }
