@@ -13,9 +13,9 @@
                 <td>{{$ticket}}</td>
                 <td>{{$inner->count()}}</td>
                 <td>
-                    <form action="/Sort"  method="POST" >
+                    <form action="/Sort"  method="GET" >
                         @csrf
-                        @method("POST")
+                        @method("GET")
                         <input type="text" name="department" value="{{$ticket}}" hidden>
                         <input type="text" name="status" value="On-Going" hidden>
                         <button type="submit" class="btn btn-sm btn-primary"><i class="fal fa-eye"></i>View Tickets</button>

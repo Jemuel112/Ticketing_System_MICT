@@ -17,7 +17,7 @@
                     <h4>{{$title}}</h4>
                 </div>
                 <div class="card-body">
-                    <form action="/Sort" class="container-fluid" autocomplete="off" method="POST">
+                    <form action="/Sort" class="container-fluid" autocomplete="off" method="GET">
                         @csrf
                         <div class="row float-right" style="width: 100%;">
                             <div class="col-sm-3 col-lg-3" style="width: 100%;">

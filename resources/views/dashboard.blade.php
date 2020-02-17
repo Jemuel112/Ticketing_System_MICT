@@ -27,11 +27,10 @@
                         <div class="icon">
                             <i class="fas fa-tags"></i>
                         </div>
-                        <form action="/Sort" method="POST" class="small-box-footer">
-                            @csrf
-                            <button type="submit" class="btn btn-link">
-                                More Info<i class="fas fa-arrow-circle-right"></i>
-                            </button>
+                        <form action="/Sort" method="GET" class="small-box-footer">
+                            <input type="text" name="status" value="Active" hidden>
+                            <button class="btn btn-link"><span class="text-white">More Info <i
+                                        class="fas fa-arrow-circle-right"></i></span></button>
                         </form>
 
                     </div>
@@ -46,7 +45,11 @@
                         <div class="icon">
                             <i class="fas fa-cogs"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <form action="/Sort" method="GET" class="small-box-footer">
+                            <input type="text" name="status" value="On-Going" hidden>
+                            <button class="btn btn-link"><span class="text-dark">More Info <i
+                                        class="fas fa-arrow-circle-right"></i></span></button>
+                        </form>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -59,7 +62,11 @@
                         <div class="icon">
                             <i class="fas fa-clipboard-check"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <form action="/Sort" method="GET" class="small-box-footer">
+                            <input type="text" name="status" value="Resolve" hidden>
+                            <button class="btn btn-link"><span class="text-white">More Info <i
+                                        class="fas fa-arrow-circle-right"></i></span></button>
+                        </form>
                     </div>
 
                 </div>
@@ -73,7 +80,11 @@
                         <div class="icon">
                             <i class="far fa-chart-pie"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <form action="/Sort" method="GET" class="small-box-footer">
+                            <input type="text" name="status" value="Closed" hidden>
+                            <button class="btn btn-link"><span class="text-white">More Info <i
+                                        class="fas fa-arrow-circle-right"></i></span></button>
+                        </form>
                     </div>
                 </div>
                 <!-- ./col -->

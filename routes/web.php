@@ -27,7 +27,7 @@ Route::resource('/MICT-Tickets', 'mTicketsController',['only'=> ['index','create
 Route::post('/MICT-Tickets/comments/{comment}', 'mTicketsController@comment');
 Route::get('/MyTickets', 'mTicketsController@myTickets');
 Route::post('/MICT-Tickets/report', 'mTicketsController@report');
-Route::post('/Sort', 'mTicketsController@index');
+Route::GET('/Sort', 'mTicketsController@index');
 
 
 

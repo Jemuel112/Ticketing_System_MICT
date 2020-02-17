@@ -420,7 +420,7 @@
                                             value="{{old('lop')}}" id="lop" name="lop"
                                             style="width: 100%;">
                                         <option></option>
-                                        <option value="Low" {{ old('lop') == 'Low' ? 'selected':''}}>Low</option>
+                                        <option value="Low" {{ old('lop') == 'Low' ? 'selected':''}} selected>Low</option>
                                         <option value="Medium" {{ old('lop') == 'Medium' ? 'selected':''}}>Medium
                                         </option>
                                         <option value="High" {{ old('lop') == 'High' ? 'selected':''}}>High</option>
