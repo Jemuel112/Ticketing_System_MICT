@@ -22,16 +22,16 @@
                         <div class="row float-right" style="width: 100%;">
                             <div class="col-sm-3 col-lg-3" style="width: 100%;">
                                 <input type="text" class="form-control float-right" name="datefilter"
-                                       placeholder="Date Range">
+                                       placeholder="Date Range" value="{{request()->input('datefilter')}}">
                             </div>
                             @if(Auth::user()->department == 'Administrator' || Auth::user()->department == 'MICT')
                                 <div class="col-sm-3 col-lg-3">
                                     <select class="form-control select2bs4 col-md-7" name="department" id="deps"
                                             style="width: 100%;">
                                         <option value=""></option>
-                                        @foreach($departments as $department)
+                                        @foreach($departments as $dept)
                                             <option
-                                                value="{{$department->dept_name}}" {{ old('request_by') == $department->dept_name ? 'selected':''}}>{{$department->dept_name}}</option>
+                                                value="{{$dept->dept_name}}" {{ request()->input('department') == $dept->dept_name ? 'selected':''}}>{{$dept->dept_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -41,18 +41,18 @@
                                         name="status" id="stats"
                                         style="width: 100%;">
                                     <option value=""></option>
-                                    <option value="Active" {{ old('status') == 'Active' ? 'selected' :''}}>Active
+                                    <option value="Active" {{ request()->input('status') == 'Active' ? 'selected' :''}}>Active
                                     </option>
-                                    <option value="On-Going" {{ old('status') == 'On-Going' ? 'selected':''}}>
+                                    <option value="On-Going" {{ request()->input('status') == 'On-Going' ? 'selected':''}}>
                                         On-Going
                                     </option>
-                                    <option value="Resolve" {{ old('status') == 'Resolve' ? 'selected':''}}>
+                                    <option value="Resolve" {{ request()->input('status') == 'Resolve' ? 'selected':''}}>
                                         Resolve
                                     </option>
-                                    <option value="Duplicate" {{ old('status') == 'Duplicate' ? 'selected':''}}>
+                                    <option value="Duplicate" {{ request()->input('status')== 'Duplicate' ? 'selected':''}}>
                                         Duplicate
                                     </option>
-                                    <option value="Closed" {{ old('status') == 'Closed' ? 'selected':''}}>Closed
+                                    <option value="Closed" {{ request()->input('status') == 'Closed' ? 'selected':''}}>Closed
                                     </option>
                                 </select>
                             </div>
