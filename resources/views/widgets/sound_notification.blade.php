@@ -1,6 +1,6 @@
 @if($notify > 0)
 <audio autoplay>
-    <source src="Google_Event-1.mp3" type="audio/mpeg">
+    <source src="{{asset('Google_Event-1.mp3')}}" type="audio/mpeg">
     Your browser does not support the audio element.
 </audio>
 @endif

@@ -17,7 +17,9 @@
 {{--        document.getElementById("my_audio").play();--}}
 {{--    }--}}
 {{--</script>--}}
+@if(Auth::user()->department == 'Administrator' || Auth::user()->department == 'MICT')
 @asyncWidget('sound_notification')
+@endif
 <body class="hold-transition sidebar-mini layout-fixed layout-footer-fixed">
 <!-- Site wrapper -->
 <div class="wrapper">
