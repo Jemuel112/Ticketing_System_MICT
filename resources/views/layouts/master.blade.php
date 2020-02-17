@@ -19,10 +19,11 @@
 {{--</script>--}}
 @asyncWidget('sound_notification')
 <body class="hold-transition sidebar-mini layout-fixed layout-footer-fixed">
-<audio src="Google_Event-1.mp3" id="my_audio" loop="loop"></audio>
-
 <!-- Site wrapper -->
 <div class="wrapper">
+
+
+
 @include('layouts.mict_header')
 
 @hasSection('nav')
