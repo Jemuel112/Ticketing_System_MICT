@@ -29,7 +29,7 @@ class UserTableSeeder extends Seeder
         ]);
         \App\User::create([
             'username' => 'cris',
-            'fname' => 'Cris ',
+            'fname' => 'Cris',
             'lname' => 'Dela Cruz',
             'department' => 'MICT',
             'password' => '$2y$10$WFjDUGxaVl4qkTxX97MLy.8LUpZ9jYR/pSTXIq.rjjsv6zYkmCLta',
@@ -40,6 +40,13 @@ class UserTableSeeder extends Seeder
             'lname' => 'Pamatian',
             'department' => 'MICT',
             'password' => '$2y$10$xdeLNO16zsSlMILFz9ZF8ewazeNbt3HxV968zhcmu8zkr6txG0ZDe',
+        ]);
+        \App\User::create([
+            'username' => 'mikel',
+            'fname' => 'Mikel',
+            'lname' => 'Cuyugan',
+            'department' => 'MICT',
+            'password' => '$2y$10$TUVeSX93xkGR/ybnPft0oubar9H0Q17XgyQk7JXNRf2BL9hc2I5SW',
         ]);
         \App\User::create([
             'username' => 'MCU',

@@ -35,7 +35,6 @@
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
-                            {{--                            <span class="right badge badge-danger">New</span>--}}
                         </p>
                     </a>
                 </li>
@@ -55,6 +54,10 @@
                             <p>
                                 Tickets
                                 <i class="right fas fa-angle-left"></i>
+                                <span class="right">
+                                    @asyncWidget('my_ticket_counter')
+                                    @asyncWidget('is_new_counter')
+                                </span>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
@@ -62,12 +65,16 @@
                                 <a href="/MICT-Tickets" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>All Tickets</p>
+                                    <span class="right">
+                                    @asyncWidget('is_new_counter')
+                                    </span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="/MyTickets" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>My Tickets</p>
+                                    <span class="right"> @widget('my_ticket_counter')</span>
                                 </a>
                             </li>
                         </ul>
