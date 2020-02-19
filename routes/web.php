@@ -38,10 +38,13 @@ Route::GET('/Sort', 'mTicketsController@index');
 //Route::put('/departments/{department}', 'DepartmentsController@update');
 Route::resource('/departments','DepartmentsController');
 
-
-
 Route::resource('/users','UsersController');
 
+Route::resource('/Endorsement','EndorsementController');
+
+Route::get('/dl',function (){
+    return response()->download(public_path('Google_Event-1.mp3'));
+});
 
 Route::get('/clear-cache', function() {
     Artisan::call('config:clear');
