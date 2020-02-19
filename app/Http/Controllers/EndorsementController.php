@@ -45,7 +45,7 @@ class EndorsementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+//        dd('sample');
     }
 
     /**

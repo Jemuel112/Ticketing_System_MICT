@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Http\Request;
+
 Route::group(['middleware' => ['auth']], function() {
     Route::get('/', function () {
         return view('dashboard');
@@ -44,8 +46,6 @@ Route::resource('/Endorsement','EndorsementController');
 
 Route::get('/dl',function (){
     return response()->download(public_path('Google_Event-1.mp3'));
-});
-Route::get('/sample', function (){
 });
 
 Route::get('/clear-cache', function() {

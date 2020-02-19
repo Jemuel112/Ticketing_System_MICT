@@ -77,7 +77,7 @@
             </div><!-- /.container-fluid -->
         </section>
 
-<form action="/sample">
+<form action="/Endorsement/create">
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
@@ -201,7 +201,7 @@
                                 <div class="form-group">
                                     <div class="btn btn-default btn-file">
                                         <i class="fas fa-paperclip"></i> Attachment
-                                        <input type="file" name="attachment" multiple>
+                                        <input type="file" name="attachment[]" multiple>
                                     </div>
                                     <p class="help-block">Max. 32MB</p>
                                 </div>
@@ -224,7 +224,7 @@
         </section>
         <!-- /.content -->
     </div>
-	
+
 	</form>
     <script>
         $(function () {

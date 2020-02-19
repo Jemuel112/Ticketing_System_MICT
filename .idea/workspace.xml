@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e46f795c-50de-4821-94e9-0a47af70672e" name="Default Changelist" comment="Innitial Commit">
-      <change afterPath="$PROJECT_DIR$/app/Endorsement.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/EndorsementController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/factories/EndorsementFactory.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_02_19_084242_create_endorsements_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/endorsement/create.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/endorsement/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/EndorsementController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/EndorsementController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/endorsement/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/endorsement/create.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -232,7 +228,7 @@
       <workItem from="1581643406310" duration="12989000" />
       <workItem from="1581733594012" duration="259000" />
       <workItem from="1581900277517" duration="6211000" />
-      <workItem from="1582072292196" duration="7327000" />
+      <workItem from="1582072292196" duration="10888000" />
     </task>
     <servers />
   </component>
