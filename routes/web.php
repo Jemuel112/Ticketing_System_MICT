@@ -45,6 +45,8 @@ Route::resource('/Endorsement','EndorsementController');
 Route::get('/dl',function (){
     return response()->download(public_path('Google_Event-1.mp3'));
 });
+Route::get('/sample', function (){
+});
 
 Route::get('/clear-cache', function() {
     Artisan::call('config:clear');

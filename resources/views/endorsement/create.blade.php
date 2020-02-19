@@ -77,6 +77,7 @@
             </div><!-- /.container-fluid -->
         </section>
 
+<form action="/sample">
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
@@ -200,7 +201,7 @@
                                 <div class="form-group">
                                     <div class="btn btn-default btn-file">
                                         <i class="fas fa-paperclip"></i> Attachment
-                                        <input type="file" name="attachment">
+                                        <input type="file" name="attachment" multiple>
                                     </div>
                                     <p class="help-block">Max. 32MB</p>
                                 </div>
@@ -208,7 +209,6 @@
                             <!-- /.card-body -->
                             <div class="card-footer">
                                 <div class="float-right">
-                                    <button type="button" class="btn btn-default"><i class="fas fa-pencil-alt"></i> Draft</button>
                                     <button type="submit" class="btn btn-primary"><i class="far fa-envelope"></i> Send</button>
                                 </div>
                                 <button type="reset" class="btn btn-default"><i class="fas fa-times"></i> Discard</button>
@@ -224,6 +224,8 @@
         </section>
         <!-- /.content -->
     </div>
+	
+	</form>
     <script>
         $(function () {
             //Add text editor
