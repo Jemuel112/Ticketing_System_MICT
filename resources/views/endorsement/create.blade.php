@@ -77,7 +77,7 @@
             </div><!-- /.container-fluid -->
         </section>
 
-<form action="/Endorsement/create" enctype="multipart/form-data">
+<form action="/Endorsement" enctype="multipart/form-data" method="post">
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
@@ -201,9 +201,12 @@
                                 <div class="form-group">
                                     <div class="btn btn-default btn-file">
                                         <i class="fas fa-paperclip"></i> Attachment
-                                        <input type="file" name="attachment[]" multiple>
+
                                     </div>
                                     <p class="help-block">Max. 32MB</p>
+                                    @csrf
+                                    <input type="file" name="attachment[]" multiple>
+
                                 </div>
                             </div>
                             <!-- /.card-body -->

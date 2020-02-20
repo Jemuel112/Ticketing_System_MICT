@@ -121,6 +121,26 @@
                 @endif
 
                 <li class="nav-header">
+                    ENDORSEMENTS
+                </li>
+                <li class="nav-item">
+                    <a href="/Endorsement/create" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Create Endorsement
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/Endorsement" class="nav-link">
+                        <i class="nav-icon far fa-building"></i>
+                        <p>
+                            All Endorsements
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-header">
                     SETTINGS
                 </li>
                 @if(Auth::user()->department == 'MICT' || Auth::user()->department == 'Administrator' )
