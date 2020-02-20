@@ -766,9 +766,12 @@
             } else if($(this).val() == "On-Going") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
-            } else {
-                $("#act").prop("disabled", true);
+            } else if($(this).val() == "On-Going") {
+                $("#act").prop("disabled", false);
+                $("#dact").prop("hidden", false);
+            }else{
                 $("#dact").prop("hidden", true);
+                $("#act").prop("disabled", true);
             }
         });
         function mySubmit() {
@@ -808,9 +811,12 @@
             } else if ($('#status').val() == "Resolve") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
-            } else {
-                $("#act").prop("disabled", true);
+            }  else if($(this).val() == "On-Going") {
+                $("#act").prop("disabled", false);
+                $("#dact").prop("hidden", false);
+            }else{
                 $("#dact").prop("hidden", true);
+                $("#act").prop("disabled", true);
             }
         }
         var msg = '{{Session::get('alert')}}';
