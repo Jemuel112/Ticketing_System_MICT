@@ -77,7 +77,7 @@
             </div><!-- /.container-fluid -->
         </section>
 
-<form action="/Endorsement/create">
+<form action="/Endorsement/create" enctype="multipart/form-data">
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">

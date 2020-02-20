@@ -264,9 +264,10 @@
                                 <select class="form-control select2bs4 @error("acknowledge_by")is-invalid @enderror"
                                         id="ackn" name="acknowledge_by"
                                         style="width: 100%;"
-                                        @if(Auth::user()->department != "Administrator")
-                                        readonly
-                                    @endif>
+                                        @if(Auth::user()->department != "Administrator" || !is_null($ticket->acknowledge_by))
+                                        disabled
+                                        value ="{{$ticket->acknowledge_by}}"
+                                        @endif>
                                     <option></option>
                                     @foreach($micts as $mict)
                                         <option
@@ -607,7 +608,7 @@
 
     <footer class="main-footer">
         <div class="float-right">
-            <button type="submit" class="btn btn-primary" form="myForm">Submit</button>
+            <button type="submit" class="btn btn-primary" form="myForm" onclick="mySubmit()">Submit</button>
 
         </div>
         <strong>Copyright &copy; 2020 <a href="https://www.mcuhospital.org/">MCU Hospital</a>.</strong> All
@@ -762,11 +763,17 @@
             } else if ($(this).val() == "Resolve") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
+            } else if($(this).val() == "On-Going") {
+                $("#act").prop("disabled", false);
+                $("#dact").prop("hidden", false);
             } else {
                 $("#act").prop("disabled", true);
                 $("#dact").prop("hidden", true);
             }
         });
+        function mySubmit() {
+            $("#ackn").prop("disabled", false);
+        }
     </script>
     <script>
         window.onload = function exampleFunction() {
@@ -794,6 +801,7 @@
             } else {
                 $("#dother").prop("hidden", true);
             }
+
             if ($('#status').val() == "Closed") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);

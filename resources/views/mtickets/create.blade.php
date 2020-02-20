@@ -29,7 +29,7 @@
             <!-- Main content -->
             @csrf
             @method('POST')
-            <section class="content" onload="functionToBeExecuted">
+            <section class="content">
 
                 @if(Auth::user()->department == 'Administrator')
                     <div class="card card-secondary">
@@ -653,9 +653,12 @@
             } else if ($(this).val() == "Resolve") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
-            } else {
-                $("#act").prop("disabled", true);
+            } else if($(this).val() == "On-Going") {
+                $("#act").prop("disabled", false);
+                $("#dact").prop("hidden", false);
+            }else{
                 $("#dact").prop("hidden", true);
+                $("#act").prop("disabled", true);
             }
         });
     </script>
@@ -669,6 +672,8 @@
                 $("#dogst1").prop("hidden", false);
                 $("#dogst2").prop("disabled", false);
                 $("#dogst2").prop("hidden", false);
+                $("#act").prop("disabled", false);
+                $("#dact").prop("hidden", false);
             } else {
                 $("#ogs").prop("disabled", true);
                 $("#dogs").prop("hidden", true);
@@ -676,6 +681,8 @@
                 $("#dogst1").prop("hidden", true);
                 $("#dogst2").prop("disabled", true);
                 $("#dogst2").prop("hidden", true);
+                $("#act").prop("disabled", true);
+                $("#dact").prop("hidden", true);
             }
             if ($('#category').val() == "System") {
                 $("#system").prop("disabled", false);
