@@ -158,7 +158,7 @@ class MTicketsController extends Controller
                 $tickets->finished_at = date('Y-m-d H:i:s', strtotime(Carbon::now()));
             }
         }
-        if ($request->status != "Active") {
+        if ($request->status != "Active" || !is_null($request->acknowledge_by)) {
             $tickets->is_new = false;
         }
 
