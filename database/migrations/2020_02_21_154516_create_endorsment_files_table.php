@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEndorsementsTable extends Migration
+class CreateEndorsmentFilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateEndorsementsTable extends Migration
      */
     public function up()
     {
-        Schema::create('endorsements', function (Blueprint $table) {
+        Schema::create('endorsment_files', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title');
-            $table->longText('content');
-            $table->string('created_by');
-            $table->string('seen_by');
+            $table->string('file');
+            $table->bigInteger('doc_id');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateEndorsementsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('endorsements');
+        Schema::dropIfExists('endorsment_files');
     }
 }
