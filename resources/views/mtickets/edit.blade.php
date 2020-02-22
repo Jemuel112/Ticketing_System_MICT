@@ -151,7 +151,7 @@
 
                             {{--Status--}}
                             <div class="col-lg-3 col-sm-3">
-                                <label for="reqb" @error('request_by') class="text-red" @enderror>Request By</label>
+                                <label for="reqb" @error('request_by') class="text-red" @enderror>Status</label>
                                 @error('request_by')
                                 <span class="text-red">is required</span>
                                 @enderror
