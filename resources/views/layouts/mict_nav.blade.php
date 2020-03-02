@@ -55,8 +55,8 @@
                                 Tickets
                                 <i class="right fas fa-angle-left"></i>
                                 <span class="right">
-                                    @asyncWidget('my_ticket_counter')
-                                    @asyncWidget('is_new_counter')
+                                    @widget('my_ticket_counter')
+                                    @widget('is_new_counter')
                                 </span>
                             </p>
                         </a>
@@ -66,7 +66,7 @@
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>All Tickets</p>
                                     <span class="right">
-                                    @asyncWidget('is_new_counter')
+                                    @widget('is_new_counter')
                                     </span>
                                 </a>
                             </li>

@@ -4,6 +4,7 @@ namespace App\Widgets;
 
 use App\mTicket;
 use Arrilot\Widgets\AbstractWidget;
+use Illuminate\Support\Facades\Auth;
 
 class SoundNotification extends AbstractWidget
 {
@@ -19,7 +20,7 @@ class SoundNotification extends AbstractWidget
      *
      * @var int|float
      */
-    public $reloadTimeout = 2;
+    public $reloadTimeout = 3;
 
     /**
      * Treat this method as a controller action.
@@ -29,9 +30,11 @@ class SoundNotification extends AbstractWidget
     {
         //
         $notify = mTicket::where('is_new', 1)->count();
+        $myActive = mTicket::where([['assigned_to', 'Like', '%' . Auth::user()->fname . '%']])->where([['status', '=', 'Active']])->count();
         return view('widgets.sound_notification', [
             'config' => $this->config,
             'notify' => $notify,
+            'myActive' => $myActive,
         ]);
     }
 }
