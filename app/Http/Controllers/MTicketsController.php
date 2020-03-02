@@ -30,7 +30,6 @@ class MTicketsController extends Controller
     public function myTickets()
     {
         $name = Auth::user()->fname;
-
         $tickets = mTicket::where([['assigned_to', 'Like', '%' . "$name" . '%']])->orderBy('id', 'DESC')->get();
         $title = 'My Tickets';
         $departments = Department::all();
