@@ -354,7 +354,7 @@
                                 <input id="other"
                                        disabled
                                        class="form-control @error("other")is-invalid @enderror" value="{{old('other')}}"
-                                       name="other" style="width: 100%;" type="text" name=""
+                                       name="other" style="width: 100%;" type="text"
                                        placeholder="Please Specify"
                                 >
                             </div>
@@ -700,7 +700,7 @@
             } else if ($('#status').val() == "Resolve") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
-            }  else if($(this).val() == "On-Going") {
+            }else if($('#status').val() == "On-Going") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
             }else{

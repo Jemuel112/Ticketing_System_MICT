@@ -32,7 +32,7 @@ Route::post('/MICT-Tickets/report', 'mTicketsController@report');
 Route::GET('/Sort', 'mTicketsController@index');
 
 
-
+Route::GET('/Received_Calls', 'ReportsController@receivedCalls');
 
 //Route::get('/departments', 'DepartmentsController@index');
 //Route::post('/departments', 'DepartmentsController@store');
@@ -52,7 +52,7 @@ Route::get('/clear-cache', function() {
     Artisan::call('config:clear');
     Artisan::call('cache:clear');
     Artisan::call('config:cache');
-    return redirect()->back();
+    return "Cache cleared";
 });
 
 Auth::routes([

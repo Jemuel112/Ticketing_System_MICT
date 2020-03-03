@@ -34,7 +34,6 @@ class TicketFormRequest extends FormRequest
                     ]);
             }
         }
-
         if (Auth::user()->department == 'Administrator') {
             if ($request->status == 'On-Going') {
                 return [
@@ -63,6 +62,7 @@ class TicketFormRequest extends FormRequest
                         'lop.required' => 'Level of Priority is required',
                     ])];
             } else {
+
                 return [
                     $data = request()->validate([
                         'reported_by' => 'required',
@@ -75,12 +75,13 @@ class TicketFormRequest extends FormRequest
                     ], [
                         'reported_by' => 'Reported by is required',
                         'request_by' => 'Request by is required',
-//                        'acknowledge_by' => 'Acknowledge by is required',
                         'status' => 'Status is required',
                         'category' => 'Category is required',
                         'concerns.required' => 'Concerns is required',
                         'concerns.min' => 'Concerns must be at least 8 characters',
                         'lop.required' => 'Level of Priority is required',
+                        //                        'acknowledge_by' => 'Acknowledge by is required',
+
                     ])];
             }
         } elseif (Auth::user()->department == 'MICT') {
