@@ -35,7 +35,7 @@ class MyTicketCounter extends AbstractWidget
      *
      * @var int|float|bool
      */
-    public $reloadTimeout = 1;
+    public $reloadTimeout = true;
 
     /**
      * Treat this method as a controller action.

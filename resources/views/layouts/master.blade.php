@@ -18,7 +18,7 @@
 {{--    }--}}
 {{--</script>--}}
 @if(Auth::user()->department == 'Administrator' || Auth::user()->department == 'MICT')
-@widget('sound_notification')
+@asyncWidget('sound_notification')
 @endif
 <body class="hold-transition sidebar-mini layout-fixed layout-footer-fixed">
 <!-- Site wrapper -->

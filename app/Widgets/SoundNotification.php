@@ -20,7 +20,21 @@ class SoundNotification extends AbstractWidget
      *
      * @var int|float
      */
-    public $reloadTimeout = 3;
+    public $reloadTimeout = 5;
+
+    /**
+     * Async and reloadable widgets are wrapped in container.
+     * You can customize it by overriding this method.
+     *
+     * @return array
+     */
+    public function container()
+    {
+        return [
+            'element'       => 'span',
+            'attributes'    => '',
+        ];
+    }
 
     /**
      * Treat this method as a controller action.

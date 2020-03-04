@@ -19,21 +19,23 @@
                     <div class="card card-cyan">
                         <div class="card-header">
                             {{--                            <h3 class="card-title">Active Tickets</h3>--}}
-
-                            <div class="row">
-                                <div class="col-lg-8"></div>
-                                <div class="col-sm-6 col-lg-2" style="width: 100%;">
-                                    <input type="text" class="form-control float-right" name="datefilter"
-                                           placeholder="Date Range" value="{{request()->input('datefilter')}}">
+                            {{--                                <div class="card-tools col-sm-1">--}}
+                            {{--                                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i--}}
+                            {{--                                            class="fas fa-minus"></i></button>--}}
+                            {{--                                </div>--}}
+                            <form action="#" class="" autocomplete="off" method="GET">
+                                <div class="row">
+                                    <div class="col-lg-8"></div>
+                                    <div class="col-sm-6 col-lg-2" style="width: 100%;">
+                                        <input type="text" class="form-control float-right" name="datefilter"
+                                               placeholder="Date Range" value="{{request()->input('datefilter')}}">
+                                    </div>
+                                    <div class="col-sm-6 col-lg-2">
+                                        <button type="submit" class="btn btn-warning col-12">Apply</button>
+                                    </div>
                                 </div>
-                                <div class="col-sm-6 col-lg-2">
-                                    <button type="submit" class="btn btn-warning col-12">Apply</button>
-                                </div>
-{{--                                <div class="card-tools col-sm-1">--}}
-{{--                                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i--}}
-{{--                                            class="fas fa-minus"></i></button>--}}
-{{--                                </div>--}}
-                            </div>
+                            </form>
+                            3
 
 
                             {{--                            <form action="#" class="" autocomplete="off" method="GET">--}}
