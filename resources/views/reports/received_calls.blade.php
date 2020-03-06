@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Dashboard | ')
+@section('title', 'Department Received Calls | ')
 
 @section('content')
     <div class="content-wrapper">
@@ -35,7 +35,6 @@
                                     </div>
                                 </div>
                             </form>
-                            3
 
 
                             {{--                            <form action="#" class="" autocomplete="off" method="GET">--}}

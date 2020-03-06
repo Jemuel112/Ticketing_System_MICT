@@ -8,6 +8,7 @@ class ReportsController extends Controller
 {
     public function receivedCalls()
     {
+//        dd('demo');
        return view('reports.received_calls');
     }
 }

@@ -289,6 +289,11 @@ class MTicketsController extends Controller
         }
         if (!is_null($request->action)) {
             $action = new mactions();
+            if($request->shared == "on"){
+                $action->shared = 1;
+            }else{
+                $action->shared = 0;
+            }
             $action->actions = $request->action;
             $action->id_mticket = $id;
             $action->id_user = Auth::user()->id;

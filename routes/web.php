@@ -31,6 +31,8 @@ Route::get('/MyTickets', 'mTicketsController@myTickets');
 Route::post('/MICT-Tickets/report', 'mTicketsController@report');
 Route::GET('/Sort', 'mTicketsController@index');
 
+Route::GET('/Received_Calls', 'ReportsController@receivedCalls');
+
 
 Route::GET('/Received_Calls', 'ReportsController@receivedCalls');
 
