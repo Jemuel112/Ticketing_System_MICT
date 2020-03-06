@@ -99,7 +99,6 @@
                                         <td style="text-align: center; vertical-align: middle;">{{ str_pad($ticket->id,5,'0',STR_PAD_LEFT) }}</td>
                                         <td style="text-align: center; vertical-align: middle;">{{$ticket->reported_by}}</td>
                                         <td style="text-align: center; vertical-align: middle;">{{$ticket->request_by}}</td>
-
                                         @if($ticket->status == 'Active')
                                             <td style="text-align: center; vertical-align: middle;">
                                                 @if($ticket->is_new == true)

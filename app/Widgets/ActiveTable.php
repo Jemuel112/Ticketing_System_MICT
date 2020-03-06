@@ -45,11 +45,12 @@ class ActiveTable extends AbstractWidget
 
             $to1 =  Carbon::now();
             $to = date( Carbon::now());
-            $encrypted = Crypt::encryptString('Hello world.');
-            $decrypted = Crypt::decryptString($encrypted);
+//            $encrypted = Crypt::encryptString('Hello world.');
+//            $decrypted = Crypt::decryptString($encrypted);
 //            dd( $encrypted."(".$decrypted.")");
+
+
             $tickets = mTicket::whereBetween('created_at',  [$from, $to])->count();
-//            dd($tickets);
             $tickets = mTicket::where('status', '=', 'Active')->get()->groupBy('request_by');
 
         } else {

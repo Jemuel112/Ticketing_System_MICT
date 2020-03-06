@@ -23,7 +23,9 @@
                             {{--                                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i--}}
                             {{--                                            class="fas fa-minus"></i></button>--}}
                             {{--                                </div>--}}
-                            <form action="#" class="" autocomplete="off" method="GET">
+                            <form action="{{route('report.received.calls')}}" class="" autocomplete="off" method="POST">
+                                @csrf
+                                @method('POST')
                                 <div class="row">
                                     <div class="col-lg-8"></div>
                                     <div class="col-sm-6 col-lg-2" style="width: 100%;">

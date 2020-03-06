@@ -90,7 +90,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="/Received_Calls" class="nav-link">
+                                <a href="{{route('received.calls')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Department received calls</p>
                                 </a>
