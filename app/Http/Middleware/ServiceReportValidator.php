@@ -5,21 +5,22 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class AccessEngineering
+class ServiceReportValidator
 {
     /**
      * Handle an incoming request.
      *
-     * @param \Illuminate\Http\
-     * @param \Closure $next
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->department == 'Engineering') {
+        if ($request != NULL) {
+            dd($request);
             return $next($request);
         }
+        dd('FAILED');
         return redirect()->back();
-
     }
 }

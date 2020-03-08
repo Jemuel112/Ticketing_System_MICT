@@ -8,7 +8,9 @@ use App\User;
 use App\mcomments;
 use App\mactions;
 use Carbon\Carbon;
+use DateTime;
 use Illuminate\Http\Request;
+use App\Http\Requests\TicketFormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
@@ -21,39 +23,66 @@ class MTicketsController extends Controller
         $this->middleware('auth');
         $this->middleware('auth.am')->except('index', 'store', 'create', 'show', 'comment');
         $this->middleware('editvalid')->only('show');
+
 //        $this->middleware('auth.admin')->only('index', 'store', 'allticket');
     }
 
     public function myTickets()
     {
         $name = Auth::user()->fname;
-//        $tickets = mTicket::where('category','LIKE',$name);
-//        $tickets = DB::table('m_tickets')->keyBy('assigned_to');
-//        $query="SELECT * FROM m_tickets WHERE ({implode(',',assigned_to)}) IN $name";
-        //        assigned_to
-//        $query = mTicket::where('assigned_to', 'Administrator')->count();
-
-        $tickets = mTicket::where([['assigned_to', 'Like', '%' . "$name" . '%']])->get();
-//        dd($tickets);
-
-        return view('mtickets.index', compact('tickets'));
+        $tickets = mTicket::where([['assigned_to', 'Like', '%' . "$name" . '%']])->orderBy('id', 'DESC')->get();
+        $title = 'My Tickets';
+        $departments = Department::all();
+        return view('mtickets.index', compact('tickets', 'title', 'departments'));
     }
 
     public function index(Request $request)
     {
+        $title = 'All Tickets';
 
         if (Auth::user()->department == "Administrator" || Auth::user()->department == "MICT") {
-            $tickets = mTicket::orderBy('id', 'DESC')->get();
+            $tickets = new mTicket;
         } else {
-//            dd(Auth::user()->department);
             $dept = Auth::user()->department;
             $tickets = mTicket::where([
                 ['request_by', '=', $dept]
-            ])
-                ->orderBy('id', 'DESC')
-                ->get();
+            ]);
+            $title = 'My Tickets';
         }
-        return view('mtickets.index', compact('tickets'));
+        $departments = Department::all();
+        if (!is_null($request->datefilter)) {
+            $range = explode(' - ', $request->datefilter);
+            if (DateTime::createFromFormat('m/d/Y', $range[0]) == FALSE) {
+                $error = \Illuminate\Validation\ValidationException::withMessages([
+                    'field_name_1' => ['Start Date format is invalid'],
+                ]);
+                throw $error;
+            }
+            if (DateTime::createFromFormat('m/d/Y', $range[1]) == FALSE) {
+                $error = \Illuminate\Validation\ValidationException::withMessages([
+                    'field_name_1' => ['End Date format is invalid'],
+                ]);
+                throw $error;
+            }
+            $range0 = date('Y-m-d', strtotime($range[0]));
+            $range1 = date('Y-m-d', strtotime($range[1]));
+            $tickets = $tickets->whereBetween('created_at', [$range0 . " 00:00:00", $range1 . " 23:59:59"]);
+            $title = 'Sorted Tickets';
+        }
+        if (!is_null($request->department)) {
+            $tickets = $tickets->where([
+                ['request_by', '=', $request->department]
+            ]);
+            $title = 'Sorted Tickets';
+        }
+        if (!is_null($request->status)) {
+            $tickets = $tickets->where([
+                ['status', '=', $request->status]
+            ]);
+            $title = 'Sorted Tickets';
+        }
+        $tickets = $tickets->orderBy('id', 'DESC')->get();
+        return view('mtickets.index', compact('tickets', 'title', 'departments'));
     }
 
     public function create()
@@ -77,6 +106,7 @@ class MTicketsController extends Controller
         $actions = mactions::Where([['id_mticket', '=', $id]])->orderBy('created_at', 'DESC')->get()->groupBy(function ($item) {
             return $item->created_at->format('Y-m-d');
         });
+        $shared = mactions::Where([['id_mticket', '=', $id]])->Where('shared', '=', True)->count();
         $departments = Department::all();
         $micts = User::select('fname')
             ->Where([
@@ -86,13 +116,17 @@ class MTicketsController extends Controller
                 ['department', '=', 'Administrator']
             ])
             ->get();
-//        dd($comments);
-        return view('mtickets.show', compact('ticket', 'micts', 'departments', 'comments', 'actions'));
+        return view('mtickets.show', compact('ticket', 'micts', 'departments', 'comments', 'actions', 'shared'));
     }
 
     public function edit($id)
     {
         $ticket = mTicket::findOrFail($id);
+
+        if (is_null($ticket->acknowledge_by)) {
+            $ticket->acknowledge_by = Auth::user()->fname;
+            $ticket->save();
+        }
         $ticket->is_new = 0;
         $ticket->save();
         $comments = mcomments::Where([['id_mticket', '=', $id]])->orderBy('created_at', 'DESC')->get();
@@ -112,96 +146,31 @@ class MTicketsController extends Controller
         return view('mtickets.edit', compact('ticket', 'micts', 'departments', 'comments', 'actions'));
     }
 
-    public function store(Request $request)
+    public function store(TicketFormRequest $request)
     {
         $tickets = new mTicket();
 
-        if ($request->status == "Closed" || $request->status == "Resolve") {
+        if ($request->status == "Closed" || $request->status == "Resolve" || $request->status == "Duplicate") {
             if (!is_null($request->finished_at)) {
                 $tickets->finished_at = date('Y-m-d H:i:s', strtotime($request->finished_at));
             } else {
                 $tickets->finished_at = date('Y-m-d H:i:s', strtotime(Carbon::now()));
             }
         }
-        if ($request->status != "Active") {
+        if ($request->status != "Active" || !is_null($request->acknowledge_by)) {
             $tickets->is_new = false;
         }
 
         if (Auth::user()->department == 'Administrator') {
-//            dd($request);
             if ($request->status == 'On-Going') {
-//                dd($request->status);
-                $data = request()->validate([
-                    'og_status' => 'required',
-                    'start_at' => 'required',
-                    'end_at' => 'required',
-                    'reported_by' => 'required',
-                    'request_by' => 'required',
-                    'acknowledge_by' => 'required',
-                    'assigned_to' => '',
-                    'assisted_by' => '',
-                    'accomplished_by' => '',
-                    'status' => 'required',
-                    'category' => 'required',
-                    'sys_category' => '',
-                    'concerns' => 'required|min:8',
-                    'lop' => 'required',
-                    'created_at' => '',
-                ]);
-
                 $tickets->start_at = date('Y-m-d H:i:s', strtotime($request->start_at));
                 $tickets->end_at = date('Y-m-d H:i:s', strtotime($request->end_at));
-            } else {
-                $data = request()->validate([
-                    'create_at' => '',
-                    'reported_by' => 'required',
-                    'request_by' => 'required',
-                    'acknowledge_by' => 'required',
-                    'assigned_to' => '',
-                    'assisted_by' => '',
-                    'accomplished_by' => '',
-                    'status' => 'required',
-                    'category' => 'required',
-                    'sys_category' => '',
-                    'concerns' => 'required|min:8',
-                    'lop' => 'required',
-                ]);
             }
         } elseif (Auth::user()->department == 'MICT') {
             if ($request->status == 'On-Going') {
-                $data = request()->validate([
-                    'og_status' => 'required',
-                    'start_at' => 'required',
-                    'end_at' => 'required',
-                    'reported_by' => 'required',
-                    'request_by' => 'required',
-                    'acknowledge_by' => 'required',
-                    'status' => 'required',
-                    'category' => 'required',
-                    'concerns' => 'required|min:8',
-                    'lop' => 'required',
-                ]);
                 $tickets->start_at = date('Y-m-d H:i:s', strtotime($request->start_at));
                 $tickets->end_at = date('Y-m-d H:i:s', strtotime($request->end_at));
-            } else {
-                $data = request()->validate([
-                    'reported_by' => 'required',
-                    'request_by' => 'required',
-                    'status' => 'required',
-                    'acknowledge_by' => 'required',
-                    'category' => 'required',
-                    'concerns' => 'required|min:8',
-                    'lop' => 'required',
-                ]);
             }
-        } else {
-            $data = request()->validate([
-                'reported_by' => 'required',
-                'request_by' => 'required',
-                'status' => 'required',
-                'category' => 'required',
-                'concerns' => 'required|min:8',
-            ]);
         }
 
         if (!is_null($request->assigned_to)) {
@@ -229,21 +198,17 @@ class MTicketsController extends Controller
         $tickets->recommendation = $request->recommendation;
 
 
-//        dd($tickets->assigned_to);
-
-        if (is_null($request->created_at)) {
-//            dd($request->created_at);
-            $tickets->save();
-        } else {
-            $tickets->created_at = date('Y-m-d H:i:s', strtotime($request->created_at));
+        if (!is_null($request->created_at)) {
+//           dd( Carbon::now() , date('Y-m-d H:i:s.u', strtotime($request->created_at)));
+            $tickets->created_at = date('Y-m-d H:i:s.u', strtotime($request->created_at));
             $tickets->updated_at = Carbon::now();
             $tickets->save(['timestamps' => false]);
+
+        } else {
+            $tickets->save();
         }
 
         if (!is_null($request->action)) {
-            $data = request()->validate([
-                'action' => 'required'
-            ]);
             $action = new mactions();
             $action->actions = $request->action;
             $action->id_mticket = $tickets->id;
@@ -287,79 +252,29 @@ class MTicketsController extends Controller
         return redirect('/MICT-Tickets');
     }
 
-    public function update(Request $request, $id)
+    public function update(TicketFormRequest $request, $id)
     {
         $ticket = mTicket::findOrFail($id);
-//        dd($id);
-
+//        dd($request);
+        if ($request->status == "Closed" || $request->status == "Resolve") {
+            if (!is_null($request->finished_at)) {
+                $ticket->finished_at = date('Y-m-d H:i:s', strtotime($request->finished_at));
+            } else {
+                $ticket->finished_at = date('Y-m-d H:i:s', strtotime(Carbon::now()));
+            }
+        }
         if (Auth::user()->department == 'Administrator') {
-//            dd($request);
             if ($request->status == 'On-Going') {
-//                dd($request->status);
-                $data = request()->validate([
-                    'og_status' => 'required',
-                    'start_at' => 'required',
-                    'end_at' => 'required',
-                    'reported_by' => 'required',
-                    'request_by' => 'required',
-                    'acknowledge_by' => 'required',
-                    'assigned_to' => '',
-                    'assisted_by' => '',
-                    'accomplished_by' => '',
-                    'status' => 'required',
-                    'category' => 'required',
-                    'sys_category' => '',
-                    'concerns' => 'required|min:8',
-                    'lop' => 'required',
-                    'created_at' => '',
-                ]);
-
                 $ticket->start_at = date('Y-m-d H:i:s', strtotime($request->start_at));
                 $ticket->end_at = date('Y-m-d H:i:s', strtotime($request->end_at));
-            } else {
-                $data = request()->validate([
-                    'create_at' => '',
-                    'reported_by' => 'required',
-                    'request_by' => 'required',
-                    'acknowledge_by' => 'required',
-                    'assigned_to' => '',
-                    'assisted_by' => '',
-                    'accomplished_by' => '',
-                    'status' => 'required',
-                    'category' => 'required',
-                    'sys_category' => '',
-                    'concerns' => 'required|min:8',
-                    'lop' => 'required',
-                ]);
             }
         } elseif (Auth::user()->department == 'MICT') {
             if ($request->status == 'On-Going') {
-                $data = request()->validate([
-                    'og_status' => 'required',
-                    'start_at' => 'required',
-                    'end_at' => 'required',
-                    'reported_by' => 'required',
-                    'request_by' => 'required',
-                    'acknowledge_by' => 'required',
-                    'status' => 'required',
-                    'category' => 'required',
-                    'concerns' => 'required|min:8',
-                    'lop' => 'required',
-                ]);
                 $ticket->start_at = date('Y-m-d H:i:s', strtotime($request->start_at));
                 $ticket->end_at = date('Y-m-d H:i:s', strtotime($request->end_at));
-            } else {
-                $data = request()->validate([
-                    'reported_by' => 'required',
-                    'request_by' => 'required',
-                    'status' => 'required',
-                    'acknowledge_by' => 'required',
-                    'category' => 'required',
-                    'concerns' => 'required|min:8',
-                    'lop' => 'required',
-                ]);
             }
         }
+
         if (!is_null($request->assigned_to)) {
             $assign = $request->input('assigned_to');
             $ticket->assigned_to = implode(',', $assign);
@@ -374,6 +289,11 @@ class MTicketsController extends Controller
         }
         if (!is_null($request->action)) {
             $action = new mactions();
+            if($request->shared == "on"){
+                $action->shared = 1;
+            }else{
+                $action->shared = 0;
+            }
             $action->actions = $request->action;
             $action->id_mticket = $id;
             $action->id_user = Auth::user()->id;
@@ -411,6 +331,20 @@ class MTicketsController extends Controller
 
     public function report(Request $request)
     {
-        dd($request->action_id);
+        $ticket = mTicket::findOrFail($request->ticket_id);
+        $actions = $request->action_id;
+        if (is_null($actions)) {
+//        dd('suc');
+            return redirect()->back()->with('alert', 'Unable to proceed no Action is selected');
+        }
+        $micts = User::select('fname')
+            ->Where([
+                ['department', '=', 'MICT']
+            ])
+            ->orwhere([
+                ['department', '=', 'Administrator']
+            ])
+            ->get();
+        return view('mtickets.report', compact('actions', 'ticket', 'micts'));
     }
 }

@@ -19,7 +19,7 @@ class OnGoingWidget extends AbstractWidget
      *
      * @var int|float
      */
-    public $reloadTimeout = 1;
+    public $reloadTimeout = 5;
 
     /**
      * Treat this method as a controller action.

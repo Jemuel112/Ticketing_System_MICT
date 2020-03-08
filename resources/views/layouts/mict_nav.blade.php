@@ -3,7 +3,7 @@
     <!-- Brand Logo -->
     <a href="/dashboard" class="brand-link">
         <img src="../../img/MCU.png"
-             alt="AdminLTE Logo"
+             alt="MCU Logo"
              class="brand-image img-circle elevation-3"
              style="opacity: .8">
         <span class="brand-text font-weight-light">Ticketing System</span>
@@ -35,7 +35,6 @@
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
-                            {{--                            <span class="right badge badge-danger">New</span>--}}
                         </p>
                     </a>
                 </li>
@@ -55,6 +54,10 @@
                             <p>
                                 Tickets
                                 <i class="right fas fa-angle-left"></i>
+                                <span class="right">
+                                    @widget('my_ticket_counter')
+                                    @widget('is_new_counter')
+                                </span>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
@@ -62,12 +65,16 @@
                                 <a href="/MICT-Tickets" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>All Tickets</p>
+                                    <span class="right">
+                                    @widget('is_new_counter')
+                                    </span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="/MyTickets" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>My Tickets</p>
+                                    <span class="right"> @widget('my_ticket_counter')</span>
                                 </a>
                             </li>
                         </ul>
@@ -83,15 +90,21 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('received.calls')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>All Tickets</p>
+                                    <p>Department received calls</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>My Tickets</p>
+                                    <p>Cencus of tickets</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>List of pending tickets</p>
                                 </a>
                             </li>
                         </ul>
@@ -106,6 +119,26 @@
                         </a>
                     </li>
                 @endif
+
+                <li class="nav-header">
+                    ENDORSEMENTS
+                </li>
+                <li class="nav-item">
+                    <a href="/Endorsement/create" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Create Endorsement
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/Endorsement" class="nav-link">
+                        <i class="nav-icon far fa-building"></i>
+                        <p>
+                            All Endorsements
+                        </p>
+                    </a>
+                </li>
 
                 <li class="nav-header">
                     SETTINGS

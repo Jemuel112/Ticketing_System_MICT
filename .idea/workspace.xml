@@ -3,11 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="e46f795c-50de-4821-94e9-0a47af70672e" name="Default Changelist" comment="Innitial Commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MTicketsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MTicketsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/mtickets/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mtickets/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReportsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReportsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Widgets/ActiveTable.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Widgets/ActiveTable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/mict_nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/mict_nav.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/mtickets/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mtickets/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/reports/received_calls.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/reports/received_calls.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,6 +21,20 @@
     <execution>
       <executable />
     </execution>
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -124,41 +141,43 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="HTML&#10;Asp" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/mtickets" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/endorsement" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\Github\Ticketing_System_MICT\resources\views\mtickets" />
-      <recent name="C:\Users\Jemuel\Desktop\New folder (10)\public\plugins\tempusdominus" />
-      <recent name="C:\Users\Jemuel\Desktop\New folder (10)\resources\views\users" />
-      <recent name="C:\Users\Jemuel\Desktop\MICT - Copy\MCU_MICT\resources\views" />
-      <recent name="C:\Users\Jemuel\Desktop\MICT - Copy\MCU_MICT\app\Widgets" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Github\Ticketing_System_MICT\public" />
+      <recent name="D:\Github\Ticketing_System_MICT\public\notification" />
       <recent name="C:\Users\Jemuel\Desktop\New folder (10)\public\plugins\tempusdominus-bootstrap-4\js" />
       <recent name="C:\Users\Jemuel\Desktop\MICT - Copy\MCU_MICT\resources\views\auth" />
       <recent name="C:\Users\Jemuel\Desktop\New folder (7) - Copy\MCU_MICT\resources\views\layouts" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Github\Ticketing_System_MICT\resources\views\endorsement" />
+      <recent name="D:\Github\Ticketing_System_MICT\resources\views\mtickets" />
+      <recent name="D:\Desktop files\New folder (5)" />
+      <recent name="C:\Users\Jemuel\Desktop\New folder (10)\public\plugins\tempusdominus" />
+      <recent name="C:\Users\Jemuel\Desktop\New folder (10)\resources\views\users" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager">
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner scope="XML" />
       <method v="2" />
     </configuration>
-  </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -197,8 +216,31 @@
       <workItem from="1580087474512" duration="23069000" />
       <workItem from="1580143469627" duration="5650000" />
       <workItem from="1580172287481" duration="21348000" />
-      <workItem from="1580314542248" duration="34450000" />
-      <workItem from="1580483973004" duration="3630000" />
+      <workItem from="1580523676200" duration="8358000" />
+      <workItem from="1580688005596" duration="10900000" />
+      <workItem from="1580788463000" duration="1256000" />
+      <workItem from="1581002888502" duration="8017000" />
+      <workItem from="1581035096588" duration="6324000" />
+      <workItem from="1581128141803" duration="8660000" />
+      <workItem from="1581344409731" duration="7819000" />
+      <workItem from="1581406154359" duration="27486000" />
+      <workItem from="1581467732034" duration="589000" />
+      <workItem from="1581470584336" duration="7813000" />
+      <workItem from="1581486805220" duration="10179000" />
+      <workItem from="1581559085721" duration="5573000" />
+      <workItem from="1581643406310" duration="12989000" />
+      <workItem from="1581733594012" duration="259000" />
+      <workItem from="1581900277517" duration="6211000" />
+      <workItem from="1582072292196" duration="10888000" />
+      <workItem from="1582158506559" duration="12957000" />
+      <workItem from="1582244697491" duration="4424000" />
+      <workItem from="1582253245343" duration="8126000" />
+      <workItem from="1582353843402" duration="1299000" />
+      <workItem from="1582503720238" duration="2355000" />
+      <workItem from="1583197931391" duration="15547000" />
+      <workItem from="1583287928387" duration="10198000" />
+      <workItem from="1583385242694" duration="3391000" />
+      <workItem from="1583457275391" duration="14013000" />
     </task>
     <servers />
   </component>
@@ -231,29 +273,29 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="0" y="0" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1579794438180" />
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1580412656721">
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1581017120844">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1580412656721" />
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1581017120844" />
     <state x="184" y="7" key="SettingsEditor" timestamp="1579860613081">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="7" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1579860613081" />
-    <state x="378" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1580484260638">
+    <state x="378" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1581406218703">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="378" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1580484260638" />
+    <state x="378" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1581406218703" />
     <state x="490" y="276" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1579844943911">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="490" y="276" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1579844943911" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1580487073884">
+    <state x="339" y="162" key="run.anything.popup" timestamp="1581436208766">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1580487073884" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1580491056839">
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1581436208766" />
+    <state x="458" y="79" width="672" height="678" key="search.everywhere.popup" timestamp="1581442182087">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1580491056839" />
+    <state x="458" y="79" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1581442182087" />
   </component>
 </project>
