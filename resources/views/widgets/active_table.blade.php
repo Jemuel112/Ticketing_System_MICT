@@ -1,4 +1,36 @@
-<table class="table table-responsive-lg table-hover">
+@if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
+<table class="table table-hover" style="width: 100%;">
+    <thead>
+    <tr>
+        <th>Department</th>
+        <th>Count</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    @forelse($tickets as $ticket => $inner)
+        <tbody>
+        <tr>
+            <td>{{$ticket}}</td>
+            <td>{{$inner->count()}}</td>
+            <td>
+                <form action="/Sort" method="GET">
+                    @csrf
+                    @method('GET')
+                    <input type="text" name="department" value="{{$ticket}}" hidden>
+                    <input type="text" name="status" value="Active" hidden>
+                    <button type="submit" class="btn btn-sm btn-primary"><i class="fal fa-eye"></i>View Tickets</button>
+                </form>
+            </td>
+        </tr>
+        @empty
+            <tr>
+                <td colspan="4" style="text-align: center">No Active Tickets</td>
+            </tr>
+        </tbody>
+    @endforelse
+</table>
+@else
+<table class="table table-hover" style="width: 100%;">
     <thead>
     <tr>
         <th width="20%">Ticket#</th>
@@ -7,7 +39,7 @@
         <th width="20%">Actions</th>
     </tr>
     </thead>
-    @forelse($tickets1 as $ticket)
+    @forelse($tickets as $ticket)
         <tbody>
         <tr>
             <td>{{$ticket->id}}</td>
@@ -33,8 +65,7 @@
                 <td colspan="4" style="text-align: center">No Active Tickets</td>
             </tr>
         </tbody>
-
     @endforelse
 </table>
-{{ $tickets1->links() }}
+@endif
 

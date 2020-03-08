@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('title', 'Create New Ticket | ')
-@include('layouts.scripts')
 
 @section('content')
 
@@ -18,7 +17,6 @@
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->
-                {{--            SHOW USERS ERRORS--}}
                 @if($errors->count()>0)
                     <div style="" class="alert alert-danger">
                         @foreach($errors->all() as $error)
@@ -26,13 +24,12 @@
                         @endforeach
                     </div>
                 @endif
-                {{--            END SHOW USERS ERRORS--}}
             </section>
 
             <!-- Main content -->
             @csrf
             @method('POST')
-            <section class="content" onload="functionToBeExecuted">
+            <section class="content">
 
                 @if(Auth::user()->department == 'Administrator')
                     <div class="card card-secondary">
@@ -54,7 +51,8 @@
                                              data-target-input="nearest">
                                             <input type="text" name="created_at" id="datetimepicker7"
                                                    class="form-control datetimepicker-input"
-                                                   data-target="#datetimepicker7">
+                                                   data-target="#datetimepicker7"
+                                                   value="{{old('created_at')}}">
                                             <div class="input-group-append" data-target="#datetimepicker7"
                                                  data-toggle="datetimepicker">
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -70,7 +68,8 @@
                                              data-target-input="nearest">
                                             <input type="text" name="finished_at" id="datetimepicker8"
                                                    class="form-control datetimepicker-input"
-                                                   data-target="#datetimepicker8"/>
+                                                   data-target="#datetimepicker8"
+                                                   value="{{old('finished_at')}}">
                                             <div class="input-group-append" data-target="#datetimepicker8"
                                                  data-toggle="datetimepicker">
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -98,26 +97,26 @@
                         {{--End Data--}}
                     </div>
                     <!-- /.card-header -->
-
                     <div class="card-body">
                         <div class="row">
-
-
                             {{--Reportedy by--}}
                             <div class="col-lg-3 col-sm-3">
-                                <label>Reported by
-                                </label>
+                                <label @error('reported_by') class="text-red" @enderror>Reported by</label>
+                                @error('reported_by')
+                                <span class="text-red">is required</span>
+                                @enderror
                                 <input class="form-control @error("reported_by")is-invalid @enderror"
                                        value="{{old('reported_by')}}"
                                        style="width: 100%;" type="text" name="reported_by" placeholder="Name"
                                 >
                             </div>
                             {{--End Reported by--}}
-
-
                             {{--Request by--}}
                             <div class="col-lg-3 col-sm-3">
-                                <label for="reqb">Request By</label>
+                                <label for="reqb" @error('request_by') class="text-red" @enderror>Request By</label>
+                                @error('request_by')
+                                <span class="text-red">is required</span>
+                                @enderror
                                 @if(Auth::user()->department == 'Administrator' || Auth::user()->department == "MICT")
                                     <select class="form-control select2bs4 @error("request_by")is-invalid @enderror"
                                             id="reqb" name="request_by"
@@ -141,7 +140,10 @@
 
                             {{--Status--}}
                             <div class="col-lg-3 col-sm-3">
-                                <label>Status</label>
+                                <label @error('status') class="text-red" @enderror>Status</label>
+                                @error('status')
+                                <span class="text-red">is required</span>
+                                @enderror
                                 @if(Auth::user()->department == 'Administrator' || Auth::user()->department == 'MICT')
                                     <select class="form-control select2bs4 @error("status")is-invalid @enderror"
                                             name="status"
@@ -176,7 +178,11 @@
                             {{--On-Going Status--}}
                             <div class="col-lg-3 col-sm-3">
                                 <div id="dogs" hidden>
-                                    <label for="ogs">On-Going Status</label>
+                                    <label for="ogs" @error('og_status') class="text-red" @enderror>On-Going
+                                        Status</label>
+                                    @error('og_status')
+                                    <span class="text-red">is required</span>
+                                    @enderror
                                     <select class="form-control select2bs4 @error("og_status")is-invalid @enderror"
                                             name="og_status"
                                             id="ogs"
@@ -202,7 +208,10 @@
 
 
                             <div class="col-md-6" id="dogst1" hidden>
-                                <label for="ogst"><br>Select Date to start</label>
+                                <label for="ogst" @error('start_at') class="text-red" @enderror><br>Select Date to start</label>
+                                @error('start_at')
+                                <span class="text-red">is required</span>
+                                @enderror
                                 <div class="input-group date" id="datetimepickers" data-target-input="nearest">
                                     <input type="text"
                                            class="form-control datetimepicker-input @error("start_at")is-invalid @enderror"
@@ -214,8 +223,13 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-md-6" id="dogst2" hidden>
-                                <label for="ogst"><br>Select Deadline</label>
+                                <label for="ogst" @error('end_at') class="text-red" @enderror><br>Select
+                                    Deadline</label>
+                                @error('end_at')
+                                <span class="text-red">is required</span>
+                                @enderror
                                 <div class="input-group date" id="datetimepickerd" data-target-input="nearest">
                                     <input type="text"
                                            class="form-control datetimepicker-input @error("end_at")is-invalid @enderror"
@@ -230,7 +244,10 @@
 
                             {{--Acknoledge--}}
                             <div class="col-lg-3 col-md-3">
-                                <label for="ackn"><br>Acknowledge by</label>
+                                <label for="ackn" @error('acknowledge_by') class="text-red" @enderror><br>Acknowledge by</label>
+                                @error('acknowledge_by')
+                                <span class="text-red">is required</span>
+                                @enderror
                                 <select class="form-control select2bs4 @error("acknowledge_by")is-invalid @enderror"
                                         value="{{old('acknowledge_by')}}" id="ackn" name="acknowledge_by"
                                         style="width: 100%;"
@@ -251,7 +268,7 @@
                             <div class="col-lg-3 col-md-3">
                                 <label><br>Assigned to</label>
                                 <select class="form-control select2bs4 @error("assigned_to")is-invalid @enderror"
-                                        value="{{old('assigned_to')}}" name="assigned_to[]"
+                                        name="assigned_to[]"
                                         data-placeholder="Assigned to..."
                                         multiple="multiple" style="width: 100%;"
                                         @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
@@ -271,7 +288,7 @@
                             <div class="col-lg-3 col-md-3">
                                 <label><br>Assisted By</label>
                                 <select class="form-control select2bs4 @error("assisted_by")is-invalid @enderror"
-                                        value="{{old('assisted_by')}}" name="assisted_by[]"
+                                        name="assisted_by[]"
                                         data-placeholder="Assisted by..."
                                         multiple="multiple" style="width: 100%;"
                                         @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
@@ -291,7 +308,7 @@
                             <div class="col-lg-3 col-md-3">
                                 <label><br>Accomplished by</label>
                                 <select class="form-control select2bs4 @error("accomplished_by")is-invalid @enderror"
-                                        value="{{old('accomplished_by')}}" name="accomplished_by[]"
+                                        name="accomplished_by[]"
                                         data-placeholder="Accomplished by..."
                                         multiple="multiple" style="width: 100%;"
                                         @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
@@ -308,7 +325,10 @@
                             {{-- End Accompleshed--}}
 
                             <div class="col-lg-4 col-md-4">
-                                <label><br>Category</label>
+                                <label @error('category') class="text-red" @enderror><br>Category</label>
+                                @error('category')
+                                <span class="text-red">is required</span>
+                                @enderror
                                 <select class="form-control select2bs4 @error("category")is-invalid @enderror"
                                         id="category" name="category"
                                         style="width: 100%;">
@@ -334,7 +354,7 @@
                                 <input id="other"
                                        disabled
                                        class="form-control @error("other")is-invalid @enderror" value="{{old('other')}}"
-                                       name="other" style="width: 100%;" type="text" name=""
+                                       name="other" style="width: 100%;" type="text"
                                        placeholder="Please Specify"
                                 >
                             </div>
@@ -342,7 +362,10 @@
 
                             @if(Auth::user()->department == "Administrator"|| Auth::user()->department == "MICT")
                                 <div id="dsystem" class="col-lg-4 col-md-4" hidden>
-                                    <label><br>System Category</label>
+                                    <label @error('sys_category') class="text-red" @enderror><br>System Category</label>
+                                    @error('sys_category')
+                                    <span class="text-red">is required</span>
+                                    @enderror
                                     <select id="system"
                                             class="form-control select2bs4 @error("sys_category")is-invalid @enderror"
                                             id="syscategory"
@@ -395,12 +418,15 @@
 
                             @if(Auth::user()->department == 'MICT' || Auth::user()->department == 'Administrator')
                                 <div class="col-lg-4 col-md-4">
-                                    <label><br>Level of Priority</label>
+                                    <label @error('lop') class="text-red" @enderror><br>Level of Priority</label>
+                                    @error('lop')
+                                    <span class="text-red">is required</span>
+                                    @enderror
                                     <select class="form-control select2bs4 @error("lop")is-invalid @enderror"
                                             value="{{old('lop')}}" id="lop" name="lop"
                                             style="width: 100%;">
                                         <option></option>
-                                        <option value="Low" {{ old('lop') == 'Low' ? 'selected':''}}>Low</option>
+                                        <option value="Low" {{ old('lop') == 'Low' ? 'selected':''}} selected>Low</option>
                                         <option value="Medium" {{ old('lop') == 'Medium' ? 'selected':''}}>Medium
                                         </option>
                                         <option value="High" {{ old('lop') == 'High' ? 'selected':''}}>High</option>
@@ -409,9 +435,10 @@
                             @endif
 
                             <div class="col-lg-12 col-md-12">
-                                <label> <br>
-                                    Issue / Concerns
-                                </label>
+                                <label @error('concerns') class="text-red" @enderror><br>Issue / Concerns</label>
+                                @error('concerns')
+                                <span class="text-red">is required</span>
+                                @enderror
                                 <textarea name="concerns"
                                           placeholder="What can I help you"
                                           class="@error("concerns")is-invalid @enderror"
@@ -487,7 +514,7 @@
         </footer>
 
     </form>
-    <script>
+    <script type="text/javascript">
         $(window).on("beforeunload", function () {
             return "Are you sure? You didn't finish the form!";
         });
@@ -501,9 +528,16 @@
         });
     </script>
     <script type="text/javascript">
-        $("#datetimepickers").datetimepicker();
+        $("#datetimepickers").datetimepicker({
+            icons: {
+                time: "far fa-clock"
+            }
+        });
         $("#datetimepickerd").datetimepicker({
-            useCurrent: false
+            useCurrent: false,
+            icons: {
+                time: "far fa-clock"
+            }
         });
         $("#datetimepickers").on("change.datetimepicker", function (e) {
             $('#datetimepickerd').datetimepicker('minDate', e.date);
@@ -511,6 +545,28 @@
         $("#datetimepickerd").on("change.datetimepicker", function (e) {
             $('#datetimepickers').datetimepicker('maxDate', e.date);
         });
+
+        $("#datetimepicker7").datetimepicker({
+            icons: {
+                time: "far fa-clock"
+            }
+        });
+        $("#datetimepicker8").datetimepicker({
+            useCurrent: false,
+            icons: {
+                time: "far fa-clock"
+            }
+        });
+
+        $("#datetimepicker7").on("change.datetimepicker", function (e) {
+            $('#datetimepicker8').datetimepicker('minDate', e.date);
+        });
+        $("#datetimepicker8").on("change.datetimepicker", function (e) {
+            $('#datetimepicker7').datetimepicker('maxDate', e.date);
+        });
+
+    </script>
+    <script>
         //Initialize Select2 Elements
         $('.select2').select2();
 
@@ -597,11 +653,16 @@
             } else if ($(this).val() == "Resolve") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
-            } else {
-                $("#act").prop("disabled", true);
+            } else if($(this).val() == "On-Going") {
+                $("#act").prop("disabled", false);
+                $("#dact").prop("hidden", false);
+            }else{
                 $("#dact").prop("hidden", true);
+                $("#act").prop("disabled", true);
             }
         });
+    </script>
+    <script>
         window.onload = function exampleFunction() {
             // Function to executed
             if ($('#status').val() == "On-Going") {
@@ -639,9 +700,12 @@
             } else if ($('#status').val() == "Resolve") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
-            } else {
-                $("#act").prop("disabled", true);
+            }else if($('#status').val() == "On-Going") {
+                $("#act").prop("disabled", false);
+                $("#dact").prop("hidden", false);
+            }else{
                 $("#dact").prop("hidden", true);
+                $("#act").prop("disabled", true);
             }
         }
     </script>
@@ -650,3 +714,4 @@
 
 
 @section('footer',"<p></p>")
+@include('layouts.scripts')

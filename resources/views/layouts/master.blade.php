@@ -9,12 +9,23 @@
 @include('layouts.css')
 <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
-
 </head>
+
+{{--<audio src="Google_Event-1.mp3" id="my_audio" loop="loop"></audio>--}}
+{{--<script type="text/javascript">--}}
+{{--    window.onload=function(){--}}
+{{--        document.getElementById("my_audio").play();--}}
+{{--    }--}}
+{{--</script>--}}
+@if(Auth::user()->department == 'Administrator' || Auth::user()->department == 'MICT')
+@asyncWidget('sound_notification')
+@endif
 <body class="hold-transition sidebar-mini layout-fixed layout-footer-fixed">
 <!-- Site wrapper -->
 <div class="wrapper">
+
+
+
 @include('layouts.mict_header')
 
 @hasSection('nav')
@@ -26,14 +37,16 @@
 <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
         <!-- Control sidebar content goes here -->
-        {{--        <h1>Sample Text</h1>--}}
+        {{--                <h1>Sample Text</h1>--}}
     </aside>
     <!-- /.control-sidebar -->
-
     @hasSection('footer')
         @yield('footer')
     @else
         <footer class="main-footer">
+{{--            <audio id="audio" src="https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_700KB.mp3"></audio>--}}
+
+{{--            <audio id="audio" src="Google_Event-1.mp3"></audio>--}}
             <div class="float-right d-none d-sm-block">
                 <b>Version</b> 1.0.0
             </div>
@@ -43,7 +56,6 @@
     @endif
 </div>
 <!-- ./wrapper -->
-
 
 </body>
 </html>

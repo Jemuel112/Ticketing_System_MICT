@@ -28,11 +28,25 @@ class UserTableSeeder extends Seeder
             'password' => bcrypt('qweqweqwe'),
         ]);
         \App\User::create([
-            'username' => 'Jemuel1',
-            'fname' => 'Jemuel1',
-            'lname' => 'Amerila',
+            'username' => 'cris',
+            'fname' => 'Cris',
+            'lname' => 'Dela Cruz',
             'department' => 'MICT',
-            'password' => bcrypt('qweqweqwe'),
+            'password' => '$2y$10$WFjDUGxaVl4qkTxX97MLy.8LUpZ9jYR/pSTXIq.rjjsv6zYkmCLta',
+        ]);
+        \App\User::create([
+            'username' => 'joel',
+            'fname' => 'Joel',
+            'lname' => 'Pamatian',
+            'department' => 'MICT',
+            'password' => '$2y$10$xdeLNO16zsSlMILFz9ZF8ewazeNbt3HxV968zhcmu8zkr6txG0ZDe',
+        ]);
+        \App\User::create([
+            'username' => 'mikel',
+            'fname' => 'Mikel',
+            'lname' => 'Cuyugan',
+            'department' => 'MICT',
+            'password' => '$2y$10$TUVeSX93xkGR/ybnPft0oubar9H0Q17XgyQk7JXNRf2BL9hc2I5SW',
         ]);
         \App\User::create([
             'username' => 'MCU',

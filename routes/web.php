@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Http\Request;
+
 Route::group(['middleware' => ['auth']], function() {
     Route::get('/', function () {
         return view('dashboard');
@@ -26,9 +28,11 @@ Route::get('/dashboard', function () {
 Route::resource('/MICT-Tickets', 'mTicketsController',['only'=> ['index','create','store','show','edit','update']]);
 Route::post('/MICT-Tickets/comments/{comment}', 'mTicketsController@comment');
 Route::get('/MyTickets', 'mTicketsController@myTickets');
-Route::post('/MICT-Tickets/reports/{report}', 'mTicketsController@report');
+Route::post('/MICT-Tickets/report', 'mTicketsController@report');
+Route::GET('/Sort', 'mTicketsController@index');
 
-
+Route::get('/Received_Calls', 'ReportsController@receivedCalls')->name('received.calls');
+Route::POST('/Received_Calls/Report', 'ReportsController@reportreceivedCalls')->name('report.received.calls');
 
 //Route::get('/departments', 'DepartmentsController@index');
 //Route::post('/departments', 'DepartmentsController@store');
@@ -36,16 +40,19 @@ Route::post('/MICT-Tickets/reports/{report}', 'mTicketsController@report');
 //Route::put('/departments/{department}', 'DepartmentsController@update');
 Route::resource('/departments','DepartmentsController');
 
-
-
 Route::resource('/users','UsersController');
 
+Route::resource('/Endorsement','EndorsementController');
+
+Route::get('/dl',function (){
+    return response()->download(public_path('Google_Event-1.mp3'));
+});
 
 Route::get('/clear-cache', function() {
     Artisan::call('config:clear');
     Artisan::call('cache:clear');
     Artisan::call('config:cache');
-    return  'CACHE CLEARED'; //Return anything
+    return "Cache cleared";
 });
 
 Auth::routes([

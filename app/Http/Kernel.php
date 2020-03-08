@@ -67,6 +67,7 @@ class Kernel extends HttpKernel
         'auth.ae' => \App\Http\Middleware\AccessAE::class,
         'disablepreventback' => \App\Http\Middleware\DisablePreventBack::class,
         'editvalid' => \App\Http\Middleware\EditValidator::class,
+        'sreport' => \App\Http\Middleware\ServiceReportValidator::class,
     ];
 
     /**
