@@ -15,8 +15,9 @@ class CreateEndorsmentFilesTable extends Migration
     {
         Schema::create('endorsment_files', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('file');
-            $table->bigInteger('doc_id');
+            $table->string('file_name');
+            $table->string('org_file_name');
+            $table->bigInteger('endorse_id');
             $table->timestamps();
         });
     }

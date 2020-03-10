@@ -578,6 +578,16 @@
         $('#act').summernote({
             height: 300,
             placeholder: 'Write here...',
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['fontname', ['fontname']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture']],
+                ['view', ['fullscreen', 'codeview', 'help']],
+            ],
         });
 
         $selectElement = $('#reqb').select2({

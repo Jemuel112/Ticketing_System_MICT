@@ -142,7 +142,7 @@ class MTicketsController extends Controller
                 ['department', '=', 'Administrator']
             ])
             ->get();
-
+//        dd($actions->count());
         return view('mtickets.edit', compact('ticket', 'micts', 'departments', 'comments', 'actions'));
     }
 

@@ -34,7 +34,7 @@ class IsNewCounter extends AbstractWidget
      *
      * @var int|float|bool
      */
-    public $reloadTimeout = true;
+    public $reloadTimeout = 10;
 
     /**
      * Treat this method as a controller action.

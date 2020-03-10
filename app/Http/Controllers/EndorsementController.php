@@ -2,8 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Department;
 use App\Endorsement;
+use App\EndorsmentFiles;
+use App\mTicket;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class EndorsementController extends Controller
 {
@@ -16,6 +23,7 @@ class EndorsementController extends Controller
 
 //        $this->middleware('auth.admin')->only('index', 'store', 'allticket');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +32,6 @@ class EndorsementController extends Controller
     public function index()
     {
         return view('endorsement.index');
-
     }
 
     /**
@@ -34,24 +41,74 @@ class EndorsementController extends Controller
      */
     public function create()
     {
-        return view('endorsement.create');
+        $users = User::all();
+        $departments = Department::all();
+        $tickets = mTicket::all();
+        return view('endorsement.create', compact('users', 'departments', 'tickets'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        dd($request->attachment);
+
+        $data = request()->validate([
+            'assigned_to' => 'required_without:departments',
+            'departments' => '',
+            'ticket' => '',
+            'title' => 'required',
+            'body' => 'required',
+        ]);
+        $endorse = new Endorsement();
+        $endorse->title = $request->title;
+        $endorse->body = $request->body;
+        $endorse->created_by_id = Auth::user()->id;
+        if ($request->ticket) {
+            $endorse->ticket_id = implode(', ', $request->ticket);
+        }
+        if ($request->assigned_to) {
+            $endorse->assigned_to_id = implode(', ', $request->assigned_to);
+        }
+        if ($request->departments) {
+            $endorse->assigned_dept_id = implode(', ', $request->departments);
+        }
+        $endorse->save();
+
+        if ($request->attachment) {
+            $id = $endorse->id;
+            $directory = "endorsment_files/$id";
+            $files = $request->attachment;
+            foreach ($files as $file) {
+                $unique = Str::uuid()->getTimeMidHex();
+                $orig_filename = $file->getClientOriginalName();
+                $unique_filename = "[".$unique."]" . $orig_filename;
+                $file->storeAs($directory, $unique_filename);
+
+                $end_file = new EndorsmentFiles();
+                $end_file->file_name = $unique_filename;
+                $end_file->org_file_name = $orig_filename;
+                $end_file->endorse_id = $id;
+                $end_file->save();
+            }
+        }
+
+//        $endors = new Endorsement();
+//        ticket_id
+//        title
+//        body
+//        attachment
+
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Endorsement  $endorsement
+     * @param \App\Endorsement $endorsement
      * @return \Illuminate\Http\Response
      */
     public function show(Endorsement $endorsement)
@@ -62,7 +119,7 @@ class EndorsementController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Endorsement  $endorsement
+     * @param \App\Endorsement $endorsement
      * @return \Illuminate\Http\Response
      */
     public function edit(Endorsement $endorsement)
@@ -73,8 +130,8 @@ class EndorsementController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Endorsement  $endorsement
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Endorsement $endorsement
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Endorsement $endorsement)
@@ -85,7 +142,7 @@ class EndorsementController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Endorsement  $endorsement
+     * @param \App\Endorsement $endorsement
      * @return \Illuminate\Http\Response
      */
     public function destroy(Endorsement $endorsement)
