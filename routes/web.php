@@ -44,7 +44,7 @@ Route::resource('/users','UsersController');
 
 Route::resource('/Endorsement','EndorsementController');
 
-Route::get('/dls',function (){
+Route::get('/dl',function (){
     return response()->download(public_path('Google_Event-1.mp3'),'sadsdasd.ico');
 });
 

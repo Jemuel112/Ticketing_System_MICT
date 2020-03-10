@@ -12,8 +12,9 @@
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <h1>
-                            Create an Endorsement
+                            Edit Endorsement # {{ str_pad($endor->id,3,'0',STR_PAD_LEFT) }}
                         </h1>
+
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
@@ -35,7 +36,7 @@
                         <div class="col-md-12">
                             <div class="card card-primary card-outline">
                                 <div class="card-header">
-                                    <h3 class="card-title">Compose New Message</h3>
+                                    <h3 class="card-title"><h5>({{$endor->title}})</h5></h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">

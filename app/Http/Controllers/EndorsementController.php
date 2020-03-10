@@ -31,7 +31,8 @@ class EndorsementController extends Controller
      */
     public function index()
     {
-        return view('endorsement.index');
+        $endors = Endorsement::all();
+        return view('endorsement.index', compact('endors'));
     }
 
     /**
@@ -51,7 +52,7 @@ class EndorsementController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function store(Request $request)
     {
@@ -85,7 +86,7 @@ class EndorsementController extends Controller
             foreach ($files as $file) {
                 $unique = Str::uuid()->getTimeMidHex();
                 $orig_filename = $file->getClientOriginalName();
-                $unique_filename = "[".$unique."]" . $orig_filename;
+                $unique_filename = "[" . $unique . "]" . $orig_filename;
                 $file->storeAs($directory, $unique_filename);
 
                 $end_file = new EndorsmentFiles();
@@ -95,14 +96,7 @@ class EndorsementController extends Controller
                 $end_file->save();
             }
         }
-
-//        $endors = new Endorsement();
-//        ticket_id
-//        title
-//        body
-//        attachment
-
-
+        return view('endorsement.index');
     }
 
     /**
@@ -120,11 +114,15 @@ class EndorsementController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param \App\Endorsement $endorsement
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit(Endorsement $endorsement)
+    public function edit($id)
     {
-        //
+        $endor = Endorsement::findOrFail($id);
+        $users = User::all();
+        $departments = Department::all();
+        $tickets = mTicket::all();
+        return view('endorsement.edit', compact('endor','users', 'departments', 'tickets'));
     }
 
     /**

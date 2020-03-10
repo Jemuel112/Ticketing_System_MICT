@@ -13,7 +13,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>My Endorsement</h1>
+                            <h1>Endorsement</h1>
                         </div>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
             <section class="content" onload="functionToBeExecuted">
                 <div class="card card-cyan">
                     <div class="card-header">
-                        <h3 class="card-title">Ticket Info</h3>
+                        <h3 class="card-title"></h3>
                         <div class="card-tools">
                             &nbsp;
                             <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
@@ -36,7 +36,35 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <div class="row"></div>
+                        {{--                        <div class="row"></div>--}}
+                        <table id="endorsment"
+                               style="width: 100%"
+                               class="wrap compact table table-responsive-sm table-hover table-borderedless table-striped ">
+                            <thead>
+                            <tr>
+                                <td>Doc.#</td>
+                                <td>From</td>
+                                <td>Title</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @forelse($endors as $endor)
+                                <tr  onclick="window.location='/Endorsement/{{$endor->id}}/edit';">
+                                <td>{{ str_pad($endor->id,3,'0',STR_PAD_LEFT) }}</td>
+                                    <td>{{ \Illuminate\Support\Str::limit($endor->title, 100, $end='...') }}</td>
+                                    @php
+                                        $user = \App\User::find($endor->created_by_id)
+                                    @endphp
+                                    @if($user)
+                                        <td>{{$user->fname." ".$user->lname." (".$user->department.")"}}</td>
+                                    @else
+                                        <td>'User Deleted'</td>
+                                    @endif
+                                    @empty
+                                </tr>
+                            @endforelse
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </section>
@@ -55,7 +83,12 @@
         </footer>
 
     </form>
-
+    <script>
+        $("#endorsment").DataTable({
+            'processing': true,
+            "order": [[0, "desc"]]
+        });
+    </script>
 @endsection
 
 

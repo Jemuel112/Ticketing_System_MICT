@@ -167,19 +167,19 @@
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Github\Ticketing_System_MICT\resources\views\endorsement" />
+      <recent name="D:\Github\Ticketing_System_MICT\resources\views\endorsement" />
+      <recent name="D:\Github\Ticketing_System_MICT\resources\views\mtickets" />
+      <recent name="D:\Desktop files\New folder (5)" />
+      <recent name="C:\Users\Jemuel\Desktop\New folder (10)\public\plugins\tempusdominus" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Github\Ticketing_System_MICT\public" />
       <recent name="D:\Github\Ticketing_System_MICT\public\notification" />
       <recent name="C:\Users\Jemuel\Desktop\New folder (10)\public\plugins\tempusdominus-bootstrap-4\js" />
       <recent name="C:\Users\Jemuel\Desktop\MICT - Copy\MCU_MICT\resources\views\auth" />
       <recent name="C:\Users\Jemuel\Desktop\New folder (7) - Copy\MCU_MICT\resources\views\layouts" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Github\Ticketing_System_MICT\resources\views\endorsement" />
-      <recent name="D:\Github\Ticketing_System_MICT\resources\views\mtickets" />
-      <recent name="D:\Desktop files\New folder (5)" />
-      <recent name="C:\Users\Jemuel\Desktop\New folder (10)\public\plugins\tempusdominus" />
-      <recent name="C:\Users\Jemuel\Desktop\New folder (10)\resources\views\users" />
     </key>
   </component>
   <component name="RunManager">
@@ -263,7 +263,7 @@
       <workItem from="1583385242694" duration="3391000" />
       <workItem from="1583457275391" duration="14013000" />
       <workItem from="1583767964303" duration="17668000" />
-      <workItem from="1583842327872" duration="6779000" />
+      <workItem from="1583842327872" duration="11803000" />
     </task>
     <servers />
   </component>
@@ -316,9 +316,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1581436208766" />
-    <state x="458" y="79" width="672" height="678" key="search.everywhere.popup" timestamp="1583859913262">
+    <state x="458" y="79" width="672" height="678" key="search.everywhere.popup" timestamp="1583865616007">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="458" y="79" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1583859913262" />
+    <state x="458" y="79" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1583865616007" />
   </component>
 </project>

@@ -619,7 +619,7 @@
     <!-- /.content -->
     <!-- /.content-wrapper -->
 
-    <script>
+    <script type="text/javascript">
         $(window).on("beforeunload", function () {
             return "Are you sure? You didn't finish the form!";
         });
