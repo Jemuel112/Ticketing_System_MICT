@@ -9,19 +9,16 @@ use App\mTicket;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Str;
 
 class EndorsementController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('disablepreventback');
+        $this->middleware('disablepreventback')->except('download');
         $this->middleware('auth');
-        $this->middleware('auth.am')->except('index', 'store', 'create', 'show', 'comment');
-        $this->middleware('editvalid')->only('show');
-
-//        $this->middleware('auth.admin')->only('index', 'store', 'allticket');
+//        $this->middleware('auth.am')->except('index', 'store', 'create', 'show', 'comment');
     }
 
     /**
@@ -31,8 +28,8 @@ class EndorsementController extends Controller
      */
     public function index()
     {
-        $endors = Endorsement::all();
-        return view('endorsement.index', compact('endors'));
+        $endorsements = Endorsement::all();
+        return view('endorsement.index', compact('endorsements'));
     }
 
     /**
@@ -81,7 +78,7 @@ class EndorsementController extends Controller
 
         if ($request->attachment) {
             $id = $endorse->id;
-            $directory = "endorsment_files/$id";
+            $directory = "public/endorsment_files/$id";
             $files = $request->attachment;
             foreach ($files as $file) {
                 $unique = Str::uuid()->getTimeMidHex();
@@ -96,7 +93,7 @@ class EndorsementController extends Controller
                 $end_file->save();
             }
         }
-        return view('endorsement.index');
+        return redirect('/Endorsement');
     }
 
     /**
@@ -105,9 +102,9 @@ class EndorsementController extends Controller
      * @param \App\Endorsement $endorsement
      * @return \Illuminate\Http\Response
      */
-    public function show(Endorsement $endorsement)
+    public function show($id)
     {
-        //
+        dd($id);
     }
 
     /**
@@ -118,11 +115,12 @@ class EndorsementController extends Controller
      */
     public function edit($id)
     {
-        $endor = Endorsement::findOrFail($id);
+        $endorsement = Endorsement::findOrFail($id);
         $users = User::all();
         $departments = Department::all();
         $tickets = mTicket::all();
-        return view('endorsement.edit', compact('endor','users', 'departments', 'tickets'));
+        $files = EndorsmentFiles::where('endorse_id',$id)->get();
+        return view('endorsement.edit', compact('endorsement','users', 'departments', 'tickets','files'));
     }
 
     /**
@@ -146,5 +144,17 @@ class EndorsementController extends Controller
     public function destroy(Endorsement $endorsement)
     {
         //
+    }
+
+    public function download($id)
+    {
+        $file = EndorsmentFiles::findOrFail($id);
+        $d_id = $file->endorse_id;
+        $directory = "storage\\endorsment_files\\$d_id\\$file->file_name";
+        $name = $file->org_file_name;
+//        dd($directory);
+//        return Storage::download(public_path($directory));
+//        return response()->download(public_path($directory, $name));
+        return Response::download($directory, $name);
     }
 }

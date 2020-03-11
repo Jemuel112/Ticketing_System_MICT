@@ -34,19 +34,20 @@ Route::GET('/Sort', 'mTicketsController@index');
 Route::get('/Received_Calls', 'ReportsController@receivedCalls')->name('received.calls');
 Route::POST('/Received_Calls/Report', 'ReportsController@reportreceivedCalls')->name('report.received.calls');
 
-//Route::get('/departments', 'DepartmentsController@index');
-//Route::post('/departments', 'DepartmentsController@store');
-//Route::get('/departments/{department}/edit', 'DepartmentsController@edit');
-//Route::put('/departments/{department}', 'DepartmentsController@update');
 Route::resource('/departments','DepartmentsController');
 
 Route::resource('/users','UsersController');
 
+//Route::get('/Endorsement/{Endorsement}','EndorsementController@show');
 Route::resource('/Endorsement','EndorsementController');
 
-Route::get('/dl',function (){
-    return response()->download(public_path('Google_Event-1.mp3'),'sadsdasd.ico');
-});
+
+Route::get('/Endorsement/{id}/dl','EndorsementController@download');
+
+
+//Route::get('/dl',function (){
+//    return response()->download(public_path('Google_Event-1.mp3'),'sadsdasd.ico');
+//});
 
 Route::get('/clear-cache', function() {
     Artisan::call('config:clear');

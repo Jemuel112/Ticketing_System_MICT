@@ -35,7 +35,7 @@
                         <div class="col-md-12">
                             <div class="card card-primary card-outline">
                                 <div class="card-header">
-                                    <h3 class="card-title">Compose New Message</h3>
+                                    <h3 class="card-title">Compose New Endorsement</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
@@ -56,12 +56,12 @@
                                             </select>
                                         </div>
                                         <div class="form-group col-md-5">
-                                            <label for="department">Departments</label>
+                                            <label for="department">Departments </label>
                                             <select class="form-control select2bs4"
                                                     name="departments[]"
                                                     data-placeholder="Assigned to departments"
                                                     multiple="multiple" style="width: 100%;" id="department">
-                                                <option></option>
+                                                <option value="All Department">All Department</option>
                                                 @foreach($departments as $department)
                                                     <option
                                                         value="{{$department->id}}">{{$department->dept_name}}</option>

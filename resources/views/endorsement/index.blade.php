@@ -45,22 +45,37 @@
                                 <td>Doc.#</td>
                                 <td>From</td>
                                 <td>Title</td>
+                                <td>Action</td>
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($endors as $endor)
-                                <tr  onclick="window.location='/Endorsement/{{$endor->id}}/edit';">
-                                <td>{{ str_pad($endor->id,3,'0',STR_PAD_LEFT) }}</td>
-                                    <td>{{ \Illuminate\Support\Str::limit($endor->title, 100, $end='...') }}</td>
+                            @forelse($endorsements as $endorsement)
+                                <tr  onclick="window.location='/Endorsement/{{$endorsement->id}}';">
+                                <td>{{ str_pad($endorsement->id,3,'0',STR_PAD_LEFT) }}</td>
+                                    <td>{{ \Illuminate\Support\Str::limit($endorsement->title, 100, $end='...') }}</td>
                                     @php
-                                        $user = \App\User::find($endor->created_by_id)
+                                        $user = \App\User::find($endorsement->created_by_id)
                                     @endphp
                                     @if($user)
                                         <td>{{$user->fname." ".$user->lname." (".$user->department.")"}}</td>
                                     @else
                                         <td>'User Deleted'</td>
                                     @endif
-                                    @empty
+                                        <td>
+                                            <a style="margin: 2px"
+                                               class="btn btn-sm btn-outline-primary"
+                                               href="Endorsement/{Endorsement}"
+                                            ><i class="fal fa-pencil-alt"></i> View</a>
+                                            <a style="margin: 2px"
+                                               class="btn btn-sm btn-outline-primary"
+                                               href="Endorsement/{{$endorsement->id}}/edit"
+                                            ><i class="fal fa-pencil-alt"></i> Edit</a>
+
+                                        </td>
+                                </tr>
+                                @empty
+                                <tr>
+                                    <td colspan="4" class="text-center">No Endorsement at the moment</td>
                                 </tr>
                             @endforelse
                             </tbody>

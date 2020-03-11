@@ -18,7 +18,7 @@ class CreateEndorsementsTable extends Migration
             $table->string('title');
             $table->longText('body');
             $table->string('created_by_id');
-            $table->string('ticket_id');
+            $table->string('ticket_id')->nullable();
             $table->string('assigned_to_id')->nullable();
             $table->string('assigned_dept_id')->nullable();
             $table->string('seen_by')->nullable();
