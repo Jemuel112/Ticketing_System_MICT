@@ -54,6 +54,7 @@ class EndorsementController extends Controller
     public function store(Request $request)
     {
 
+
         $data = request()->validate([
             'assigned_to' => 'required_without:departments',
             'departments' => '',
@@ -72,7 +73,15 @@ class EndorsementController extends Controller
             $endorse->assigned_to_id = implode(', ', $request->assigned_to);
         }
         if ($request->departments) {
-            $endorse->assigned_dept_id = implode(', ', $request->departments);
+
+            if($request->departments[0] == "All Department"){
+                foreach (Department::all() as $department){
+                    $dept[] = $department->id;
+                }
+                $endorse->assigned_dept_id = implode(', ', $dept);
+            }else{
+                $endorse->assigned_dept_id = implode(', ', $request->departments);
+            }
         }
         $endorse->save();
 
@@ -83,13 +92,15 @@ class EndorsementController extends Controller
             foreach ($files as $file) {
                 $unique = Str::uuid()->getTimeMidHex();
                 $orig_filename = $file->getClientOriginalName();
-                $unique_filename = "[" . $unique . "]" . $orig_filename;
+                $unique_filename = "[" . $unique . "]" . $orig_filename . "." . $file->getClientOriginalExtension();
                 $file->storeAs($directory, $unique_filename);
 
                 $end_file = new EndorsmentFiles();
                 $end_file->file_name = $unique_filename;
                 $end_file->org_file_name = $orig_filename;
                 $end_file->endorse_id = $id;
+                $end_file->extension_name = $file->getClientOriginalExtension();
+                dd($file->getClientOriginalExtension());
                 $end_file->save();
             }
         }
@@ -100,11 +111,23 @@ class EndorsementController extends Controller
      * Display the specified resource.
      *
      * @param \App\Endorsement $endorsement
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show($id)
     {
-        dd($id);
+        $endorse = Endorsement::findOrFail($id);
+        $user = User::findOrFail($endorse->created_by_id);
+        $files = EndorsmentFiles::where('endorse_id', $id);
+        $to = explode(', ', $endorse->assigned_to_id);
+        $departments = explode(', ', $endorse->assigned_dept_id);
+        $files = EndorsmentFiles::where('endorse_id', $id)->get();
+        foreach ($files as $file) {
+            dd($file->getClientOriginalExtension());
+
+            $sad = $file->getClientOriginalExtension();
+        }
+
+        return view('endorsement.show', compact('endorse', 'user', 'files', 'to', 'departments', 'files'));
     }
 
     /**
@@ -119,8 +142,8 @@ class EndorsementController extends Controller
         $users = User::all();
         $departments = Department::all();
         $tickets = mTicket::all();
-        $files = EndorsmentFiles::where('endorse_id',$id)->get();
-        return view('endorsement.edit', compact('endorsement','users', 'departments', 'tickets','files'));
+        $files = EndorsmentFiles::where('endorse_id', $id)->get();
+        return view('endorsement.edit', compact('endorsement', 'users', 'departments', 'tickets', 'files'));
     }
 
     /**

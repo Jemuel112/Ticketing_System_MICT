@@ -17,6 +17,7 @@ class CreateEndorsmentFilesTable extends Migration
             $table->bigIncrements('id');
             $table->string('file_name');
             $table->string('org_file_name');
+            $table->string('extension_name');
             $table->bigInteger('endorse_id');
             $table->timestamps();
         });
