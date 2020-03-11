@@ -109,9 +109,9 @@
                                         @elseif($ticket->status == 'On-Going')
                                             <td style="text-align: center; vertical-align: middle;"><span
                                                     class="badge badge-warning   col-md-12">On-Going</span></td>
-                                        @elseif($ticket->status == 'Resolve')
+                                        @elseif($ticket->status == 'Resolved')
                                             <td style="text-align: center; vertical-align: middle;"><span
-                                                    class="badge badge-success col-md-12">Resolve</span></td>
+                                                    class="badge badge-success col-md-12">Resolved</span></td>
                                         @elseif($ticket->status == 'Duplicate')
                                             <td style="text-align: center; vertical-align: middle;"><span
                                                     class="badge badge-primary col-md-12">Duplicate</span></td>

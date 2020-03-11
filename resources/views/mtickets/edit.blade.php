@@ -168,8 +168,8 @@
                                         On-Going
                                     </option>
                                     <option
-                                        value="Resolve" {{ (old('status') ?? $ticket->status) == 'Resolve' ? 'selected':''}}>
-                                        Resolve
+                                        value="Resolved" {{ (old('status') ?? $ticket->status) == 'Resolved' ? 'selected':''}}>
+                                        Resolved
                                     </option>
                                     <option
                                         value="Duplicate" {{  (old('status') ?? $ticket->status) == 'Duplicate' ? 'selected':''}}>
@@ -767,7 +767,7 @@
             if ($('#status').val() == "Closed") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
-            } else if ($('#status').val() == "Resolve") {
+            } else if ($('#status').val() == "Resolved") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
             } else if ($('#status').val() == "On-Going") {
@@ -816,7 +816,7 @@
             if ($('#status').val() == "Closed") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
-            } else if ($('#status').val() == "Resolve") {
+            } else if ($('#status').val() == "Resolved") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
             } else if ($('#status').val() == "On-Going") {

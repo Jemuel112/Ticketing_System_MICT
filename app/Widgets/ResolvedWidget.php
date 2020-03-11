@@ -28,8 +28,8 @@ class ResolvedWidget extends AbstractWidget
     public function run()
     {
         //
-        $tickets = mTicket::where('status', '=', 'Resolve')->count();
-        $utickets = mTicket::where('request_by','=',\Illuminate\Support\Facades\Auth::user()->department)->where('status', '=','Resolve')->count();
+        $tickets = mTicket::where('status', '=', 'Resolved')->count();
+        $utickets = mTicket::where('request_by','=',\Illuminate\Support\Facades\Auth::user()->department)->where('status', '=','Resolved')->count();
         return view('widgets.resolved_widget', [
             'config' => $this->config,
             'tickets' => $tickets,
