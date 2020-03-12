@@ -2,6 +2,8 @@
 
 @section('title', 'MICT Tickets | ')
 @section('content')
+    @include('layouts.scripts')
+
     <div class="content-wrapper">
 
         <section class="content-header">
@@ -46,8 +48,8 @@
                                     <option value="On-Going" {{ request()->input('status') == 'On-Going' ? 'selected':''}}>
                                         On-Going
                                     </option>
-                                    <option value="Resolve" {{ request()->input('status') == 'Resolve' ? 'selected':''}}>
-                                        Resolve
+                                    <option value="Resolved" {{ request()->input('status') == 'Resolved' ? 'selected':''}}>
+                                        Resolved
                                     </option>
                                     <option value="Duplicate" {{ request()->input('status')== 'Duplicate' ? 'selected':''}}>
                                         Duplicate
@@ -192,4 +194,3 @@
 
 @endsection
 
-@include('layouts.scripts')

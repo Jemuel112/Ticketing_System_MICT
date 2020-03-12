@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('title', 'View Ticket | ')
-@include('layouts.scripts')
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
@@ -341,17 +340,25 @@
                                         id="category" name="category"
                                         style="width: 100%;">
                                     <option></option>
-                                    <option value="System" {{ $ticket->category ?? old('category') == 'System' ? 'selected':''}}>System
+                                    <option
+                                        value="System" {{ $ticket->category ?? old('category') == 'System' ? 'selected':''}}>
+                                        System
                                     </option>
-                                    <option value="Software" {{ $ticket->category ?? old('category') == 'Software' ? 'selected':''}}>
+                                    <option
+                                        value="Software" {{ $ticket->category ?? old('category') == 'Software' ? 'selected':''}}>
                                         Software
                                     </option>
-                                    <option value="Hardware" {{ $ticket->category ?? old('category') == 'Hardware' ? 'selected':''}}>
+                                    <option
+                                        value="Hardware" {{ $ticket->category ?? old('category') == 'Hardware' ? 'selected':''}}>
                                         Hardware
                                     </option>
-                                    <option value="Network" {{ $ticket->category ?? old('category') == 'Network' ? 'selected':''}}>Network
+                                    <option
+                                        value="Network" {{ $ticket->category ?? old('category') == 'Network' ? 'selected':''}}>
+                                        Network
                                     </option>
-                                    <option value="Others" {{ $ticket->category ?? old('category') == 'Others' ? 'selected':''}}>Others
+                                    <option
+                                        value="Others" {{ $ticket->category ?? old('category') == 'Others' ? 'selected':''}}>
+                                        Others
                                     </option>
                                 </select>
                             </div>
@@ -379,25 +386,32 @@
                                         style="width: 100%;">
                                     <option></option>
                                     {{--                                    <option></option>--}}
-                                    <option value="Bizbox" {{  $ticket->sys_category ?? old('sys_category') == 'Bizbox' ? 'selected':''}}>
+                                    <option
+                                        value="Bizbox" {{  $ticket->sys_category ?? old('sys_category') == 'Bizbox' ? 'selected':''}}>
                                         Bizbox
                                     </option>
-                                    <option value="PACS" {{ $ticket->sys_category ?? old('sys_category')== 'PACS' ? 'selected':''}}>PACS
+                                    <option
+                                        value="PACS" {{ $ticket->sys_category ?? old('sys_category')== 'PACS' ? 'selected':''}}>
+                                        PACS
                                     </option>
                                     <option
                                         value="LIS - SYSMEX" {{ $ticket->sys_category ?? old('sys_category') == 'LIS - SYSMEX' ? 'selected':''}}>
                                         LIS - SYSMEX
                                     </option>
-                                    <option value="LIS - MARSMAN" {{ $ticket->sys_category ?? old('sys_category') == 'LIS' ? 'selected':''}}>
+                                    <option
+                                        value="LIS - MARSMAN" {{ $ticket->sys_category ?? old('sys_category') == 'LIS' ? 'selected':''}}>
                                         LIS - MARSMAN
                                     </option>
                                     <option
                                         value="LIS - J&J" {{ $ticket->sys_category ?? old('sys_category') == 'LIS - J&J' ? 'selected':''}}>
                                         LIS - J&J
                                     </option>
-                                    <option value="DMS" {{ $ticket->sys_category ?? old('sys_category') == 'DMS' ? 'selected':''}}>DMS
+                                    <option
+                                        value="DMS" {{ $ticket->sys_category ?? old('sys_category') == 'DMS' ? 'selected':''}}>
+                                        DMS
                                     </option>
-                                    <option value="ACC PAC" {{ $ticket->sys_category ?? old('sys_category') == 'ACC PAC' ? 'selected':''}}>
+                                    <option
+                                        value="ACC PAC" {{ $ticket->sys_category ?? old('sys_category') == 'ACC PAC' ? 'selected':''}}>
                                         ACC PAC
                                     </option>
                                     <option
@@ -408,14 +422,17 @@
                                         value="ACCESS DB" {{ $ticket->sys_category ?? old('sys_category') == 'ACCESS DB' ? 'selected':''}}>
                                         ACCESS DB
                                     </option>
-                                    <option value="ASSET" {{ $ticket->sys_category ?? old('sys_category') == 'ASSET' ? 'selected':''}}>ASSET
+                                    <option
+                                        value="ASSET" {{ $ticket->sys_category ?? old('sys_category') == 'ASSET' ? 'selected':''}}>
+                                        ASSET
                                         TRACER
                                     </option>
                                     <option
                                         value="CHEQUE TRACER" {{ $ticket->sys_category ?? old('sys_category') == 'CHEQUE TRACER' ? 'selected':''}}>
                                         CHEQUE TRACER
                                     </option>
-                                    <option value="Others" {{ $ticket->sys_category ?? old('sys_category') == 'Others' ? 'selected':''}}>
+                                    <option
+                                        value="Others" {{ $ticket->sys_category ?? old('sys_category') == 'Others' ? 'selected':''}}>
                                         Others
                                     </option>
                                 </select>
@@ -430,9 +447,14 @@
                                         value="{{old('lop')}}" id="lop" name="lop"
                                         style="width: 100%;">
                                     <option></option>
-                                    <option value="Low" {{ $ticket->lop ?? old('lop') == 'Low' ? 'selected':''}}>Low</option>
-                                    <option value="Medium" {{ $ticket->lop ?? old('lop') == 'Medium' ? 'selected':''}}>Medium</option>
-                                    <option value="High" {{ $ticket->lop ?? old('lop') == 'High' ? 'selected':''}}>High</option>
+                                    <option value="Low" {{ $ticket->lop ?? old('lop') == 'Low' ? 'selected':''}}>Low
+                                    </option>
+                                    <option value="Medium" {{ $ticket->lop ?? old('lop') == 'Medium' ? 'selected':''}}>
+                                        Medium
+                                    </option>
+                                    <option value="High" {{ $ticket->lop ?? old('lop') == 'High' ? 'selected':''}}>
+                                        High
+                                    </option>
                                 </select>
                             </div>
 
@@ -501,7 +523,8 @@
                                 @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
                                     <div class=" col-lg-12 container-fluid">
                                         <div class="icheck-danger float-right">
-                                            <input type="checkbox" name="shared" value="{{old('shared')}}" id="checkboxDanger2">
+                                            <input type="checkbox" name="shared" value="{{old('shared')}}"
+                                                   id="checkboxDanger2">
                                             <label for="checkboxDanger2">Share info</label>
                                         </div>
                                     </div>
@@ -532,7 +555,7 @@
         </section>
 
         @if($actions->count() >0)
-            <section class="container-fluid">
+            <section class="container-fluid pb-3 px-5">
                 <form action="/MICT-Tickets/report" method="POST" id="myForm2">
                     <input type="text" name="ticket_id" value="{{$ticket->id}}" hidden>
                     @csrf
@@ -542,8 +565,6 @@
                             <h4>Actions Taken</h4>
                         </div>
                     </div>
-
-
                     <!-- Timelime example  -->
                     <div class="row">
                         <div class="col-md-12">
@@ -604,6 +625,9 @@
         @endif
     </div>
 
+@endsection
+
+@section('footer')
 
     <footer class="main-footer">
         <div class="float-right">
@@ -615,10 +639,6 @@
         reserved.
         <b>Version</b> 1.0.0
     </footer>
-
-    <!-- /.content -->
-    <!-- /.content-wrapper -->
-
     <script type="text/javascript">
         $(window).on("beforeunload", function () {
             return "Are you sure? You didn't finish the form!";
@@ -675,7 +695,7 @@
         });
 
     </script>
-    <script>
+    <script type="text/javascript">
 
         //Initialize Select2 Elements
         $('.select2').select2();
@@ -755,14 +775,6 @@
             }
         });
 
-        // $('#category').change(function () {
-        //     if ($('#category').val() == "Others") {
-        //         $("#dother").prop("hidden", false);
-        //     } else {
-        //         $("#dother").prop("hidden", true);
-        //     }
-        // });
-
         $('#status').change(function () {
             if ($('#status').val() == "Closed") {
                 $("#act").prop("disabled", false);
@@ -786,7 +798,7 @@
             $("#ackn").prop("disabled", false);
         }
     </script>
-    <script>
+    <script type="text/javascript">
         window.onload = function exampleFunction() {
             // Function to executed
             if ($('#status').val() == "On-Going") {
@@ -837,5 +849,10 @@
 
 @endsection
 
+<!-- /.content -->
+<!-- /.content-wrapper -->
 
-@section('footer',"<p></p>")
+
+@include('layouts.scripts')
+
+

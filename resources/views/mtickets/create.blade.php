@@ -657,13 +657,13 @@
         });
 
         $('#status').change(function () {
-            if ($(this).val() == "Closed") {
+            if ($('#status').val() == "Closed") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
-            } else if ($(this).val() == "Resolved") {
+            } else if ($('#status').val() == "Resolved") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
-            } else if($(this).val() == "On-Going") {
+            } else if($('#status').val() == "On-Going") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
             }else{

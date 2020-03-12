@@ -55,6 +55,7 @@ class EndorsementController extends Controller
     {
 
 
+
         $data = request()->validate([
             'assigned_to' => 'required_without:departments',
             'departments' => '',
@@ -96,11 +97,10 @@ class EndorsementController extends Controller
                 $file->storeAs($directory, $unique_filename);
 
                 $end_file = new EndorsmentFiles();
-                $end_file->file_name = $unique_filename;
-                $end_file->org_file_name = $orig_filename;
+                $end_file->file_name = pathinfo($unique_filename, PATHINFO_FILENAME);
+                $end_file->org_file_name = pathinfo($orig_filename, PATHINFO_FILENAME).".".$file->getClientOriginalExtension();
                 $end_file->endorse_id = $id;
                 $end_file->extension_name = $file->getClientOriginalExtension();
-                dd($file->getClientOriginalExtension());
                 $end_file->save();
             }
         }
@@ -121,11 +121,12 @@ class EndorsementController extends Controller
         $to = explode(', ', $endorse->assigned_to_id);
         $departments = explode(', ', $endorse->assigned_dept_id);
         $files = EndorsmentFiles::where('endorse_id', $id)->get();
-        foreach ($files as $file) {
-            dd($file->getClientOriginalExtension());
+//        foreach ($files as $file) {
+////            dd($file->getClientOriginalExtension());
+//
+////            $sad = $file->getClientOriginalExtension();
+//        }
 
-            $sad = $file->getClientOriginalExtension();
-        }
 
         return view('endorsement.show', compact('endorse', 'user', 'files', 'to', 'departments', 'files'));
     }
