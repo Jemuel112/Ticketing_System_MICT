@@ -81,12 +81,24 @@
                 <div class="card-footer bg-white">
                     <ul class="mailbox-attachments d-flex align-items-stretch clearfix">
 
-                        @if(!files)
+                        @if(!$files)
 
 
-                        @foreach($files as $file)
-                        @endforeach
+                            @foreach($files as $file)
+                            @endforeach
                         @endif
+                        <li>
+                            <span class="mailbox-attachment-icon"><i class="far fa-file"></i></span>
+                            <div class="mailbox-attachment-info">
+                                <a href="#" class="mailbox-attachment-name"><i class="fas fa-paperclip"></i>
+                                    Sep2014-report.pdf</a>
+                                <span class="mailbox-attachment-size clearfix mt-1">
+                          <span>1,245 KB</span>
+                          <a href="#" class="btn btn-default btn-sm float-right"><i
+                                  class="fas fa-cloud-download-alt"></i></a>
+                        </span>
+                            </div>
+                        </li>
                         <li>
                             <span class="mailbox-attachment-icon"><i class="far fa-file-pdf"></i></span>
                             <div class="mailbox-attachment-info">
