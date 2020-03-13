@@ -66,8 +66,12 @@ class MTicketsController extends Controller
             $title = 'My Sorted Tickets';
         }
         $tickets = $tickets->orderBy('id', 'DESC')->get();
+        $active = $tickets->where('status','Active')->count();
+        $onGoing = $tickets->where('status','On-Going')->count();
+        $resolved = $tickets->where('status','Resolved')->count();
+        $closed = $tickets->where('status','Closed')->count();
 
-        return view('mtickets.index', compact('tickets', 'title', 'departments'));
+        return view('mtickets.index', compact('tickets', 'title', 'departments','active','onGoing','resolved','closed'));
     }
 
     public function index(Request $request)
@@ -116,6 +120,7 @@ class MTicketsController extends Controller
             $title = 'All Sorted Tickets';
         }
         $tickets = $tickets->orderBy('id', 'DESC')->get();
+
         return view('mtickets.index', compact('tickets', 'title', 'departments'));
     }
 
@@ -323,9 +328,9 @@ class MTicketsController extends Controller
         }
         if (!is_null($request->action)) {
             $action = new mactions();
-            if($request->shared == "on"){
+            if ($request->shared == "on") {
                 $action->shared = 1;
-            }else{
+            } else {
                 $action->shared = 0;
             }
             $action->actions = $request->action;
