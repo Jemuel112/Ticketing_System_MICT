@@ -29,7 +29,9 @@ Route::resource('/MICT-Tickets', 'mTicketsController', ['only' => ['index', 'cre
 Route::post('/MICT-Tickets/comments/{comment}', 'mTicketsController@comment');
 Route::get('/MyTickets', 'mTicketsController@myTickets');
 Route::post('/MICT-Tickets/report', 'mTicketsController@report');
-Route::GET('/Sort', 'mTicketsController@index');
+Route::GET('/All_Sort', 'mTicketsController@index');
+Route::GET('/My_Sort', 'mTicketsController@myTickets');
+
 
 Route::get('/Received_Calls', 'ReportsController@receivedCalls')->name('received.calls');
 Route::POST('/Received_Calls/Report', 'ReportsController@reportreceivedCalls')->name('report.received.calls');

@@ -27,19 +27,53 @@ class MTicketsController extends Controller
 //        $this->middleware('auth.admin')->only('index', 'store', 'allticket');
     }
 
-    public function myTickets()
+    public function myTickets(Request $request)
     {
         $name = Auth::user()->fname;
-        $tickets = mTicket::where([['assigned_to', 'Like', '%' . "$name" . '%']])->orderBy('id', 'DESC')->get();
+        $tickets = mTicket::where([['assigned_to', 'Like', '%' . "$name" . '%']]);
         $title = 'My Tickets';
         $departments = Department::all();
+
+        if (!is_null($request->datefilter)) {
+            $range = explode(' - ', $request->datefilter);
+            if (DateTime::createFromFormat('m/d/Y', $range[0]) == FALSE) {
+                $error = \Illuminate\Validation\ValidationException::withMessages([
+                    'field_name_1' => ['Start Date format is invalid'],
+                ]);
+                throw $error;
+            }
+            if (DateTime::createFromFormat('m/d/Y', $range[1]) == FALSE) {
+                $error = \Illuminate\Validation\ValidationException::withMessages([
+                    'field_name_1' => ['End Date format is invalid'],
+                ]);
+                throw $error;
+            }
+            $range0 = date('Y-m-d', strtotime($range[0]));
+            $range1 = date('Y-m-d', strtotime($range[1]));
+            $tickets = $tickets->whereBetween('created_at', [$range0 . " 00:00:00", $range1 . " 23:59:59"]);
+            $title = 'My Sorted Tickets';
+        }
+        if (!is_null($request->department)) {
+            $tickets = $tickets->where([
+                ['request_by', '=', $request->department]
+            ]);
+            $title = 'My Sorted Tickets';
+        }
+        if (!is_null($request->status)) {
+            $tickets = $tickets->where([
+                ['status', '=', $request->status]
+            ]);
+            $title = 'My Sorted Tickets';
+        }
+        $tickets = $tickets->orderBy('id', 'DESC')->get();
+
         return view('mtickets.index', compact('tickets', 'title', 'departments'));
     }
 
     public function index(Request $request)
     {
-        $title = 'All Tickets';
 
+        $title = 'All Tickets';
         if (Auth::user()->department == "Administrator" || Auth::user()->department == "MICT") {
             $tickets = new mTicket;
         } else {
@@ -67,19 +101,19 @@ class MTicketsController extends Controller
             $range0 = date('Y-m-d', strtotime($range[0]));
             $range1 = date('Y-m-d', strtotime($range[1]));
             $tickets = $tickets->whereBetween('created_at', [$range0 . " 00:00:00", $range1 . " 23:59:59"]);
-            $title = 'Sorted Tickets';
+            $title = 'All Sorted Tickets';
         }
         if (!is_null($request->department)) {
             $tickets = $tickets->where([
                 ['request_by', '=', $request->department]
             ]);
-            $title = 'Sorted Tickets';
+            $title = 'All Sorted Tickets';
         }
         if (!is_null($request->status)) {
             $tickets = $tickets->where([
                 ['status', '=', $request->status]
             ]);
-            $title = 'Sorted Tickets';
+            $title = 'All Sorted Tickets';
         }
         $tickets = $tickets->orderBy('id', 'DESC')->get();
         return view('mtickets.index', compact('tickets', 'title', 'departments'));

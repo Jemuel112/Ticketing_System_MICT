@@ -19,7 +19,9 @@
                     <h4>{{$title}}</h4>
                 </div>
                 <div class="card-body">
-                    <form action="/Sort" class="container-fluid" autocomplete="off" method="GET">
+
+
+                    <form @if($title == "All Tickets" || $title == "All Sorted Tickets") action="/All_Sort" @else action="/My_Sort" @endif class="container-fluid" autocomplete="off" method="GET">
                         @csrf
                         <div class="row float-right" style="width: 100%;">
                             <div class="col-sm-3 col-lg-3" style="width: 100%;">
@@ -43,18 +45,23 @@
                                         name="status" id="stats"
                                         style="width: 100%;">
                                     <option value=""></option>
-                                    <option value="Active" {{ request()->input('status') == 'Active' ? 'selected' :''}}>Active
+                                    <option value="Active" {{ request()->input('status') == 'Active' ? 'selected' :''}}>
+                                        Active
                                     </option>
-                                    <option value="On-Going" {{ request()->input('status') == 'On-Going' ? 'selected':''}}>
+                                    <option
+                                        value="On-Going" {{ request()->input('status') == 'On-Going' ? 'selected':''}}>
                                         On-Going
                                     </option>
-                                    <option value="Resolved" {{ request()->input('status') == 'Resolved' ? 'selected':''}}>
+                                    <option
+                                        value="Resolved" {{ request()->input('status') == 'Resolved' ? 'selected':''}}>
                                         Resolved
                                     </option>
-                                    <option value="Duplicate" {{ request()->input('status')== 'Duplicate' ? 'selected':''}}>
+                                    <option
+                                        value="Duplicate" {{ request()->input('status')== 'Duplicate' ? 'selected':''}}>
                                         Duplicate
                                     </option>
-                                    <option value="Closed" {{ request()->input('status') == 'Closed' ? 'selected':''}}>Closed
+                                    <option value="Closed" {{ request()->input('status') == 'Closed' ? 'selected':''}}>
+                                        Closed
                                     </option>
                                 </select>
                             </div>

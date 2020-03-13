@@ -82,9 +82,10 @@
                     <ul class="mailbox-attachments d-flex align-items-stretch clearfix">
 
                         @if(!$files)
-
-
                             @foreach($files as $file)
+                                @if($file->extension_name)
+                                    @endif
+                                
                             @endforeach
                         @endif
                         <li>
