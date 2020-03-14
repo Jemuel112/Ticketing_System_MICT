@@ -83,9 +83,20 @@
 
                         @if(!$files)
                             @foreach($files as $file)
-                                @if($file->extension_name)
-                                    @endif
-                                
+                                @if($file->extension_name == )
+                                    <li>
+                                        <span class="mailbox-attachment-icon"><i class="far fa-file-pdf"></i></span>
+                                        <div class="mailbox-attachment-info">
+                                            <a href="#" class="mailbox-attachment-name"><i class="fas fa-paperclip"></i>
+                                                Sep2014-report.pdf</a>
+                                            <span class="mailbox-attachment-size clearfix mt-1">
+                                                <span>1,245 KB</span>
+                                                <a href="#" class="btn btn-default btn-sm float-right"><i
+                                                        class="fas fa-cloud-download-alt"></i></a>
+                                            </span>
+                                        </div>
+                                    </li>
+                                @endif
                             @endforeach
                         @endif
                         <li>
@@ -100,18 +111,7 @@
                         </span>
                             </div>
                         </li>
-                        <li>
-                            <span class="mailbox-attachment-icon"><i class="far fa-file-pdf"></i></span>
-                            <div class="mailbox-attachment-info">
-                                <a href="#" class="mailbox-attachment-name"><i class="fas fa-paperclip"></i>
-                                    Sep2014-report.pdf</a>
-                                <span class="mailbox-attachment-size clearfix mt-1">
-                          <span>1,245 KB</span>
-                          <a href="#" class="btn btn-default btn-sm float-right"><i
-                                  class="fas fa-cloud-download-alt"></i></a>
-                        </span>
-                            </div>
-                        </li>
+
 
                         <li>
                             <span class="mailbox-attachment-icon"><i class="far fa-file-word"></i></span>
