@@ -17,8 +17,9 @@ class EndorsementController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('disablepreventback')->except('download');
         $this->middleware('auth');
+        $this->middleware('disablepreventback')->except('download');
+        $this->middleware('endorsed')->except('index','sent');
 //        $this->middleware('auth.am')->except('index', 'store', 'create', 'show', 'comment');
     }
 
@@ -35,18 +36,26 @@ class EndorsementController extends Controller
             $user = Auth::user()->id;
             $dept = Department::select('id')->where('dept_name', Auth::user()->department)->first();
             $endors = Endorsement::whereOr([['assigned_to_id', 'Like', '%' . "$user" . '%']])
-                            ->whereOr('assigned_dept_id', 'Like', '%' . "$dept->id" . '%')
-                            ->get();
-            foreach ($endors as $endor){
-                $assign = explode(', ',$endor->assigned_to_id);
+                ->whereOr('assigned_dept_id', 'Like', '%' . "$dept->id" . '%')
+                ->get();
+            foreach ($endors as $endor) {
+                $assign = explode(', ', $endor->assigned_to_id);
                 $depts = explode(', ', $endor->assigned_dept_id);
-                if (in_array($user, $assign)){
+                if (in_array($user, $assign)) {
                     $endorsements[] = $endor;
-                }elseif (in_array($dept->id, $depts)){
+                } elseif (in_array($dept->id, $depts)) {
+                    $endorsements[] = $endor;
+                } elseif ($endor->created_by_id == Auth::user()->id) {
                     $endorsements[] = $endor;
                 }
             }
         }
+        return view('endorsement.index', compact('endorsements'));
+    }
+
+    public function sent()
+    {
+        $endorsements = Endorsement::where('created_by_id', Auth::user()->id)->get();
         return view('endorsement.index', compact('endorsements'));
     }
 

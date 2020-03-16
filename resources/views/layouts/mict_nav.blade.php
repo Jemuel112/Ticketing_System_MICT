@@ -140,7 +140,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/Endorsement" class="nav-link">
+                    <a href="{{route('Endorsement.sent')}}" class="nav-link">
                         <i class="nav-icon far fa-building"></i>
                         <p>
                             Sent Endorsements

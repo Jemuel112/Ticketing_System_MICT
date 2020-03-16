@@ -43,6 +43,8 @@ Route::resource('/users', 'UsersController');
 //Route::get('/Endorsement/{Endorsement}','EndorsementController@show');
 Route::resource('/Endorsement', 'EndorsementController');
 Route::get('/Endorsement/{id}/dl', 'EndorsementController@download')->name('Endorsement.dl');
+Route::get('/Sent_Endorsement', 'EndorsementController@sent')->name('Endorsement.sent');
+
 
 
 //Route::get('/dl',function (){

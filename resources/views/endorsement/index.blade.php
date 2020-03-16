@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'View Ticket | ')
+@section('title', 'Endorsements | ')
 @include('layouts.scripts')
 
 @section('content')
@@ -42,10 +42,10 @@
                                class="wrap compact table table-responsive-sm table-hover table-borderedless table-striped ">
                             <thead>
                             <tr>
-                                <td>Doc.#</td>
-                                <td>From</td>
+                                <td width="10%">Doc.#</td>
+                                <td width="15%">From</td>
                                 <td>Title</td>
-                                <td>Action</td>
+                                <td width="15%">Action</td>
                             </tr>
                             </thead>
                             <tbody>
