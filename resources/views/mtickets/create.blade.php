@@ -5,7 +5,7 @@
 @section('content')
 
     <!-- Content Wrapper. Contains page content -->
-    <form action="/MICT-Tickets" id="myForm" method="POST">
+    <form action="/MICT-Tickets" id="myForm" method="POST" onload="functionToBeExecuted">
 
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -353,10 +353,14 @@
                                 <label><br>Others</label>
                                 <input id="other"
                                        disabled
+                                       list="others"
                                        class="form-control @error("other")is-invalid @enderror" value="{{old('other')}}"
                                        name="other" style="width: 100%;" type="text"
-                                       placeholder="Please Specify"
-                                >
+                                       placeholder="Please Specify">
+                                <datalist id="others">
+                                    <option value="">
+                                </datalist>
+
                             </div>
                             {{--                        @endif--}}
 

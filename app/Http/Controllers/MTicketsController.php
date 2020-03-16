@@ -259,7 +259,9 @@ class MTicketsController extends Controller
             }
             $action->save();
         }
-
+        if ($request->category == 'Others'){
+            
+        }
         return redirect('/MICT-Tickets');
     }
 

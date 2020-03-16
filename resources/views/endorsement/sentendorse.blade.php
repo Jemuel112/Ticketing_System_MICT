@@ -13,7 +13,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Endorsement</h1>
+                            <h1>Sent Endorsement</h1>
                         </div>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                             </thead>
                             <tbody>
                             @forelse($endorsements as $endorsement)
-                                <tr onclick="window.location='/Endorsement/{{$endorsement->id}}';" style="font-weight: bold">
+                                <tr onclick="window.location='/Endorsement/{{$endorsement->id}}';">
                                     <td>{{ str_pad($endorsement->id,3,'0',STR_PAD_LEFT) }}</td>
                                     @php
                                         $user = \App\User::find($endorsement->created_by_id)
@@ -60,19 +60,18 @@
                                     @else
                                         <td>'User Deleted'</td>
                                     @endif
-                                    <td> {{ \Illuminate\Support\Str::limit($endorsement->title, 100, $end='...') }}</td>
+                                    <td>{{ \Illuminate\Support\Str::limit($endorsement->title, 100, $end='...') }}</td>
 
                                     <td>
                                         <a style="margin: 2px"
                                            class="btn btn-sm btn-outline-primary"
-                                           href="{{ route('Endorsement.show', ['id' => $endorsement->id]) }}"
+                                           href="Endorsement/{Endorsement}"
                                         ><i class="fal fa-pencil-alt"></i> View</a>
-                                        @if($endorsement->created_by_id == Auth::user()->id)
                                         <a style="margin: 2px"
                                            class="btn btn-sm btn-outline-primary"
-                                           href="{{ route('Endorsement.edit', ['id' => $endorsement->id]) }}"
+                                           href="Endorsement/{{$endorsement->id}}/edit"
                                         ><i class="fal fa-pencil-alt"></i> Edit</a>
-                                        @endif
+
                                     </td>
                                 </tr>
                             @empty

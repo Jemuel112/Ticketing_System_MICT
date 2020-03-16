@@ -12,7 +12,7 @@
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <h1>
-                            Create an Endorsement
+{{--                            Edit an Endorsement--}}
                         </h1>
                     </div>
                 </div>
@@ -26,8 +26,10 @@
             @endif
         </section>
 
-        <form action="/Endorsement" enctype="multipart/form-data" method="post" id="myForm">
-            <!-- Main content -->
+        <form action="{{route("Endorsement.update", ['id' => $endorsement->id ])}}" enctype="multipart/form-data" method="post" id="myForm">
+        @csrf
+        @method('PUT')
+        <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
                     <div class="row">
@@ -35,7 +37,7 @@
                         <div class="col-md-12">
                             <div class="card card-primary card-outline">
                                 <div class="card-header">
-                                    <h3 class="card-title">Compose New Endorsement</h3>
+                                    <h3 class="card-title">Editing Endorsement # {{ str_pad($endorsement->id,3,'0',STR_PAD_LEFT) }}</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
@@ -103,7 +105,6 @@
                                         </textarea>
                                     </div>
                                     <div class="form-group">
-                                        @csrf
                                         <input type="file" name="attachment[]" multiple>
                                     </div>
                                     <br>
@@ -136,7 +137,7 @@
 @section('footer')
     <footer class="main-footer">
         <div class="float-right">
-            <button type="submit" class="btn btn-primary"><i class="far fa-save"></i>
+            <button type="submit" form="myForm" class="btn btn-primary"><i class="far fa-save"></i>
                 Update
             </button>
 
