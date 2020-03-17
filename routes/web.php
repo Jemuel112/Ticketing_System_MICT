@@ -55,11 +55,6 @@ Route::get('/clear-cache', function () {
     Artisan::call('config:clear');
     Artisan::call('cache:clear');
     Artisan::call('config:cache');
-    $tickets = \App\mTicket::where('status', 'Resolve')->get();
-    foreach ($tickets as $ticket){
-        $ticket->status = 'Resolved';
-        $ticket->save();
-    }
     return "Cache cleared";
 });
 
