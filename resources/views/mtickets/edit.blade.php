@@ -1,10 +1,10 @@
 @extends('layouts.master')
 
 @section('title', 'View Ticket | ')
+@include('layouts.scripts')
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
-
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -25,11 +25,8 @@
             @endif
             {{--            END SHOW USERS ERRORS--}}
         </section>
-
         <!-- Main content -->
-
-
-        <section class="content" onload="functionToBeExecuted">
+        <section class="content" onload="functionToBeExecuted()">
             <form action='/MICT-Tickets/{{$ticket->id}}' method="POST" id="myForm">
                 @csrf
                 @method('PUT')
@@ -38,7 +35,7 @@
                         <div class="card-header">
                             <h3 class="card-title">Date</h3>
                             <div class="card-tools">
-                                &nbsp;
+                                &nbsp
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
                                         class="fas fa-minus"></i></button>
                             </div>
@@ -341,23 +338,23 @@
                                         style="width: 100%;">
                                     <option></option>
                                     <option
-                                        value="System" {{ $ticket->category ?? old('category') == 'System' ? 'selected':''}}>
+                                        value="System" {{ old('category') ?? $ticket->category  == 'System' ? 'selected':''}}>
                                         System
                                     </option>
                                     <option
-                                        value="Software" {{ $ticket->category ?? old('category') == 'Software' ? 'selected':''}}>
+                                        value="Software" {{ old('category') ?? $ticket->category  == 'Software' ? 'selected':''}}>
                                         Software
                                     </option>
                                     <option
-                                        value="Hardware" {{ $ticket->category ?? old('category') == 'Hardware' ? 'selected':''}}>
+                                        value="Hardware" {{ old('category') ?? $ticket->category == 'Hardware' ? 'selected':''}}>
                                         Hardware
                                     </option>
                                     <option
-                                        value="Network" {{ $ticket->category ?? old('category') == 'Network' ? 'selected':''}}>
+                                        value="Network" {{ old('category') ?? $ticket->category == 'Network' ? 'selected':''}}>
                                         Network
                                     </option>
                                     <option
-                                        value="Others" {{ $ticket->category ?? old('category') == 'Others' ? 'selected':''}}>
+                                        value="Others" {{ old('category') ?? $ticket->category  == 'Others' ? 'selected':''}}>
                                         Others
                                     </option>
                                 </select>
@@ -367,7 +364,6 @@
                             <div id="dother" class="col-lg-4 col-md-4" hidden>
                                 <label><br>Others</label>
                                 <input id="other"
-                                       disabled
                                        class="form-control @error("other")is-invalid @enderror" value="{{old('other')}}"
                                        name="other" style="width: 100%;" type="text" name=""
                                        placeholder="Please Specify"
@@ -529,15 +525,15 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
-                                        <label></label>
+                                        <label for="act"></label>
                                         <textarea id="act" name="action" class="textarea"
                                                   placeholder="Place some text here"
                                                   style="width: 100%; height: 250px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{old('action')}}</textarea>
                                     </div>
                                 @endif
                                 <div class="col-lg-12 col-md-12">
-                                    <label>Remarks / Recomendation</label>
-                                    <textarea name="recommendation"
+                                    <label for="remarks">Remarks / Recomendation</label>
+                                    <textarea id="remarks" name="recommendation"
                                               placeholder="Enter Recommendation here"
                                               style="resize: none ;width: 100%; height: 75px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{old('recommendation') ?? $ticket->recommendation}}</textarea>
                                 </div>
@@ -579,10 +575,8 @@
                                     </div>
                                 @foreach($contents as $key => $content)
                                     @if($content->shared == 1 || Auth::user()->department == 'Administrator' || Auth::user()->department == 'MICT')
-
                                         <!-- /.timeline-label -->
                                             <!-- timeline item -->
-
                                             <div>
                                                 <i class="fas fa-envelope bg-blue"></i>
                                                 <div class="timeline-item">
@@ -624,21 +618,6 @@
             </section>
         @endif
     </div>
-
-@endsection
-
-@section('footer')
-
-    <footer class="main-footer">
-        <div class="float-right">
-            <button type="submit" class="btn btn-primary" form="myForm" onclick="mySubmit()">Submit</button>
-
-        </div>
-        <strong>Copyright &copy; 2020 <a href="https://www.mcuhospital.org/">MCU Hospital</a>.</strong> All
-        rights
-        reserved.
-        <b>Version</b> 1.0.0
-    </footer>
     <script type="text/javascript">
         $(window).on("beforeunload", function () {
             return "Are you sure? You didn't finish the form!";
@@ -651,23 +630,18 @@
                 return true;
             });
         });
-        $(window).on("beforeunload", function () {
-            return "Are you sure? You didn't finish the form!";
-        });
-        $(document).ready(function () {
-            $("#myForm2").on("submit", function (e) {
-                //check form to make sure it is kosher
-                //remove the ev
-                $(window).off("beforeunload");
-                return true;
-            });
-        });
     </script>
-
     <script type="text/javascript">
-        $("#datetimepickers").datetimepicker();
+        $("#datetimepickers").datetimepicker({
+            icons: {
+                time: "far fa-clock"
+            }
+        });
         $("#datetimepickerd").datetimepicker({
-            useCurrent: false
+            useCurrent: false,
+            icons: {
+                time: "far fa-clock"
+            }
         });
         $("#datetimepickers").on("change.datetimepicker", function (e) {
             $('#datetimepickerd').datetimepicker('minDate', e.date);
@@ -675,7 +649,7 @@
         $("#datetimepickerd").on("change.datetimepicker", function (e) {
             $('#datetimepickers').datetimepicker('maxDate', e.date);
         });
-        {{--        {{date('m/d/Y h:i A', strtotime($ticket->created_at))}}--}}
+
         $("#datetimepicker7").datetimepicker({
             icons: {
                 time: "far fa-clock"
@@ -685,8 +659,9 @@
             useCurrent: false,
             icons: {
                 time: "far fa-clock"
-            },
+            }
         });
+
         $("#datetimepicker7").on("change.datetimepicker", function (e) {
             $('#datetimepicker8').datetimepicker('minDate', e.date);
         });
@@ -695,8 +670,7 @@
         });
 
     </script>
-    <script type="text/javascript">
-
+    <script>
         //Initialize Select2 Elements
         $('.select2').select2();
 
@@ -725,8 +699,6 @@
             placeholder: "Select...",
             allowClear: true
         });
-
-
         $selectElement = $('#ackn').select2({
             theme: 'bootstrap4',
             placeholder: "Select...",
@@ -742,7 +714,7 @@
             placeholder: "Select Category",
             allowClear: true
         });
-        $selectElement = $('#system').select2({
+        $selectElement = $('#syscategory').select2({
             theme: 'bootstrap4',
             placeholder: "Select Category",
             allowClear: true
@@ -753,13 +725,15 @@
             allowClear: true
         });
         $('#status').change(function () {
-            if ($('#status').val() == "On-Going") {
+            if ($(this).val() == "On-Going") {
+                $("#ogs").prop("disabled", false);
                 $("#dogs").prop("hidden", false);
                 $("#dogst1").prop("disabled", false);
                 $("#dogst1").prop("hidden", false);
                 $("#dogst2").prop("disabled", false);
                 $("#dogst2").prop("hidden", false);
             } else {
+                $("#ogs").prop("disabled", true);
                 $("#dogs").prop("hidden", true);
                 $("#dogst1").prop("disabled", true);
                 $("#dogst1").prop("hidden", true);
@@ -768,10 +742,21 @@
             }
         });
         $('#category').change(function () {
-            if ($('#category').val() == "System") {
+            if ($(this).val() == "System") {
+                $("#system").prop("disabled", false);
                 $("#dsystem").prop("hidden", false);
             } else {
+                $("#system").prop("disabled", true);
                 $("#dsystem").prop("hidden", true);
+            }
+        });
+        $('#category').change(function () {
+            if ($(this).val() == "Others") {
+                $("#other").prop("disabled", false);
+                $("#dother").prop("hidden", false);
+            } else {
+                $("#other").prop("disabled", true);
+                $("#dother").prop("hidden", true);
             }
         });
 
@@ -782,32 +767,26 @@
             } else if ($('#status').val() == "Resolved") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
-            } else if ($('#status').val() == "On-Going") {
+            } else if($('#status').val() == "On-Going") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
-            } else if ($('#status').val() == "On-Going") {
-                $("#act").prop("disabled", false);
-                $("#dact").prop("hidden", false);
-            } else {
+            }else{
                 $("#dact").prop("hidden", true);
                 $("#act").prop("disabled", true);
             }
         });
-
-        function mySubmit() {
-            $("#ackn").prop("disabled", false);
-        }
     </script>
-    <script type="text/javascript">
+    <script>
         window.onload = function exampleFunction() {
-            // Function to executed
             if ($('#status').val() == "On-Going") {
+                $("#ogs").prop("disabled", false);
                 $("#dogs").prop("hidden", false);
                 $("#dogst1").prop("disabled", false);
                 $("#dogst1").prop("hidden", false);
                 $("#dogst2").prop("disabled", false);
                 $("#dogst2").prop("hidden", false);
             } else {
+                $("#ogs").prop("disabled", true);
                 $("#dogs").prop("hidden", true);
                 $("#dogst1").prop("disabled", true);
                 $("#dogst1").prop("hidden", true);
@@ -815,44 +794,52 @@
                 $("#dogst2").prop("hidden", true);
             }
             if ($('#category').val() == "System") {
+                $("#system").prop("disabled", false);
                 $("#dsystem").prop("hidden", false);
             } else {
+                $("#system").prop("disabled", true);
                 $("#dsystem").prop("hidden", true);
             }
             if ($('#category').val() == "Others") {
+                $("#other").prop("disabled", false);
                 $("#dother").prop("hidden", false);
             } else {
+                $("#other").prop("disabled", true);
                 $("#dother").prop("hidden", true);
             }
-
             if ($('#status').val() == "Closed") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
             } else if ($('#status').val() == "Resolved") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
-            } else if ($('#status').val() == "On-Going") {
+            }else if($('#status').val() == "On-Going") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
-            } else {
+            }else{
                 $("#dact").prop("hidden", true);
                 $("#act").prop("disabled", true);
             }
         }
-
-        var msg = '{{Session::get('alert')}}';
-        var exist = '{{Session::has('alert')}}';
-        if (exist) {
-            alert(msg);
-        }
     </script>
+@endsection
 
+@section('footer')
+    <footer class="main-footer">
+        <div class="float-right">
+            <button type="submit" class="btn btn-primary" form="myForm" onclick="mySubmit()">Submit</button>
+
+        </div>
+        <strong>Copyright &copy; 2020 <a href="https://www.mcuhospital.org/">MCU Hospital</a>.</strong> All
+        rights
+        reserved.
+        <b>Version</b> 1.0.0
+    </footer>
 @endsection
 
 <!-- /.content -->
 <!-- /.content-wrapper -->
 
 
-@include('layouts.scripts')
 
 

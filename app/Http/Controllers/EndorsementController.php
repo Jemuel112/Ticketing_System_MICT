@@ -19,7 +19,7 @@ class EndorsementController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('disablepreventback')->except('download');
-        $this->middleware('endorsed')->except('index','sent');
+        $this->middleware('endorsed')->except('index', 'sent');
 //        $this->middleware('auth.am')->except('index', 'store', 'create', 'show', 'comment');
     }
 
@@ -126,11 +126,11 @@ class EndorsementController extends Controller
             $files = $request->attachment;
             foreach ($files as $file) {
                 $unique = Str::uuid()->getTimeMidHex();
-                $orig_filename = $file->getClientOriginalName();
+                $orig_filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
                 $unique_filename = "[" . $unique . "]" . $orig_filename . "." . $file->getClientOriginalExtension();
                 $file->storeAs($directory, $unique_filename);
                 $end_file = new EndorsmentFiles();
-                $end_file->file_name = pathinfo($unique_filename, PATHINFO_FILENAME);
+                $end_file->file_name = pathinfo($unique_filename, PATHINFO_FILENAME) . "." . $file->getClientOriginalExtension();;
                 $end_file->org_file_name = pathinfo($orig_filename, PATHINFO_FILENAME) . "." . $file->getClientOriginalExtension();
                 $end_file->endorse_id = $id;
                 $end_file->extension_name = $file->getClientOriginalExtension();
@@ -236,17 +236,18 @@ class EndorsementController extends Controller
             $files = $request->attachment;
             foreach ($files as $file) {
                 $unique = Str::uuid()->getTimeMidHex();
-                $orig_filename = $file->getClientOriginalName();
+                $orig_filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
                 $unique_filename = "[" . $unique . "]" . $orig_filename . "." . $file->getClientOriginalExtension();
                 $file->storeAs($directory, $unique_filename);
                 $end_file = new EndorsmentFiles();
-                $end_file->file_name = pathinfo($unique_filename, PATHINFO_FILENAME);
+                $end_file->file_name = pathinfo($unique_filename, PATHINFO_FILENAME) . "." . $file->getClientOriginalExtension();;
                 $end_file->org_file_name = pathinfo($orig_filename, PATHINFO_FILENAME) . "." . $file->getClientOriginalExtension();
                 $end_file->endorse_id = $id;
                 $end_file->extension_name = $file->getClientOriginalExtension();
                 $end_file->save();
             }
         }
+        dd($unique_filename);
         return redirect()->route('Endorsement.index');
     }
 
@@ -265,10 +266,10 @@ class EndorsementController extends Controller
     {
         $file = EndorsmentFiles::findOrFail($id);
         $d_id = $file->endorse_id;
-//        $directory = "storage\\endorsment_files\\$d_id\\$file->file_name";
-        $directory = "app\\public\\endorsment_files\\$d_id\\$file->file_name";
+        $directory = "storage\\endorsment_files\\$d_id\\$file->file_name";
+//        $directory = "app\\public\\endorsment_files\\$d_id\\$file->file_name";
         $name = $file->org_file_name;
-        return Response::download(storage_path($directory, $name));
+        return Response::download(public_path($directory, $name));
 
 //        dd($directory);
 //        return Storage::download(public_path($directory));

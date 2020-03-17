@@ -161,7 +161,7 @@ class MTicketsController extends Controller
     public function edit($id)
     {
         $ticket = mTicket::findOrFail($id);
-
+//        dd($ticket->category);
         if (is_null($ticket->acknowledge_by)) {
             $ticket->acknowledge_by = Auth::user()->fname;
             $ticket->save();
@@ -260,7 +260,7 @@ class MTicketsController extends Controller
             $action->save();
         }
         if ($request->category == 'Others'){
-            
+
         }
         return redirect('/MICT-Tickets');
     }
