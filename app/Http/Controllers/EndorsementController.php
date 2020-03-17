@@ -39,7 +39,6 @@ class EndorsementController extends Controller
                 ->whereOr('assigned_dept_id', 'Like', '%' . "$dept->id" . '%')
                 ->get();
             $endorsements[] = null;
-            dd($endorsements);
             foreach ($endors as $endor) {
                 $assign = explode(', ', $endor->assigned_to_id);
                 $depts = explode(', ', $endor->assigned_dept_id);

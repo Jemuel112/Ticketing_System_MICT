@@ -49,37 +49,37 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($endorsements as $endorsement)
-                                <tr onclick="window.location='/Endorsement/{{$endorsement->id}}';"
-                                    style="font-weight: bold">
-                                    <td>{{ str_pad($endorsement->id,3,'0',STR_PAD_LEFT) }}</td>
-                                    @php
-                                        $user = \App\User::find($endorsement->created_by_id)
-                                    @endphp
-                                    @if($user)
-                                        <td>{{$user->fname." ".$user->lname." (".$user->department.")"}}</td>
-                                    @else
-                                        <td>'User Deleted'</td>
-                                    @endif
-                                    <td> {{ \Illuminate\Support\Str::limit($endorsement->title, 100, $end='...') }}</td>
+                                @foreach($endorsements as $endorsement)
+                                    <tr onclick="window.location='/Endorsement/{{$endorsement->id}}';"
+                                        style="font-weight: bold">
+                                        <td>{{ str_pad($endorsement->id,3,'0',STR_PAD_LEFT) }}</td>
+                                        @php
+                                            $user = \App\User::find($endorsement->created_by_id)
+                                        @endphp
+                                        @if($user)
+                                            <td>{{$user->fname." ".$user->lname." (".$user->department.")"}}</td>
+                                        @else
+                                            <td>'User Deleted'</td>
+                                        @endif
+                                        <td> {{ \Illuminate\Support\Str::limit($endorsement->title, 100, $end='...') }}</td>
 
-                                    <td>
-                                        <a style="margin: 2px"
-                                           class="btn btn-sm btn-outline-primary"
-                                           href="{{ route('Endorsement.show', ['id' => $endorsement->id]) }}"
-                                        ><i class="fal fa-pencil-alt"></i> View</a>
-                                        @if($endorsement->created_by_id == Auth::user()->id)
+                                        <td>
                                             <a style="margin: 2px"
                                                class="btn btn-sm btn-outline-primary"
-                                               href="{{ route('Endorsement.edit', ['id' => $endorsement->id]) }}"
-                                            ><i class="fal fa-pencil-alt"></i> Edit</a>
-                                        @endif
-                                    </td>
+                                               href="{{ route('Endorsement.show', ['id' => $endorsement->id]) }}"
+                                            ><i class="fal fa-pencil-alt"></i> View</a>
+                                            @if($endorsement->created_by_id == Auth::user()->id)
+                                                <a style="margin: 2px"
+                                                   class="btn btn-sm btn-outline-primary"
+                                                   href="{{ route('Endorsement.edit', ['id' => $endorsement->id]) }}"
+                                                ><i class="fal fa-pencil-alt"></i> Edit</a>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                <tr>
+                                    <td colspan="4" class="text-center">No Endorsement at the moment</td>
                                 </tr>
-                            @endforeach
-                            <tr>
-                                <td colspan="4" class="text-center">No Endorsement at the moment</td>
-                            </tr>
                             </tbody>
                         </table>
                     </div>
