@@ -269,7 +269,7 @@ class EndorsementController extends Controller
         $directory = "storage\\endorsment_files\\$d_id\\$file->file_name";
 //        $directory = "app\\public\\endorsment_files\\$d_id\\$file->file_name";
         $name = $file->org_file_name;
-        return Response::download(public_path($directory, $name));
+        return Response::download(public_path($directory, $file->ogr_file_name));
 
 //        dd($directory);
 //        return Storage::download(public_path($directory));
