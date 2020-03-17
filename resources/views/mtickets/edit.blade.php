@@ -617,6 +617,7 @@
                 </form>
             </section>
         @endif
+
     </div>
     <script type="text/javascript">
         $(window).on("beforeunload", function () {
