@@ -178,7 +178,6 @@
                                 </select>
                             </div>
                             {{--End Status--}}
-
                             {{--On-Going Status--}}
                             <div class="col-lg-3 col-sm-3">
                                 <div id="dogs" hidden>
@@ -193,7 +192,7 @@
                                             style="width: 100%;">
                                         <option></option>
                                         <option
-                                            value="Pending For Spare" {{ ($ticket->og_status ?? old('og_status'))== 'Pending For Spare' ? 'selected':''}}>
+                                            value="Pending For Spare" {{ ($ticket->og_status ?? old('og_status')) == 'Pending For Spare' ? 'selected':''}}>
                                             Pending For Spare
                                         </option>
                                         <option
@@ -338,28 +337,28 @@
                                         style="width: 100%;">
                                     <option></option>
                                     <option
-                                        value="System" {{ old('category') ?? $ticket->category  == 'System' ? 'selected':''}}>
+                                        value="System" {{ ($ticket->category ?? old('category'))  == 'System' ? 'selected':''}}>
                                         System
                                     </option>
                                     <option
-                                        value="Software" {{ old('category') ?? $ticket->category  == 'Software' ? 'selected':''}}>
+                                        value="Software" {{ ($ticket->category ?? old('category'))  == 'Software' ? 'selected':''}}>
                                         Software
                                     </option>
                                     <option
-                                        value="Hardware" {{ old('category') ?? $ticket->category == 'Hardware' ? 'selected':''}}>
+                                        value="Hardware" {{ ($ticket->category ?? old('category')) == 'Hardware' ? 'selected':''}}>
                                         Hardware
                                     </option>
                                     <option
-                                        value="Network" {{ old('category') ?? $ticket->category == 'Network' ? 'selected':''}}>
+                                        value="Network" {{ ($ticket->category ?? old('category')) == 'Network' ? 'selected':''}}>
                                         Network
                                     </option>
                                     <option
-                                        value="Others" {{ old('category') ?? $ticket->category  == 'Others' ? 'selected':''}}>
+                                        value="Others" {{ ($ticket->category ?? old('category'))  == 'Others' ? 'selected':''}}>
                                         Others
                                     </option>
                                 </select>
                             </div>
-
+{{--                            {{dd($ticket->sys_category)}}--}}
                             {{--                        @if(Auth::user()->department == "Administrator"|| Auth::user()->department == "MICT")--}}
                             <div id="dother" class="col-lg-4 col-md-4" hidden>
                                 <label><br>Others</label>
@@ -383,52 +382,52 @@
                                     <option></option>
                                     {{--                                    <option></option>--}}
                                     <option
-                                        value="Bizbox" {{  $ticket->sys_category ?? old('sys_category') == 'Bizbox' ? 'selected':''}}>
+                                        value="Bizbox" {{  ($ticket->sys_category ?? old('sys_category')) == 'Bizbox' ? 'selected':''}}>
                                         Bizbox
                                     </option>
                                     <option
-                                        value="PACS" {{ $ticket->sys_category ?? old('sys_category')== 'PACS' ? 'selected':''}}>
+                                        value="PACS" {{ ($ticket->sys_category ?? old('sys_category')) == 'PACS' ? 'selected':''}}>
                                         PACS
                                     </option>
                                     <option
-                                        value="LIS - SYSMEX" {{ $ticket->sys_category ?? old('sys_category') == 'LIS - SYSMEX' ? 'selected':''}}>
+                                        value="LIS - SYSMEX" {{ ($ticket->sys_category ?? old('sys_category')) == 'LIS - SYSMEX' ? 'selected':''}}>
                                         LIS - SYSMEX
                                     </option>
                                     <option
-                                        value="LIS - MARSMAN" {{ $ticket->sys_category ?? old('sys_category') == 'LIS' ? 'selected':''}}>
+                                        value="LIS - MARSMAN" {{ ($ticket->sys_category ?? old('sys_category')) == 'LIS' ? 'selected':''}}>
                                         LIS - MARSMAN
                                     </option>
                                     <option
-                                        value="LIS - J&J" {{ $ticket->sys_category ?? old('sys_category') == 'LIS - J&J' ? 'selected':''}}>
+                                        value="LIS - J&J" {{ ($ticket->sys_category ?? old('sys_category')) == 'LIS - J&J' ? 'selected':''}}>
                                         LIS - J&J
                                     </option>
                                     <option
-                                        value="DMS" {{ $ticket->sys_category ?? old('sys_category') == 'DMS' ? 'selected':''}}>
+                                        value="DMS" {{ ($ticket->sys_category ?? old('sys_category')) == 'DMS' ? 'selected':''}}>
                                         DMS
                                     </option>
                                     <option
-                                        value="ACC PAC" {{ $ticket->sys_category ?? old('sys_category') == 'ACC PAC' ? 'selected':''}}>
+                                        value="ACC PAC" {{ ($ticket->sys_category ?? old('sys_category')) == 'ACC PAC' ? 'selected':''}}>
                                         ACC PAC
                                     </option>
                                     <option
-                                        value="MEDEXPRESS" {{ $ticket->sys_category ?? old('sys_category') == 'MEDEXPRESS' ? 'selected':''}}>
+                                        value="MEDEXPRESS" {{ ($ticket->sys_category ?? old('sys_category')) == 'MEDEXPRESS' ? 'selected':''}}>
                                         MEDEXPRESS
                                     </option>
                                     <option
-                                        value="ACCESS DB" {{ $ticket->sys_category ?? old('sys_category') == 'ACCESS DB' ? 'selected':''}}>
+                                        value="ACCESS DB" {{ ($ticket->sys_category ?? old('sys_category')) == 'ACCESS DB' ? 'selected':''}}>
                                         ACCESS DB
                                     </option>
                                     <option
-                                        value="ASSET" {{ $ticket->sys_category ?? old('sys_category') == 'ASSET' ? 'selected':''}}>
+                                        value="ASSET TRACER" {{ ($ticket->sys_category ?? old('sys_category')) == 'ASSET' ? 'selected':''}}>
                                         ASSET
                                         TRACER
                                     </option>
                                     <option
-                                        value="CHEQUE TRACER" {{ $ticket->sys_category ?? old('sys_category') == 'CHEQUE TRACER' ? 'selected':''}}>
+                                        value="CHEQUE TRACER" {{ ($ticket->sys_category ?? old('sys_category')) == 'CHEQUE TRACER' ? 'selected':''}}>
                                         CHEQUE TRACER
                                     </option>
                                     <option
-                                        value="Others" {{ $ticket->sys_category ?? old('sys_category') == 'Others' ? 'selected':''}}>
+                                        value="Others" {{ ($ticket->sys_category ?? old('sys_category'))  == 'Others' ? 'selected':''}}>
                                         Others
                                     </option>
                                 </select>
