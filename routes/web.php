@@ -34,7 +34,15 @@ Route::GET('/My_Sort', 'mTicketsController@myTickets');
 
 
 Route::get('/Received_Calls', 'ReportsController@receivedCalls')->name('received.calls');
-Route::POST('/Received_Calls/Report', 'ReportsController@reportreceivedCalls')->name('report.received.calls');
+Route::POST('/Received_Calls/Report', 'ReportsController@reportReceivedCalls')->name('report.received.calls');
+Route::get('/Received_Calls/Report/Print', 'ReportsController@printReceivedCalls')->name('print.received.calls');
+
+Route::get('/Census_MICT', 'ReportsController@census')->name('census');
+Route::POST('/Census_MICT/Report', 'ReportsController@reportCensus')->name('report.census');
+Route::get('/Census_MICT/Report/Print', 'ReportsController@printCensus')->name('print.census');
+
+
+
 
 Route::resource('/departments', 'DepartmentsController');
 

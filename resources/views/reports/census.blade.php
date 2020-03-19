@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Department Received Calls | ')
+@section('title', ' Census Report for MICT | ')
 
 @section('content')
     <div class="content-wrapper">
@@ -8,7 +8,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Department Received Calls</h1>
+                        <h1>Census Report for MICT</h1>
                     </div>
                 </div>
             </div>
@@ -23,7 +23,7 @@
                             {{--                                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i--}}
                             {{--                                            class="fas fa-minus"></i></button>--}}
                             {{--                                </div>--}}
-                            <form action="{{route('report.received.calls')}}" class="" autocomplete="off" method="POST">
+                            <form action="{{route('report.census')}}" class="" autocomplete="off" method="POST">
                                 @csrf
                                 @method('POST')
                                 <div class="row">
@@ -38,21 +38,6 @@
                                 </div>
                             </form>
 
-
-                            {{--                            <form action="#" class="" autocomplete="off" method="GET">--}}
-                            {{--                                @csrf--}}
-                            {{--                                <div class="flex-column" style="width: 100%;">--}}
-                            {{--                                    <div class="col-sm-3" style="width: 100%;">--}}
-                            {{--                                        <input type="text" class="form-control float-right" name="datefilter"--}}
-                            {{--                                               placeholder="Date Range" value="{{request()->input('datefilter')}}">--}}
-                            {{--                                    </div>--}}
-                            {{--                                    <div class="col-sm-3">--}}
-                            {{--                                        <button type="submit" class="btn btn-warning col-12">Apply</button>--}}
-                            {{--                                    </div>--}}
-                            {{--                                </div>--}}
-                            {{--                            </form>--}}
-
-
                         </div>
                         <!-- /.card-header -->
                         <section>
@@ -63,38 +48,43 @@
                                         $range0 = date('F d, Y', strtotime($range[0]));
                                         $range1 = date('F d, Y', strtotime($range[1]));
                                     @endphp
-                                    <h2 style="text-align: center;">Department Recieved
-                                        Calls ({{$range0 ." - ".$range1}})</h2>
+                                    <h2 style="text-align: center;">Census Report fot ({{$range0 ." - ".$range1}})</h2>
                                     <div class="container">
                                         <table
                                             class="compact table table-sm table-responsive-sm table-hover table-borderedless table-striped "
                                             style="text-align: center;">
                                             <thead>
                                             <tr>
-                                                <th>Department</th>
-                                                <th>Number of Call</th>
+                                                <th>Staff</th>
+                                                <th>Active Tickets</th>
+                                                <th>On-Going Tickets</th>
+                                                <th>Resolved Tickets</th>
+                                                <th>Closed Tickets</th>
+                                                <th>Total</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @forelse($tickets as $ticket => $call)
+                                            @foreach( $micts as $key => $mict )
                                                 <tr>
-                                                    <td>{{$ticket}}</td>
-                                                    <td>{{count($call)}}</td>
+                                                    <td>{{$mict->fname}}</td>
+                                                    <td>{{$active[$key]}}</td>
+                                                    <td>{{$on_going[$key]}}</td>
+                                                    <td>{{$resolved[$key]}}</td>
+                                                    <td>{{$closed[$key]}}</td>
+                                                    <td>{{ $active[$key] + $on_going[$key] + $resolved[$key] + $closed[$key] }}</td>
                                                 </tr>
-                                            @empty
-                                                <tr>
-                                                    <td colspan="2"> No Results for {{request()->input('datefilter')}}</td>
-                                                </tr>
-                                            @endforelse
-                                            </tbody>
-                                            <tfoot>
-                                            <tr style="font-weight: bolder">
-                                                <td>Total</td>
-                                                <td>{{count($tickets)}}</td>
+                                            @endforeach
+                                            <tr>
+                                                <td>Unassigned</td>
+                                                <td>{{$nactive}}</td>
+                                                <td>{{$non_going}}</td>
+                                                <td>{{$nresolved}}</td>
+                                                <td>{{$nclosed}}</td>
+                                                <td>{{ $nactive + $non_going + $nresolved + $nclosed }}</td>
                                             </tr>
-                                            </tfoot>
+                                            </tbody>
                                         </table>
-                                        <a href="{{route('print.received.calls')}}" target="_blank">
+                                        <a href="{{route('print.census')}}" target="_blank">
                                             <button class="btn btn-info float-right">Print Report</button>
                                         </a>
                                     </div>
