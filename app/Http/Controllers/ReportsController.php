@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Department;
 use App\mTicket;
 use App\User;
 use DateTime;
@@ -32,26 +33,27 @@ class ReportsController extends Controller
             $range0 = date('Y-m-d', strtotime($range[0]));
             $range1 = date('Y-m-d', strtotime($range[1]));
 
-            $mict = User::select('fname')->Where([['department', '=', 'MICT']])
-                ->orwhere([
-                    ['department', '=', 'Administrator']
-                ])
-                ->get();
-            $active = mTicket::Where('status', '=', 'Resolve')->get()->groupBy('acknowledge_by');
+            $tickets = mTicket::whereBetween('created_at',[$range0, $range1])
+                ->orderBy('request_by', 'asc')
+                ->get()
+                ->groupBy('request_by');
+//            $mict = User::select('fname')->Where([['department', '=', 'MICT']])
+//                ->orwhere([
+//                    ['department', '=', 'Administrator']
+//                ])
+//                ->get();
+//            $active = mTicket::Where('status', '=', 'Resolve')->get()->groupBy('acknowledge_by');
 //            $acts = $active->count();
 //            ->select('browser', DB::raw('count(*) as total'))
 
-            foreach ($active as $resolve => $count){
-                dd($count->count());
-            }
-
-
-
+//            foreach ($active as $resolve => $count){
+//                dd($count->count());
+//            }
 //            dd($range0." ".$range1);
 //            $tickets = $tickets->whereBetween('created_at', [$range0 . " 00:00:00", $range1 . " 23:59:59"]);
 //            $title = 'Sorted Tickets';
         }
 
-        return view('reports.received_calls');
+        return view('reports.received_calls', compact('tickets'));
     }
 }

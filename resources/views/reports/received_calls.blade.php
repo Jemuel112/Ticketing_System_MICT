@@ -55,8 +55,47 @@
 
                         </div>
                         <!-- /.card-header -->
-                        <div class="card-body" style="overflow-x:auto;">
-                        </div>
+                        <section>
+                            <div class="card-body" style="overflow-x:auto;">
+                                @if(request()->input('datefilter'))
+                                    <h2 style="text-align: center;">Department Recieved
+                                        Calls {{request()->input('datefilter')}}</h2>
+                                    <div class="container">
+                                        <table
+                                            class="compact table table-sm table-responsive-sm table-hover table-borderedless table-striped "
+                                            style="text-align: center;">
+                                            <thead>
+                                            <tr>
+                                                <th>Department</th>
+                                                <th>Number of Call</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @forelse($tickets as $ticket => $call)
+                                                <tr>
+                                                    <td>{{$ticket}}</td>
+                                                    <td>{{count($call)}}</td>
+                                                </tr>
+                                            @empty
+                                                <tr>
+                                                    <td colspan="2"> No Data as
+                                                        of {{request()->input('datefilter')}}</td>
+                                                </tr>
+                                            @endforelse
+                                            </tbody>
+                                            <tfoot>
+                                            <tr style="font-weight: bolder">
+                                                <td>Total</td>
+                                                <td>{{count($tickets)}}</td>
+                                            </tr>
+                                            </tfoot>
+                                        </table>
+                                        <button class="btn btn-info float-right">Print Report</button>
+                                    </div>
+                                @endif
+
+                            </div>
+                        </section>
                         <!-- /.card-body -->
                         {{--                        <div class="card-footer">--}}
                         {{--                            Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples and--}}
