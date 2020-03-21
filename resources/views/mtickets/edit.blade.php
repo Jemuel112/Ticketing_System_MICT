@@ -258,9 +258,9 @@
                                 <select class="form-control select2bs4 @error("acknowledge_by")is-invalid @enderror"
                                         id="ackn" name="acknowledge_by"
                                         style="width: 100%;"
-                                        @if(Auth::user()->department != "Administrator" || !is_null($ticket->acknowledge_by))
+                                        @if(Auth::user()->department != "Administrator" ?? !is_null($ticket->acknowledge_by))
                                         disabled
-                                    @endif>
+                                        @endif>
                                     <option></option>
                                     @foreach($micts as $mict)
                                         <option
