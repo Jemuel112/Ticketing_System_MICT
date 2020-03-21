@@ -30,18 +30,32 @@ class EndorsementController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->department == "Administrator" || Auth::user()->department == "MICT") {
+
+        if (Auth::user()->department == "Administrator") {
+            $user = Auth::user()->id;
             $endorsements = Endorsement::all();
+            $read = null;
+
+            foreach ($endorsements as $endorsement) {
+                $user = Auth::user()->id;
+                $seen = explode(', ', $endorsement->seen_by);
+                if (in_array($user, $seen)) {
+                    $read[] = $endorsement;
+                } else {
+                    $unread[] = $endorsement;
+                }
+            }
+            dd($read);
         } else {
             $user = Auth::user()->id;
             $dept = Department::select('id')->where('dept_name', Auth::user()->department)->first();
-            $endors = Endorsement::whereOr([['assigned_to_id', 'Like', '%' . "$user" . '%']])
-                ->whereOr('assigned_dept_id', 'Like', '%' . "$dept->id" . '%')
-                ->get();
+            $endors = Endorsement::all();
+//            dd($endors);
             $endorsements[] = null;
             foreach ($endors as $endor) {
                 $assign = explode(', ', $endor->assigned_to_id);
                 $depts = explode(', ', $endor->assigned_dept_id);
+                dd($dept);
                 if (in_array($user, $assign)) {
                     $endorsements[] = $endor;
                 } elseif (in_array($dept->id, $depts)) {
