@@ -109,7 +109,7 @@ class ReportsController extends Controller
     public function printCensus()
     {
         if(Session::get('Censusdate')){
-            $range = explode(' - ', Session::get('Cdate'));
+            $range = explode(' - ', Session::get('Censusdate'));
             $range0 = date('Y-m-d', strtotime($range[0]));
             $range1 = date('Y-m-d', strtotime($range[1]));
 

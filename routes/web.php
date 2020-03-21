@@ -66,6 +66,11 @@ Route::get('/clear-cache', function () {
     return "Cache cleared";
 });
 
+//Route::get('/websockets-serve', function () {
+////    Artisan::call('websockets:serve');
+//    return Artisan::call('websockets:serve');
+//});
+
 Auth::routes([
     'register' => false,
     'reset' => false,
