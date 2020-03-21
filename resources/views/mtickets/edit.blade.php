@@ -442,12 +442,12 @@
                                         value="{{old('lop')}}" id="lop" name="lop"
                                         style="width: 100%;">
                                     <option></option>
-                                    <option value="Low" {{ $ticket->lop ?? old('lop') == 'Low' ? 'selected':''}}>Low
+                                    <option value="Low" {{ ($ticket->lop ?? old('lop')) == 'Low' ? 'selected':''}}>Low
                                     </option>
-                                    <option value="Medium" {{ $ticket->lop ?? old('lop') == 'Medium' ? 'selected':''}}>
+                                    <option value="Medium" {{ ($ticket->lop ?? old('lop')) == 'Medium' ? 'selected':''}}>
                                         Medium
                                     </option>
-                                    <option value="High" {{ $ticket->lop ?? old('lop') == 'High' ? 'selected':''}}>
+                                    <option value="High" {{ ($ticket->lop ?? old('lop')) == 'High' ? 'selected':''}}>
                                         High
                                     </option>
                                 </select>

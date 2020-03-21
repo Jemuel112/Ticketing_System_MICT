@@ -51,6 +51,8 @@ class EndorsementController extends Controller
                 }
             }
         }
+
+
         return view('endorsement.index', compact('endorsements'));
     }
 
