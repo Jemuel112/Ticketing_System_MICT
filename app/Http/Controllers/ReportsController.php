@@ -96,10 +96,10 @@ class ReportsController extends Controller
                 $resolved[] = mTicket::whereBetween('created_at',[$range0, $range1])->where([['assigned_to', 'Like', '%' . "$mict->fname" . '%']])->where('status','Resolved')->count();
                 $closed[] = mTicket::whereBetween('created_at',[$range0, $range1])->where([['assigned_to', 'Like', '%' . "$mict->fname" . '%']])->where('status','Closed')->count();
             }
-            $nactive =  mTicket::where([['assigned_to',null]])->where('status','Active')->count();
-            $non_going =  mTicket::where([['assigned_to', null]])->where('status','On-Going')->count();
-            $nresolved =  mTicket::where([['assigned_to', null]])->where('status','Resolved')->count();
-            $nclosed =  mTicket::where([['assigned_to', null]])->where('status','Closed')->count();
+            $nactive =  mTicket::whereBetween('created_at',[$range0, $range1])->where([['assigned_to',null]])->where('status','Active')->count();
+            $non_going =  mTicket::whereBetween('created_at',[$range0, $range1])->where([['assigned_to', null]])->where('status','On-Going')->count();
+            $nresolved =  mTicket::whereBetween('created_at',[$range0, $range1])->where([['assigned_to', null]])->where('status','Resolved')->count();
+            $nclosed =  mTicket::whereBetween('created_at',[$range0, $range1])->where([['assigned_to', null]])->where('status','Closed')->count();
 
             Session::put('Censusdate', $request->datefilter);
         }
@@ -123,10 +123,10 @@ class ReportsController extends Controller
                 $resolved[] = mTicket::whereBetween('created_at',[$range0, $range1])->where([['assigned_to', 'Like', '%' . "$mict->fname" . '%']])->where('status','Resolved')->count();
                 $closed[] = mTicket::whereBetween('created_at',[$range0, $range1])->where([['assigned_to', 'Like', '%' . "$mict->fname" . '%']])->where('status','Closed')->count();
             }
-            $nactive =  mTicket::where([['assigned_to',null]])->where('status','Active')->count();
-            $non_going =  mTicket::where([['assigned_to', null]])->where('status','On-Going')->count();
-            $nresolved =  mTicket::where([['assigned_to', null]])->where('status','Resolved')->count();
-            $nclosed =  mTicket::where([['assigned_to', null]])->where('status','Closed')->count();
+            $nactive =  mTicket::whereBetween('created_at',[$range0, $range1])->where([['assigned_to',null]])->where('status','Active')->count();
+            $non_going =  mTicket::whereBetween('created_at',[$range0, $range1])->where([['assigned_to', null]])->where('status','On-Going')->count();
+            $nresolved =  mTicket::whereBetween('created_at',[$range0, $range1])->where([['assigned_to', null]])->where('status','Resolved')->count();
+            $nclosed =  mTicket::whereBetween('created_at',[$range0, $range1])->where([['assigned_to', null]])->where('status','Closed')->count();
 
             $range = date('F d, Y', strtotime($range[0]))." - ".date('F d, Y', strtotime($range[1])) ;
             return view('reports.print_census', compact('micts','active','on_going','resolved','closed','nactive','non_going','nresolved','nclosed','range'));

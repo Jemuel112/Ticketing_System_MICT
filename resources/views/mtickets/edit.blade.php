@@ -178,6 +178,7 @@
                                 </select>
                             </div>
                             {{--End Status--}}
+
                             {{--On-Going Status--}}
                             <div class="col-lg-3 col-sm-3">
                                 <div id="dogs" hidden>
@@ -208,7 +209,6 @@
                             </div>
                             {{--End On-Going Status--}}
 
-
                             <div class="col-md-6" id="dogst1" hidden>
                                 <label for="ogst" @error('start_at') class="text-red" @enderror><br>Select Date to start</label>
                                 @error('start_at')
@@ -228,6 +228,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-md-6" id="dogst2" hidden>
                                 <label for="ogst" @error('end_at') class="text-red" @enderror><br>Select
                                     Deadline</label>
@@ -258,7 +259,7 @@
                                 <select class="form-control select2bs4 @error("acknowledge_by")is-invalid @enderror"
                                         id="ackn" name="acknowledge_by"
                                         style="width: 100%;"
-                                        @if(Auth::user()->department != "Administrator" || !is_null($ticket->acknowledge_by))
+                                        @if(Auth::user()->department != "Administrator" ?? !is_null($ticket->acknowledge_by))
                                         disabled
                                     @endif>
                                     <option></option>
@@ -358,7 +359,7 @@
                                     </option>
                                 </select>
                             </div>
-{{--                            {{dd($ticket->sys_category)}}--}}
+                            {{--                            {{dd($ticket->sys_category)}}--}}
                             {{--                        @if(Auth::user()->department == "Administrator"|| Auth::user()->department == "MICT")--}}
                             <div id="dother" class="col-lg-4 col-md-4" hidden>
                                 <label><br>Others</label>
@@ -442,12 +443,13 @@
                                         value="{{old('lop')}}" id="lop" name="lop"
                                         style="width: 100%;">
                                     <option></option>
-                                    <option value="Low" {{ $ticket->lop ?? old('lop') == 'Low' ? 'selected':''}}>Low
+                                    <option value="Low" {{ ($ticket->lop ?? old('lop')) == 'Low' ? 'selected':''}}>Low
                                     </option>
-                                    <option value="Medium" {{ $ticket->lop ?? old('lop') == 'Medium' ? 'selected':''}}>
+                                    <option
+                                        value="Medium" {{ ($ticket->lop ?? old('lop')) == 'Medium' ? 'selected':''}}>
                                         Medium
                                     </option>
-                                    <option value="High" {{ $ticket->lop ?? old('lop') == 'High' ? 'selected':''}}>
+                                    <option value="High" {{ ($ticket->lop ?? old('lop')) == 'High' ? 'selected':''}}>
                                         High
                                     </option>
                                 </select>
@@ -591,8 +593,11 @@
                                                             href="#">{{app\User::findOrFail($content->id_user)->fname}} {{app\User::findOrFail($content->id_user)->lname}}</a>
                                                     </h3>
                                                     <div class="timeline-body">
+                                                        <div class="container" >
+                                                            {!! $content->actions !!}
+                                                        </div>
+
                                                         {{--                                                    echo strip_tags($content->actions)--}}
-                                                        {!! $content->actions !!}
                                                     </div>
                                                     {{--                                        <div class="timeline-footer">--}}
                                                     {{--                                        </div>--}}
@@ -767,10 +772,10 @@
             } else if ($('#status').val() == "Resolved") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
-            } else if($('#status').val() == "On-Going") {
+            } else if ($('#status').val() == "On-Going") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
-            }else{
+            } else {
                 $("#dact").prop("hidden", true);
                 $("#act").prop("disabled", true);
             }
@@ -813,10 +818,10 @@
             } else if ($('#status').val() == "Resolved") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
-            }else if($('#status').val() == "On-Going") {
+            } else if ($('#status').val() == "On-Going") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
-            }else{
+            } else {
                 $("#dact").prop("hidden", true);
                 $("#act").prop("disabled", true);
             }
