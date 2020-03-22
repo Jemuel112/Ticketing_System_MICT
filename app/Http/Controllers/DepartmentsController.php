@@ -42,14 +42,16 @@ class DepartmentsController extends Controller
         return view('department.show',compact('department'));
     }
 
-    public function update(Request $department)
+    public function update(Request $request,$id)
     {
+//        dd($request->dept_name);
+        $department = Department::findOrFail($id);
         $id = $department->id;
         $data = request()->validate([
             'dept_name' => "required|unique:departments,dept_name,$id",
         ]);
-
         $department->update($data);
+
         return redirect('/departments');
 
     }

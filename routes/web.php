@@ -52,8 +52,10 @@ Route::resource('/users', 'UsersController');
 Route::resource('/Endorsement', 'EndorsementController');
 Route::get('/Endorsement/{id}/dl', 'EndorsementController@download')->name('Endorsement.dl');
 Route::get('/Sent_Endorsement', 'EndorsementController@sent')->name('Endorsement.sent');
-
-
+Route::get('/notifications', 'EndorsementController@notifications')->name('notifications');
+Route::get('/nigga', function () {
+    return view('sample');
+});
 
 //Route::get('/dl',function (){
 //    return response()->download(public_path('Google_Event-1.mp3'),'sadsdasd.ico');
@@ -81,4 +83,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/logout', function () {
     return view('auth.login');
 });
+
+
 

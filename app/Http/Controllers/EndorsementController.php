@@ -12,13 +12,14 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Str;
 use phpDocumentor\Reflection\Types\Null_;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class EndorsementController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('disablepreventback')->except('download');
+        $this->middleware('disablepreventback')->except('download','notifications');
         $this->middleware('endorsed')->except('index', 'sent');
 //        $this->middleware('auth.am')->except('index', 'store', 'create', 'show', 'comment');
     }
@@ -275,5 +276,23 @@ class EndorsementController extends Controller
 //        dd($directory);
 //        return Storage::download(public_path($directory));
 //        return response()->download(public_path($directory, $name));
+    }
+
+    public function notifications()
+    {
+        $response = new StreamedResponse(function() {
+            $dept = Department::where('id',1)->first();
+//            $time = date('r');
+            echo "data: {$dept->dept_name}\n\n";
+//            ob_flush();
+            flush();
+
+        });
+        $response->headers->set('Content-Type', 'text/event-stream');
+//        $response->headers->set('Cache-Control', 'no-control');
+//        $response->headers->set('Cache-Control', 'no-cache');
+
+
+        return $response;
     }
 }
