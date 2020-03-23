@@ -9,17 +9,16 @@
 
 
 <script >
-    const source = new EventSource('{{route('notifications')}}');
+    const source = new EventSource('{{route('notifications')}}',{withCredentials: true});
 
     source.onmessage = function (event) {
         document.getElementById("result").innerHTML = event.data;
-        source.close();
+        // source.close();
+        // console.log(event.data);
     };
-
-
-    source.onopen = function() {
-        console.log('connection to stream has been opened');
-    };
+    // source.onopen = function() {
+    //     console.log('connection to stream has been opened');
+    // };
 </script>
 
 </body>

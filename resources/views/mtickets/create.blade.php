@@ -430,10 +430,11 @@
                                             value="{{old('lop')}}" id="lop" name="lop"
                                             style="width: 100%;">
                                         <option></option>
-                                        <option value="Low" {{ old('lop') == 'Low' ? 'selected':''}} selected>Low</option>
-                                        <option value="Medium" {{ old('lop') == 'Medium' ? 'selected':''}}>Medium
+                                        <option value="Low" {{ (old('lop') == 'Low') ? 'selected':''}} selected>Low
                                         </option>
-                                        <option value="High" {{ old('lop') == 'High' ? 'selected':''}}>High</option>
+                                        <option value="Medium" {{ (old('lop') == 'Medium') ? 'selected':''}}>Medium
+                                        </option>
+                                        <option value="High" {{ (old('lop') == 'High') ? 'selected':''}}>High</option>
                                     </select>
                                 </div>
                             @endif
@@ -504,18 +505,21 @@
         </div>
         <!-- /.content -->
         <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            <div class="float-right">
-                <button type="submit" class="btn btn-primary"><i class="nav-icon fal fa-plus-circle"></i>
-                    Submit
-                </button>
 
-            </div>
-            <strong>Copyright &copy; 2020 <a href="https://www.mcuhospital.org/">MCU Hospital</a>.</strong> All
-            rights
-            reserved.
-            <b>Version</b> 1.0.0
-        </footer>
+        @section('footer')
+            <footer class="main-footer">
+                <div class="float-right">
+                    <button type="submit" class="btn btn-primary"><i class="nav-icon fal fa-plus-circle"></i>
+                        Submit
+                    </button>
+
+                </div>
+                <strong>Copyright &copy; 2020 <a href="https://www.mcuhospital.org/">MCU Hospital</a>.</strong> All
+                rights
+                reserved.
+                <b>Version</b> 1.0.0
+            </footer>
+        @endsection
 
     </form>
     <script type="text/javascript">
@@ -667,10 +671,10 @@
             } else if ($('#status').val() == "Resolved") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
-            } else if($('#status').val() == "On-Going") {
+            } else if ($('#status').val() == "On-Going") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
-            }else{
+            } else {
                 $("#dact").prop("hidden", true);
                 $("#act").prop("disabled", true);
             }
@@ -714,10 +718,10 @@
             } else if ($('#status').val() == "Resolved") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
-            }else if($('#status').val() == "On-Going") {
+            } else if ($('#status').val() == "On-Going") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
-            }else{
+            } else {
                 $("#dact").prop("hidden", true);
                 $("#act").prop("disabled", true);
             }
@@ -727,5 +731,4 @@
 @endsection
 
 
-@section('footer',"<p></p>")
 @include('layouts.scripts')

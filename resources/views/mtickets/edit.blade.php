@@ -111,7 +111,9 @@
                                 <input class="form-control @error("reported_by")is-invalid @enderror"
                                        value="{{$ticket->reported_by ?? old('reported_by')}}"
                                        style="width: 100%;" type="text" name="reported_by" placeholder="Name"
-                                >
+                                       @if($ticket->status == "Closed" && Auth::user()->department != "Administrator")
+                                       disabled
+                                        @endif>
                             </div>
                             {{--End Reported by--}}
 
@@ -125,7 +127,10 @@
                                 @if(Auth::user()->department == 'Administrator' || Auth::user()->department == "MICT")
                                     <select class="form-control select2bs4 @error("request_by")is-invalid @enderror"
                                             id="reqb" name="request_by"
-                                            style="width: 100%;">
+                                            style="width: 100%;"
+                                            @if($ticket->status == "Closed" && Auth::user()->department != "Administrator")
+                                            disabled
+                                        @endif>
                                         <option value=""></option>
                                         @foreach($departments as $department)
                                             <option
@@ -153,7 +158,10 @@
                                 <select class="form-control select2bs4 @error("status")is-invalid @enderror"
                                         name="status"
                                         style="width: 100%;"
-                                        id="status">
+                                        id="status"
+                                        @if($ticket->status == "Closed" && Auth::user()->department != "Administrator")
+                                        disabled
+                                    @endif>
                                     {{--                                        {{$ticket->status == $user->department  ? 'selected' : ''}}--}}
                                     <option
                                         value="Active" {{ (old('status') ?? $ticket->status) == 'Active' ? 'selected' :''}}>
@@ -190,7 +198,10 @@
                                     <select class="form-control select2bs4 @error("og_status")is-invalid @enderror"
                                             name="og_status"
                                             id="ogs"
-                                            style="width: 100%;">
+                                            style="width: 100%;"
+                                            @if($ticket->status == "Closed" && Auth::user()->department != "Administrator")
+                                            disabled
+                                        @endif>
                                         <option></option>
                                         <option
                                             value="Pending For Spare" {{ ($ticket->og_status ?? old('og_status')) == 'Pending For Spare' ? 'selected':''}}>
@@ -221,7 +232,10 @@
                                            value="{{date('m/d/Y h:i', strtotime($ticket->start_at)) ?? old('start_at')}}"
                                            @endif
                                            name="start_at"
-                                           data-target="#datetimepickers">
+                                           data-target="#datetimepickers"
+                                           @if($ticket->status == "Closed" && Auth::user()->department != "Administrator")
+                                           disabled
+                                        @endif/>
                                     <div class="input-group-append" data-target="#datetimepickers"
                                          data-toggle="datetimepicker">
                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -242,7 +256,10 @@
                                            value="{{date('m/d/Y h:i', strtotime($ticket->end_at)) ?? old('end_at')}}"
                                            @endif
                                            name="end_at"
-                                           data-target="#datetimepickerd"/>
+                                           data-target="#datetimepickerd"
+                                           @if($ticket->status == "Closed" && Auth::user()->department != "Administrator")
+                                           disabled
+                                        @endif/>
                                     <div class="input-group-append" data-target="#datetimepickerd"
                                          data-toggle="datetimepicker">
                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -280,7 +297,10 @@
                                 <select class="form-control select2bs4 @error("assigned_to")is-invalid @enderror"
                                         name="assigned_to[]"
                                         data-placeholder="Assigned to..."
-                                        multiple="multiple" style="width: 100%;">
+                                        multiple="multiple" style="width: 100%;"
+                                        @if($ticket->status == "Closed" && Auth::user()->department != "Administrator")
+                                        disabled
+                                    @endif>
                                     <option></option>
                                     @foreach($micts as $mict)
                                         <option
@@ -299,7 +319,10 @@
                                 <select class="form-control select2bs4 @error("assisted_by")is-invalid @enderror"
                                         name="assisted_by[]"
                                         data-placeholder="Assisted by..."
-                                        multiple="multiple" style="width: 100%;">
+                                        multiple="multiple" style="width: 100%;"
+                                        @if($ticket->status == "Closed" && Auth::user()->department != "Administrator")
+                                        disabled
+                                    @endif>
                                     <option></option>
                                     @foreach($micts as $mict)
                                         <option
@@ -318,7 +341,10 @@
                                 <select class="form-control select2bs4 @error("accomplished_by")is-invalid @enderror"
                                         name="accomplished_by[]"
                                         data-placeholder="Accomplished by..."
-                                        multiple="multiple" style="width: 100%;">
+                                        multiple="multiple" style="width: 100%;"
+                                        @if($ticket->status == "Closed" && Auth::user()->department != "Administrator")
+                                        disabled
+                                    @endif>
                                     <option></option>
                                     @foreach($micts as $mict)
                                         <option
@@ -335,7 +361,10 @@
                                 @enderror
                                 <select class="form-control select2bs4 @error("category")is-invalid @enderror"
                                         id="category" name="category"
-                                        style="width: 100%;">
+                                        style="width: 100%;"
+                                        @if($ticket->status == "Closed" && Auth::user()->department != "Administrator")
+                                        disabled
+                                    @endif>
                                     <option></option>
                                     <option
                                         value="System" {{ ($ticket->category ?? old('category'))  == 'System' ? 'selected':''}}>
@@ -367,21 +396,24 @@
                                        class="form-control @error("other")is-invalid @enderror" value="{{old('other')}}"
                                        name="other" style="width: 100%;" type="text" name=""
                                        placeholder="Please Specify"
-                                >
+                                       @if($ticket->status == "Closed" && Auth::user()->department != "Administrator")
+                                       disabled
+                                    @endif>
                             </div>
-                            {{--                        @endif--}}
 
                             <div id="dsystem" class="col-lg-4 col-md-4" hidden>
-                                <label @error('sys_category') class="text-red" @enderror><br>System Category</label>
+                                <label for="system" @error('sys_category') class="text-red" @enderror><br>System Category</label>
                                 @error('sys_category')
                                 <span class="text-red">is required</span>
                                 @enderror
-                                <select id="system"
+                                <select id="syscategory"
                                         class="form-control select2bs4 @error("sys_category")is-invalid @enderror"
                                         name="sys_category"
-                                        style="width: 100%;">
+                                        style="width: 100%;"
+                                        @if($ticket->status == "Closed" && Auth::user()->department != "Administrator")
+                                        disabled
+                                    @endif>
                                     <option></option>
-                                    {{--                                    <option></option>--}}
                                     <option
                                         value="Bizbox" {{  ($ticket->sys_category ?? old('sys_category')) == 'Bizbox' ? 'selected':''}}>
                                         Bizbox
@@ -441,7 +473,10 @@
                                 @enderror
                                 <select class="form-control select2bs4 @error("lop")is-invalid @enderror"
                                         value="{{old('lop')}}" id="lop" name="lop"
-                                        style="width: 100%;">
+                                        style="width: 100%;"
+                                        @if($ticket->status == "Closed" && Auth::user()->department != "Administrator")
+                                        disabled
+                                    @endif>
                                     <option></option>
                                     <option value="Low" {{ ($ticket->lop ?? old('lop')) == 'Low' ? 'selected':''}}>Low
                                     </option>
@@ -462,7 +497,10 @@
                                 @enderror
                                 <textarea name="concerns"
                                           placeholder=""
-                                          style="resize: none ;width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ old('concerns') ?? $ticket->concerns }}</textarea>
+                                          style="resize: none ;width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
+                                          @if($ticket->status == "Closed" && Auth::user()->department != "Administrator")
+                                          disabled
+                                        @endif>{{ old('concerns') ?? $ticket->concerns }}</textarea>
                             </div>
                             <div class="col-lg-12 col-md-12">
                                 <label><br>Additional Comments</label>
@@ -470,7 +508,9 @@
                                           placeholder="Enter your comments here"
                                           class="is-invalid"
                                           style="resize: none ;width: 100%; height: 75px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
-                                >{{old('comment')}}</textarea>
+                                          @if($ticket->status == "Closed" && Auth::user()->department != "Administrator")
+                                          disabled
+                                        @endif>{{old('comment')}}</textarea>
                                 <br> &nbsp;
                             </div>
 
@@ -521,7 +561,10 @@
                                     <div class=" col-lg-12 container-fluid">
                                         <div class="icheck-danger float-right">
                                             <input type="checkbox" name="shared"
-                                                   id="checkboxDanger2">
+                                                   id="checkboxDanger2"
+                                                   @if($ticket->status == "Closed" && Auth::user()->department != "Administrator")
+                                                   disabled
+                                                @endif>
                                             <label for="checkboxDanger2">Share info</label>
                                         </div>
                                     </div>
@@ -529,14 +572,18 @@
                                         <label for="act"></label>
                                         <textarea id="act" name="action" class="textarea"
                                                   placeholder="Place some text here"
-                                                  style="width: 100%; height: 250px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{old('action')}}</textarea>
+                                                  style="width: 100%; height: 250px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
+                                                 >{{old('action')}}</textarea>
                                     </div>
                                 @endif
                                 <div class="col-lg-12 col-md-12">
                                     <label for="remarks">Remarks / Recomendation</label>
                                     <textarea id="remarks" name="recommendation"
                                               placeholder="Enter Recommendation here"
-                                              style="resize: none ;width: 100%; height: 75px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{old('recommendation') ?? $ticket->recommendation}}</textarea>
+                                              style="resize: none ;width: 100%; height: 75px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
+                                              @if($ticket->status == "Closed" && Auth::user()->department != "Administrator")
+                                              disabled @endif>
+                                        {{old('recommendation') ?? $ticket->recommendation}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -593,10 +640,9 @@
                                                             href="#">{{app\User::findOrFail($content->id_user)->fname}} {{app\User::findOrFail($content->id_user)->lname}}</a>
                                                     </h3>
                                                     <div class="timeline-body">
-                                                        <div class="container" >
+                                                        <div class="container">
                                                             {!! $content->actions !!}
                                                         </div>
-
                                                         {{--                                                    echo strip_tags($content->actions)--}}
                                                     </div>
                                                     {{--                                        <div class="timeline-footer">--}}
@@ -676,6 +722,7 @@
 
     </script>
     <script>
+
         //Initialize Select2 Elements
         $('.select2').select2();
 
@@ -683,6 +730,7 @@
         $('.select2bs4').select2({
             theme: 'bootstrap4'
         });
+
         // Summernote
         $('#act').summernote({
             height: 300,
@@ -698,7 +746,9 @@
                 ['view', ['fullscreen', 'codeview', 'help']],
             ],
         });
-
+        @if(Auth::user()->department != 'Administrator' && $ticket->status == 'Closed')
+        $('#act').summernote('disable');
+        @endif
         $selectElement = $('#reqb').select2({
             theme: 'bootstrap4',
             placeholder: "Select...",
@@ -829,6 +879,8 @@
     </script>
 @endsection
 
+
+@if(Auth::user()->department == 'Administrator' || !($ticket->status == 'Closed'))
 @section('footer')
     <footer class="main-footer">
         <div class="float-right">
@@ -841,7 +893,7 @@
         <b>Version</b> 1.0.0
     </footer>
 @endsection
-
+@endif
 <!-- /.content -->
 <!-- /.content-wrapper -->
 

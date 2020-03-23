@@ -125,7 +125,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{route('Endorsement.create')}}" class="nav-link">
-                        <i class="nav-icon fas fa-users"></i>
+                        <i class="nav-icon fal fa-file-plus"></i>
                         <p>
                             Create Endorsement
                         </p>
@@ -133,7 +133,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{route('Endorsement.index')}}" class="nav-link">
-                        <i class="nav-icon far fa-building"></i>
+                            <i class="nav-icon far fa-building"></i>
                         <p>
                             All Endorsements
                         </p>

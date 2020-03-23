@@ -16,6 +16,7 @@
 
 <!-- Select2 -->
 <script src="{{asset("/plugins/select2/js/select2.full.min.js")}}"></script>
+{{--<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>--}}
 
 <!-- DataTables -->
 <script src="{{asset("/plugins/datatables/jquery.dataTables.js")}}"></script>
