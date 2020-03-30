@@ -62,7 +62,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="/MICT-Tickets" class="nav-link">
+                                <a href="{{route('MICT-Tickets.index')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>All Tickets</p>
                                     <span class="right">
@@ -71,7 +71,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="/MyTickets" class="nav-link">
+                                <a href="{{route('my.sort')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>My Tickets</p>
                                     <span class="right"> @widget('my_ticket_counter')</span>

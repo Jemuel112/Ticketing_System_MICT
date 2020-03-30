@@ -72,8 +72,9 @@ class MTicketsController extends Controller
         $onGoing = $tickets->where('status', 'On-Going')->count();
         $resolved = $tickets->where('status', 'Resolved')->count();
         $closed = $tickets->where('status', 'Closed')->count();
+//        dd($closed);
 
-        return view('mtickets.index', compact('tickets', 'title', 'departments', 'active', 'onGoing', 'resolved', 'closed'));
+        return view('mtickets.mytickets', compact('tickets', 'title', 'departments', 'active', 'onGoing', 'resolved', 'closed'));
     }
 
     public function index(Request $request)

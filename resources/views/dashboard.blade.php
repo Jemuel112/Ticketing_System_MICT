@@ -65,7 +65,6 @@
                             <button class="btn btn-link"><span class="text-white">More Info <i
                                         class="fas fa-arrow-circle-right"></i></span></button>
                         </form>
-
                     </div>
                 </div>
                 <!-- ./col -->
