@@ -46,17 +46,16 @@ class EndorsementController extends Controller
                     $unread[] = $endorsement;
                 }
             }
-            dd($read);
+            dd($unread);
         } else {
             $user = Auth::user()->id;
             $dept = Department::select('id')->where('dept_name', Auth::user()->department)->first();
             $endors = Endorsement::all();
 //            dd($endors);
-            $endorsements[] = null;
             foreach ($endors as $endor) {
                 $assign = explode(', ', $endor->assigned_to_id);
                 $depts = explode(', ', $endor->assigned_dept_id);
-                dd($dept);
+//                dd($dept->id);
                 if (in_array($user, $assign)) {
                     $endorsements[] = $endor;
                 } elseif (in_array($dept->id, $depts)) {
@@ -64,7 +63,10 @@ class EndorsementController extends Controller
                 } elseif ($endor->created_by_id == Auth::user()->id) {
                     $endorsements[] = $endor;
                 }
+
             }
+            dd($endorsements);
+
         }
 
 

@@ -19,9 +19,11 @@ class MTicketsController extends Controller
 {
     public function __construct()
     {
+
+
         $this->middleware('disablepreventback');
         $this->middleware('auth');
-        $this->middleware('auth.am')->except('index', 'store', 'create', 'show', 'comment');
+        $this->middleware('auth.am')->except('index', 'store', 'create', 'show', 'comment','dashboard');
         $this->middleware('editvalid')->only('show');
 
 //        $this->middleware('auth.admin')->only('index', 'store', 'allticket');
@@ -66,12 +68,12 @@ class MTicketsController extends Controller
             $title = 'My Sorted Tickets';
         }
         $tickets = $tickets->orderBy('id', 'DESC')->get();
-        $active = $tickets->where('status','Active')->count();
-        $onGoing = $tickets->where('status','On-Going')->count();
-        $resolved = $tickets->where('status','Resolved')->count();
-        $closed = $tickets->where('status','Closed')->count();
+        $active = $tickets->where('status', 'Active')->count();
+        $onGoing = $tickets->where('status', 'On-Going')->count();
+        $resolved = $tickets->where('status', 'Resolved')->count();
+        $closed = $tickets->where('status', 'Closed')->count();
 
-        return view('mtickets.index', compact('tickets', 'title', 'departments','active','onGoing','resolved','closed'));
+        return view('mtickets.index', compact('tickets', 'title', 'departments', 'active', 'onGoing', 'resolved', 'closed'));
     }
 
     public function index(Request $request)
@@ -259,7 +261,7 @@ class MTicketsController extends Controller
             }
             $action->save();
         }
-        if ($request->category == 'Others'){
+        if ($request->category == 'Others') {
 
         }
         return redirect('/MICT-Tickets');
@@ -384,8 +386,31 @@ class MTicketsController extends Controller
             ])
             ->orwhere([
                 ['department', '=', 'Administrator']
+
             ])
             ->get();
         return view('mtickets.report', compact('actions', 'ticket', 'micts'));
+    }
+
+    public function dashboard(Request $request)
+    {
+
+        $date = $request->date;
+
+        if (DateTime::createFromFormat('m/Y', $date) == FALSE) {
+//            dd('sad');
+            $error = \Illuminate\Validation\ValidationException::withMessages([
+                'field_name_1' => ['Month format is invalid'],
+            ]);
+            throw $error;
+        }
+
+        $date = explode('/', $date);
+        $request->session()->put('month',$date[0]);
+        $request->session()->put('year',$date[1]);
+        $date = $date[0]. "/01/" . $date[1];
+        $request->session()->put('date',$date);
+
+        return redirect('/dashboard');
     }
 }

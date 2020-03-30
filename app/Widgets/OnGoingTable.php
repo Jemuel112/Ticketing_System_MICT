@@ -4,6 +4,8 @@ namespace App\Widgets;
 
 use App\mTicket;
 use Arrilot\Widgets\AbstractWidget;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class OnGoingTable extends AbstractWidget
@@ -26,15 +28,28 @@ class OnGoingTable extends AbstractWidget
      * Treat this method as a controller action.
      * Return view() or other content to display.
      */
-    public function run()
+    public function run(Request $request)
     {
-        if(Auth::user()->department == "Administrator" || Auth::user()->department =="MICT"){
-//        $tickets = mTicket::where('status', '=', 'Active')->get();
-            $tickets = mTicket::where('status', '=', 'On-Going')->get()->groupBy(function ($item) {
-                return $item->request_by;
-            });
-        }else{
-            $tickets = mTicket::where('request_by','=', Auth::user()->department)->where('status', '=','On-Going')->get();
+        if (Auth::user()->department == "Administrator" || Auth::user()->department == "MICT") {
+            if ($request->session()->has('date')){
+//                dd('sad');
+                $month = $request->session()->get('month');
+                $year = $request->session()->get('year');
+                $tickets = mTicket::whereYear('created_at',$year)
+                    ->whereMonth('created_at', $month)
+                    ->where('status', '=', 'On-Going')
+                    ->get()->groupBy('request_by');
+//                dd($tickets);
+            }else{
+                $year = date( Carbon::now()->format('Y'));
+                $month = date( Carbon::now()->format('m'));
+                $tickets = mTicket::whereYear('created_at',$year)
+                    ->whereMonth('created_at', $month)
+                    ->where('status', '=', 'On-Going')
+                    ->get()->groupBy('request_by');
+            }
+        } else {
+            $tickets = mTicket::where('request_by', '=', Auth::user()->department)->where('status', '=', 'On-Going')->get();
         }
         return view('widgets.on_going_table', [
             'config' => $this->config,
