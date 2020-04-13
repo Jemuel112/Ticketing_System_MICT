@@ -26,7 +26,10 @@
                                 <label for="date" style="padding-top: 5px">Month of: &nbsp;</label>
                                 <input type="text"
                                        class="form-control datetimepicker-input @error("start_at")is-invalid @enderror"
-                                       value="" name="date"
+                                       @if(Session::has('date'))
+                                       value="{{date('m/Y', strtotime(Session::get('date')))}}"
+                                       @endif
+                                       name="date"
                                        data-target="#datetimepickers"/>
                                 <div class="input-group-append" data-target="#datetimepickers"
                                      data-toggle="datetimepicker">

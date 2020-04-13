@@ -51,37 +51,39 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @forelse($endorsements as $endorsement)
-                                    <tr onclick="window.location='/Endorsement/{{$endorsement->id}}';">
-                                        <td>{{ str_pad($endorsement->id,3,'0',STR_PAD_LEFT) }}</td>
-                                        @php
-                                            $user = \App\User::find($endorsement->created_by_id)
-                                        @endphp
-                                        @if($user)
-                                            <td>{{$user->fname." ".$user->lname." (".$user->department.")"}}</td>
-                                        @else
-                                            <td>'User Deleted'</td>
-                                        @endif
-                                        <td> {{ \Illuminate\Support\Str::limit($endorsement->title, 100, $end='...') }}</td>
-
-                                        <td>
-                                            <a style="margin: 2px"
-                                               class="btn btn-sm btn-outline-primary"
-                                               href="{{ route('Endorsement.show', ['id' => $endorsement->id]) }}"
-                                            ><i class="fal fa-pencil-alt"></i> View</a>
-                                            @if($endorsement->created_by_id == Auth::user()->id)
-                                                <a style="margin: 2px"
-                                                   class="btn btn-sm btn-outline-primary"
-                                                   href="{{ route('Endorsement.edit', ['id' => $endorsement->id]) }}"
-                                                ><i class="fal fa-pencil-alt"></i> Edit</a>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                @empty
+                                @if($unread == null)
                                     <tr>
                                         <td colspan="4" class="text-center">No Endorsement at the moment</td>
                                     </tr>
-                                @endforelse
+                                @else
+                                    @foreach($unread as $endorsement)
+                                        <tr onclick="window.location='/Endorsement/{{$endorsement->id}}';">
+                                            <td>{{ str_pad($endorsement->id,3,'0',STR_PAD_LEFT) }}</td>
+                                            @php
+                                                $user = \App\User::find($endorsement->created_by_id)
+                                            @endphp
+                                            @if($user)
+                                                <td>{{$user->fname." ".$user->lname." (".$user->department.")"}}</td>
+                                            @else
+                                                <td>'User Deleted'</td>
+                                            @endif
+                                            <td> {{ \Illuminate\Support\Str::limit($endorsement->title, 100, $end='...') }}</td>
+
+                                            <td>
+                                                <a style="margin: 2px"
+                                                   class="btn btn-sm btn-outline-primary"
+                                                   href="{{ route('Endorsement.show', ['id' => $endorsement->id]) }}"
+                                                ><i class="fal fa-pencil-alt"></i> View</a>
+                                                @if($endorsement->created_by_id == Auth::user()->id)
+                                                    <a style="margin: 2px"
+                                                       class="btn btn-sm btn-outline-primary"
+                                                       href="{{ route('Endorsement.edit', ['id' => $endorsement->id]) }}"
+                                                    ><i class="fal fa-pencil-alt"></i> Edit</a>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
                                 </tbody>
                             </table>
                         </div>
@@ -115,37 +117,39 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @forelse($endorsements as $endorsement)
-                                    <tr onclick="window.location='/Endorsement/{{$endorsement->id}}';">
-                                        <td>{{ str_pad($endorsement->id,3,'0',STR_PAD_LEFT) }}</td>
-                                        @php
-                                            $user = \App\User::find($endorsement->created_by_id)
-                                        @endphp
-                                        @if($user)
-                                            <td>{{$user->fname." ".$user->lname." (".$user->department.")"}}</td>
-                                        @else
-                                            <td>'User Deleted'</td>
-                                        @endif
-                                        <td> {{ \Illuminate\Support\Str::limit($endorsement->title, 100, $end='...') }}</td>
-
-                                        <td>
-                                            <a style="margin: 2px"
-                                               class="btn btn-sm btn-outline-primary"
-                                               href="{{ route('Endorsement.show', ['id' => $endorsement->id]) }}"
-                                            ><i class="fal fa-pencil-alt"></i> View</a>
-                                            @if($endorsement->created_by_id == Auth::user()->id)
-                                                <a style="margin: 2px"
-                                                   class="btn btn-sm btn-outline-primary"
-                                                   href="{{ route('Endorsement.edit', ['id' => $endorsement->id]) }}"
-                                                ><i class="fal fa-pencil-alt"></i> Edit</a>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                @empty
+                                @if($read == null)
                                     <tr>
                                         <td colspan="4" class="text-center">No Endorsement at the moment</td>
                                     </tr>
-                                @endforelse
+                                @else
+                                    @foreach($read as $endorsement)
+                                        <tr onclick="window.location='/Endorsement/{{$endorsement->id}}';">
+                                            <td>{{ str_pad($endorsement->id,3,'0',STR_PAD_LEFT) }}</td>
+                                            @php
+                                                $user = \App\User::find($endorsement->created_by_id)
+                                            @endphp
+                                            @if($user)
+                                                <td>{{$user->fname." ".$user->lname." (".$user->department.")"}}</td>
+                                            @else
+                                                <td>'User Deleted'</td>
+                                            @endif
+                                            <td> {{ \Illuminate\Support\Str::limit($endorsement->title, 100, $end='...') }}</td>
+
+                                            <td>
+                                                <a style="margin: 2px"
+                                                   class="btn btn-sm btn-outline-primary"
+                                                   href="{{ route('Endorsement.show', ['id' => $endorsement->id]) }}"
+                                                ><i class="fal fa-pencil-alt"></i> View</a>
+                                                @if($endorsement->created_by_id == Auth::user()->id)
+                                                    <a style="margin: 2px"
+                                                       class="btn btn-sm btn-outline-primary"
+                                                       href="{{ route('Endorsement.edit', ['id' => $endorsement->id]) }}"
+                                                    ><i class="fal fa-pencil-alt"></i> Edit</a>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
                                 </tbody>
                             </table>
                         </div>
@@ -156,27 +160,18 @@
         </div>
         <!-- /.content -->
         <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            <div class="float-right">
-                <button type="submit" class="btn btn-primary">Submit</button>
-
-            </div>
-            <strong>Copyright &copy; 2020 <a href="https://www.mcuhospital.org/">MCU Hospital</a>.</strong> All
-            rights
-            reserved.
-            <b>Version</b> 1.0.0
-        </footer>
 
     </form>
     <script>
         $("#endorsements").DataTable({
             'processing': true,
+            "order": [[0, "desc"]]
         });
         $("#endorsements2").DataTable({
             'processing': true,
+            "order": [[0, "desc"]]
         });
     </script>
 @endsection
 
 
-@section('footer',"<p></p>")

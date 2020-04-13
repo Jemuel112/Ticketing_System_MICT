@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e46f795c-50de-4821-94e9-0a47af70672e" name="Default Changelist" comment="Innitial Commit">
-      <change afterPath="$PROJECT_DIR$/resources/views/mtickets/mytickets.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MTicketsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MTicketsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/EndorsementController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/EndorsementController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/mict_nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/mict_nav.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/endorsement/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/endorsement/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/widgets/active_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/widgets/active_table.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/widgets/on_going_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/widgets/on_going_table.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -282,6 +282,12 @@
       <workItem from="1585051829603" duration="6481000" />
       <workItem from="1585214009565" duration="1564000" />
       <workItem from="1585533557543" duration="17874000" />
+      <workItem from="1585913379493" duration="171000" />
+      <workItem from="1586371255963" duration="1195000" />
+      <workItem from="1586415450079" duration="2038000" />
+      <workItem from="1586444922341" duration="1230000" />
+      <workItem from="1586706136438" duration="1361000" />
+      <workItem from="1586744776124" duration="9155000" />
     </task>
     <servers />
   </component>

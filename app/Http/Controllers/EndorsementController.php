@@ -10,8 +10,9 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use phpDocumentor\Reflection\Types\Null_;
+//use phpDocumentor\Reflection\Types\Null_;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class EndorsementController extends Controller
@@ -19,7 +20,7 @@ class EndorsementController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('disablepreventback')->except('download','notifications');
+        $this->middleware('disablepreventback')->except('download', 'notifications');
         $this->middleware('endorsed')->except('index', 'sent');
 //        $this->middleware('auth.am')->except('index', 'store', 'create', 'show', 'comment');
     }
@@ -31,14 +32,12 @@ class EndorsementController extends Controller
      */
     public function index()
     {
-
+        $read = null;
+        $unread = null;
         if (Auth::user()->department == "Administrator") {
             $user = Auth::user()->id;
             $endorsements = Endorsement::all();
-            $read = null;
-
             foreach ($endorsements as $endorsement) {
-                $user = Auth::user()->id;
                 $seen = explode(', ', $endorsement->seen_by);
                 if (in_array($user, $seen)) {
                     $read[] = $endorsement;
@@ -46,16 +45,13 @@ class EndorsementController extends Controller
                     $unread[] = $endorsement;
                 }
             }
-            dd($unread);
         } else {
             $user = Auth::user()->id;
             $dept = Department::select('id')->where('dept_name', Auth::user()->department)->first();
             $endors = Endorsement::all();
-//            dd($endors);
             foreach ($endors as $endor) {
                 $assign = explode(', ', $endor->assigned_to_id);
                 $depts = explode(', ', $endor->assigned_dept_id);
-//                dd($dept->id);
                 if (in_array($user, $assign)) {
                     $endorsements[] = $endor;
                 } elseif (in_array($dept->id, $depts)) {
@@ -63,14 +59,18 @@ class EndorsementController extends Controller
                 } elseif ($endor->created_by_id == Auth::user()->id) {
                     $endorsements[] = $endor;
                 }
-
             }
-            dd($endorsements);
+            foreach ($endorsements as $endorsement) {
+                $seen = explode(', ', $endorsement->seen_by);
+                if (in_array($user, $seen)) {
+                    $read[] = $endorsement;
+                } else {
+                    $unread[] = $endorsement;
+                }
+            }
 
         }
-
-
-        return view('endorsement.index', compact('endorsements'));
+        return view('endorsement.index', compact('endorsements', 'read', 'unread'));
     }
 
     public function sent()
@@ -179,7 +179,6 @@ class EndorsementController extends Controller
                 $to[] = User::find($users);
             }
         }
-
         if (is_null($endorse->assigned_dept_id)) {
             $departments = null;
         } else {
@@ -187,6 +186,16 @@ class EndorsementController extends Controller
             foreach ($department as $depts) {
                 $departments[] = Department::find($depts);
             }
+        }
+        $seen = explode(', ', $endorse->seen_by);
+//        $user = Auth::user()->id;
+
+        if (!(in_array($user->id,$seen))){
+            array_push($seen, $user->id);
+            $seen = array_filter($seen);
+            $seen = implode(', ',$seen);
+            $endorse->seen_by = $seen;
+            $endorse->save();
         }
         return view('endorsement.show', compact('endorse', 'user', 'users', 'files', 'to', 'departments', 'files'));
     }
@@ -267,7 +276,6 @@ class EndorsementController extends Controller
                 $end_file->save();
             }
         }
-        dd($unique_filename);
         return redirect()->route('Endorsement.index');
     }
 
@@ -289,17 +297,18 @@ class EndorsementController extends Controller
         $directory = "storage\\endorsment_files\\$d_id\\$file->file_name";
 //        $directory = "app\\public\\endorsment_files\\$d_id\\$file->file_name";
         $name = $file->org_file_name;
-        return Response::download(public_path($directory, $file->ogr_file_name));
+//        return Response::download(public_path($directory , $file->org_file_name));
+        return response()->download($directory, $name);
 
 //        dd($directory);
-//        return Storage::download(public_path($directory));
+//        return Storage::download(public_path($directory,"sad"));
 //        return response()->download(public_path($directory, $name));
     }
 
     public function notifications()
     {
-        $response = new StreamedResponse(function() {
-            $dept = Department::where('id',1)->first();
+        $response = new StreamedResponse(function () {
+            $dept = Department::where('id', 1)->first();
 //            $time = date('r');
             echo "data: {$dept->dept_name}\n\n";
 //            ob_flush();
