@@ -25,7 +25,7 @@
             @method('POST')
             <section class="content row" onload="functionToBeExecuted">
 
-                <div class="col-6">
+                <div class="col-sm-6">
                     <div class="card card-cyan ">
                         <div class="card-header">
                             <h3 class="card-title">Unread Endorsements</h3>
@@ -91,7 +91,7 @@
                 </div>
 
 
-                <div class="col-6">
+                <div class="col-sm-6">
                     <div class="card card-cyan">
                         <div class="card-header">
                             <h3 class="card-title">Read Endorsements</h3>

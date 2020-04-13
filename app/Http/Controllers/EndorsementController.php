@@ -187,16 +187,18 @@ class EndorsementController extends Controller
                 $departments[] = Department::find($depts);
             }
         }
-        $seen = explode(', ', $endorse->seen_by);
-//        $user = Auth::user()->id;
 
-        if (!(in_array($user->id,$seen))){
-            array_push($seen, $user->id);
+
+        $seen = explode(', ', $endorse->seen_by);
+        if (!(in_array(Auth::user()->id,$seen)) && $endorse->created_by_id != Auth::user()->id ){
+            dd('sad');
+            array_push($seen, Auth::user()->id);
             $seen = array_filter($seen);
             $seen = implode(', ',$seen);
             $endorse->seen_by = $seen;
             $endorse->save();
         }
+        dd('wat');
         return view('endorsement.show', compact('endorse', 'user', 'users', 'files', 'to', 'departments', 'files'));
     }
 
