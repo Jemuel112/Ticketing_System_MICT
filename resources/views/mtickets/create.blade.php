@@ -509,7 +509,7 @@
         @section('footer')
             <footer class="main-footer">
                 <div class="float-right">
-                    <button type="submit" class="btn btn-primary"><i class="nav-icon fal fa-plus-circle"></i>
+                    <button type="submit" form="myForm" class="btn btn-primary"><i class="nav-icon fal fa-plus-circle"></i>
                         Submit
                     </button>
 
