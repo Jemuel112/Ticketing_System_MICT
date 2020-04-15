@@ -2,8 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e46f795c-50de-4821-94e9-0a47af70672e" name="Default Changelist" comment="Innitial Commit">
+      <change afterPath="$PROJECT_DIR$/app/EndorsementSeen.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/mTicketSeen.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_04_15_114443_create_m_ticket_seens_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_04_15_115238_create_endorsement_seens_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/web.config" beforeDir="false" afterPath="$PROJECT_DIR$/public/web.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/EndorsementController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/EndorsementController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/Endorsment.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/Endorsment.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -284,6 +289,7 @@
       <workItem from="1586444922341" duration="1230000" />
       <workItem from="1586706136438" duration="1361000" />
       <workItem from="1586744776124" duration="15412000" />
+      <workItem from="1586920032095" duration="10156000" />
     </task>
     <servers />
   </component>
