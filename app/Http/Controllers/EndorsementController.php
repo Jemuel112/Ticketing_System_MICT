@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Department;
 use App\Endorsement;
+use App\EndorsementSeen;
 use App\EndorsmentFiles;
 use App\mTicket;
 use App\User;
@@ -188,17 +189,17 @@ class EndorsementController extends Controller
             }
         }
 
-
-        $seen = explode(', ', $endorse->seen_by);
-        if (!(in_array(Auth::user()->id,$seen)) && $endorse->created_by_id != Auth::user()->id ){
-            dd('sad');
-            array_push($seen, Auth::user()->id);
-            $seen = array_filter($seen);
-            $seen = implode(', ',$seen);
-            $endorse->seen_by = $seen;
-            $endorse->save();
+        $seens = EndorsementSeen::select('seen_id')->where('endorsement_id', $id)->get();
+        foreach ($seens as $see) {
+            $seen[] = $see->seen_id;
         }
-        dd('wat');
+        if (!(in_array(Auth::user()->id, $seen)) && !($endorse->created_by_id == Auth::user())) {
+            $stamp = new EndorsementSeen();
+            $stamp->endorsement_id = $id;
+            $stamp->seen_id = Auth::user()->id;
+        }
+
+
         return view('endorsement.show', compact('endorse', 'user', 'users', 'files', 'to', 'departments', 'files'));
     }
 
