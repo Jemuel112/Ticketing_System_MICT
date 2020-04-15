@@ -76,7 +76,7 @@ class EndorsementController extends Controller
     public function sent()
     {
         $endorsements = Endorsement::where('created_by_id', Auth::user()->id)->get();
-        return view('endorsement.index', compact('endorsements'));
+        return view('endorsement.sent', compact('endorsements'));
     }
 
     /**
