@@ -39,11 +39,12 @@ class EndorsementController extends Controller
             $user = Auth::user()->id;
             $endorsements = Endorsement::all();
             foreach ($endorsements as $endorsement) {
-                $seen = explode(', ', $endorsement->seen_by);
-                if (in_array($user, $seen)) {
-                    $read[] = $endorsement;
-                } else {
+                $see = EndorsementSeen::where('endorsement_id', $endorsement->id)->where('seen_id', $user)->get();
+                dd($see);
+                if ($see->isEmpty()){
                     $unread[] = $endorsement;
+                }else{
+                    $read[] = $endorsement;
                 }
             }
         } else {
@@ -188,6 +189,7 @@ class EndorsementController extends Controller
                 $departments[] = Department::find($depts);
             }
         }
+
 
         $seens = EndorsementSeen::select('seen_id')->where('endorsement_id', $id)->get();
         foreach ($seens as $see) {
