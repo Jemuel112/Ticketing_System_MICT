@@ -65,9 +65,7 @@
                                 <a href="{{route('MICT-Tickets.index')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>All Tickets</p>
-                                    <span class="right">
-                                    @widget('is_new_counter')
-                                    </span>
+                                    <span class="right">@widget('is_new_counter')</span>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -135,7 +133,7 @@
                     <a href="{{route('Endorsement.index')}}" class="nav-link">
                             <i class="nav-icon far fa-building"></i>
                         <p>
-                            All Endorsements
+                            Endorsements
                         </p>
                     </a>
                 </li>

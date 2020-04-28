@@ -40,7 +40,6 @@ class EndorsementController extends Controller
             $endorsements = Endorsement::all();
             foreach ($endorsements as $endorsement) {
                 $see = EndorsementSeen::where('endorsement_id', $endorsement->id)->where('seen_id', $user)->get();
-                dd($see);
                 if ($see->isEmpty()){
                     $unread[] = $endorsement;
                 }else{
@@ -149,7 +148,7 @@ class EndorsementController extends Controller
             foreach ($files as $file) {
                 $unique = Str::uuid()->getTimeMidHex();
                 $orig_filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-                $unique_filename = "[" . $unique . "]" . $orig_filename . "." . $file->getClientOriginalExtension();
+                $unique_filename = "["  . $unique . "]" . $orig_filename . "." . $file->getClientOriginalExtension();
                 $file->storeAs($directory, $unique_filename);
                 $end_file = new EndorsmentFiles();
                 $end_file->file_name = pathinfo($unique_filename, PATHINFO_FILENAME) . "." . $file->getClientOriginalExtension();;
@@ -170,7 +169,7 @@ class EndorsementController extends Controller
      */
     public function show($id)
     {
-        $endorse = Endorsement::find($id);
+        $endorse = Endorsement::findOrFail($id);
         $user = User::findOrFail($endorse->created_by_id);
         $files = EndorsmentFiles::where('endorse_id', $id)->get();
         if (is_null($endorse->assigned_to_id)) {
@@ -191,7 +190,7 @@ class EndorsementController extends Controller
         }
 
 
-        $seens = EndorsementSeen::select('seen_id')->where('endorsement_id', $id)->get();
+        $seens = EndorsementSeen::where('endorsement_id', $id)->get();
         foreach ($seens as $see) {
             $seen[] = $see->seen_id;
         }
@@ -201,8 +200,7 @@ class EndorsementController extends Controller
             $stamp->seen_id = Auth::user()->id;
         }
 
-
-        return view('endorsement.show', compact('endorse', 'user', 'users', 'files', 'to', 'departments', 'files'));
+        return view('endorsement.show', compact('endorse', 'user', 'users', 'files', 'to', 'departments', 'files','seens'));
     }
 
     /**
