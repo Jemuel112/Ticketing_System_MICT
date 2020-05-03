@@ -4,13 +4,14 @@
 <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
 
 <!-- Theme style -->
-<link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
+<link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}" >
 
 <!-- summernote -->
 <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.css') }}">
 
 <!-- Select2 -->
 <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
+{{--<link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />--}}
 <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
 
 <!-- Ionicons -->

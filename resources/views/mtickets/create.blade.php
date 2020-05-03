@@ -5,7 +5,7 @@
 @section('content')
 
     <!-- Content Wrapper. Contains page content -->
-    <form action="/MICT-Tickets" id="myForm" method="POST">
+    <form action="/MICT-Tickets" id="myForm" method="POST" onload="functionToBeExecuted">
 
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -154,8 +154,8 @@
                                         <option value="On-Going" {{ old('status') == 'On-Going' ? 'selected':''}}>
                                             On-Going
                                         </option>
-                                        <option value="Resolve" {{ old('status') == 'Resolve' ? 'selected':''}}>
-                                            Resolve
+                                        <option value="Resolved" {{ old('status') == 'Resolved' ? 'selected':''}}>
+                                            Resolved
                                         </option>
                                         <option value="Duplicate" {{ old('status') == 'Duplicate' ? 'selected':''}}>
                                             Duplicate
@@ -353,10 +353,14 @@
                                 <label><br>Others</label>
                                 <input id="other"
                                        disabled
+                                       list="others"
                                        class="form-control @error("other")is-invalid @enderror" value="{{old('other')}}"
                                        name="other" style="width: 100%;" type="text"
-                                       placeholder="Please Specify"
-                                >
+                                       placeholder="Please Specify">
+                                <datalist id="others">
+                                    <option value="">
+                                </datalist>
+
                             </div>
                             {{--                        @endif--}}
 
@@ -426,10 +430,11 @@
                                             value="{{old('lop')}}" id="lop" name="lop"
                                             style="width: 100%;">
                                         <option></option>
-                                        <option value="Low" {{ old('lop') == 'Low' ? 'selected':''}} selected>Low</option>
-                                        <option value="Medium" {{ old('lop') == 'Medium' ? 'selected':''}}>Medium
+                                        <option value="Low" {{ (old('lop') == 'Low') ? 'selected':''}} selected>Low
                                         </option>
-                                        <option value="High" {{ old('lop') == 'High' ? 'selected':''}}>High</option>
+                                        <option value="Medium" {{ (old('lop') == 'Medium') ? 'selected':''}}>Medium
+                                        </option>
+                                        <option value="High" {{ (old('lop') == 'High') ? 'selected':''}}>High</option>
                                     </select>
                                 </div>
                             @endif
@@ -500,18 +505,21 @@
         </div>
         <!-- /.content -->
         <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            <div class="float-right">
-                <button type="submit" class="btn btn-primary"><i class="nav-icon fal fa-plus-circle"></i>
-                    Submit
-                </button>
 
-            </div>
-            <strong>Copyright &copy; 2020 <a href="https://www.mcuhospital.org/">MCU Hospital</a>.</strong> All
-            rights
-            reserved.
-            <b>Version</b> 1.0.0
-        </footer>
+        @section('footer')
+            <footer class="main-footer">
+                <div class="float-right">
+                    <button type="submit" form="myForm" class="btn btn-primary"><i class="nav-icon fal fa-plus-circle"></i>
+                        Submit
+                    </button>
+
+                </div>
+                <strong>Copyright &copy; 2020 <a href="https://www.mcuhospital.org/">MCU Hospital</a>.</strong> All
+                rights
+                reserved.
+                <b>Version</b> 1.0.0
+            </footer>
+        @endsection
 
     </form>
     <script type="text/javascript">
@@ -578,6 +586,16 @@
         $('#act').summernote({
             height: 300,
             placeholder: 'Write here...',
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['fontname', ['fontname']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture']],
+                ['view', ['fullscreen', 'codeview', 'help']],
+            ],
         });
 
         $selectElement = $('#reqb').select2({
@@ -647,16 +665,16 @@
         });
 
         $('#status').change(function () {
-            if ($(this).val() == "Closed") {
+            if ($('#status').val() == "Closed") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
-            } else if ($(this).val() == "Resolve") {
+            } else if ($('#status').val() == "Resolved") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
-            } else if($(this).val() == "On-Going") {
+            } else if ($('#status').val() == "On-Going") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
-            }else{
+            } else {
                 $("#dact").prop("hidden", true);
                 $("#act").prop("disabled", true);
             }
@@ -697,13 +715,13 @@
             if ($('#status').val() == "Closed") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
-            } else if ($('#status').val() == "Resolve") {
+            } else if ($('#status').val() == "Resolved") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
-            }else if($('#status').val() == "On-Going") {
+            } else if ($('#status').val() == "On-Going") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
-            }else{
+            } else {
                 $("#dact").prop("hidden", true);
                 $("#act").prop("disabled", true);
             }
@@ -713,5 +731,4 @@
 @endsection
 
 
-@section('footer',"<p></p>")
 @include('layouts.scripts')

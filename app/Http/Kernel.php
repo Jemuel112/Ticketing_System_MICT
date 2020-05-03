@@ -68,6 +68,8 @@ class Kernel extends HttpKernel
         'disablepreventback' => \App\Http\Middleware\DisablePreventBack::class,
         'editvalid' => \App\Http\Middleware\EditValidator::class,
         'sreport' => \App\Http\Middleware\ServiceReportValidator::class,
+        'endorsed' => \App\Http\Middleware\Endorsment::class,
+//        'Edl' => \App\Http\Middleware\EndorsmentDownload::class,
     ];
 
     /**

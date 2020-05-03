@@ -3,12 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="e46f795c-50de-4821-94e9-0a47af70672e" name="Default Changelist" comment="Innitial Commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReportsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReportsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Widgets/ActiveTable.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Widgets/ActiveTable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/EndorsementController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/EndorsementController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/endorsement/sentendorse.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/endorsement/sent.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/endorsement/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/endorsement/show.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/mict_nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/mict_nav.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/mtickets/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mtickets/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/reports/received_calls.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/reports/received_calls.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mtickets/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mtickets/edit.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -125,6 +125,28 @@
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
       <path value="$PROJECT_DIR$/vendor/fzaninotto/faker" />
       <path value="$PROJECT_DIR$/vendor/realrashid/sweet-alert" />
+      <path value="$PROJECT_DIR$/vendor/clue/buzz-react" />
+      <path value="$PROJECT_DIR$/vendor/symfony/psr-http-message-bridge" />
+      <path value="$PROJECT_DIR$/vendor/ringcentral/psr7" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/vendor/cboden/ratchet" />
+      <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/react/stream" />
+      <path value="$PROJECT_DIR$/vendor/react/socket" />
+      <path value="$PROJECT_DIR$/vendor/react/promise-timer" />
+      <path value="$PROJECT_DIR$/vendor/react/promise-stream" />
+      <path value="$PROJECT_DIR$/vendor/react/promise" />
+      <path value="$PROJECT_DIR$/vendor/react/http-client" />
+      <path value="$PROJECT_DIR$/vendor/react/event-loop" />
+      <path value="$PROJECT_DIR$/vendor/react/dns" />
+      <path value="$PROJECT_DIR$/vendor/react/cache" />
+      <path value="$PROJECT_DIR$/vendor/pusher/pusher-php-server" />
+      <path value="$PROJECT_DIR$/vendor/beyondcode/laravel-websockets" />
+      <path value="$PROJECT_DIR$/vendor/evenement/evenement" />
+      <path value="$PROJECT_DIR$/vendor/facade/ignition-contracts" />
+      <path value="$PROJECT_DIR$/vendor/paragonie/sodium_compat" />
+      <path value="$PROJECT_DIR$/vendor/ratchet/rfc6455" />
     </include_path>
   </component>
   <component name="ProjectId" id="1W0zAYaAIxj5melF2cj1qGuH4hI" />
@@ -141,24 +163,24 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="HTML&#10;Asp" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/endorsement" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/mtickets" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Github\Ticketing_System_MICT\resources\views" />
       <recent name="D:\Github\Ticketing_System_MICT\public" />
       <recent name="D:\Github\Ticketing_System_MICT\public\notification" />
       <recent name="C:\Users\Jemuel\Desktop\New folder (10)\public\plugins\tempusdominus-bootstrap-4\js" />
       <recent name="C:\Users\Jemuel\Desktop\MICT - Copy\MCU_MICT\resources\views\auth" />
-      <recent name="C:\Users\Jemuel\Desktop\New folder (7) - Copy\MCU_MICT\resources\views\layouts" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Github\Ticketing_System_MICT\resources\views\endorsement" />
       <recent name="D:\Github\Ticketing_System_MICT\resources\views\mtickets" />
+      <recent name="D:\Github\Ticketing_System_MICT\resources\views\reports" />
+      <recent name="D:\Github\Ticketing_System_MICT\resources\views\endorsement" />
+      <recent name="E:\Github\Ticketing_System_MICT\resources\views\endorsement" />
       <recent name="D:\Desktop files\New folder (5)" />
-      <recent name="C:\Users\Jemuel\Desktop\New folder (10)\public\plugins\tempusdominus" />
-      <recent name="C:\Users\Jemuel\Desktop\New folder (10)\resources\views\users" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -241,6 +263,38 @@
       <workItem from="1583287928387" duration="10198000" />
       <workItem from="1583385242694" duration="3391000" />
       <workItem from="1583457275391" duration="14013000" />
+      <workItem from="1583767964303" duration="17668000" />
+      <workItem from="1583842327872" duration="11803000" />
+      <workItem from="1583975610336" duration="12378000" />
+      <workItem from="1584061837609" duration="7208000" />
+      <workItem from="1584153672149" duration="2064000" />
+      <workItem from="1584164968556" duration="624000" />
+      <workItem from="1584291952673" duration="2903000" />
+      <workItem from="1584325723761" duration="97000" />
+      <workItem from="1584325834791" duration="67000" />
+      <workItem from="1584325919657" duration="31923000" />
+      <workItem from="1584408101576" duration="12518000" />
+      <workItem from="1584591599491" duration="15071000" />
+      <workItem from="1584681273555" duration="943000" />
+      <workItem from="1584689191621" duration="1877000" />
+      <workItem from="1584895770027" duration="11507000" />
+      <workItem from="1584926372702" duration="8010000" />
+      <workItem from="1584941534961" duration="7353000" />
+      <workItem from="1585051829603" duration="6481000" />
+      <workItem from="1585214009565" duration="1564000" />
+      <workItem from="1585533557543" duration="17874000" />
+      <workItem from="1585913379493" duration="171000" />
+      <workItem from="1586371255963" duration="1195000" />
+      <workItem from="1586415450079" duration="2038000" />
+      <workItem from="1586444922341" duration="1230000" />
+      <workItem from="1586706136438" duration="1361000" />
+      <workItem from="1586744776124" duration="19412000" />
+      <workItem from="1587086719503" duration="8609000" />
+      <workItem from="1587383137102" duration="1514000" />
+      <workItem from="1587470190075" duration="756000" />
+      <workItem from="1587558973110" duration="2384000" />
+      <workItem from="1587814698304" duration="2479000" />
+      <workItem from="1587956668416" duration="16093000" />
     </task>
     <servers />
   </component>
@@ -281,10 +335,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="7" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1579860613081" />
-    <state x="378" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1581406218703">
+    <state x="378" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1583944140755">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="378" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1581406218703" />
+    <state x="378" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1583944140755" />
     <state x="490" y="276" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1579844943911">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -293,9 +347,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1581436208766" />
-    <state x="458" y="79" width="672" height="678" key="search.everywhere.popup" timestamp="1581442182087">
+    <state x="458" y="79" width="672" height="678" key="search.everywhere.popup" timestamp="1583865616007">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="458" y="79" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1581442182087" />
+    <state x="458" y="79" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1583865616007" />
   </component>
 </project>

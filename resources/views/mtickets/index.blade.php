@@ -2,6 +2,8 @@
 
 @section('title', 'MICT Tickets | ')
 @section('content')
+    @include('layouts.scripts')
+
     <div class="content-wrapper">
 
         <section class="content-header">
@@ -17,7 +19,9 @@
                     <h4>{{$title}}</h4>
                 </div>
                 <div class="card-body">
-                    <form action="/Sort" class="container-fluid" autocomplete="off" method="GET">
+
+
+                    <form @if($title == "All Tickets" || $title == "All Sorted Tickets") action="/All_Sort" @else action="/My_Sort" @endif class="container-fluid" autocomplete="off" method="GET">
                         @csrf
                         <div class="row float-right" style="width: 100%;">
                             <div class="col-sm-3 col-lg-3" style="width: 100%;">
@@ -41,18 +45,23 @@
                                         name="status" id="stats"
                                         style="width: 100%;">
                                     <option value=""></option>
-                                    <option value="Active" {{ request()->input('status') == 'Active' ? 'selected' :''}}>Active
+                                    <option value="Active" {{ request()->input('status') == 'Active' ? 'selected' :''}}>
+                                        Active
                                     </option>
-                                    <option value="On-Going" {{ request()->input('status') == 'On-Going' ? 'selected':''}}>
+                                    <option
+                                        value="On-Going" {{ request()->input('status') == 'On-Going' ? 'selected':''}}>
                                         On-Going
                                     </option>
-                                    <option value="Resolve" {{ request()->input('status') == 'Resolve' ? 'selected':''}}>
-                                        Resolve
+                                    <option
+                                        value="Resolved" {{ request()->input('status') == 'Resolved' ? 'selected':''}}>
+                                        Resolved
                                     </option>
-                                    <option value="Duplicate" {{ request()->input('status')== 'Duplicate' ? 'selected':''}}>
+                                    <option
+                                        value="Duplicate" {{ request()->input('status')== 'Duplicate' ? 'selected':''}}>
                                         Duplicate
                                     </option>
-                                    <option value="Closed" {{ request()->input('status') == 'Closed' ? 'selected':''}}>Closed
+                                    <option value="Closed" {{ request()->input('status') == 'Closed' ? 'selected':''}}>
+                                        Closed
                                     </option>
                                 </select>
                             </div>
@@ -109,9 +118,9 @@
                                         @elseif($ticket->status == 'On-Going')
                                             <td style="text-align: center; vertical-align: middle;"><span
                                                     class="badge badge-warning   col-md-12">On-Going</span></td>
-                                        @elseif($ticket->status == 'Resolve')
+                                        @elseif($ticket->status == 'Resolved')
                                             <td style="text-align: center; vertical-align: middle;"><span
-                                                    class="badge badge-success col-md-12">Resolve</span></td>
+                                                    class="badge badge-success col-md-12">Resolved</span></td>
                                         @elseif($ticket->status == 'Duplicate')
                                             <td style="text-align: center; vertical-align: middle;"><span
                                                     class="badge badge-primary col-md-12">Duplicate</span></td>
@@ -192,4 +201,3 @@
 
 @endsection
 
-@include('layouts.scripts')

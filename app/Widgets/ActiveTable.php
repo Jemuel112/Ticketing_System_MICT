@@ -5,6 +5,7 @@ namespace App\Widgets;
 use App\mTicket;
 use Arrilot\Widgets\AbstractWidget;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
@@ -29,34 +30,33 @@ class ActiveTable extends AbstractWidget
     /**
      * Treat this method as a controller action.
      * Return view() or other content to display.
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function run()
+    public function run(Request $request)
     {
 
         if (Auth::user()->department == "Administrator" || Auth::user()->department == "MICT") {
-//            $range0 = date('Y-m-d', strtotime(Carbon::now()));
-//            $range1 = date('Y-m-d', strtotime(Carbon::now()->firstOfMonth()));
-            $range0 = Carbon::now();
-            $range1 = Carbon::now()->firstOfMonth();
-//            dd($range0." ". $range1);
-
-//            $from = date('2020-01-01');
-            $from = date(Carbon::now()->firstOfMonth());
-
-            $to1 =  Carbon::now();
-            $to = date( Carbon::now());
-//            $encrypted = Crypt::encryptString('Hello world.');
-//            $decrypted = Crypt::decryptString($encrypted);
-//            dd( $encrypted."(".$decrypted.")");
-
-
-            $tickets = mTicket::whereBetween('created_at',  [$from, $to])->count();
-            $tickets = mTicket::where('status', '=', 'Active')->get()->groupBy('request_by');
-
+            if ($request->session()->has('date')){
+//                dd('sad');
+                $month = $request->session()->get('month');
+                $year = $request->session()->get('year');
+                $tickets = mTicket::whereYear('created_at',$year)
+                    ->whereMonth('created_at', $month)
+                    ->where('status', '=', 'Active')
+                    ->get()->groupBy('request_by');
+//                dd($tickets);
+            }else{
+                $year = date( Carbon::now()->format('Y'));
+                $month = date( Carbon::now()->format('m'));
+                $tickets = mTicket::whereYear('created_at',$year)
+                    ->whereMonth('created_at', $month)
+                    ->where('status', '=', 'Active')
+                    ->get()->groupBy('request_by');
+            }
         } else {
             $tickets = mTicket::where('request_by', '=', Auth::user()->department)->where('status', '=', 'Active')->get();
         }
-//        dd($tickets);
         return view('widgets.active_table', [
             'config' => $this->config,
             'tickets' => $tickets,

@@ -5,7 +5,6 @@
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
-
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -16,7 +15,7 @@
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
-{{--            SHOW USERS ERRORS--}}
+            {{--            SHOW USERS ERRORS--}}
             @if($errors->count()>0)
                 <div style="" class="alert alert-danger">
                     @foreach($errors->all() as $error)
@@ -24,13 +23,10 @@
                     @endforeach
                 </div>
             @endif
-{{--            END SHOW USERS ERRORS--}}
+            {{--            END SHOW USERS ERRORS--}}
         </section>
-
         <!-- Main content -->
-
-
-        <section class="content" onload="functionToBeExecuted">
+        <section class="content" onload="functionToBeExecuted()">
             <form action='/MICT-Tickets/{{$ticket->id}}' method="POST" id="myForm">
                 @csrf
                 @method('PUT')
@@ -39,7 +35,7 @@
                         <div class="card-header">
                             <h3 class="card-title">Date</h3>
                             <div class="card-tools">
-                                &nbsp;
+                                &nbsp
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
                                         class="fas fa-minus"></i></button>
                             </div>
@@ -113,9 +109,11 @@
                                 <span class="text-red">is required</span>
                                 @enderror
                                 <input class="form-control @error("reported_by")is-invalid @enderror"
-                                       value="{{$ticket->reported_by}}"
+                                       value="{{$ticket->reported_by ?? old('reported_by')}}"
                                        style="width: 100%;" type="text" name="reported_by" placeholder="Name"
-                                >
+                                       @if($ticket->status == "Closed" && Auth::user()->department != "Administrator")
+                                       disabled
+                                        @endif>
                             </div>
                             {{--End Reported by--}}
 
@@ -129,16 +127,18 @@
                                 @if(Auth::user()->department == 'Administrator' || Auth::user()->department == "MICT")
                                     <select class="form-control select2bs4 @error("request_by")is-invalid @enderror"
                                             id="reqb" name="request_by"
-                                            style="width: 100%;">
+                                            style="width: 100%;"
+                                            @if($ticket->status == "Closed" && Auth::user()->department != "Administrator")
+                                            disabled
+                                        @endif>
                                         <option value=""></option>
                                         @foreach($departments as $department)
                                             <option
-                                                value="{{$department->dept_name}}" {{ $ticket->request_by == ($department->dept_name ??  old(reported_by)) ? 'selected':''}}>{{$department->dept_name}}</option>
+                                                value="{{$department->dept_name}}" {{ $ticket->request_by == ($department->dept_name ??  old('request_by')) ? 'selected':''}}>{{$department->dept_name}}</option>
                                         @endforeach
                                     </select>
                                 @else
                                     <select class="form-control select2bs4 @error("request_by")is-invalid @enderror"
-                                            value="{{old('request_by')}}"
                                             id="reqb" name="request_by"
                                             style="width: 100%;"
                                     >
@@ -158,7 +158,10 @@
                                 <select class="form-control select2bs4 @error("status")is-invalid @enderror"
                                         name="status"
                                         style="width: 100%;"
-                                        id="status">
+                                        id="status"
+                                        @if($ticket->status == "Closed" && Auth::user()->department != "Administrator")
+                                        disabled
+                                    @endif>
                                     {{--                                        {{$ticket->status == $user->department  ? 'selected' : ''}}--}}
                                     <option
                                         value="Active" {{ (old('status') ?? $ticket->status) == 'Active' ? 'selected' :''}}>
@@ -169,8 +172,8 @@
                                         On-Going
                                     </option>
                                     <option
-                                        value="Resolve" {{ (old('status') ?? $ticket->status) == 'Resolve' ? 'selected':''}}>
-                                        Resolve
+                                        value="Resolved" {{ (old('status') ?? $ticket->status) == 'Resolved' ? 'selected':''}}>
+                                        Resolved
                                     </option>
                                     <option
                                         value="Duplicate" {{  (old('status') ?? $ticket->status) == 'Duplicate' ? 'selected':''}}>
@@ -195,25 +198,27 @@
                                     <select class="form-control select2bs4 @error("og_status")is-invalid @enderror"
                                             name="og_status"
                                             id="ogs"
-                                            style="width: 100%;">
+                                            style="width: 100%;"
+                                            @if($ticket->status == "Closed" && Auth::user()->department != "Administrator")
+                                            disabled
+                                        @endif>
                                         <option></option>
                                         <option
-                                            value="Pending For Spare" {{ old('og_status') ?? $ticket->og_status == 'Pending For Spare' ? 'selected':''}}>
+                                            value="Pending For Spare" {{ ($ticket->og_status ?? old('og_status')) == 'Pending For Spare' ? 'selected':''}}>
                                             Pending For Spare
                                         </option>
                                         <option
-                                            value="Under Observation" {{ old('og_status') ?? $ticket->og_status == 'Under Observation' ? 'selected':''}}>
+                                            value="Under Observation" {{ ($ticket->og_status ?? old('og_status')) == 'Under Observation' ? 'selected':''}}>
                                             Under Observation
                                         </option>
                                         <option
-                                            value="Others" {{ old('og_status') ?? $ticket->og_status == 'Others' ? 'selected':''}}>
+                                            value="Others" {{  ($ticket->og_status ?? old('og_status')) == 'Others' ? 'selected':''}}>
                                             Others
                                         </option>
                                     </select>
                                 </div>
                             </div>
                             {{--End On-Going Status--}}
-
 
                             <div class="col-md-6" id="dogst1" hidden>
                                 <label for="ogst" @error('start_at') class="text-red" @enderror><br>Select Date to start</label>
@@ -224,16 +229,20 @@
                                     <input type="text"
                                            class="form-control datetimepicker-input @error("start_at")is-invalid @enderror"
                                            @if(!is_null($ticket->start_at))
-                                           value="{{date('m/d/Y h:i', strtotime($ticket->start_at))}}"
+                                           value="{{date('m/d/Y h:i', strtotime($ticket->start_at)) ?? old('start_at')}}"
                                            @endif
                                            name="start_at"
-                                           data-target="#datetimepickers">
+                                           data-target="#datetimepickers"
+                                           @if($ticket->status == "Closed" && Auth::user()->department != "Administrator")
+                                           disabled
+                                        @endif/>
                                     <div class="input-group-append" data-target="#datetimepickers"
                                          data-toggle="datetimepicker">
                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-md-6" id="dogst2" hidden>
                                 <label for="ogst" @error('end_at') class="text-red" @enderror><br>Select
                                     Deadline</label>
@@ -244,10 +253,13 @@
                                     <input type="text"
                                            class="form-control datetimepicker-input @error("end_at")is-invalid @enderror"
                                            @if(!is_null($ticket->end_at))
-                                           value="{{date('m/d/Y h:i', strtotime($ticket->end_at))}}"
+                                           value="{{date('m/d/Y h:i', strtotime($ticket->end_at)) ?? old('end_at')}}"
                                            @endif
                                            name="end_at"
-                                           data-target="#datetimepickerd"/>
+                                           data-target="#datetimepickerd"
+                                           @if($ticket->status == "Closed" && Auth::user()->department != "Administrator")
+                                           disabled
+                                        @endif/>
                                     <div class="input-group-append" data-target="#datetimepickerd"
                                          data-toggle="datetimepicker">
                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -264,14 +276,13 @@
                                 <select class="form-control select2bs4 @error("acknowledge_by")is-invalid @enderror"
                                         id="ackn" name="acknowledge_by"
                                         style="width: 100%;"
-                                        @if(Auth::user()->department != "Administrator" || !is_null($ticket->acknowledge_by))
+                                        @if(Auth::user()->department != "Administrator" ?? !is_null($ticket->acknowledge_by))
                                         disabled
-                                        value ="{{$ticket->acknowledge_by}}"
-                                        @endif>
+                                    @endif>
                                     <option></option>
                                     @foreach($micts as $mict)
                                         <option
-                                            value="{{$mict->fname}}" {{ $ticket->acknowledge_by == $mict->fname ? 'selected':''}}>{{$mict->fname}}</option>
+                                            value="{{$mict->fname}}" {{ ($ticket->acknowledge_by ?? old('acknowledge_by')) == $mict->fname ? 'selected':''}}>{{$mict->fname}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -286,11 +297,14 @@
                                 <select class="form-control select2bs4 @error("assigned_to")is-invalid @enderror"
                                         name="assigned_to[]"
                                         data-placeholder="Assigned to..."
-                                        multiple="multiple" style="width: 100%;">
+                                        multiple="multiple" style="width: 100%;"
+                                        @if($ticket->status == "Closed" && Auth::user()->department != "Administrator")
+                                        disabled
+                                    @endif>
                                     <option></option>
                                     @foreach($micts as $mict)
                                         <option
-                                            value="{{$mict->fname}}" {{ (in_array($mict->fname, $selected)) ? 'selected' : '' }}>{{$mict->fname}}</option>
+                                            value="{{$mict->fname}}" {{ in_array($mict->fname, $selected) ? 'selected' : '' }}>{{$mict->fname}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -305,7 +319,10 @@
                                 <select class="form-control select2bs4 @error("assisted_by")is-invalid @enderror"
                                         name="assisted_by[]"
                                         data-placeholder="Assisted by..."
-                                        multiple="multiple" style="width: 100%;">
+                                        multiple="multiple" style="width: 100%;"
+                                        @if($ticket->status == "Closed" && Auth::user()->department != "Administrator")
+                                        disabled
+                                    @endif>
                                     <option></option>
                                     @foreach($micts as $mict)
                                         <option
@@ -324,7 +341,10 @@
                                 <select class="form-control select2bs4 @error("accomplished_by")is-invalid @enderror"
                                         name="accomplished_by[]"
                                         data-placeholder="Accomplished by..."
-                                        multiple="multiple" style="width: 100%;">
+                                        multiple="multiple" style="width: 100%;"
+                                        @if($ticket->status == "Closed" && Auth::user()->department != "Administrator")
+                                        disabled
+                                    @endif>
                                     <option></option>
                                     @foreach($micts as $mict)
                                         <option
@@ -341,83 +361,106 @@
                                 @enderror
                                 <select class="form-control select2bs4 @error("category")is-invalid @enderror"
                                         id="category" name="category"
-                                        style="width: 100%;">
+                                        style="width: 100%;"
+                                        @if($ticket->status == "Closed" && Auth::user()->department != "Administrator")
+                                        disabled
+                                    @endif>
                                     <option></option>
-                                    <option value="System" {{ $ticket->category == 'System' ? 'selected':''}}>System
+                                    <option
+                                        value="System" {{ ($ticket->category ?? old('category'))  == 'System' ? 'selected':''}}>
+                                        System
                                     </option>
-                                    <option value="Software" {{ $ticket->category == 'Software' ? 'selected':''}}>
+                                    <option
+                                        value="Software" {{ ($ticket->category ?? old('category'))  == 'Software' ? 'selected':''}}>
                                         Software
                                     </option>
-                                    <option value="Hardware" {{ $ticket->category == 'Hardware' ? 'selected':''}}>
+                                    <option
+                                        value="Hardware" {{ ($ticket->category ?? old('category')) == 'Hardware' ? 'selected':''}}>
                                         Hardware
                                     </option>
-                                    <option value="Network" {{ $ticket->category == 'Network' ? 'selected':''}}>Network
+                                    <option
+                                        value="Network" {{ ($ticket->category ?? old('category')) == 'Network' ? 'selected':''}}>
+                                        Network
                                     </option>
-                                    <option value="Others" {{ $ticket->category == 'Others' ? 'selected':''}}>Others
+                                    <option
+                                        value="Others" {{ ($ticket->category ?? old('category'))  == 'Others' ? 'selected':''}}>
+                                        Others
                                     </option>
                                 </select>
                             </div>
-
+                            {{--                            {{dd($ticket->sys_category)}}--}}
                             {{--                        @if(Auth::user()->department == "Administrator"|| Auth::user()->department == "MICT")--}}
                             <div id="dother" class="col-lg-4 col-md-4" hidden>
                                 <label><br>Others</label>
                                 <input id="other"
-                                       disabled
                                        class="form-control @error("other")is-invalid @enderror" value="{{old('other')}}"
                                        name="other" style="width: 100%;" type="text" name=""
                                        placeholder="Please Specify"
-                                >
+                                       @if($ticket->status == "Closed" && Auth::user()->department != "Administrator")
+                                       disabled
+                                    @endif>
                             </div>
-                            {{--                        @endif--}}
 
                             <div id="dsystem" class="col-lg-4 col-md-4" hidden>
-                                <label @error('sys_category') class="text-red" @enderror><br>System Category</label>
+                                <label for="system" @error('sys_category') class="text-red" @enderror><br>System Category</label>
                                 @error('sys_category')
                                 <span class="text-red">is required</span>
                                 @enderror
-                                <select id="system"
+                                <select id="syscategory"
                                         class="form-control select2bs4 @error("sys_category")is-invalid @enderror"
                                         name="sys_category"
-                                        style="width: 100%;">
+                                        style="width: 100%;"
+                                        @if($ticket->status == "Closed" && Auth::user()->department != "Administrator")
+                                        disabled
+                                    @endif>
                                     <option></option>
-                                    {{--                                    <option></option>--}}
-                                    <option value="Bizbox" {{  $ticket->sys_category == 'Bizbox' ? 'selected':''}}>
+                                    <option
+                                        value="Bizbox" {{  ($ticket->sys_category ?? old('sys_category')) == 'Bizbox' ? 'selected':''}}>
                                         Bizbox
                                     </option>
-                                    <option value="PACS" {{ $ticket->sys_category == 'PACS' ? 'selected':''}}>PACS
+                                    <option
+                                        value="PACS" {{ ($ticket->sys_category ?? old('sys_category')) == 'PACS' ? 'selected':''}}>
+                                        PACS
                                     </option>
                                     <option
-                                        value="LIS - SYSMEX" {{ $ticket->sys_category == 'LIS - SYSMEX' ? 'selected':''}}>
+                                        value="LIS - SYSMEX" {{ ($ticket->sys_category ?? old('sys_category')) == 'LIS - SYSMEX' ? 'selected':''}}>
                                         LIS - SYSMEX
                                     </option>
-                                    <option value="LIS - MARSMAN" {{ $ticket->sys_category == 'LIS' ? 'selected':''}}>
+                                    <option
+                                        value="LIS - MARSMAN" {{ ($ticket->sys_category ?? old('sys_category')) == 'LIS' ? 'selected':''}}>
                                         LIS - MARSMAN
                                     </option>
                                     <option
-                                        value="LIS - J&J" {{ $ticket->sys_category == 'LIS - J&J' ? 'selected':''}}>
+                                        value="LIS - J&J" {{ ($ticket->sys_category ?? old('sys_category')) == 'LIS - J&J' ? 'selected':''}}>
                                         LIS - J&J
                                     </option>
-                                    <option value="DMS" {{ $ticket->sys_category == 'DMS' ? 'selected':''}}>DMS
+                                    <option
+                                        value="DMS" {{ ($ticket->sys_category ?? old('sys_category')) == 'DMS' ? 'selected':''}}>
+                                        DMS
                                     </option>
-                                    <option value="ACC PAC" {{ $ticket->sys_category == 'ACC PAC' ? 'selected':''}}>
+                                    <option
+                                        value="ACC PAC" {{ ($ticket->sys_category ?? old('sys_category')) == 'ACC PAC' ? 'selected':''}}>
                                         ACC PAC
                                     </option>
                                     <option
-                                        value="MEDEXPRESS" {{ $ticket->sys_category == 'MEDEXPRESS' ? 'selected':''}}>
+                                        value="MEDEXPRESS" {{ ($ticket->sys_category ?? old('sys_category')) == 'MEDEXPRESS' ? 'selected':''}}>
                                         MEDEXPRESS
                                     </option>
                                     <option
-                                        value="ACCESS DB" {{ $ticket->sys_category == 'ACCESS DB' ? 'selected':''}}>
+                                        value="ACCESS DB" {{ ($ticket->sys_category ?? old('sys_category')) == 'ACCESS DB' ? 'selected':''}}>
                                         ACCESS DB
                                     </option>
-                                    <option value="ASSET" {{ $ticket->sys_category == 'ASSET' ? 'selected':''}}>ASSET
+                                    <option
+                                        value="ASSET TRACER" {{ ($ticket->sys_category ?? old('sys_category')) == 'ASSET' ? 'selected':''}}>
+                                        ASSET
                                         TRACER
                                     </option>
                                     <option
-                                        value="CHEQUE TRACER" {{ $ticket->sys_category == 'CHEQUE TRACER' ? 'selected':''}}>
+                                        value="CHEQUE TRACER" {{ ($ticket->sys_category ?? old('sys_category')) == 'CHEQUE TRACER' ? 'selected':''}}>
                                         CHEQUE TRACER
                                     </option>
-                                    <option value="Others" {{ $ticket->sys_category == 'Others' ? 'selected':''}}>
+                                    <option
+                                        value="Others" {{ ($ticket->sys_category ?? old('sys_category'))  == 'Others' ? 'selected':''}}>
                                         Others
                                     </option>
                                 </select>
@@ -430,11 +473,20 @@
                                 @enderror
                                 <select class="form-control select2bs4 @error("lop")is-invalid @enderror"
                                         value="{{old('lop')}}" id="lop" name="lop"
-                                        style="width: 100%;">
+                                        style="width: 100%;"
+                                        @if($ticket->status == "Closed" && Auth::user()->department != "Administrator")
+                                        disabled
+                                    @endif>
                                     <option></option>
-                                    <option value="Low" {{ $ticket->lop == 'Low' ? 'selected':''}}>Low</option>
-                                    <option value="Medium" {{ $ticket->lop == 'Medium' ? 'selected':''}}>Medium</option>
-                                    <option value="High" {{ $ticket->lop == 'High' ? 'selected':''}}>High</option>
+                                    <option value="Low" {{ ($ticket->lop ?? old('lop')) == 'Low' ? 'selected':''}}>Low
+                                    </option>
+                                    <option
+                                        value="Medium" {{ ($ticket->lop ?? old('lop')) == 'Medium' ? 'selected':''}}>
+                                        Medium
+                                    </option>
+                                    <option value="High" {{ ($ticket->lop ?? old('lop')) == 'High' ? 'selected':''}}>
+                                        High
+                                    </option>
                                 </select>
                             </div>
 
@@ -445,7 +497,10 @@
                                 @enderror
                                 <textarea name="concerns"
                                           placeholder=""
-                                          style="resize: none ;width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ old('concerns') ?? $ticket->concerns }}</textarea>
+                                          style="resize: none ;width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
+                                          @if($ticket->status == "Closed" && Auth::user()->department != "Administrator")
+                                          disabled
+                                        @endif>{{ old('concerns') ?? $ticket->concerns }}</textarea>
                             </div>
                             <div class="col-lg-12 col-md-12">
                                 <label><br>Additional Comments</label>
@@ -453,7 +508,9 @@
                                           placeholder="Enter your comments here"
                                           class="is-invalid"
                                           style="resize: none ;width: 100%; height: 75px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
-                                >{{old('comment')}}</textarea>
+                                          @if($ticket->status == "Closed" && Auth::user()->department != "Administrator")
+                                          disabled
+                                        @endif>{{old('comment')}}</textarea>
                                 <br> &nbsp;
                             </div>
 
@@ -503,22 +560,30 @@
                                 @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
                                     <div class=" col-lg-12 container-fluid">
                                         <div class="icheck-danger float-right">
-                                            <input type="checkbox" name="shared" id="checkboxDanger2">
+                                            <input type="checkbox" name="shared"
+                                                   id="checkboxDanger2"
+                                                   @if($ticket->status == "Closed" && Auth::user()->department != "Administrator")
+                                                   disabled
+                                                @endif>
                                             <label for="checkboxDanger2">Share info</label>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
-                                        <label></label>
+                                        <label for="act"></label>
                                         <textarea id="act" name="action" class="textarea"
                                                   placeholder="Place some text here"
-                                                  style="width: 100%; height: 250px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{old('action')}}</textarea>
+                                                  style="width: 100%; height: 250px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
+                                                 >{{old('action')}}</textarea>
                                     </div>
                                 @endif
                                 <div class="col-lg-12 col-md-12">
-                                    <label>Remarks / Recomendation</label>
-                                    <textarea name="recommendation"
+                                    <label for="remarks">Remarks / Recomendation</label>
+                                    <textarea id="remarks" name="recommendation"
                                               placeholder="Enter Recommendation here"
-                                              style="resize: none ;width: 100%; height: 75px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{old('recommendation') ?? $ticket->recommendation}}</textarea>
+                                              style="resize: none ;width: 100%; height: 75px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
+                                              @if($ticket->status == "Closed" && Auth::user()->department != "Administrator")
+                                              disabled @endif>
+                                        {{old('recommendation') ?? $ticket->recommendation}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -533,94 +598,77 @@
             </form>
         </section>
 
-
-        <section class="container-fluid">
-            <form action="/MICT-Tickets/report" method="POST" id="myForm2">
-                <input type="text" name="ticket_id" value="{{$ticket->id}}" hidden>
-                @csrf
-                @method('POST')
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h4>Actions Taken</h4>
+        @if($actions->count() >0)
+            <section class="container-fluid pb-3 px-5">
+                <form action="/MICT-Tickets/report" method="POST" id="myForm2">
+                    <input type="text" name="ticket_id" value="{{$ticket->id}}" hidden>
+                    @csrf
+                    @method('POST')
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h4>Actions Taken</h4>
+                        </div>
                     </div>
-                </div>
-
-
-                <!-- Timelime example  -->
-                <div class="row">
-                    <div class="col-md-12">
-                        <!-- The time line -->
-                        <div class="timeline">
-                            <!-- timeline time label -->
-                            @forelse($actions as $action => $contents)
-                                <div class="time-label">
+                    <!-- Timelime example  -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- The time line -->
+                            <div class="timeline">
+                                <!-- timeline time label -->
+                                @forelse($actions as $action => $contents)
+                                    <div class="time-label">
 
                                             <span
                                                 class="bg-gradient-indigo">{{date('M d, Y', strtotime($action))}}</span>
-                                </div>
+                                    </div>
                                 @foreach($contents as $key => $content)
                                     @if($content->shared == 1 || Auth::user()->department == 'Administrator' || Auth::user()->department == 'MICT')
-
                                         <!-- /.timeline-label -->
-                                        <!-- timeline item -->
-
-                                        <div>
-                                            <i class="fas fa-envelope bg-blue"></i>
-                                            <div class="timeline-item">
-                                                <div class="icheck-danger float-right">
-                                                    <input type="checkbox" name="action_id[]"
-                                                           value="{{$content->id}}"
-                                                           id="checkboxDanger[{{$content->id}}]">
-                                                    <label for="checkboxDanger[{{$content->id}}]">Add to report
-                                                        &nbsp;</label>
+                                            <!-- timeline item -->
+                                            <div>
+                                                <i class="fas fa-envelope bg-blue"></i>
+                                                <div class="timeline-item">
+                                                    <div class="icheck-danger float-right">
+                                                        <input type="checkbox" name="action_id[]"
+                                                               value="{{$content->id}}"
+                                                               id="checkboxDanger[{{$content->id}}]">
+                                                        <label for="checkboxDanger[{{$content->id}}]">Add to report
+                                                            &nbsp;</label>
+                                                    </div>
+                                                    <span class="time"><i class="fas fa-clock"></i> {{date(' h:i A', strtotime($content->created_at))}}</span>
+                                                    <h3 class="timeline-header"><a href="#">{{app\User::findOrFail($content->id_user)->fname}} {{app\User::findOrFail($content->id_user)->lname}}</a>
+                                                    </h3>
+                                                    <div class="timeline-body">
+{{--                                                        <div class="container">--}}
+                                                            {!!$content->actions!!}
+{{--                                                        </div>--}}
+                                                        {{--                                                    echo strip_tags($content->actions)--}}
+                                                    </div>
+                                                    {{--                                        <div class="timeline-footer">--}}
+                                                    {{--                                        </div>--}}
                                                 </div>
-                                                <span class="time"><i class="fas fa-clock"></i> {{date(' h:i A', strtotime($content->created_at))}}</span>
-                                                <h3 class="timeline-header"><a
-                                                        href="#">{{app\User::findOrFail($content->id_user)->fname}} {{app\User::findOrFail($content->id_user)->lname}}</a>
-                                                </h3>
-                                                <div class="timeline-body">
-                                                    {{--                                                    echo strip_tags($content->actions)--}}
-                                                    {!! $content->actions !!}
-                                                </div>
-                                                {{--                                        <div class="timeline-footer">--}}
-                                                {{--                                        </div>--}}
                                             </div>
-                                        </div>
-                                @endif
-                            @endforeach
-                        @empty
-                        @endforelse
-                        <!-- END timeline item -->
-                            <div>
-                                <i class="fas fa-clock bg-gray"></i>
-                                <button type="submit" class="float-right">Generate Report</button>
+                                    @endif
+                                @endforeach
+                            @empty
+                            @endforelse
+                            <!-- END timeline item -->
+                                <div>
+                                    <i class="fas fa-clock bg-gray"></i>
+                                    <button type="submit" class="btn btn-info float-right">Generate Report</button>
+                                </div>
                             </div>
                         </div>
+                        <!-- /.col -->
                     </div>
-                    <!-- /.col -->
-                </div>
 
 
-            </form>
-        </section>
+                </form>
+            </section>
+        @endif
+
     </div>
-
-
-    <footer class="main-footer">
-        <div class="float-right">
-            <button type="submit" class="btn btn-primary" form="myForm" onclick="mySubmit()">Submit</button>
-
-        </div>
-        <strong>Copyright &copy; 2020 <a href="https://www.mcuhospital.org/">MCU Hospital</a>.</strong> All
-        rights
-        reserved.
-        <b>Version</b> 1.0.0
-    </footer>
-
-    <!-- /.content -->
-    <!-- /.content-wrapper -->
-
-    <script>
+    <script type="text/javascript">
         $(window).on("beforeunload", function () {
             return "Are you sure? You didn't finish the form!";
         });
@@ -632,22 +680,18 @@
                 return true;
             });
         });
-        $(window).on("beforeunload", function () {
-            return "Are you sure? You didn't finish the form!";
-        });
-        $(document).ready(function () {
-            $("#myForm2").on("submit", function (e) {
-                //check form to make sure it is kosher
-                //remove the ev
-                $(window).off("beforeunload");
-                return true;
-            });
-        });
     </script>
     <script type="text/javascript">
-        $("#datetimepickers").datetimepicker();
+        $("#datetimepickers").datetimepicker({
+            icons: {
+                time: "far fa-clock"
+            }
+        });
         $("#datetimepickerd").datetimepicker({
-            useCurrent: false
+            useCurrent: false,
+            icons: {
+                time: "far fa-clock"
+            }
         });
         $("#datetimepickers").on("change.datetimepicker", function (e) {
             $('#datetimepickerd').datetimepicker('minDate', e.date);
@@ -655,10 +699,6 @@
         $("#datetimepickerd").on("change.datetimepicker", function (e) {
             $('#datetimepickers').datetimepicker('maxDate', e.date);
         });
-
-
-        {{--        {{date('m/d/Y h:i A', strtotime($ticket->created_at))}}--}}
-
 
         $("#datetimepicker7").datetimepicker({
             icons: {
@@ -669,8 +709,9 @@
             useCurrent: false,
             icons: {
                 time: "far fa-clock"
-            },
+            }
         });
+
         $("#datetimepicker7").on("change.datetimepicker", function (e) {
             $('#datetimepicker8').datetimepicker('minDate', e.date);
         });
@@ -688,19 +729,30 @@
         $('.select2bs4').select2({
             theme: 'bootstrap4'
         });
+
         // Summernote
         $('#act').summernote({
             height: 300,
             placeholder: 'Write here...',
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['fontname', ['fontname']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture']],
+                ['view', ['fullscreen', 'codeview', 'help']],
+            ],
         });
-
+        @if(Auth::user()->department != 'Administrator' && $ticket->status == 'Closed')
+        $('#act').summernote('disable');
+        @endif
         $selectElement = $('#reqb').select2({
             theme: 'bootstrap4',
             placeholder: "Select...",
             allowClear: true
         });
-
-
         $selectElement = $('#ackn').select2({
             theme: 'bootstrap4',
             placeholder: "Select...",
@@ -716,7 +768,7 @@
             placeholder: "Select Category",
             allowClear: true
         });
-        $selectElement = $('#system').select2({
+        $selectElement = $('#syscategory').select2({
             theme: 'bootstrap4',
             placeholder: "Select Category",
             allowClear: true
@@ -728,12 +780,14 @@
         });
         $('#status').change(function () {
             if ($(this).val() == "On-Going") {
+                $("#ogs").prop("disabled", false);
                 $("#dogs").prop("hidden", false);
                 $("#dogst1").prop("disabled", false);
                 $("#dogst1").prop("hidden", false);
                 $("#dogst2").prop("disabled", false);
                 $("#dogst2").prop("hidden", false);
             } else {
+                $("#ogs").prop("disabled", true);
                 $("#dogs").prop("hidden", true);
                 $("#dogst1").prop("disabled", true);
                 $("#dogst1").prop("hidden", true);
@@ -743,51 +797,50 @@
         });
         $('#category').change(function () {
             if ($(this).val() == "System") {
+                $("#system").prop("disabled", false);
                 $("#dsystem").prop("hidden", false);
             } else {
+                $("#system").prop("disabled", true);
                 $("#dsystem").prop("hidden", true);
             }
         });
         $('#category').change(function () {
             if ($(this).val() == "Others") {
+                $("#other").prop("disabled", false);
                 $("#dother").prop("hidden", false);
             } else {
+                $("#other").prop("disabled", true);
                 $("#dother").prop("hidden", true);
             }
         });
 
         $('#status').change(function () {
-            if ($(this).val() == "Closed") {
+            if ($('#status').val() == "Closed") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
-            } else if ($(this).val() == "Resolve") {
+            } else if ($('#status').val() == "Resolved") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
-            } else if($(this).val() == "On-Going") {
+            } else if ($('#status').val() == "On-Going") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
-            } else if($(this).val() == "On-Going") {
-                $("#act").prop("disabled", false);
-                $("#dact").prop("hidden", false);
-            }else{
+            } else {
                 $("#dact").prop("hidden", true);
                 $("#act").prop("disabled", true);
             }
         });
-        function mySubmit() {
-            $("#ackn").prop("disabled", false);
-        }
     </script>
     <script>
         window.onload = function exampleFunction() {
-            // Function to executed
             if ($('#status').val() == "On-Going") {
+                $("#ogs").prop("disabled", false);
                 $("#dogs").prop("hidden", false);
                 $("#dogst1").prop("disabled", false);
                 $("#dogst1").prop("hidden", false);
                 $("#dogst2").prop("disabled", false);
                 $("#dogst2").prop("hidden", false);
             } else {
+                $("#ogs").prop("disabled", true);
                 $("#dogs").prop("hidden", true);
                 $("#dogst1").prop("disabled", true);
                 $("#dogst1").prop("hidden", true);
@@ -795,38 +848,54 @@
                 $("#dogst2").prop("hidden", true);
             }
             if ($('#category').val() == "System") {
+                $("#system").prop("disabled", false);
                 $("#dsystem").prop("hidden", false);
             } else {
+                $("#system").prop("disabled", true);
                 $("#dsystem").prop("hidden", true);
             }
             if ($('#category').val() == "Others") {
+                $("#other").prop("disabled", false);
                 $("#dother").prop("hidden", false);
             } else {
+                $("#other").prop("disabled", true);
                 $("#dother").prop("hidden", true);
             }
-
             if ($('#status').val() == "Closed") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
-            } else if ($('#status').val() == "Resolve") {
+            } else if ($('#status').val() == "Resolved") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
-            }  else if($(this).val() == "On-Going") {
+            } else if ($('#status').val() == "On-Going") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
-            }else{
+            } else {
                 $("#dact").prop("hidden", true);
                 $("#act").prop("disabled", true);
             }
         }
-        var msg = '{{Session::get('alert')}}';
-        var exist = '{{Session::has('alert')}}';
-        if (exist) {
-            alert(msg);
-        }
     </script>
-
 @endsection
 
 
-@section('footer',"<p></p>")
+@if(Auth::user()->department == 'Administrator' || !($ticket->status == 'Closed'))
+@section('footer')
+    <footer class="main-footer">
+        <div class="float-right">
+            <button type="submit" class="btn btn-primary" form="myForm" onclick="mySubmit()">Submit</button>
+
+        </div>
+        <strong>Copyright &copy; 2020 <a href="https://www.mcuhospital.org/">MCU Hospital</a>.</strong> All
+        rights
+        reserved.
+        <b>Version</b> 1.0.0
+    </footer>
+@endsection
+@endif
+<!-- /.content -->
+<!-- /.content-wrapper -->
+
+
+
+
