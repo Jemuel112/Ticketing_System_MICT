@@ -48,6 +48,7 @@ class EndorsementController extends Controller
                 }
             }
         } else {
+
             $user = Auth::user()->id;
             $dept = Department::select('id')->where('dept_name', Auth::user()->department)->first();
             $endors = Endorsement::all();
@@ -62,9 +63,10 @@ class EndorsementController extends Controller
                 }
             }
             if (!is_null($endorsements)){
+                $seens = EndorsementSeen::Where('seen_id', $user)->get()->pluck('endorsement_id')->toArray();
                 foreach ($endorsements as $endorsement) {
                     $seen = explode(', ', $endorsement->seen_by);
-                    if (in_array($user, $seen)) {
+                    if (in_array($endorsement->id, $seens)) {
                         $read[] = $endorsement;
                     } else {
                         $unread[] = $endorsement;
