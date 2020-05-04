@@ -152,7 +152,7 @@
                         @php
                             $name = App\User::find($seen->seen_id);
                         @endphp
-                        <a href="#">{{$name->fname}} {{$name->lname}} <span class="mailbox-read-time">({{date('F d, Y   h:i A', strtotime($seen->created_at))}})</span></a>
+                        <a href="#">{{$name->fname}} {{$name->lname}}</a> <span class="mailbox-read-time">({{date('F d, Y   h:i A', strtotime($seen->created_at))}})</span>
                     @empty
                     @endforelse
                 </div>
