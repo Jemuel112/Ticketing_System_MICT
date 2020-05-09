@@ -76,7 +76,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="4" class="text-center">No Endorsement at the moment</td>
+                                    <td colspan="4" class="text-center">No Sent Endorsement at the moment</td>
                                 </tr>
                             @endforelse
                             </tbody>
@@ -87,16 +87,6 @@
         </div>
         <!-- /.content -->
         <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            <div class="float-right">
-                <button type="submit" class="btn btn-primary">Submit</button>
-
-            </div>
-            <strong>Copyright &copy; 2020 <a href="https://www.mcuhospital.org/">MCU Hospital</a>.</strong> All
-            rights
-            reserved.
-            <b>Version</b> 1.0.0
-        </footer>
 
     </form>
     <script>
@@ -107,5 +97,3 @@
     </script>
 @endsection
 
-
-@section('footer',"<p></p>")

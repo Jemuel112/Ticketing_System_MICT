@@ -636,13 +636,12 @@
                                                             &nbsp;</label>
                                                     </div>
                                                     <span class="time"><i class="fas fa-clock"></i> {{date(' h:i A', strtotime($content->created_at))}}</span>
-                                                    <h3 class="timeline-header"><a
-                                                            href="#">{{app\User::findOrFail($content->id_user)->fname}} {{app\User::findOrFail($content->id_user)->lname}}</a>
+                                                    <h3 class="timeline-header"><a href="#">{{app\User::findOrFail($content->id_user)->fname}} {{app\User::findOrFail($content->id_user)->lname}}</a>
                                                     </h3>
                                                     <div class="timeline-body">
-                                                        <div class="container">
-                                                            {!! $content->actions !!}
-                                                        </div>
+{{--                                                        <div class="container">--}}
+                                                            {!!$content->actions!!}
+{{--                                                        </div>--}}
                                                         {{--                                                    echo strip_tags($content->actions)--}}
                                                     </div>
                                                     {{--                                        <div class="timeline-footer">--}}

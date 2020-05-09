@@ -22,7 +22,6 @@ class Endorsment
         if (Auth::user()->department == "Administrator" || Auth::user()->department == "MICT") {
             return $next($request);
         } else {
-            dd($request);
             $user = Auth::user()->id;
             $endorsement = Endorsement::findOrFail($request->Endorsement);
             $dept = Department::select('id')->where('dept_name', Auth::user()->department)->first();
@@ -36,7 +35,6 @@ class Endorsment
                 return $next($request);
             }
         }
-
         return redirect()->back();
     }
 }

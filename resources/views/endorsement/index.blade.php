@@ -5,8 +5,6 @@
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
-    <form action='' method="POST" id="myForm">
-
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
@@ -19,12 +17,9 @@
                 </div>
                 <!-- /.container-fluid -->
             </section>
-
             <!-- Main content -->
-            @csrf
-            @method('POST')
-            <section class="content row" onload="functionToBeExecuted">
 
+            <section class="content row">
                 <div class="col-sm-6">
                     <div class="card card-cyan ">
                         <div class="card-header">
@@ -68,7 +63,6 @@
                                                 <td>'User Deleted'</td>
                                             @endif
                                             <td> {{ \Illuminate\Support\Str::limit($endorsement->title, 100, $end='...') }}</td>
-
                                             <td>
                                                 <a style="margin: 2px"
                                                    class="btn btn-sm btn-outline-primary"
@@ -161,7 +155,6 @@
         <!-- /.content -->
         <!-- /.content-wrapper -->
 
-    </form>
     <script>
         $("#endorsements").DataTable({
             'processing': true,
