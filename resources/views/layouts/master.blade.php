@@ -7,7 +7,7 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=2">
 @include('layouts.css')
-<!-- Google Font: Source Sans Pro -->
+    <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
 </head>
@@ -25,7 +25,6 @@
 @endif
 <!-- Site wrapper -->
 <div class="wrapper">
-
 
 
 @include('layouts.mict_header')
@@ -46,17 +45,28 @@
         @yield('footer')
     @else
         <footer class="main-footer">
-{{--            <audio id="audio" src="https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_700KB.mp3"></audio>--}}
+{{--                        <audio id="audio" src="https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_700KB.mp3"></audio>--}}
 
-{{--            <audio id="audio" src="Google_Event-1.mp3"></audio>--}}
-            <div class="float-right d-none d-sm-block">
-                <b>Version</b> 1.0.0
+{{--                        <audio id="audio" src="Google_Event-1.mp3"></audio>--}}
+            <div class="float-right d-none d-sm-block" id="ver">
+                <b>Version</b> @{{ version }}
             </div>
             <strong>Copyright &copy; 2020 <a href="https://www.mcuhospital.org/">MCU Hospital</a>.</strong> All rights
             reserved.
         </footer>
     @endif
 </div>
+@include('layouts.scripts')
+
+@yield('p-script')
+<script>
+    const ver = new Vue({
+        el:'#ver',
+        data:{
+            version: "0.1.0"
+        }
+    })
+</script>
 <!-- ./wrapper -->
 
 </body>

@@ -1,49 +1,49 @@
 @extends('layouts.master')
 
-@section('title', 'Dashboard | ')
+@section('title', 'Dashboards | ')
 
 @section('content')
     <div class="content-wrapper">
         <section class="content-header">
             <div class="container-fluid">
                 @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
-                <div class="row mb-2">
-                    <div class="col-sm-12">
-                        @if($errors->count()>0)
-                            <div style="" class="alert alert-danger">
-                                @foreach($errors->all() as $error)
-                                    {{$error}} <br>
-                                @endforeach
-                            </div>
-                        @endif
-                    </div>
-                    <div class="col-sm-12">
-
-                        <form action="{{route('dash.date')}}" class="float-right" method="POST">
-                            @method('GET')
-                            @csrf
-                            <div class="input-group date" id="datetimepickers" data-target-input="nearest">
-                                <label for="date" style="padding-top: 5px">Month of: &nbsp;</label>
-                                <input type="text"
-                                       class="form-control datetimepicker-input @error("start_at")is-invalid @enderror"
-                                       @if(Session::has('date'))
-                                       value="{{date('m/Y', strtotime(Session::get('date')))}}"
-                                       @endif
-                                       name="date"
-                                       data-target="#datetimepickers"/>
-                                <div class="input-group-append" data-target="#datetimepickers"
-                                     data-toggle="datetimepicker">
-                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    <div class="row mb-2">
+                        <div class="col-sm-12">
+                            @if($errors->count()>0)
+                                <div style="" class="alert alert-danger">
+                                    @foreach($errors->all() as $error)
+                                        {{$error}} <br>
+                                    @endforeach
                                 </div>
-                                <button class="btn btn-sm btn-secondary" type="submit">Submit</button>
-                            </div>
-                        </form>
-                        <h1>Dashboard for the month of
-                            <strong>@if(Session::has('date')) {{date('F Y', strtotime(Session::get('date')))}} @else {{\Carbon\Carbon::now()->format('F Y')}}  @endif</strong>
-                        </h1>
+                            @endif
+                        </div>
+                        <div class="col-sm-12">
+
+                            <form action="{{route('dash.date')}}" class="float-right" method="POST">
+                                @method('GET')
+                                @csrf
+                                <div class="input-group date" id="datetimepickers" data-target-input="nearest">
+                                    <label for="date" style="padding-top: 5px">Month of: &nbsp;</label>
+                                    <input type="text"
+                                           class="form-control datetimepicker-input @error("start_at")is-invalid @enderror"
+                                           @if(Session::has('date'))
+                                           value="{{date('m/Y', strtotime(Session::get('date')))}}"
+                                           @endif
+                                           name="date"
+                                           data-target="#datetimepickers"/>
+                                    <div class="input-group-append" data-target="#datetimepickers"
+                                         data-toggle="datetimepicker">
+                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                    </div>
+                                    <button class="btn btn-sm btn-secondary" type="submit">Submit</button>
+                                </div>
+                            </form>
+                            <h1>Dashboard for the month of
+                                <strong>@if(Session::has('date')) {{date('F Y', strtotime(Session::get('date')))}} @else {{\Carbon\Carbon::now()->format('F Y')}}  @endif</strong>
+                            </h1>
+                        </div>
                     </div>
-                </div>
-                    @else
+                @else
                     <h1>Dashboard</h1>
                 @endif
 
@@ -141,11 +141,6 @@
                             @asyncWidget('active_table')
                         </div>
                         <!-- /.card-body -->
-                        {{--                        <div class="card-footer">--}}
-                        {{--                            Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples and--}}
-                        {{--                            information about--}}
-                        {{--                            the plugin.--}}
-                        {{--                        </div>--}}
                     </div>
                 </div>
 
@@ -162,77 +157,14 @@
                         <div class="card-body" style="overflow-x:auto;">
                             @asyncWidget('on_going_table')
                         </div>
-                        <!-- /.card-body -->
-                        {{--                        <div class="card-footer">--}}
-                        {{--                            Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples and--}}
-                        {{--                            information about--}}
-                        {{--                            the plugin.--}}
-                        {{--                        </div>--}}
                     </div>
                 </div>
-
-                {{--                <div class="col-md-6">--}}
-                {{--                    <div class="card card-green">--}}
-                {{--                        <div class="card-header">--}}
-                {{--                            <h3 class="card-title">Resolved Tickets</h3>--}}
-                {{--                            <div class="card-tools">--}}
-                {{--                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i--}}
-                {{--                                        class="fas fa-minus"></i></button>--}}
-                {{--                            </div>--}}
-                {{--                        </div>--}}
-                {{--                        <!-- /.card-header -->--}}
-                {{--                        <div class="card-body">--}}
-                {{--                            <div class="row">--}}
-
-                {{--                            </div>--}}
-                {{--                        </div>--}}
-                {{--                        <!-- /.card-body -->--}}
-                {{--                        --}}{{--                        <div class="card-footer">--}}
-                {{--                        --}}{{--                            Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples and--}}
-                {{--                        --}}{{--                            information about--}}
-                {{--                        --}}{{--                            the plugin.--}}
-                {{--                        --}}{{--                        </div>--}}
-                {{--                    </div>--}}
-                {{--                </div>--}}
-
-                {{--                <div class="col-md-6">--}}
-                {{--                    <div class="card card-red">--}}
-                {{--                        <div class="card-header">--}}
-                {{--                            <h3 class="card-title">Closed Tickets</h3>--}}
-                {{--                            <div class="card-tools">--}}
-                {{--                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i--}}
-                {{--                                        class="fas fa-minus"></i></button>--}}
-                {{--                            </div>--}}
-                {{--                        </div>--}}
-                {{--                        <!-- /.card-header -->--}}
-                {{--                        <div class="card-body">--}}
-                {{--                            <div class="row">--}}
-
-                {{--                            </div>--}}
-                {{--                        </div>--}}
-                {{--                        <!-- /.card-body -->--}}
-                {{--                        --}}{{--                        <div class="card-footer">--}}
-                {{--                        --}}{{--                            Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples and--}}
-                {{--                        --}}{{--                            information about--}}
-                {{--                        --}}{{--                            the plugin.--}}
-                {{--                        --}}{{--                        </div>--}}
-                {{--                    </div>--}}
-                {{--                </div>--}}
-
-
             </div>
         </section>
     </div>
 
-    <footer class="main-footer">
-        <div class="float-right d-none d-sm-block">
-            <b>Version</b> 1.0.0
-        </div>
-        <strong>Copyright &copy; 2020 <a tabindex="1" href="https://www.mcuhospital.org/">MCU Hospital</a>.</strong> All
-        rights
-        reserved.
-    </footer>
-    @include('layouts.scripts')
+@endsection
+@section('p-script')
     <script>
         $("#datetimepickers").datetimepicker({
             icons: {

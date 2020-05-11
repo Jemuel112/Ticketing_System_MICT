@@ -9,6 +9,7 @@ use App\mcomments;
 use App\mactions;
 use Carbon\Carbon;
 use DateTime;
+use http\Env;
 use Illuminate\Http\Request;
 use App\Http\Requests\TicketFormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -31,6 +32,10 @@ class MTicketsController extends Controller
 
     public function myTickets(Request $request)
     {
+        $request->headers->set('X-Authorization', env('PUSHER_APP_KEY'));
+
+        dd($request->header('X-Authorization'));
+//        $request->header('API_KEY') = "sdasdasd";
         $name = Auth::user()->fname;
         $tickets = mTicket::where([['assigned_to', 'Like', '%' . "$name" . '%']]);
         $title = 'My Tickets';

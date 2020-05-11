@@ -138,7 +138,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('Endorsement.sent')}}" class="nav-link">
+                    <a href="{{route('Endorsement.sent')}}" class="nav-link {{ Route::currentRouteName() == 'Endorsement.sent' ? 'active' : '' }}">
                         <i class="nav-icon far fa-building"></i>
                         <p>
                             Sent Endorsements

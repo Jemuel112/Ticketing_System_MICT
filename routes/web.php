@@ -15,7 +15,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/', function () {
+    Route::get('/', function (Request $request) {
+        $request->headers->set('APP_KEY',env('PUSHER_APP_KEY'));
         return view('dashboard');
     });
 });
@@ -32,6 +33,8 @@ Route::post('/MICT-Tickets/report', 'mTicketsController@report');
 Route::GET('/All_Sort', 'mTicketsController@index')->name('ticket.sort');
 Route::GET('/My_Sort', 'mTicketsController@myTickets')->name('my.sort');
 Route::GET('/Set_Date','mTicketsController@dashboard')->name('dash.date');
+
+Route::resource('/Engineering-Tickets','ETicketController');
 
 
 Route::get('/Received_Calls', 'ReportsController@receivedCalls')->name('received.calls');

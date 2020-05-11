@@ -30,5 +30,7 @@
 <!-- date-range-picker -->
 <script src="{{asset("/plugins/daterangepicker/daterangepicker.js")}}"></script>
 
+<script src="{{asset('/js/app.js')}}"></script>
+
 
 
