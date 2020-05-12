@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('title', 'Service Report | ')
-@include('layouts.scripts')
 
 @section('content')
     <style>
@@ -90,7 +89,7 @@
                     </table>
 
 
-                    <table class="table">
+                    <table class="table table-borderless">
                         <tr>
                             <td><strong>Noted by:</strong></td>
                             <td><strong>Received by:</strong></td>
@@ -99,7 +98,7 @@
                         <tr>
                             <td><strong><span style="border-bottom: solid 3px;font-size: 20px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mr. Cristeto L. Dela Cruz&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></strong>
                             </td>
-                            <td><strong>______________________________________</strong></td>
+                            <td><strong><span style="border-bottom: 3px solid black">                                                                                          </span></strong></td>
                         </tr>
                         <tr>
                             <td><strong>Signature Over Printed Name</strong></td>
@@ -116,7 +115,5 @@
     </div>
 @endsection
 @section('footer')
-    <div style="display: none">
-        s
-    </div>
+&nbsp;
 @endsection

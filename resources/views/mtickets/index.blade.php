@@ -2,8 +2,6 @@
 
 @section('title', 'MICT Tickets | ')
 @section('content')
-    @include('layouts.scripts')
-
     <div class="content-wrapper">
 
         <section class="content-header">
@@ -156,48 +154,50 @@
             </div>
         </section>
     </div>
-    <script>
-        $("#department1").DataTable({
-            'processing': true,
-            "order": [[0, "desc"]]
-        });
-
-        //Date range picker
-        $('input[name="datefilter"]').daterangepicker({
-            showDropdowns: true,
-            minYear: 2020,
-            autoUpdateInput: false,
-            autoclose: true,
-            locale: {
-                cancelLabel: 'Clear'
-            }
-        });
-
-        $('input[name="datefilter"]').on('apply.daterangepicker', function (ev, picker) {
-            $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
-        });
-
-        $('input[name="datefilter"]').on('cancel.daterangepicker', function (ev, picker) {
-            $(this).val('');
-        });
-
-        // $('.select2').select2({
-        //     theme: 'bootstrap4'
-        // });
-        // $('.select2bs4').select2({
-        //     theme: 'bootstrap4'
-        // });
-        $selectElement = $('#deps').select2({
-            theme: 'bootstrap4',
-            placeholder: "Department",
-            allowClear: true
-        });
-        $selectElement = $('#stats').select2({
-            theme: 'bootstrap4',
-            placeholder: "Status",
-            allowClear: true
-        });
-    </script>
-
 @endsection
 
+@section('p-script')
+<script>
+    $("#department1").DataTable({
+        'processing': true,
+        "order": [[0, "desc"]]
+    });
+
+    //Date range picker
+    $('input[name="datefilter"]').daterangepicker({
+        showDropdowns: true,
+        minYear: 2020,
+        autoUpdateInput: false,
+        autoclose: true,
+        locale: {
+            cancelLabel: 'Clear'
+        }
+    });
+
+    $('input[name="datefilter"]').on('apply.daterangepicker', function (ev, picker) {
+        $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+    });
+
+    $('input[name="datefilter"]').on('cancel.daterangepicker', function (ev, picker) {
+        $(this).val('');
+    });
+
+    // $('.select2').select2({
+    //     theme: 'bootstrap4'
+    // });
+    // $('.select2bs4').select2({
+    //     theme: 'bootstrap4'
+    // });
+    $selectElement = $('#deps').select2({
+        theme: 'bootstrap4',
+        placeholder: "Department",
+        allowClear: true
+    });
+    $selectElement = $('#stats').select2({
+        theme: 'bootstrap4',
+        placeholder: "Status",
+        allowClear: true
+    });
+</script>
+
+@endsection

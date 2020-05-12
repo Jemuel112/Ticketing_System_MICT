@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('title', 'View Ticket | ')
-@include('layouts.scripts')
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
@@ -65,7 +64,7 @@
                                     <td>
                                         <a style="margin: 2px"
                                            class="btn btn-sm btn-outline-primary"
-                                           href="Endorsement/{Endorsement}"
+                                           href="Endorsement/{{$endorsement->id}}"
                                         ><i class="fal fa-pencil-alt"></i> View</a>
                                         <a style="margin: 2px"
                                            class="btn btn-sm btn-outline-primary"
@@ -89,6 +88,10 @@
         <!-- /.content-wrapper -->
 
     </form>
+
+@endsection
+
+@section('p-script')
     <script>
         $("#endorsment").DataTable({
             'processing': true,

@@ -117,7 +117,10 @@
             </div>
         </div>
     </div>
-    @include('layouts.scripts')
+
+@endsection
+
+@section('p-script')
     <script>
         $(function () {
             //Initialize Select2 Elements

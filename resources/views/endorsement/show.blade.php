@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('title', 'Create Endorsement | ')
-@include('layouts.scripts')
 
 @section('content')
 
@@ -161,21 +160,6 @@
             <!-- /.card -->
         </div>
     </div>
-@section('footer')
-    <p></p>
-    {{--    <footer class="main-footer">--}}
-    {{--        <div class="float-right">--}}
-    {{--            <button type="submit" class="btn btn-primary"><i class="far fa-save"></i>--}}
-    {{--                Update--}}
-    {{--            </button>--}}
-
-    {{--        </div>--}}
-    {{--        <strong>Copyright &copy; 2020 <a href="https://www.mcuhospital.org/">MCU Hospital</a>.</strong> All--}}
-    {{--        rights--}}
-    {{--        reserved.--}}
-    {{--        <b>Version</b> 1.0.0--}}
-    {{--    </footer>--}}
-@endsection
 
 
 @endsection

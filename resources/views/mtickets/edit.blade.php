@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('title', 'View Ticket | ')
-@include('layouts.scripts')
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
@@ -113,7 +112,7 @@
                                        style="width: 100%;" type="text" name="reported_by" placeholder="Name"
                                        @if($ticket->status == "Closed" && Auth::user()->department != "Administrator")
                                        disabled
-                                        @endif>
+                                    @endif>
                             </div>
                             {{--End Reported by--}}
 
@@ -402,7 +401,8 @@
                             </div>
 
                             <div id="dsystem" class="col-lg-4 col-md-4" hidden>
-                                <label for="system" @error('sys_category') class="text-red" @enderror><br>System Category</label>
+                                <label for="system" @error('sys_category') class="text-red" @enderror><br>System
+                                    Category</label>
                                 @error('sys_category')
                                 <span class="text-red">is required</span>
                                 @enderror
@@ -573,7 +573,7 @@
                                         <textarea id="act" name="action" class="textarea"
                                                   placeholder="Place some text here"
                                                   style="width: 100%; height: 250px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
-                                                 >{{old('action')}}</textarea>
+                                        >{{old('action')}}</textarea>
                                     </div>
                                 @endif
                                 <div class="col-lg-12 col-md-12">
@@ -636,12 +636,13 @@
                                                             &nbsp;</label>
                                                     </div>
                                                     <span class="time"><i class="fas fa-clock"></i> {{date(' h:i A', strtotime($content->created_at))}}</span>
-                                                    <h3 class="timeline-header"><a href="#">{{app\User::findOrFail($content->id_user)->fname}} {{app\User::findOrFail($content->id_user)->lname}}</a>
+                                                    <h3 class="timeline-header"><a
+                                                            href="#">{{app\User::findOrFail($content->id_user)->fname}} {{app\User::findOrFail($content->id_user)->lname}}</a>
                                                     </h3>
                                                     <div class="timeline-body">
-{{--                                                        <div class="container">--}}
-                                                            {!!$content->actions!!}
-{{--                                                        </div>--}}
+                                                        {{--                                                        <div class="container">--}}
+                                                        {!!$content->actions!!}
+                                                        {{--                                                        </div>--}}
                                                         {{--                                                    echo strip_tags($content->actions)--}}
                                                     </div>
                                                     {{--                                        <div class="timeline-footer">--}}
@@ -668,6 +669,28 @@
         @endif
 
     </div>
+
+@endsection
+
+
+@if(Auth::user()->department == 'Administrator' || !($ticket->status == 'Closed'))
+@section('footer')
+    <footer class="main-footer">
+        <div id="ver">
+            <div class="float-right">
+                <b>Version</b> @{{ version }}
+
+                <button type="submit" style="margin-left: 10px" class="btn btn-primary" form="myForm" onclick="mySubmit()">Submit</button>
+            </div>
+            <strong>Copyright &copy; @{{ year }} <a href="https://www.mcuhospital.org/">MCU Hospital</a>.</strong> All
+            rights
+            reserved.
+        </div>
+    </footer>
+@endsection
+@endif
+
+@section('p-script')
     <script type="text/javascript">
         $(window).on("beforeunload", function () {
             return "Are you sure? You didn't finish the form!";
@@ -748,7 +771,7 @@
         @if(Auth::user()->department != 'Administrator' && $ticket->status == 'Closed')
         $('#act').summernote('disable');
         @endif
-        $selectElement = $('#reqb').select2({
+            $selectElement = $('#reqb').select2({
             theme: 'bootstrap4',
             placeholder: "Select...",
             allowClear: true
@@ -877,22 +900,6 @@
         }
     </script>
 @endsection
-
-
-@if(Auth::user()->department == 'Administrator' || !($ticket->status == 'Closed'))
-@section('footer')
-    <footer class="main-footer">
-        <div class="float-right">
-            <button type="submit" class="btn btn-primary" form="myForm" onclick="mySubmit()">Submit</button>
-
-        </div>
-        <strong>Copyright &copy; 2020 <a href="https://www.mcuhospital.org/">MCU Hospital</a>.</strong> All
-        rights
-        reserved.
-        <b>Version</b> 1.0.0
-    </footer>
-@endsection
-@endif
 <!-- /.content -->
 <!-- /.content-wrapper -->
 

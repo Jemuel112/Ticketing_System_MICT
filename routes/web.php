@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Artisan;
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/', function (Request $request) {
-        $request->headers->set('APP_KEY',env('PUSHER_APP_KEY'));
         return view('dashboard');
     });
 });

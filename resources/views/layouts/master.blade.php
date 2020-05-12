@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="eng">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,18 +7,13 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=2">
 @include('layouts.css')
-    <!-- Google Font: Source Sans Pro -->
+@include('layouts.scripts')
+
+
+<!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
 </head>
-
-{{--<audio src="Google_Event-1.mp3" id="my_audio" loop="loop"></audio>--}}
-{{--<script type="text/javascript">--}}
-{{--    window.onload=function(){--}}
-{{--        document.getElementById("my_audio").play();--}}
-{{--    }--}}
-{{--</script>--}}
-
 <body class="hold-transition sidebar-mini layout-fixed layout-footer-fixed">
 @if(Auth::user()->department == 'Administrator' || Auth::user()->department == 'MICT')
     @asyncWidget('sound_notification')
@@ -45,25 +40,29 @@
         @yield('footer')
     @else
         <footer class="main-footer">
-{{--                        <audio id="audio" src="https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_700KB.mp3"></audio>--}}
-
-{{--                        <audio id="audio" src="Google_Event-1.mp3"></audio>--}}
-            <div class="float-right d-none d-sm-block" id="ver">
-                <b>Version</b> @{{ version }}
+            <div id="ver">
+                <div class="float-right d-none d-sm-block">
+                    <b>Version</b> @{{ version }}
+                </div>
+                <strong>Copyright &copy; @{{ year }} <a href="https://www.mcuhospital.org/">MCU Hospital</a>.</strong>
+                All rights
+                reserved.
             </div>
-            <strong>Copyright &copy; 2020 <a href="https://www.mcuhospital.org/">MCU Hospital</a>.</strong> All rights
-            reserved.
         </footer>
     @endif
 </div>
-@include('layouts.scripts')
 
 @yield('p-script')
+
+<script type="text/javascript">
+    // window.location = "http://192.168.254.102:8080";
+</script>
 <script>
     const ver = new Vue({
-        el:'#ver',
-        data:{
-            version: "0.1.0"
+        el: '#ver',
+        data: {
+            version: "0.1.0 Testing",
+            year: new Date().getFullYear(),
         }
     })
 </script>

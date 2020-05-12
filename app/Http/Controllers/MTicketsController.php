@@ -32,9 +32,9 @@ class MTicketsController extends Controller
 
     public function myTickets(Request $request)
     {
-        $request->headers->set('X-Authorization', env('PUSHER_APP_KEY'));
+//        $request->headers->set('X-Authorization', env('PUSHER_APP_KEY'));
 
-        dd($request->header('X-Authorization'));
+//        dd($request->header('X-Authorization'));
 //        $request->header('API_KEY') = "sdasdasd";
         $name = Auth::user()->fname;
         $tickets = mTicket::where([['assigned_to', 'Like', '%' . "$name" . '%']]);
