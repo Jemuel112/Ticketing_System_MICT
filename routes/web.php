@@ -16,14 +16,15 @@ use Illuminate\Support\Facades\Artisan;
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/', function (Request $request) {
+//        Alert::alert('Title', 'Message', 'Type');
         return view('dashboard');
-    });
+    })->name('MICT-dash1');
 });
 
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware('auth');
+})->middleware('auth')->name('MICT-dash2');
 
 Route::resource('/MICT-Tickets', 'mTicketsController', ['only' => ['index', 'create', 'store', 'show', 'edit', 'update']]);
 Route::post('/MICT-Tickets/comments/{comment}', 'mTicketsController@comment');
@@ -56,9 +57,6 @@ Route::resource('/Endorsement', 'EndorsementController');
 Route::get('/Endorsement/{id}/dl', 'EndorsementController@download')->name('Endorsement.dl');
 Route::get('/Sent_Endorsement', 'EndorsementController@sent')->name('Endorsement.sent');
 Route::get('/notifications', 'EndorsementController@notifications')->name('notifications');
-Route::get('/nigga', function () {
-    return view('sample');
-});
 
 //Route::get('/dl',function (){
 //    return response()->download(public_path('Google_Event-1.mp3'),'sadsdasd.ico');
@@ -84,6 +82,7 @@ Auth::routes([
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/logout', function () {
+    Auth::logout();
     return view('auth.login');
 });
 

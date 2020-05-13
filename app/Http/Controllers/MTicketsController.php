@@ -84,7 +84,6 @@ class MTicketsController extends Controller
 
     public function index(Request $request)
     {
-
         $title = 'All Tickets';
         if (Auth::user()->department == "Administrator" || Auth::user()->department == "MICT") {
             $tickets = new mTicket;
@@ -128,8 +127,9 @@ class MTicketsController extends Controller
             $title = 'All Sorted Tickets';
         }
         $tickets = $tickets->orderBy('id', 'DESC')->get();
+//        alert()->info('Post Created', 'Successfully');
 
-        return view('mtickets.index', compact('tickets', 'title', 'departments'));
+        return view('mtickets.index', compact('tickets', 'title', 'departments'))->with('success','test');
     }
 
     public function create()
@@ -143,6 +143,7 @@ class MTicketsController extends Controller
                 ['department', '=', 'Administrator']
             ])
             ->get();
+
         return view('mtickets.create', compact('departments', 'micts'));
     }
 
@@ -374,6 +375,10 @@ class MTicketsController extends Controller
         $ticket->recommendation = $request->recommendation;
 
         $ticket->save();
+//        alert()->success('SuccessAlert','Lorem ipsum dolor sit amet.');
+//        alert()->success('SuccessAlert','Lorem ipsum dolor sit amet.');
+//        alert()->success('Post Created', '<strong>Successfully</strong>')->toHtml();
+        // example:
         return redirect('/MICT-Tickets');
 
     }

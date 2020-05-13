@@ -61,12 +61,12 @@
     const ver = new Vue({
         el: '#ver',
         data: {
-            version: "0.1.0 Testing",
-            year: new Date().getFullYear(),
+            version: "0.1.0 (Beta)",
+            year: new Date().getFullYear() + " MICT Department",
         }
     })
 </script>
 <!-- ./wrapper -->
-
+@include('sweetalert::alert')
 </body>
 </html>
