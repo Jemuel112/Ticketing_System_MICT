@@ -2,7 +2,6 @@
 
 @section('title', 'MICT Tickets | ')
 @section('content')
-    @include('layouts.scripts')
 
     <div class="content-wrapper">
 
@@ -204,6 +203,11 @@
             </div>
         </section>
     </div>
+
+
+@endsection
+
+@section('p-script')
     <script>
         $("#department1").DataTable({
             'processing': true,
@@ -246,6 +250,5 @@
             allowClear: true
         });
     </script>
-
 @endsection
 

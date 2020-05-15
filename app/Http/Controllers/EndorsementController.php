@@ -22,7 +22,7 @@ class EndorsementController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('disablepreventback')->except('download', 'notifications');
-        $this->middleware('endorsed')->except('index', 'sent');
+        $this->middleware('endorsed')->except('index', 'sent','create','store');
 //        $this->middleware('auth.am')->except('index', 'store', 'create', 'show', 'comment');
     }
 
@@ -35,22 +35,24 @@ class EndorsementController extends Controller
     {
         $read = null;
         $unread = null;
-        if (Auth::user()->department == "Administrator") {
+        if (Auth::user()->department == "Administrator" && Auth::user()->id == 1) {
             $user = Auth::user()->id;
             $endorsements = Endorsement::all();
+            $seen = EndorsementSeen::Where('seen_id', $user)->get();
             foreach ($endorsements as $endorsement) {
-                $see = EndorsementSeen::where('endorsement_id', $endorsement->id)->where('seen_id', $user)->get();
-                dd($see);
-                if ($see->isEmpty()){
+                $see = $seen->where('endorsement_id', $endorsement->id);
+                if ($see->isEmpty()) {
                     $unread[] = $endorsement;
-                }else{
+                } else {
                     $read[] = $endorsement;
                 }
             }
         } else {
+
             $user = Auth::user()->id;
             $dept = Department::select('id')->where('dept_name', Auth::user()->department)->first();
             $endors = Endorsement::all();
+            $endorsements = null;
             foreach ($endors as $endor) {
                 $assign = explode(', ', $endor->assigned_to_id);
                 $depts = explode(', ', $endor->assigned_dept_id);
@@ -58,19 +60,19 @@ class EndorsementController extends Controller
                     $endorsements[] = $endor;
                 } elseif (in_array($dept->id, $depts)) {
                     $endorsements[] = $endor;
-                } elseif ($endor->created_by_id == Auth::user()->id) {
-                    $endorsements[] = $endor;
                 }
             }
-            foreach ($endorsements as $endorsement) {
-                $seen = explode(', ', $endorsement->seen_by);
-                if (in_array($user, $seen)) {
-                    $read[] = $endorsement;
-                } else {
-                    $unread[] = $endorsement;
+            if (!is_null($endorsements)){
+                $seens = EndorsementSeen::Where('seen_id', $user)->get()->pluck('endorsement_id')->toArray();
+                foreach ($endorsements as $endorsement) {
+                    $seen = explode(', ', $endorsement->seen_by);
+                    if (in_array($endorsement->id, $seens)) {
+                        $read[] = $endorsement;
+                    } else {
+                        $unread[] = $endorsement;
+                    }
                 }
             }
-
         }
         return view('endorsement.index', compact('endorsements', 'read', 'unread'));
     }
@@ -170,7 +172,7 @@ class EndorsementController extends Controller
      */
     public function show($id)
     {
-        $endorse = Endorsement::find($id);
+        $endorse = Endorsement::findOrFail($id);
         $user = User::findOrFail($endorse->created_by_id);
         $files = EndorsmentFiles::where('endorse_id', $id)->get();
         if (is_null($endorse->assigned_to_id)) {
@@ -191,18 +193,18 @@ class EndorsementController extends Controller
         }
 
 
-        $seens = EndorsementSeen::select('seen_id')->where('endorsement_id', $id)->get();
+        $seens = EndorsementSeen::where('endorsement_id', $id)->get();
         foreach ($seens as $see) {
             $seen[] = $see->seen_id;
         }
-        if (!(in_array(Auth::user()->id, $seen)) && !($endorse->created_by_id == Auth::user())) {
+        if ( $seens->isEmpty() OR ( !(in_array(Auth::user()->id, $seen)) && !($endorse->created_by_id == Auth::user()) )) {
             $stamp = new EndorsementSeen();
             $stamp->endorsement_id = $id;
             $stamp->seen_id = Auth::user()->id;
+            $stamp->save();
+            $seens[] = $stamp;
         }
-
-
-        return view('endorsement.show', compact('endorse', 'user', 'users', 'files', 'to', 'departments', 'files'));
+        return view('endorsement.show', compact('endorse', 'user', 'users', 'files', 'to', 'departments', 'files', 'seens'));
     }
 
     /**

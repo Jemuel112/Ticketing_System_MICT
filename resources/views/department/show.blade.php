@@ -104,6 +104,5 @@
         </div>
     </div>
     {{--    END ADD MODAL--}}
-    @include('layouts.scripts')
 
 @endsection

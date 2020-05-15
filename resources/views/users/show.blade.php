@@ -196,7 +196,9 @@
         </div>
     </div>
     {{--    END ADD MODAL--}}
-    @include('layouts.scripts')
+
+@endsection
+@section('p-script')
     <script>
         $(function () {
             //Initialize Select2 Elements
@@ -208,4 +210,4 @@
             });
         });
     </script>
-@endsection
+    @endsection

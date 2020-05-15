@@ -508,20 +508,30 @@
 
         @section('footer')
             <footer class="main-footer">
-                <div class="float-right">
-                    <button type="submit" form="myForm" class="btn btn-primary"><i class="nav-icon fal fa-plus-circle"></i>
-                        Submit
-                    </button>
+                <div id="ver">
+
+                    <div class="float-right">
+                        <b>Version</b> @{{ version }}
+                        <button type="submit" form="myForm" style="margin-left: 10px" class="btn btn-primary"><i
+                                class="nav-icon fal fa-plus-circle"></i>
+                            Submit
+                        </button>
+
+                    </div>
+                    <strong>Copyright &copy; @{{ year }} <a href="https://www.mcuhospital.org/">MCU Hospital</a>.</strong> All
+                    rights
+                    reserved.
 
                 </div>
-                <strong>Copyright &copy; 2020 <a href="https://www.mcuhospital.org/">MCU Hospital</a>.</strong> All
-                rights
-                reserved.
-                <b>Version</b> 1.0.0
             </footer>
         @endsection
 
     </form>
+
+
+@endsection
+
+@section('p-script')
     <script type="text/javascript">
         $(window).on("beforeunload", function () {
             return "Are you sure? You didn't finish the form!";
@@ -727,8 +737,4 @@
             }
         }
     </script>
-
 @endsection
-
-
-@include('layouts.scripts')

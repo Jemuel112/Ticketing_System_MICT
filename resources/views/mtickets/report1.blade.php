@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('title', 'Service Report | ')
-@include('layouts.scripts')
 
 @section('content')
     <style>
@@ -116,7 +115,5 @@
     </div>
 @endsection
 @section('footer')
-    <div style="display: none">
-        s
-    </div>
+&nbsp;
 @endsection

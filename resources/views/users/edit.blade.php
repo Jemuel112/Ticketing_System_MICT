@@ -88,8 +88,9 @@
             </form>
         </section>
     </div>
+@endsection
 
-    @include('layouts.scripts')
+@section('p-script')
     <script>
         $(function () {
             //Initialize Select2 Elements
