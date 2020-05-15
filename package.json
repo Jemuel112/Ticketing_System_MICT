@@ -25,7 +25,10 @@
         "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {
+        "@sweetalert2/theme-bootstrap-4": "^3.1.4",
         "laravel-echo": "^1.7.0",
-        "pusher-js": "^5.1.1"
+        "popper.js": "^1.16.1",
+        "pusher-js": "^5.1.1",
+        "sweetalert2": "^9.10.13"
     }
 }

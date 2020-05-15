@@ -26,15 +26,15 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware('auth')->name('MICT-dash2');
 
-Route::resource('/MICT-Tickets', 'mTicketsController', ['only' => ['index', 'create', 'store', 'show', 'edit', 'update']]);
+Route::resource('/MICT-Tickets', 'mTicketsController', ['except' => ['delete']]);
 Route::post('/MICT-Tickets/comments/{comment}', 'mTicketsController@comment');
-Route::get('/MyTickets', 'mTicketsController@myTickets');
+Route::get('/MyTickets', 'mTicketsController@myTickets')->name('myTicket');
 Route::post('/MICT-Tickets/report', 'mTicketsController@report');
 Route::GET('/All_Sort', 'mTicketsController@index')->name('ticket.sort');
 Route::GET('/My_Sort', 'mTicketsController@myTickets')->name('my.sort');
 Route::GET('/Set_Date','mTicketsController@dashboard')->name('dash.date');
 
-Route::resource('/Engineering-Tickets','ETicketController');
+Route::resource('/Engineering-Tickets','ETicketController',['except' => ['delete']]);
 
 
 Route::get('/Received_Calls', 'ReportsController@receivedCalls')->name('received.calls');

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title', 'Dashboards | ')
-
+@include('layouts.css')
 @section('content')
     <div class="content-wrapper">
         <section class="content-header">

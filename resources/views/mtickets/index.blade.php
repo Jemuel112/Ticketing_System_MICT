@@ -37,6 +37,7 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                @else
                             @endif
                             <div class="col-sm-3 col-lg-3">
                                 <select class="form-control select2 col-md-7"
@@ -63,6 +64,7 @@
                                     </option>
                                 </select>
                             </div>
+
                             <div class="col-sm-3 col-lg-3">
                                 <button type="submit" class="btn btn-info col-12">Apply</button>
                             </div>

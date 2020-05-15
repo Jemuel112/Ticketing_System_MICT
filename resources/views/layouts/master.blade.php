@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>@yield('title')MCU Ticketing System</title>
     <!-- Tell the browser to be responsive to screen width -->
+
     <meta name="viewport" content="width=device-width, initial-scale=2">
 @include('layouts.css')
 @include('layouts.scripts')
@@ -58,15 +59,34 @@
     // window.location = "http://192.168.254.102:8080";
 </script>
 <script>
+
+    // Swal.fire('Any fool can use a computer');
+
+    // const Toast = Swal.mixin({
+    //     toast: true,
+    //     position: 'top-end',
+    //     showConfirmButton: false,
+    //     timer: 3000,
+    //     timerProgressBar: true,
+    //     onOpen: (toast) => {
+    //         toast.addEventListener('mouseenter', Swal.stopTimer)
+    //         toast.addEventListener('mouseleave', Swal.resumeTimer)
+    //     }
+    // })
+    //
+    // Toast.fire({
+    //     icon: 'success',
+    //     title: 'Signed in successfully'
+    // })
     const ver = new Vue({
         el: '#ver',
         data: {
             version: "0.1.0 (Beta)",
             year: new Date().getFullYear() + " MICT Department",
-        }
+        },
     })
 </script>
-<!-- ./wrapper -->
+{{--<!-- ./wrapper -->--}}
 @include('sweetalert::alert')
 </body>
 </html>
