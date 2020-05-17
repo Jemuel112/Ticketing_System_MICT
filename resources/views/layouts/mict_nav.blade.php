@@ -30,9 +30,10 @@
                 <li class="nav-header">
                     MICT
                 </li>
-{{--                {{ Request::routeIs('MICT-dash1') || Request::rousteIs('MICT-dash2') ? 'active' : '' }}--}}
+                {{--                {{ Request::routeIs('MICT-dash1') || Request::rousteIs('MICT-dash2') ? 'active' : '' }}--}}
                 <li class="nav-item">
-                    <a href="{{route('MICT-dash1')}}" class="nav-link {{ Request::routeIs('MICT-dash1') ||  Request::routeIs('MICT-dash2') ? 'active' : '' }}">
+                    <a href="{{route('MICT-dash1')}}"
+                       class="nav-link {{ Request::routeIs('MICT-dash1') ||  Request::routeIs('MICT-dash2') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
@@ -40,7 +41,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('MICT-Tickets.create')}}" class="nav-link {{ Request::routeIs('MICT-Tickets.create') ? 'active' : '' }}">
+                    <a href="{{route('MICT-Tickets.create')}}"
+                       class="nav-link {{ Request::routeIs('MICT-Tickets.create') ? 'active' : '' }}">
                         <i class="nav-icon fal fa-plus-circle"></i>
                         <p>
                             Create Ticket
@@ -63,14 +65,16 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{route('MICT-Tickets.index')}}" class="nav-link {{ Request::routeIs('MICT-Tickets.index') ? 'active' : '' }}">
+                                <a href="{{route('MICT-Tickets.index')}}"
+                                   class="nav-link {{ Request::routeIs('MICT-Tickets.index') ? 'active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>All Tickets</p>
                                     <span class="right">@widget('is_new_counter')</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('my.sort')}}" class="nav-link {{ Request::routeIs('my.sort') ? 'active' : '' }}">
+                                <a href="{{route('my.sort')}}"
+                                   class="nav-link {{ Request::routeIs('my.sort') ? 'active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>My Tickets</p>
                                     <span class="right"> @widget('my_ticket_counter')</span>
@@ -89,13 +93,15 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{route('received.calls')}}" class="nav-link {{ Request::routeIs('received.calls') ? 'active' : '' }}">
+                                <a href="{{route('received.calls')}}"
+                                   class="nav-link {{ Request::routeIs('received.calls') ? 'active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Department received calls</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('census')}}" class="nav-link {{ Request::routeIs('census') ? 'active' : '' }}">
+                                <a href="{{route('census')}}"
+                                   class="nav-link {{ Request::routeIs('census') ? 'active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Cencus of tickets</p>
                                 </a>
@@ -123,7 +129,7 @@
                     ENGINEERING
                 </li>
                 <li class="nav-item">
-                    <a href="/dashboard" class="nav-link">
+                    <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
@@ -131,7 +137,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('Engineering-Tickets.create')}}" class="nav-link">
+                    <a href="{{route('Engineering-Tickets.create')}}" class="nav-link {{ Request::routeIs('Engineering-Tickets.create') ? 'active' : '' }}">
                         <i class="nav-icon fal fa-plus-circle"></i>
                         <p>
                             Create Ticket
@@ -152,7 +158,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('MICT-Tickets.index')}}" class="nav-link">
+                            <a href="{{route('MICT-Tickets.index')}}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>All Tickets</p>
                                 <span class="right">@widget('is_new_counter')</span>
@@ -172,7 +178,8 @@
                     ENDORSEMENTS
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('Endorsement.create')}}" class="nav-link {{ Route::currentRouteName() == 'Endorsement.create' ? 'active' : '' }}">
+                    <a href="{{route('Endorsement.create')}}"
+                       class="nav-link {{ Request::routeIs('Endorsement.create') ? 'active' : '' }}">
                         <i class="nav-icon fal fa-file-plus"></i>
                         <p>
                             Create Endorsement
@@ -180,7 +187,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('Endorsement.index')}}" class="nav-link {{ Route::currentRouteName() == 'Endorsement.index' ? 'active' : '' }}">
+                    <a href="{{route('Endorsement.index')}}"
+                       class="nav-link {{ Request::routeIs('Endorsement.index') ? 'active' : '' }}">
                         <i class="nav-icon far fa-building"></i>
                         <p>
                             Endorsements
@@ -189,7 +197,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{route('Endorsement.sent')}}"
-                       class="nav-link {{ Route::currentRouteName() == 'Endorsement.sent' ? 'active' : '' }}">
+                       class="nav-link {{ Request::routeIs('Endorsement.sent') ? 'active' : '' }}">
                         <i class="nav-icon far fa-building"></i>
                         <p>
                             Sent Endorsements
@@ -202,7 +210,8 @@
                 </li>
                 @if(Auth::user()->department == 'MICT' || Auth::user()->department == 'Administrator' )
                     <li class="nav-item">
-                        <a href="/users" class="nav-link">
+                        <a href="{{route('users.index')}}"
+                           class="nav-link {{ Request::routeIs('users.index') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-users"></i>
                             <p>
                                 Users
@@ -210,7 +219,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/departments" class="nav-link">
+                        <a href="{{route('departments.index')}}"
+                           class="nav-link  {{ Request::routeIs('departments.index') ? 'active' : '' }}">
                             <i class="nav-icon far fa-building"></i>
                             <p>
                                 Departments
@@ -218,16 +228,17 @@
                         </a>
                     </li>
                 @endif
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                        <i class="nav-icon fas fa-power-off"></i>
-                        <p>Logout</p>
+                <li class="nav-item" id="logout">
+                    {{--                    <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();--}}
+                    {{--                                                 document.getElementById('logout-form').submit();">--}}
+                        <a class="nav-link"  @click.prevent="swalLogout">
+                            <i class="nav-icon fas fa-power-off"></i>
+                            <p>Logout</p>
 
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
+                        </a>
+                    {{--                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
+                    {{--                        @csrf--}}
+                    {{--                    </form>--}}
                 </li>
             </ul>
         </nav>
@@ -235,3 +246,35 @@
     </div>
     <!-- /.sidebar -->
 </aside>
+
+<script>
+   const logout = new Vue({
+        el: '#logout',
+        methods: {
+            swalLogout(){
+                Swal.fire({
+                    title: 'Confirm Logout',
+                    text: "Sure you want to logout?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.value) {
+                        Swal.fire({
+                            title: 'Logout Successful',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 2500,
+                            timerProgressBar: true,
+                        }).then(function(){
+                            window.location.href = "{{ route('logout')}}"
+                        });
+                    }
+                });
+            }
+        }
+    });
+</script>

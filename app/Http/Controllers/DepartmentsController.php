@@ -11,8 +11,8 @@ class DepartmentsController extends Controller
     public function __construct()
     {
         $this->middleware('disablepreventback');
-        $this->middleware('auth');
-        $this->middleware('auth.am');
+        $this->middleware('auth')->except('sample');
+        $this->middleware('auth.am')->except('sample');
     }
 
     public function index()
@@ -41,7 +41,6 @@ class DepartmentsController extends Controller
     {
         return view('department.show',compact('department'));
     }
-
     public function update(Request $request,$id)
     {
 //        dd($request->dept_name);
@@ -55,10 +54,14 @@ class DepartmentsController extends Controller
         return redirect('/departments');
 
     }
-
     public function destroy(Department $department)
     {
         $department -> delete();
         return redirect('/departments');
+    }
+
+    public function sample()
+    {
+        return response()->json(Department::all());
     }
 }

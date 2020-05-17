@@ -521,7 +521,6 @@
                     <strong>Copyright &copy; @{{ year }} <a href="https://www.mcuhospital.org/">MCU Hospital</a>.</strong> All
                     rights
                     reserved.
-
                 </div>
             </footer>
         @endsection

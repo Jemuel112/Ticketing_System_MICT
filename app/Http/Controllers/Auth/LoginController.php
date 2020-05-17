@@ -47,8 +47,6 @@ class LoginController extends Controller
     }
     protected function authenticated(Request $request, $user)
     {
-
-        alert()->success('You have been login.', "Welcome ".Auth::user()->fname);
     }
 
 }
