@@ -1,3 +1,6 @@
+{{-- App js--}}
+<script src="{{asset('/js/app.js')}}"></script>
+
 <!-- jQuery -->
 {{--<script src="../../plugins/jquery/jquery.min.js"></script>--}}
 <script src="{{asset("/plugins/jquery/jquery.min.js")}}"></script>
@@ -22,6 +25,8 @@
 <script src="{{asset("/plugins/datatables/jquery.dataTables.js")}}"></script>
 <script src="{{asset("/plugins/datatables-bs4/js/dataTables.bootstrap4.js")}}"></script>
 
+
+
 {{--Date Picker--}}
 <script src="{{asset("/plugins/tempusdominus/moment.min.js")}}"></script>
 <script src="{{asset("/plugins/tempusdominus/tempusdominus-bootstrap-4.min.js")}}"></script>
@@ -29,6 +34,3 @@
 
 <!-- date-range-picker -->
 <script src="{{asset("/plugins/daterangepicker/daterangepicker.js")}}"></script>
-
-
-

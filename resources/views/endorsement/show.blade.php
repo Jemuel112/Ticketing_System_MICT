@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('title', 'Create Endorsement | ')
-@include('layouts.scripts')
 
 @section('content')
 
@@ -152,7 +151,7 @@
                         @php
                             $name = App\User::find($seen->seen_id);
                         @endphp
-                        <a href="#">{{$name->fname}} {{$name->lname}} <span class="mailbox-read-time">({{date('F d, Y   h:i A', strtotime($seen->created_at))}})</span></a>
+                        <a href="#">{{$name->fname}} {{$name->lname}}</a> <span class="mailbox-read-time">({{date('F d, Y   h:i A', strtotime($seen->created_at))}})</span>
                     @empty
                     @endforelse
                 </div>
@@ -161,21 +160,6 @@
             <!-- /.card -->
         </div>
     </div>
-@section('footer')
-    <p></p>
-    {{--    <footer class="main-footer">--}}
-    {{--        <div class="float-right">--}}
-    {{--            <button type="submit" class="btn btn-primary"><i class="far fa-save"></i>--}}
-    {{--                Update--}}
-    {{--            </button>--}}
-
-    {{--        </div>--}}
-    {{--        <strong>Copyright &copy; 2020 <a href="https://www.mcuhospital.org/">MCU Hospital</a>.</strong> All--}}
-    {{--        rights--}}
-    {{--        reserved.--}}
-    {{--        <b>Version</b> 1.0.0--}}
-    {{--    </footer>--}}
-@endsection
 
 
 @endsection

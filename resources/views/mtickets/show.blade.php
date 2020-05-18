@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('title', 'View Ticket | ')
-@include('layouts.scripts')
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
@@ -510,18 +509,27 @@
         </div>
         <!-- /.content -->
         <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            <div class="float-right">
-                <button type="submit" class="btn btn-primary">Submit</button>
 
-            </div>
-            <strong>Copyright &copy; 2020 <a href="https://www.mcuhospital.org/">MCU Hospital</a>.</strong> All
-            rights
-            reserved.
-            <b>Version</b> 1.0.0
-        </footer>
 
     </form>
+@endsection
+
+
+@section('footer')
+    <footer class="main-footer">
+        <div id="ver">
+            <div class="float-right">
+                <b>Version</b> @{{ version }}
+                <button type="submit" style="margin-left: 10px" form="myForm" class="btn btn-primary">Submit</button>
+            </div>
+            <strong>Copyright &copy; @{{ year }} <a href="https://www.mcuhospital.org/">MCU Hospital</a>.</strong> All
+            rights
+            reserved.
+        </div>
+    </footer>
+@endsection
+
+@section('p-script')
     <script>
         $(window).on("beforeunload", function () {
             return "Are you sure? You didn't finish the form!";
@@ -538,8 +546,7 @@
     <script type="text/javascript">
         // $('#reqb').prop('disabled', true);
         // $('#report').prop('disabled', true);
-        $("#datetimepickers").datetimepicker({
-        });
+        $("#datetimepickers").datetimepicker({});
         $("#datetimepickerd").datetimepicker({
             useCurrent: false
         });
@@ -634,10 +641,10 @@
             } else if ($(this).val() == "Resolved") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
-            }  else if($(this).val() == "On-Going") {
+            } else if ($(this).val() == "On-Going") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
-            }else{
+            } else {
                 $("#dact").prop("hidden", true);
                 $("#act").prop("disabled", true);
             }
@@ -675,17 +682,13 @@
             } else if ($('#status').val() == "Resolved") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
-            } else if($(this).val() == "On-Going") {
+            } else if ($(this).val() == "On-Going") {
                 $("#act").prop("disabled", false);
                 $("#dact").prop("hidden", false);
-            }else{
+            } else {
                 $("#dact").prop("hidden", true);
                 $("#act").prop("disabled", true);
             }
         }
     </script>
-
 @endsection
-
-
-@section('footer',"<p></p>")

@@ -9,6 +9,7 @@ use App\mcomments;
 use App\mactions;
 use Carbon\Carbon;
 use DateTime;
+use http\Env;
 use Illuminate\Http\Request;
 use App\Http\Requests\TicketFormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +24,7 @@ class MTicketsController extends Controller
 
         $this->middleware('disablepreventback');
         $this->middleware('auth');
-        $this->middleware('auth.am')->except('index', 'store', 'create', 'show', 'comment','dashboard');
+        $this->middleware('auth.am')->except('index', 'store', 'create', 'show', 'comment','dashboard','myTickets');
         $this->middleware('editvalid')->only('show');
 
 //        $this->middleware('auth.admin')->only('index', 'store', 'allticket');
@@ -31,55 +32,82 @@ class MTicketsController extends Controller
 
     public function myTickets(Request $request)
     {
-        $name = Auth::user()->fname;
-        $tickets = mTicket::where([['assigned_to', 'Like', '%' . "$name" . '%']]);
+
         $title = 'My Tickets';
         $departments = Department::all();
-
-        if (!is_null($request->datefilter)) {
-            $range = explode(' - ', $request->datefilter);
-            if (DateTime::createFromFormat('m/d/Y', $range[0]) == FALSE) {
-                $error = \Illuminate\Validation\ValidationException::withMessages([
-                    'field_name_1' => ['Start Date format is invalid'],
-                ]);
-                throw $error;
+        if (Auth::user()->department == "Administrator" || Auth::user()->department == "MICT") {
+            $name = Auth::user()->fname;
+            $tickets = mTicket::where([['assigned_to', 'Like', '%' . "$name" . '%']]);
+            if (!is_null($request->datefilter)) {
+                $range = explode(' - ', $request->datefilter);
+                if (DateTime::createFromFormat('m/d/Y', $range[0]) == FALSE) {
+                    $error = \Illuminate\Validation\ValidationException::withMessages([
+                        'field_name_1' => ['Start Date format is invalid'],
+                    ]);
+                    throw $error;
+                }
+                if (DateTime::createFromFormat('m/d/Y', $range[1]) == FALSE) {
+                    $error = \Illuminate\Validation\ValidationException::withMessages([
+                        'field_name_1' => ['End Date format is invalid'],
+                    ]);
+                    throw $error;
+                }
+                $range0 = date('Y-m-d', strtotime($range[0]));
+                $range1 = date('Y-m-d', strtotime($range[1]));
+                $tickets = $tickets->whereBetween('created_at', [$range0 . " 00:00:00", $range1 . " 23:59:59"]);
+                $title = 'My Sorted Tickets';
             }
-            if (DateTime::createFromFormat('m/d/Y', $range[1]) == FALSE) {
-                $error = \Illuminate\Validation\ValidationException::withMessages([
-                    'field_name_1' => ['End Date format is invalid'],
+            if (!is_null($request->department)) {
+                $tickets = $tickets->where([
+                    ['request_by', '=', $request->department]
                 ]);
-                throw $error;
+                $title = 'My Sorted Tickets';
             }
-            $range0 = date('Y-m-d', strtotime($range[0]));
-            $range1 = date('Y-m-d', strtotime($range[1]));
-            $tickets = $tickets->whereBetween('created_at', [$range0 . " 00:00:00", $range1 . " 23:59:59"]);
-            $title = 'My Sorted Tickets';
-        }
-        if (!is_null($request->department)) {
-            $tickets = $tickets->where([
-                ['request_by', '=', $request->department]
-            ]);
-            $title = 'My Sorted Tickets';
-        }
-        if (!is_null($request->status)) {
-            $tickets = $tickets->where([
-                ['status', '=', $request->status]
-            ]);
-            $title = 'My Sorted Tickets';
+            if (!is_null($request->status)) {
+                $tickets = $tickets->where([
+                    ['status', '=', $request->status]
+                ]);
+                $title = 'My Sorted Tickets';
+            }
+        }else{
+            $tickets = mTicket::where('request_by','=', Auth::user()->department);
+            if (!is_null($request->datefilter)) {
+                $range = explode(' - ', $request->datefilter);
+                if (DateTime::createFromFormat('m/d/Y', $range[0]) == FALSE) {
+                    $error = \Illuminate\Validation\ValidationException::withMessages([
+                        'field_name_1' => ['Start Date format is invalid'],
+                    ]);
+                    throw $error;
+                }
+                if (DateTime::createFromFormat('m/d/Y', $range[1]) == FALSE) {
+                    $error = \Illuminate\Validation\ValidationException::withMessages([
+                        'field_name_1' => ['End Date format is invalid'],
+                    ]);
+                    throw $error;
+                }
+                $range0 = date('Y-m-d', strtotime($range[0]));
+                $range1 = date('Y-m-d', strtotime($range[1]));
+                $tickets = $tickets->whereBetween('created_at', [$range0 . " 00:00:00", $range1 . " 23:59:59"]);
+                $title = 'My Sorted Tickets';
+            }
+            if (!is_null($request->status)) {
+                $tickets = $tickets->where([
+                    ['status', '=', $request->status]
+                ]);
+                $title = 'My Sorted Tickets';
+            }
         }
         $tickets = $tickets->orderBy('id', 'DESC')->get();
         $active = $tickets->where('status', 'Active')->count();
         $onGoing = $tickets->where('status', 'On-Going')->count();
         $resolved = $tickets->where('status', 'Resolved')->count();
         $closed = $tickets->where('status', 'Closed')->count();
-//        dd($closed);
 
         return view('mtickets.mytickets', compact('tickets', 'title', 'departments', 'active', 'onGoing', 'resolved', 'closed'));
     }
 
     public function index(Request $request)
     {
-
         $title = 'All Tickets';
         if (Auth::user()->department == "Administrator" || Auth::user()->department == "MICT") {
             $tickets = new mTicket;
@@ -123,8 +151,9 @@ class MTicketsController extends Controller
             $title = 'All Sorted Tickets';
         }
         $tickets = $tickets->orderBy('id', 'DESC')->get();
+//        alert()->info('Post Created', 'Successfully');
 
-        return view('mtickets.index', compact('tickets', 'title', 'departments'));
+        return view('mtickets.index', compact('tickets', 'title', 'departments'))->with('success','test');
     }
 
     public function create()
@@ -138,6 +167,7 @@ class MTicketsController extends Controller
                 ['department', '=', 'Administrator']
             ])
             ->get();
+
         return view('mtickets.create', compact('departments', 'micts'));
     }
 
@@ -369,6 +399,10 @@ class MTicketsController extends Controller
         $ticket->recommendation = $request->recommendation;
 
         $ticket->save();
+//        alert()->success('SuccessAlert','Lorem ipsum dolor sit amet.');
+//        alert()->success('SuccessAlert','Lorem ipsum dolor sit amet.');
+//        alert()->success('Post Created', '<strong>Successfully</strong>')->toHtml();
+        // example:
         return redirect('/MICT-Tickets');
 
     }

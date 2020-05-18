@@ -42,8 +42,8 @@
                                     <div class="row">
                                         <div class="form-group col-md-5">
                                             <label for="to">To</label>
-{{--                                            <input name="to" id="to" class="form-control"--}}
-{{--                                                   placeholder="Names to be delivered to">--}}
+                                            {{--                                            <input name="to" id="to" class="form-control"--}}
+                                            {{--                                                   placeholder="Names to be delivered to">--}}
                                             <select class="form-control select2bs4"
                                                     name="assigned_to[]"
                                                     data-placeholder="Assigned to..."
@@ -89,16 +89,17 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="compose-textarea"></label>
-                                        <textarea id="compose-textarea" name="body" class="form-control" style="height: 300px">
+                                        <textarea id="compose-textarea" name="body" class="form-control"
+                                                  style="height: 300px">
 
                                         </textarea>
                                     </div>
                                     <div class="form-group">
-{{--                                        <div class="btn btn-default btn-file">--}}
-{{--                                            <i class="fas fa-paperclip"></i> Attachment--}}
+                                        {{--                                        <div class="btn btn-default btn-file">--}}
+                                        {{--                                            <i class="fas fa-paperclip"></i> Attachment--}}
 
-{{--                                        </div>--}}
-{{--                                        <p class="help-block">Max. 32MB</p>--}}
+                                        {{--                                        </div>--}}
+                                        {{--                                        <p class="help-block">Max. 32MB</p>--}}
                                         @csrf
                                         <input type="file" name="attachment[]" multiple>
 
@@ -126,7 +127,8 @@
             <!-- /.content -->
         </form>
     </div>
-
+@endsection
+@section('p-script')
     <script type="text/javascript">
         $(window).on("beforeunload", function () {
             return "Are you sure? You didn't finish the form!";
@@ -139,7 +141,6 @@
                 return true;
             });
         });
-
 
         $('.select2bs4').select2({
             theme: 'bootstrap4'
