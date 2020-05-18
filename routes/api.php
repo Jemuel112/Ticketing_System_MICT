@@ -14,10 +14,11 @@ use Illuminate\Http\Request;
 */
 
 
-Route::get('/sample', 'DepartmentsController@sample');;
+Route::get('/departments', 'API\DepartmentController@index');
 
 //Route::get('/sample', 'DepartmentsController@sample');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+

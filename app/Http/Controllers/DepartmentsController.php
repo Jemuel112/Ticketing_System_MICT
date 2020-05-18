@@ -59,9 +59,4 @@ class DepartmentsController extends Controller
         $department -> delete();
         return redirect('/departments');
     }
-
-    public function sample()
-    {
-        return response()->json(Department::all());
-    }
 }

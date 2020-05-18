@@ -270,6 +270,7 @@
                             timer: 2500,
                             timerProgressBar: true,
                         }).then(function(){
+                            $(window).off("beforeunload");
                             window.location.href = "{{ route('logout')}}"
                         });
                     }
