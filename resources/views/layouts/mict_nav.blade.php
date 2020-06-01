@@ -175,40 +175,41 @@
                     </ul>
                 </li>
 
-                <li class="nav-header">
-                    ENDORSEMENTS
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('Endorsement.create')}}"
-                       class="nav-link {{ Request::routeIs('Endorsement.create') ? 'active' : '' }}">
-                        <i class="nav-icon fal fa-file-plus"></i>
-                        <p>
-                            Create Endorsement
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('Endorsement.index')}}"
-                       class="nav-link {{ Request::routeIs('Endorsement.index') ? 'active' : '' }}">
-                        <i class="nav-icon far fa-building"></i>
-                        <p>
-                            Endorsements
-                        </p>
-                        <div id="endo" class="d-inline-flex">
-                            <span class="badge badge-danger">@{{ newE }}</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('Endorsement.sent')}}"
-                       class="nav-link {{ Request::routeIs('Endorsement.sent') ? 'active' : '' }}">
-                        <i class="nav-icon far fa-building"></i>
-                        <p>
-                            Sent Endorsements
-                        </p>
-                    </a>
-                </li>
-
+                @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
+                    <li class="nav-header">
+                        ENDORSEMENTS
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('Endorsement.create')}}"
+                           class="nav-link {{ Request::routeIs('Endorsement.create') ? 'active' : '' }}">
+                            <i class="nav-icon fal fa-file-plus"></i>
+                            <p>
+                                Create Endorsement
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('Endorsement.index')}}"
+                           class="nav-link {{ Request::routeIs('Endorsement.index') ? 'active' : '' }}">
+                            <i class="nav-icon far fa-building"></i>
+                            <p>
+                                Endorsements
+                            </p>
+                            <div id="endo" class="d-inline-flex">
+                                <span class="badge badge-danger">@{{ newE }}</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('Endorsement.sent')}}"
+                           class="nav-link {{ Request::routeIs('Endorsement.sent') ? 'active' : '' }}">
+                            <i class="nav-icon far fa-building"></i>
+                            <p>
+                                Sent Endorsements
+                            </p>
+                        </a>
+                    </li>
+                @endif
                 <li class="nav-header">
                     SETTINGS
                 </li>
