@@ -86,5 +86,6 @@ Route::get('/logout', function () {
     return view('auth.login');
 });
 
+Route::view('/testing', 'welcome');
 
 

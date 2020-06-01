@@ -1,5 +1,5 @@
 {{-- App js--}}
-<script src="{{asset('/js/app.js')}}"></script>
+<script src="{{asset('js/app.js')}}"></script>
 
 <!-- jQuery -->
 {{--<script src="../../plugins/jquery/jquery.min.js"></script>--}}

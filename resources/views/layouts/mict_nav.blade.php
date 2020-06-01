@@ -137,7 +137,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('Engineering-Tickets.create')}}" class="nav-link {{ Request::routeIs('Engineering-Tickets.create') ? 'active' : '' }}">
+                    <a href="{{route('Engineering-Tickets.create')}}"
+                       class="nav-link {{ Request::routeIs('Engineering-Tickets.create') ? 'active' : '' }}">
                         <i class="nav-icon fal fa-plus-circle"></i>
                         <p>
                             Create Ticket
@@ -174,37 +175,41 @@
                     </ul>
                 </li>
 
-                <li class="nav-header">
-                    ENDORSEMENTS
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('Endorsement.create')}}"
-                       class="nav-link {{ Request::routeIs('Endorsement.create') ? 'active' : '' }}">
-                        <i class="nav-icon fal fa-file-plus"></i>
-                        <p>
-                            Create Endorsement
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('Endorsement.index')}}"
-                       class="nav-link {{ Request::routeIs('Endorsement.index') ? 'active' : '' }}">
-                        <i class="nav-icon far fa-building"></i>
-                        <p>
-                            Endorsements
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('Endorsement.sent')}}"
-                       class="nav-link {{ Request::routeIs('Endorsement.sent') ? 'active' : '' }}">
-                        <i class="nav-icon far fa-building"></i>
-                        <p>
-                            Sent Endorsements
-                        </p>
-                    </a>
-                </li>
-
+                @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
+                    <li class="nav-header">
+                        ENDORSEMENTS
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('Endorsement.create')}}"
+                           class="nav-link {{ Request::routeIs('Endorsement.create') ? 'active' : '' }}">
+                            <i class="nav-icon fal fa-file-plus"></i>
+                            <p>
+                                Create Endorsement
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('Endorsement.index')}}"
+                           class="nav-link {{ Request::routeIs('Endorsement.index') ? 'active' : '' }}">
+                            <i class="nav-icon far fa-building"></i>
+                            <p>
+                                Endorsements
+                            </p>
+                            <div id="endo" class="d-inline-flex">
+                                <span class="badge badge-danger">@{{ newE }}</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('Endorsement.sent')}}"
+                           class="nav-link {{ Request::routeIs('Endorsement.sent') ? 'active' : '' }}">
+                            <i class="nav-icon far fa-building"></i>
+                            <p>
+                                Sent Endorsements
+                            </p>
+                        </a>
+                    </li>
+                @endif
                 <li class="nav-header">
                     SETTINGS
                 </li>
@@ -228,14 +233,15 @@
                         </a>
                     </li>
                 @endif
-                <li class="nav-item" id="logout">
+                <li class="nav-item" id="logout" style="cursor: pointer">
                     {{--                    <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();--}}
                     {{--                                                 document.getElementById('logout-form').submit();">--}}
-                        <a class="nav-link"  @click.prevent="swalLogout">
-                            <i class="nav-icon fas fa-power-off"></i>
-                            <p>Logout</p>
+                    {{--                    <div id="logout"></div>--}}
+                    <a class="nav-link" @click.prevent="swalLogout">
+                        <i class="nav-icon fas fa-power-off"></i>
+                        <p>Logout</p>
 
-                        </a>
+                    </a>
                     {{--                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
                     {{--                        @csrf--}}
                     {{--                    </form>--}}
@@ -246,36 +252,3 @@
     </div>
     <!-- /.sidebar -->
 </aside>
-
-<script>
-   const logout = new Vue({
-        el: '#logout',
-        methods: {
-            swalLogout(){
-                Swal.fire({
-                    title: 'Confirm Logout',
-                    text: "Sure you want to logout?",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes',
-                    reverseButtons: true
-                }).then((result) => {
-                    if (result.value) {
-                        Swal.fire({
-                            title: 'Logout Successful',
-                            icon: 'success',
-                            showConfirmButton: false,
-                            timer: 2500,
-                            timerProgressBar: true,
-                        }).then(function(){
-                            $(window).off("beforeunload");
-                            window.location.href = "{{ route('logout')}}"
-                        });
-                    }
-                });
-            }
-        }
-    });
-</script>

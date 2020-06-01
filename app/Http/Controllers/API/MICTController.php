@@ -3,14 +3,17 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\mTicket;
 use Illuminate\Http\Request;
-use App\Department;
+use Illuminate\Support\Facades\Auth;
 
-class DepartmentController extends Controller
+class MICTController extends Controller
 {
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware('auth:api');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,10 +21,7 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        // dd('sample');
-        // return response()->json(Department::all());
-        return Department::all();
-
+        //
     }
 
     /**
@@ -67,5 +67,25 @@ class DepartmentController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function ticketCounter()
+    {
+        $new = mTicket::where('is_new',True)->count();
+        $myActive = mTicket::where([['assigned_to', 'Like', '%' . Auth::user()->fname . '%']])->where([['status', '=', 'Active']])->count();
+        return [
+            'new' => $new,
+            'active' => $myActive,
+        ];
+
+    }
+
+    public function logout()
+    {
+        auth()->user()->tokens->each(function ($token){
+            $token->delete();
+        });
+
+        return response()->json('Logged out successful', 200);
     }
 }
