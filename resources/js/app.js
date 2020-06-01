@@ -49,7 +49,10 @@ Vue.component(
     require('./components/passport/PersonalAccessTokens.vue').default
 );
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('my-button', require('./components/ExampleComponent.vue').default);
+Vue.component('sound-notification', require('./components/SoundNotification.vue').default);
+Vue.component('mtickets-counter', require('./components/MTicketsCounter.vue').default);
+
 
 
 
@@ -59,6 +62,9 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 //
-// const app = new Vue({
-//     el: '#app',
-// });
+const app = new Vue({
+    el: '#app',
+});
+
+
+

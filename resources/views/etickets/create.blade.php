@@ -44,15 +44,15 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-3 form-group">
                             <label>Full Name</label>
-                            <input class="form-control" type="text" name="fullname">
+                            <input v-model="name" class="form-control" type="text" name="name">
                         </div>
                         <div class="col-lg-3 col-md-3 form-group">
                             <label for="">Department</label>
-                            <select2 id="dept" v-model="dept" class="form-control"
-                                     style="width: 100%;">
+                            <select id="dept" v-model="dept" class="form-control"
+                                     style="width: 100%;" >
                                 <option value=""></option>
                                 <option v-for="dept in departments" v-bind:value="dept.id">@{{dept.dept_name}}</option>
-                            </select2>
+                            </select>
                         </div>
                         <div class="col-lg-3 col-md-3 form-group">
                             <label for="">Quantity</label>
@@ -65,13 +65,29 @@
 
                         <div class="col-lg-3 col-md-3 form-group">
                             <label for="">Service Type</label>
-                            <select2 id="service" class="form-control" style="width: 100%;">
+                            <select id="service" class="form-control" style="width: 100%;">
                                 <option value=""></option>
-                            </select2>
+                                <option value="1">Check-up</option>
+                                <option value="2">Fabrication</option>
+                                <option value="3">Installation</option>
+                                <option value="4">Preventive Maintenance</option>
+                                <option value="5">Repainting</option>
+                                <option value="6">Repair</option>
+                                <option value="7">Replacement</option>
+                            </select>
                         </div>
                         <div class="col-lg-3 col-md-3 form-group">
                             <label for="">Section</label>
-                            <select2 id="section" class="form-control" style="width: 100%;"></select2>
+                            <select id="section" class="form-control" style="width: 100%;">
+                                <option value=""></option>
+                                <option value="1">Carpentry</option>
+                                <option value="2">Electrical</option>
+                                <option value="3">Fab & Painting</option>
+                                <option value="4">General Equipment</option>
+                                <option value="5">Medical</option>
+                                <option value="6">Plumbing</option>
+                                <option value="7">Welding</option>
+                            </select>
                         </div>
                         <div class="col-lg-3 col-md-3 form-group">
                             <label for="">Technician</label>
@@ -79,7 +95,12 @@
                         </div>
                         <div class="col-lg-3 col-md-3 form-group">
                             <label for="">Status</label>
-                            <select2 id="status" class="form-control" style="width: 100%;"></select2>
+                            <select id="status" class="form-control" style="width: 100%;">
+                                <option value=""></option>
+                                <option value="1">Active</option>
+                                <option value="2">Hold</option>
+                                <option value="3">Finish</option>
+                            </select>
                         </div>
                         <div class="col-lg-4 col-md-4 form-group">
                             <label>Recieved Date</label>
@@ -136,13 +157,9 @@
                 </div>
                 <!-- /.card-body -->
             </div>
+
         </section>
     </div>
-    <script type="text/x-template" id="select2-template">
-        <select>
-            <slot></slot>
-        </select>
-    </script>
     <!-- /.content -->
     <!-- /.content-wrapper -->
 
@@ -171,41 +188,22 @@
 
 @section('p-script')
     <script>
-        Vue.component('select2', {
-            props: ['options', 'value'],
-            template: '#select2-template',
-            mounted: function () {
-                var vm = this
-                $(this.$el)
-                    .val(this.value)
-                    // init select2
-                    .select2({ theme: 'bootstrap4', data: this.options })
-                    // emit event on change.
-                    .on('change', function () {
-                        vm.$emit('input', this.value)
-                    })
-            },
-            watch: {
-                value: function (value) {
-                    // update value
-                    $(this.$el).val(value)
-                },
-                options: function (options) {
-                    // update options
-                    $(this.$el).select2({ data: options })
-                }
-            },
-            destroyed: function () {
-                $(this.$el).off().select2('destroy')
-            }
-        })
-
         const myForm = new Vue({
             el: '#myForm',
             data: {
                 title: 'Create Ticket for Engineering',
                 departments: {},
+                name:null,
                 dept: null,
+                qty:'',
+                equipment:'',
+                service:'',
+                section:'',
+                tech:'',
+                status:'',
+                rDate:'',
+                sDate:'',
+                dDate:'',
                 detailsBox: '',
                 remarksBox: '',
             },
@@ -222,43 +220,34 @@
                             console.log(error)
                         })
                 },
-                onChange(event) {
-                    // alert("Change");
-                    console.log(event.target.value)
-                }
             },
-        })
-    </script>
-    <script>
-        // $('select').select2({
-        //     theme: 'bootstrap4'
-        // });
-        $selectElement = $('#dept').select2({
-            theme: 'bootstrap4',
-            placeholder: "Select...",
-            allowClear: true
-        });
-        $("#datetimepicker1").datetimepicker({
-            icons: {
-                time: "far fa-clock"
-            }
-        });
-        $("#datetimepicker2").datetimepicker({
-            icons: {
-                time: "far fa-clock"
-            }
-        });
-        $("#datetimepicker3").datetimepicker({
-            useCurrent: false,
-            icons: {
-                time: "far fa-clock"
-            }
-        });
-        $("#datetimepicker2").on("change.datetimepicker", function (e) {
-            $('#datetimepicker3').datetimepicker('minDate', e.date);
-        });
-        $("#datetimepicker3").on("change.datetimepicker", function (e) {
-            $('#datetimepicker2').datetimepicker('maxDate', e.date);
         });
     </script>
+{{--    <script>--}}
+{{--        // $('select').select2({--}}
+{{--        //     theme: 'bootstrap4'--}}
+{{--        // });--}}
+{{--        $("#datetimepicker1").datetimepicker({--}}
+{{--            icons: {--}}
+{{--                time: "far fa-clock"--}}
+{{--            }--}}
+{{--        });--}}
+{{--        $("#datetimepicker2").datetimepicker({--}}
+{{--            icons: {--}}
+{{--                time: "far fa-clock"--}}
+{{--            }--}}
+{{--        });--}}
+{{--        $("#datetimepicker3").datetimepicker({--}}
+{{--            useCurrent: false,--}}
+{{--            icons: {--}}
+{{--                time: "far fa-clock"--}}
+{{--            }--}}
+{{--        });--}}
+{{--        $("#datetimepicker2").on("change.datetimepicker", function (e) {--}}
+{{--            $('#datetimepicker3').datetimepicker('minDate', e.date);--}}
+{{--        });--}}
+{{--        $("#datetimepicker3").on("change.datetimepicker", function (e) {--}}
+{{--            $('#datetimepicker2').datetimepicker('maxDate', e.date);--}}
+{{--        });--}}
+{{--    </script>--}}
 @endsection

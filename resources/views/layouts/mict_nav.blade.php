@@ -228,10 +228,11 @@
                         </a>
                     </li>
                 @endif
-                <li class="nav-item" id="logout">
+                <li class="nav-item" id="logout" style="cursor: pointer">
                     {{--                    <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();--}}
                     {{--                                                 document.getElementById('logout-form').submit();">--}}
-                        <a class="nav-link"  @click.prevent="swalLogout">
+{{--                    <div id="logout"></div>--}}
+                    <a class="nav-link"  @click.prevent="swalLogout">
                             <i class="nav-icon fas fa-power-off"></i>
                             <p>Logout</p>
 
@@ -246,36 +247,3 @@
     </div>
     <!-- /.sidebar -->
 </aside>
-
-<script>
-   const logout = new Vue({
-        el: '#logout',
-        methods: {
-            swalLogout(){
-                Swal.fire({
-                    title: 'Confirm Logout',
-                    text: "Sure you want to logout?",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes',
-                    reverseButtons: true
-                }).then((result) => {
-                    if (result.value) {
-                        Swal.fire({
-                            title: 'Logout Successful',
-                            icon: 'success',
-                            showConfirmButton: false,
-                            timer: 2500,
-                            timerProgressBar: true,
-                        }).then(function(){
-                            $(window).off("beforeunload");
-                            window.location.href = "{{ route('logout')}}"
-                        });
-                    }
-                });
-            }
-        }
-    });
-</script>

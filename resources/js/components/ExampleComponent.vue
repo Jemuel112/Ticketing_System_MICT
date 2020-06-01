@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div>
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <passport-clients></passport-clients>

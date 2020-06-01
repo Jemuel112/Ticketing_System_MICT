@@ -295,6 +295,9 @@ class MTicketsController extends Controller
         if ($request->category == 'Others') {
 
         }
+
+//        event(new MTicket());
+
         return redirect('/MICT-Tickets');
     }
 
@@ -403,6 +406,8 @@ class MTicketsController extends Controller
 //        alert()->success('SuccessAlert','Lorem ipsum dolor sit amet.');
 //        alert()->success('Post Created', '<strong>Successfully</strong>')->toHtml();
         // example:
+        event(new MTicket());
+
         return redirect('/MICT-Tickets');
 
     }
