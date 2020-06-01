@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 Route::get('/departments', 'API\DepartmentController@index');
 Route::get('/mTickets', 'API\MICTController@ticketCounter');
 Route::post('/logout', 'API\MICTController@logout');
-
+Route::get('/endorsements', 'EndorsementController@count');
 
 
 //Route::get('/sample', 'DepartmentsController@sample');

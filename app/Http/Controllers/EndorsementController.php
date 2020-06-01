@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+
 //use phpDocumentor\Reflection\Types\Null_;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
@@ -20,9 +21,10 @@ class EndorsementController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('auth:api')->only('count');
         $this->middleware('auth');
         $this->middleware('disablepreventback')->except('download', 'notifications');
-//        $this->middleware('endorsed')->except('index', 'sent','create','store');
+        $this->middleware('endorsed')->except('index', 'sent', 'create', 'store');
 //        $this->middleware('auth.am')->except('index', 'store', 'create', 'show', 'comment');
     }
 
@@ -48,7 +50,6 @@ class EndorsementController extends Controller
                 }
             }
         } else {
-
             $user = Auth::user()->id;
             $dept = Department::select('id')->where('dept_name', Auth::user()->department)->first();
             $endors = Endorsement::all();
@@ -56,14 +57,14 @@ class EndorsementController extends Controller
             foreach ($endors as $endor) {
                 $assign = explode(', ', $endor->assigned_to_id);
                 $depts = explode(', ', $endor->assigned_dept_id);
-                if ( $user != null && in_array($user, $assign)) {
+                if ($user != null && in_array($user, $assign)) {
                     $endorsements[] = $endor;
                 }
-                if ( $dept != null && in_array($dept->id, $depts)) {
+                if ($dept != null && in_array($dept->id, $depts)) {
                     $endorsements[] = $endor;
                 }
             }
-            if (!is_null($endorsements)){
+            if (!is_null($endorsements)) {
                 $seens = EndorsementSeen::Where('seen_id', $user)->get()->pluck('endorsement_id')->toArray();
                 foreach ($endorsements as $endorsement) {
                     $seen = explode(', ', $endorsement->seen_by);
@@ -198,7 +199,7 @@ class EndorsementController extends Controller
         foreach ($seens as $see) {
             $seen[] = $see->seen_id;
         }
-        if ( $seens->isEmpty() OR ( !(in_array(Auth::user()->id, $seen)) && !($endorse->created_by_id == Auth::user()) )) {
+        if ($seens->isEmpty() or (!(in_array(Auth::user()->id, $seen)) && !($endorse->created_by_id == Auth::user()))) {
             $stamp = new EndorsementSeen();
             $stamp->endorsement_id = $id;
             $stamp->seen_id = Auth::user()->id;
@@ -329,5 +330,40 @@ class EndorsementController extends Controller
 
 
         return $response;
+    }
+
+    public function count()
+    {
+        $user = Auth::user()->id;
+        $dept = Department::select('id')->where('dept_name', Auth::user()->department)->first();
+        $endors = Endorsement::all();
+        $endorsements = null;
+        $read = 0;
+        $unread = 0;
+        foreach ($endors as $endor) {
+            $assign = explode(', ', $endor->assigned_to_id);
+            $depts = explode(', ', $endor->assigned_dept_id);
+            if ($user != null && in_array($user, $assign)) {
+                $endorsements[] = $endor;
+            }
+            if ($dept != null && in_array($dept->id, $depts)) {
+                $endorsements[] = $endor;
+            }
+        }
+        if (!is_null($endorsements)) {
+            $seens = EndorsementSeen::Where('seen_id', $user)->get()->pluck('endorsement_id')->toArray();
+            foreach ($endorsements as $endorsement) {
+                $seen = explode(', ', $endorsement->seen_by);
+                if (in_array($endorsement->id, $seens)) {
+                    $read++;
+                } else {
+                    $unread++;
+                }
+            }
+
+            return [
+                'new' => $unread,
+            ];
+        }
     }
 }

@@ -137,7 +137,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('Engineering-Tickets.create')}}" class="nav-link {{ Request::routeIs('Engineering-Tickets.create') ? 'active' : '' }}">
+                    <a href="{{route('Engineering-Tickets.create')}}"
+                       class="nav-link {{ Request::routeIs('Engineering-Tickets.create') ? 'active' : '' }}">
                         <i class="nav-icon fal fa-plus-circle"></i>
                         <p>
                             Create Ticket
@@ -193,6 +194,9 @@
                         <p>
                             Endorsements
                         </p>
+                        <div id="endo" class="d-inline-flex">
+                            <span class="badge badge-danger">@{{ newE }}</span>
+                        </div>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -231,12 +235,12 @@
                 <li class="nav-item" id="logout" style="cursor: pointer">
                     {{--                    <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();--}}
                     {{--                                                 document.getElementById('logout-form').submit();">--}}
-{{--                    <div id="logout"></div>--}}
-                    <a class="nav-link"  @click.prevent="swalLogout">
-                            <i class="nav-icon fas fa-power-off"></i>
-                            <p>Logout</p>
+                    {{--                    <div id="logout"></div>--}}
+                    <a class="nav-link" @click.prevent="swalLogout">
+                        <i class="nav-icon fas fa-power-off"></i>
+                        <p>Logout</p>
 
-                        </a>
+                    </a>
                     {{--                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
                     {{--                        @csrf--}}
                     {{--                    </form>--}}

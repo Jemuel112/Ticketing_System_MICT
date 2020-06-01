@@ -67,9 +67,29 @@
         },
     });
     new Vue({
+        el: '#endo',
+        data: {
+            newE: '',
+        },
+        mounted() {
+            this.getCount()
+        },
+        methods: {
+            getCount() {
+                axios.get('/api/endorsements')
+                    .then((response) => {
+                        this.newE = response.data.new
+                    })
+                    .catch(function (error) {
+                        console.log(error)
+                    })
+            }
+        },
+    })
+    new Vue({
         el: '#logout',
         methods: {
-            swalLogout(){
+            swalLogout() {
                 Swal.fire({
                     title: 'Confirm Logout',
                     text: "Sure you want to logout?",
@@ -87,7 +107,7 @@
                             showConfirmButton: false,
                             timer: 2500,
                             timerProgressBar: true,
-                        }).then(function(){
+                        }).then(function () {
                             // $(window).preventDefault();
                             $(window).off("beforeunload");
                             window.location.href = "/logout"
