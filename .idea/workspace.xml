@@ -2,36 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e46f795c-50de-4821-94e9-0a47af70672e" name="Default Changelist" comment="Innitial Commit">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/laravel-plugin.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Events/MTicket.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/API/MICTController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/MTicketsCounter.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/SoundNotification.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/MCU_MICT.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/MCU_MICT.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/API/DepartmentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/API/DepartmentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MTicketsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MTicketsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/ExampleComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ExampleComponent.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/etickets/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/etickets/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/master.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/mict_nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/mict_nav.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/scripts.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/scripts.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample.bat" beforeDir="false" afterPath="$PROJECT_DIR$/sample.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/EndorsementController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/EndorsementController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/endorsement/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/endorsement/index.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -355,7 +328,7 @@
       <workItem from="1590840979539" duration="21525000" />
       <workItem from="1590942365087" duration="739000" />
       <workItem from="1590978214734" duration="2395000" />
-      <workItem from="1590987359125" duration="3006000" />
+      <workItem from="1590987359125" duration="5146000" />
     </task>
     <servers />
   </component>

@@ -22,7 +22,7 @@ class EndorsementController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('disablepreventback')->except('download', 'notifications');
-        $this->middleware('endorsed')->except('index', 'sent','create','store');
+//        $this->middleware('endorsed')->except('index', 'sent','create','store');
 //        $this->middleware('auth.am')->except('index', 'store', 'create', 'show', 'comment');
     }
 
@@ -56,9 +56,10 @@ class EndorsementController extends Controller
             foreach ($endors as $endor) {
                 $assign = explode(', ', $endor->assigned_to_id);
                 $depts = explode(', ', $endor->assigned_dept_id);
-                if (in_array($user, $assign)) {
+                if ( $user != null && in_array($user, $assign)) {
                     $endorsements[] = $endor;
-                } elseif (in_array($dept->id, $depts)) {
+                }
+                if ( $dept != null && in_array($dept->id, $depts)) {
                     $endorsements[] = $endor;
                 }
             }

@@ -65,12 +65,12 @@
                                         <td>
                                             <a style="margin: 2px"
                                                class="btn btn-sm btn-outline-primary"
-                                               href="{{ route('Endorsement.show', ['id' => $endorsement->id]) }}"
+                                               href="{{ route('Endorsement.show', [$endorsement->id]) }}"
                                             ><i class="fal fa-pencil-alt"></i> View</a>
                                             @if($endorsement->created_by_id == Auth::user()->id)
                                                 <a style="margin: 2px"
                                                    class="btn btn-sm btn-outline-primary"
-                                                   href="{{ route('Endorsement.edit', ['id' => $endorsement->id]) }}"
+                                                   href="{{ route('Endorsement.edit', [$endorsement->id]) }}"
                                                 ><i class="fal fa-pencil-alt"></i> Edit</a>
                                             @endif
                                         </td>
@@ -116,7 +116,7 @@
                                 </tr>
                             @else
                                 @foreach($read as $endorsement)
-                                    <tr onclick="window.location='/Endorsement/{{$endorsement->id}}';">
+                                    <tr >
                                         <td>{{ str_pad($endorsement->id,3,'0',STR_PAD_LEFT) }}</td>
                                         @php
                                             $user = \App\User::find($endorsement->created_by_id)
@@ -128,15 +128,15 @@
                                         @endif
                                         <td> {{ \Illuminate\Support\Str::limit($endorsement->title, 100, $end='...') }}</td>
 
-                                        <td>
+                                        <td onclick="window.location='/Endorsement/{{$endorsement->id}}';">
                                             <a style="margin: 2px"
                                                class="btn btn-sm btn-outline-primary"
-                                               href="{{ route('Endorsement.show', ['id' => $endorsement->id]) }}"
+                                               href="{{ route('Endorsement.show', [$endorsement->id]) }}"
                                             ><i class="fal fa-pencil-alt"></i> View</a>
                                             @if($endorsement->created_by_id == Auth::user()->id)
                                                 <a style="margin: 2px"
                                                    class="btn btn-sm btn-outline-primary"
-                                                   href="{{ route('Endorsement.edit', ['id' => $endorsement->id]) }}"
+                                                   href="{{ route('Endorsement.edit', [$endorsement->id]) }}"
                                                 ><i class="fal fa-pencil-alt"></i> Edit</a>
                                             @endif
                                         </td>
