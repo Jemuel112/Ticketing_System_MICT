@@ -1959,8 +1959,7 @@ __webpack_require__.r(__webpack_exports__);
       isActive: '',
       newMT: '',
       activeMT: '',
-      fname: "",
-      dept: ""
+      user: []
     };
   },
   mounted: function mounted() {
@@ -1968,15 +1967,22 @@ __webpack_require__.r(__webpack_exports__);
     this.getAuthUser();
     this.listen();
   },
+  computed: {
+    fname: function fname() {
+      return this.user.fname;
+    },
+    dept: function dept() {
+      return this.user.department;
+    }
+  },
   methods: {
     getAuthUser: function getAuthUser() {
       var _this = this;
 
       axios.get('/api/user').then(function (response) {
-        _this.fname = response.data.fname;
-        _this.dept = response.data.department;
-      })["catch"](function (error) {
-        console.log(error);
+        _this.user = response.data; // fname: response.data.fname,
+        // dept: response.data.department,
+        // this.dept = response.data.department
       });
     },
     getMTicketCount: function getMTicketCount() {

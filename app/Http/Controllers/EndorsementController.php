@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Department;
 use App\Endorsement;
 use App\EndorsementSeen;
-use App\EndorsmentFiles;
+use App\EndorsementFiles;
 use App\mTicket;
 use App\User;
 use Illuminate\Http\Request;
@@ -148,14 +148,14 @@ class EndorsementController extends Controller
 
         if ($request->attachment) {
             $id = $endorse->id;
-            $directory = "public/endorsment_files/$id";
+            $directory = "public/endorsement_files/$id";
             $files = $request->attachment;
             foreach ($files as $file) {
                 $unique = Str::uuid()->getTimeMidHex();
                 $orig_filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
                 $unique_filename = "[" . $unique . "]" . $orig_filename . "." . $file->getClientOriginalExtension();
                 $file->storeAs($directory, $unique_filename);
-                $end_file = new EndorsmentFiles();
+                $end_file = new EndorsementFiles();
                 $end_file->file_name = pathinfo($unique_filename, PATHINFO_FILENAME) . "." . $file->getClientOriginalExtension();;
                 $end_file->org_file_name = pathinfo($orig_filename, PATHINFO_FILENAME) . "." . $file->getClientOriginalExtension();
                 $end_file->endorse_id = $id;
@@ -176,7 +176,7 @@ class EndorsementController extends Controller
     {
         $endorse = Endorsement::findOrFail($id);
         $user = User::findOrFail($endorse->created_by_id);
-        $files = EndorsmentFiles::where('endorse_id', $id)->get();
+        $files = EndorsementFiles::where('endorse_id', $id)->get();
         if (is_null($endorse->assigned_to_id)) {
             $to = null;
         } else {
@@ -221,7 +221,7 @@ class EndorsementController extends Controller
         $users = User::all();
         $departments = Department::all();
         $tickets = mTicket::all();
-        $files = EndorsmentFiles::where('endorse_id', $id)->get();
+        $files = EndorsementFiles::where('endorse_id', $id)->get();
         return view('endorsement.edit', compact('endorsement', 'users', 'departments', 'tickets', 'files'));
     }
 
@@ -277,7 +277,7 @@ class EndorsementController extends Controller
                 $orig_filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
                 $unique_filename = "[" . $unique . "]" . $orig_filename . "." . $file->getClientOriginalExtension();
                 $file->storeAs($directory, $unique_filename);
-                $end_file = new EndorsmentFiles();
+                $end_file = new EndorsementFiles();
                 $end_file->file_name = pathinfo($unique_filename, PATHINFO_FILENAME) . "." . $file->getClientOriginalExtension();;
                 $end_file->org_file_name = pathinfo($orig_filename, PATHINFO_FILENAME) . "." . $file->getClientOriginalExtension();
                 $end_file->endorse_id = $id;
@@ -301,12 +301,14 @@ class EndorsementController extends Controller
 
     public function download($id)
     {
-        $file = EndorsmentFiles::findOrFail($id);
+        $file = EndorsementFiles::findOrFail($id);
         $d_id = $file->endorse_id;
-        $directory = "storage\\endorsment_files\\$d_id\\$file->file_name";
+//        $directory = "storage\\endorsement_files\\$d_id\\$file->file_name";
+        $directory = "storage\\endorsement_files\\$d_id\\$file->file_name";
 //        $directory = "app\\public\\endorsment_files\\$d_id\\$file->file_name";
         $name = $file->org_file_name;
 //        return Response::download(public_path($directory , $file->org_file_name));
+//        return Storage::disk('public')->download($directory);
         return response()->download($directory, $name);
 
 //        dd($directory);

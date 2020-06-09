@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\EndorsmentFiles;
+use App\EndorsementFiles;
 use Illuminate\Http\Request;
 
-class EndorsmentFilesController extends Controller
+class EndorsementFilesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class EndorsmentFilesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\EndorsmentFiles  $endorsmentFiles
+     * @param  \App\EndorsementFiles  $endorsmentFiles
      * @return \Illuminate\Http\Response
      */
-    public function show(EndorsmentFiles $endorsmentFiles)
+    public function show(EndorsementFiles $endorsmentFiles)
     {
         //
     }
@@ -52,10 +52,10 @@ class EndorsmentFilesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\EndorsmentFiles  $endorsmentFiles
+     * @param  \App\EndorsementFiles  $endorsmentFiles
      * @return \Illuminate\Http\Response
      */
-    public function edit(EndorsmentFiles $endorsmentFiles)
+    public function edit(EndorsementFiles $endorsmentFiles)
     {
         //
     }
@@ -64,10 +64,10 @@ class EndorsmentFilesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\EndorsmentFiles  $endorsmentFiles
+     * @param  \App\EndorsementFiles  $endorsmentFiles
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, EndorsmentFiles $endorsmentFiles)
+    public function update(Request $request, EndorsementFiles $endorsmentFiles)
     {
         //
     }
@@ -75,10 +75,10 @@ class EndorsmentFilesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\EndorsmentFiles  $endorsmentFiles
+     * @param  \App\EndorsementFiles  $endorsmentFiles
      * @return \Illuminate\Http\Response
      */
-    public function destroy(EndorsmentFiles $endorsmentFiles)
+    public function destroy(EndorsementFiles $endorsmentFiles)
     {
         //
     }

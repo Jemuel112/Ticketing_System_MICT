@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\EndorsmentFiles;
+use App\EndorsementFiles;
 use Faker\Generator as Faker;
 
-$factory->define(EndorsmentFiles::class, function (Faker $faker) {
+$factory->define(EndorsementFiles::class, function (Faker $faker) {
     return [
         //
     ];

@@ -21,27 +21,33 @@
                 isActive: '',
                 newMT: '',
                 activeMT: '',
-                fname: "",
-                dept: "",
-            }
-        },
+                user:[],
+
+            }},
 
         mounted() {
             this.getMTicketCount()
             this.getAuthUser()
             this.listen()
+        },
 
+        computed:{
+            fname: function(){
+                return this.user.fname
+            },
+            dept: function () {
+                return this.user.department
+            }
         },
 
         methods: {
             getAuthUser() {
                 axios.get('/api/user')
                     .then((response) => {
-                        this.fname = response.data.fname
-                        this.dept = response.data.department
-                    })
-                    .catch(function (error) {
-                        console.log(error)
+                        this.user = response.data
+                            // fname: response.data.fname,
+                            // dept: response.data.department,
+                        // this.dept = response.data.department
                     })
             },
 

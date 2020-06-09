@@ -25,7 +25,7 @@
             @endif
         </section>
 
-        <form action="{{route("Endorsement.update", ['id' => $endorsement->id ])}}" enctype="multipart/form-data"
+        <form action="{{route("Endorsement.update", [$endorsement->id])}}" enctype="multipart/form-data"
               method="post" id="myForm">
         @csrf
         @method('PUT')

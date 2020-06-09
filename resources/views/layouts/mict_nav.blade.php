@@ -196,7 +196,7 @@
                                 Endorsements
                             </p>
                             <div id="endo" class="d-inline-flex">
-                                <span class="badge badge-danger">@{{ newE }}</span>
+                                <span class="badge badge-danger" v-if="newE > 0 ">@{{ newE }}</span>
                             </div>
                         </a>
                     </li>

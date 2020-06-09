@@ -49,7 +49,7 @@
                             </thead>
                             <tbody>
                             @forelse($endorsements as $endorsement)
-                                <tr onclick="window.location='/Endorsement/{{$endorsement->id}}';">
+                                <tr>
                                     <td>{{ str_pad($endorsement->id,3,'0',STR_PAD_LEFT) }}</td>
                                     @php
                                         $user = \App\User::find($endorsement->created_by_id)
@@ -64,11 +64,11 @@
                                     <td>
                                         <a style="margin: 2px"
                                            class="btn btn-sm btn-outline-primary"
-                                           href="Endorsement/{{$endorsement->id}}"
+                                           href="{{ route('Endorsement.show',['Endorsement' => $endorsement->id]) }}"
                                         ><i class="fal fa-pencil-alt"></i> View</a>
                                         <a style="margin: 2px"
                                            class="btn btn-sm btn-outline-primary"
-                                           href="Endorsement/{{$endorsement->id}}/edit"
+                                           href="{{ route('Endorsement.edit',[ 'Endorsement' => $endorsement->id]) }}"
                                         ><i class="fal fa-pencil-alt"></i> Edit</a>
 
                                     </td>
