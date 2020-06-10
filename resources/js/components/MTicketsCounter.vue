@@ -29,8 +29,14 @@
             this.getMTicketCount()
             this.getAuthUser()
             this.listen()
-        },
 
+        },
+        created() {
+            setInterval(() => {
+                if (this.activeMT) this.log2();
+                if (this.newMT) this.log1();
+            }, 5000)
+        },
         computed:{
             fname: function(){
                 return this.user.fname
@@ -41,6 +47,14 @@
         },
 
         methods: {
+            log1(){
+                console.log('log1')
+            },
+
+            log2(){
+                console.log('log2')
+            },
+
             getAuthUser() {
                 axios.get('/api/user')
                     .then((response) => {

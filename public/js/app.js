@@ -1967,6 +1967,14 @@ __webpack_require__.r(__webpack_exports__);
     this.getAuthUser();
     this.listen();
   },
+  created: function created() {
+    var _this = this;
+
+    setInterval(function () {
+      if (_this.activeMT) _this.log2();
+      if (_this.newMT) _this.log1();
+    }, 5000);
+  },
   computed: {
     fname: function fname() {
       return this.user.fname;
@@ -1976,32 +1984,38 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    log1: function log1() {
+      console.log('log1');
+    },
+    log2: function log2() {
+      console.log('log2');
+    },
     getAuthUser: function getAuthUser() {
-      var _this = this;
+      var _this2 = this;
 
       axios.get('/api/user').then(function (response) {
-        _this.user = response.data; // fname: response.data.fname,
+        _this2.user = response.data; // fname: response.data.fname,
         // dept: response.data.department,
         // this.dept = response.data.department
       });
     },
     getMTicketCount: function getMTicketCount() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.get('/api/mTickets').then(function (response) {
-        _this2.newMT = response.data["new"];
-        _this2.activeMT = response.data.active;
+        _this3.newMT = response.data["new"];
+        _this3.activeMT = response.data.active;
       })["catch"](function (error) {
         console.log(error);
       });
     },
     listen: function listen() {
-      var _this3 = this;
+      var _this4 = this;
 
       Echo.channel('counter').listen('MTicket', function (e) {
         console.log('test');
 
-        _this3.getMTicketCount();
+        _this4.getMTicketCount();
       });
     },
     playNotificationSound: function playNotificationSound() {
@@ -66020,8 +66034,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Github\Ticketing_System_MICT\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Github\Ticketing_System_MICT\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\MICT\Documents\GitHub\Ticketing_System_MICT\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\MICT\Documents\GitHub\Ticketing_System_MICT\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
