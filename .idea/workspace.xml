@@ -2,17 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e46f795c-50de-4821-94e9-0a47af70672e" name="Default Changelist" comment="Innitial Commit">
-      <change beforePath="$PROJECT_DIR$/.idea/MCU_MICT.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/MCU_MICT.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/MTicketsCounter.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/MTicketsCounter.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -349,7 +344,8 @@
       <workItem from="1591534273577" duration="1341000" />
       <workItem from="1591544367565" duration="5138000" />
       <workItem from="1591754640386" duration="2237000" />
-      <workItem from="1591777577226" duration="4473000" />
+      <workItem from="1591777577226" duration="15437000" />
+      <workItem from="1592025558317" duration="591000" />
     </task>
     <servers />
   </component>
@@ -417,10 +413,11 @@
       <screen x="64" y="0" width="1856" height="1080" />
     </state>
     <state x="648" y="250" key="run.anything.popup/64.0.1856.1080@64.0.1856.1080" timestamp="1590757643675" />
-    <state x="722" y="112" width="914" height="1006" key="search.everywhere.popup" timestamp="1591076015940">
-      <screen x="64" y="0" width="1856" height="1080" />
+    <state x="681" y="108" width="946" height="969" key="search.everywhere.popup" timestamp="1591854076516">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="458" y="79" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1583865616007" />
+    <state x="681" y="108" width="946" height="969" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1591854076516" />
     <state x="722" y="112" width="914" height="1006" key="search.everywhere.popup/64.0.1856.1080@64.0.1856.1080" timestamp="1591076015940" />
   </component>
 </project>
