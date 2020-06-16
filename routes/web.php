@@ -88,4 +88,4 @@ Route::get('/logout', function () {
 
 Route::view('/testing', 'welcome');
 
-
+Route::view('/sample', 'layouts/app');

@@ -57,10 +57,10 @@
                             <p>
                                 Tickets
                                 <i class="right fas fa-angle-left"></i>
-                                <span class="right">
-                                    @widget('my_ticket_counter')
-                                    @widget('is_new_counter')
-                                </span>
+{{--                                <span class="right">--}}
+{{--                                    @widget('my_ticket_counter')--}}
+{{--                                    @widget('is_new_counter')--}}
+{{--                                </span>--}}
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
@@ -69,7 +69,7 @@
                                    class="nav-link {{ Request::routeIs('MICT-Tickets.index') ? 'active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>All Tickets</p>
-                                    <span class="right">@widget('is_new_counter')</span>
+{{--                                    <span class="right">@widget('is_new_counter')</span>--}}
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -77,7 +77,7 @@
                                    class="nav-link {{ Request::routeIs('my.sort') ? 'active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>My Tickets</p>
-                                    <span class="right"> @widget('my_ticket_counter')</span>
+{{--                                    <span class="right"> @widget('my_ticket_counter')</span>--}}
                                 </a>
                             </li>
                         </ul>
@@ -151,10 +151,10 @@
                         <p>
                             Tickets
                             <i class="right fas fa-angle-left"></i>
-                            <span class="right">
-                                    @widget('my_ticket_counter')
-                                    @widget('is_new_counter')
-                                </span>
+{{--                            <span class="right">--}}
+{{--                                    @widget('my_ticket_counter')--}}
+{{--                                    @widget('is_new_counter')--}}
+{{--                                </span>--}}
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
@@ -162,14 +162,14 @@
                             <a href="{{route('MICT-Tickets.index')}}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>All Tickets</p>
-                                <span class="right">@widget('is_new_counter')</span>
+{{--                                <span class="right">@widget('is_new_counter')</span>--}}
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{route('my.sort')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>My Tickets</p>
-                                <span class="right"> @widget('my_ticket_counter')</span>
+{{--                                <span class="right"> @widget('my_ticket_counter')</span>--}}
                             </a>
                         </li>
                     </ul>
