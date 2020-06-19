@@ -28,6 +28,7 @@
             return {
                 user: 'sample text',
                 play: false,
+                title: "sample",
             }
         },
         methods: {

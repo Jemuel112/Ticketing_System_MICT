@@ -26,16 +26,13 @@
     },
     "dependencies": {
         "@sweetalert2/theme-bootstrap-4": "^3.1.4",
-<<<<<<< Updated upstream
-        "laravel-echo": "^1.7.0",
-=======
         "howler": "^2.2.0",
         "laravel-echo": "^1.8.0",
->>>>>>> Stashed changes
         "popper.js": "^1.16.1",
         "pusher-js": "^5.1.1",
         "sweetalert2": "^9.15.1",
-        "vee-validate": "^3.3.3",
-        "vue-router": "^3.3.4"
+        "vee-validate": "^3.3.4",
+        "vue-router": "^3.3.4",
+        "@babel/compat-data": "^7.9.0"
     }
 }

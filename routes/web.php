@@ -74,10 +74,10 @@ use Illuminate\Support\Facades\Artisan;
 //    return Artisan::call('websockets:serve');
 //});
 //
-//Auth::routes([
-//    'register' => false,
-//    'reset' => false,
-//]);
+Auth::routes([
+    'register' => false,
+    'reset' => false,
+]);
 
 //Route::get('/home', 'HomeController@index')->name('home');
 //

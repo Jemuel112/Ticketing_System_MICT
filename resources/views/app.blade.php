@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Laravel') }} </title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -22,10 +22,7 @@
 <body>
 <div id="app">
     <p>sample text</p>
-    <p>
-        <router-link to="/foo">Go to Foo</router-link>
-        <router-link to="/bar">Go to Bar</router-link>
-    </p>
+    <router-link :to="{name: 'Test'}">test</router-link>
     <router-view></router-view>
 </div>
 </body>
