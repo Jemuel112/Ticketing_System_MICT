@@ -5,11 +5,12 @@
  */
 
 require('./bootstrap');
-
 window.Vue = require('vue');
+
 
 import Swal from 'sweetalert2'
 window.Swal =  Swal;
+
 const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
@@ -23,6 +24,12 @@ const Toast = Swal.mixin({
 });
 window.Toast = Toast;
 
+<<<<<<< Updated upstream
+=======
+const Howl = require('howler');
+
+
+>>>>>>> Stashed changes
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -62,7 +69,7 @@ Vue.component('mtickets-counter', require('./components/MTicketsCounter.vue').de
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 //
-const app = new Vue({
+new Vue({
     el: '#app',
 });
 
