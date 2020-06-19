@@ -24,12 +24,10 @@ const Toast = Swal.mixin({
 });
 window.Toast = Toast;
 
-<<<<<<< Updated upstream
-=======
 const Howl = require('howler');
 
+import router from './router'
 
->>>>>>> Stashed changes
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -71,6 +69,7 @@ Vue.component('mtickets-counter', require('./components/MTicketsCounter.vue').de
 //
 new Vue({
     el: '#app',
+    router,
 });
 
 

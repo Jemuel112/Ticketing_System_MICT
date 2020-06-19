@@ -22,6 +22,11 @@
 <body>
 <div id="app">
     <p>sample text</p>
+    <p>
+        <router-link to="/foo">Go to Foo</router-link>
+        <router-link to="/bar">Go to Bar</router-link>
+    </p>
+    <router-view></router-view>
 </div>
 </body>
 </html>
