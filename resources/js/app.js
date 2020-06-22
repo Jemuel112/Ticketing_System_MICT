@@ -3,13 +3,13 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+import App from './App.vue'
+import router from './router'
+import Swal from 'sweetalert2'
+
 
 require('./bootstrap');
 window.Vue = require('vue');
-
-
-import Swal from 'sweetalert2'
-window.Swal =  Swal;
 
 const Toast = Swal.mixin({
     toast: true,
@@ -22,11 +22,13 @@ const Toast = Swal.mixin({
         toast.addEventListener('mouseleave', Swal.resumeTimer);
     }
 });
-window.Toast = Toast;
 
 const Howl = require('howler');
 
-import router from './router'
+window.Toast = Toast;
+window.Swal =  Swal;
+
+
 
 /**
  * The following block of code may be used to automatically register your
@@ -60,6 +62,8 @@ Vue.component('mtickets-counter', require('./components/MTicketsCounter.vue').de
 
 
 
+Vue.component('side-bar', require('./components/Menu/SideBar').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -69,6 +73,8 @@ Vue.component('mtickets-counter', require('./components/MTicketsCounter.vue').de
 //
 new Vue({
     el: '#app',
+    components: { App },
+    template: '<App/>',
     router,
 });
 

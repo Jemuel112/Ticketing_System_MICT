@@ -1,5 +1,6 @@
 <!-- Font Awesome -->
 <link rel="stylesheet" href="{{ asset('/plugins/fontawesome-pro/css/all.min.css') }}">
+
 <!-- overlayScrollbars -->
 <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
 

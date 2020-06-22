@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }} </title>
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -19,11 +19,9 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
-<div id="app">
-    <p>sample text</p>
-    <router-link :to="{name: 'Test'}">test</router-link>
-    <router-view></router-view>
-</div>
+<body  class="hold-transition sidebar-mini layout-fixed layout-footer-fixed">
+<noscript><strong>We're sorry but this app doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript>
+<div id="app"></div>
+<!-- built files will be auto injected here -->
 </body>
 </html>
