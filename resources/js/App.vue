@@ -2,10 +2,14 @@
     <div>
         <div class="wrapper">
             <side-bar></side-bar>
-            <div class="content-wrapper">
-                <router-view></router-view>
-            </div>.
+            <transition name="fade" mode="out-in">
+                <div class="content-wrapper">
+                    <section class="content">
 
+                        <router-view></router-view>
+                    </section>
+                </div>
+            </transition>
 
         </div>
     </div>
@@ -16,3 +20,16 @@
         name: 'App',
     }
 </script>
+
+<style>
+    .fade-enter-active {
+        transition: opacity 2s ease;
+    }
+
+    .fade-leave {}
+
+    .fade-leave-active {
+        transition: opacity 2s ease;
+        opacity: 0;
+    }
+</style>
