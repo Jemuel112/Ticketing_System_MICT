@@ -1942,8 +1942,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'App'
+  name: 'App',
+  data: function data() {
+    return {
+      show: true
+    };
+  }
 });
 
 /***/ }),
@@ -9447,7 +9466,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, "\n.fade-enter-active {\n    transition: opacity 2s ease;\n}\n.fade-leave {}\n.fade-leave-active {\n    transition: opacity 2s ease;\n    opacity: 0;\n}\n", ""]);
+exports.push([module.i, "\n.fade-enter-active {\n    transform: translate(100%, 0);\n    /*transition: opacity 1s ease;*/\n    /*opacity: 100;*/\n}\n.fade-leave {\n}\n.fade-leave-active {\n    transform: translate(-100%, 0);\n    /*transition: opacity 1s ease;*/\n    /*opacity: 0;*/\n}\n.right-enter-active, .right-leave-active {\n    transition: 0.3s;\n}\n.right-enter, .right-leave-to {\n    opacity: 0;\n    transform: translate3d(10px, 0, 0);\n}\n.right-move {\n    opacity: 0.5;\n    transition: 0.5s;\n}\n", ""]);
 
 // exports
 
@@ -55878,10 +55897,56 @@ var render = function() {
       [
         _c("side-bar"),
         _vm._v(" "),
-        _c("transition", { attrs: { name: "fade", mode: "out-in" } }, [
-          _c("div", { staticClass: "content-wrapper" }, [
-            _c("section", { staticClass: "content" }, [_c("router-view")], 1)
-          ])
+        _c("div", { staticClass: "content-wrapper" }, [
+          _c(
+            "section",
+            { staticClass: "content" },
+            [
+              _c(
+                "div",
+                [
+                  _c(
+                    "button",
+                    {
+                      on: {
+                        click: function($event) {
+                          _vm.show = !_vm.show
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                        Toggle render\n                    "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "transition",
+                    {
+                      attrs: {
+                        name: "custom-classes-transition",
+                        "enter-active-class": "animated tada",
+                        "leave-active-class": "animated bounceOutRight"
+                      }
+                    },
+                    [_vm.show ? _c("p", [_vm._v("hello")]) : _vm._e()]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "transition",
+                { key: "1", attrs: { name: "right", mode: "out-in" } },
+                [_c("router-view")],
+                1
+              ),
+              _vm._v(" "),
+              _c("p", [_vm._v("Sample Text")])
+            ],
+            1
+          )
         ])
       ],
       1
@@ -73391,6 +73456,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _components_SoundNotification_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/SoundNotification.vue */ "./resources/js/components/SoundNotification.vue");
+/* harmony import */ var _components_ExampleComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue");
+
 
 
 
@@ -73409,6 +73476,10 @@ var routes = [{
   path: '/sample',
   name: "Test",
   component: _components_SoundNotification_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+}, {
+  path: '/',
+  name: "Passport",
+  component: _components_ExampleComponent_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: "history",
@@ -73436,8 +73507,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Github\Ticketing_System_MICT\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Github\Ticketing_System_MICT\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\MICT\Documents\GitHub\Ticketing_System_MICT\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\MICT\Documents\GitHub\Ticketing_System_MICT\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

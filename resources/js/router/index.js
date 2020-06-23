@@ -4,6 +4,8 @@ import VueRouter from 'vue-router'
 
 import Test from '../components/SoundNotification.vue'
 
+import Test2 from '../components/ExampleComponent.vue'
+
 Vue.use(VueRouter)
 
 // export default new Router({
@@ -21,7 +23,14 @@ const routes = [
         path: '/sample',
         name: "Test",
         component: Test
+    },
+    {
+        path: '/',
+        name: "Passport",
+        component: Test2
     }
+
+
 ]
 
 const router = new VueRouter({
