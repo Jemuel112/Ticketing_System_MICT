@@ -7,7 +7,7 @@
                     <!--                    <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">-->
 
                     <div>
-                        <button @click="show = !show">
+                        <button @click="show = !show" class="btn btn-primary">
                             Toggle render
                         </button>
                         <transition

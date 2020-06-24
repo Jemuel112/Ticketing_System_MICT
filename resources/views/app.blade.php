@@ -17,6 +17,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/plugins/fontawesome-pro/css/all.min.css') }}">
+
 </head>
 <body  class="hold-transition sidebar-mini layout-fixed layout-footer-fixed">
 <noscript><strong>We're sorry but this app doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript>

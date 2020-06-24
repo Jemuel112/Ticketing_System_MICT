@@ -55908,6 +55908,7 @@ var render = function() {
                   _c(
                     "button",
                     {
+                      staticClass: "btn btn-primary",
                       on: {
                         click: function($event) {
                           _vm.show = !_vm.show
@@ -56256,7 +56257,7 @@ var render = function() {
           }
         }
       },
-      [_c("span", { staticClass: "fa fa-play-circle-o" }, [_vm._v("Play")])]
+      [_c("span", { staticClass: "fa fa-play-circle-o" }), _vm._v("Play")]
     ),
     _vm._v(" "),
     _c(
@@ -56271,9 +56272,8 @@ var render = function() {
         }
       },
       [
-        _c("span", { staticClass: "fa fa-play-circle-o" }, [
-          _vm._v("notification")
-        ])
+        _c("span", { staticClass: "fa fa-play-circle-o" }),
+        _vm._v("notification")
       ]
     )
   ])

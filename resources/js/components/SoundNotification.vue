@@ -12,10 +12,10 @@
         <p>sample Text</p>
         <button class="btn btn-primary btn-sm"
                 @click.prevent="playSound('http://soundbible.com/mp3/Elevator Ding-SoundBible.com-685385892.mp3')"><span
-            class="fa fa-play-circle-o">Play</span></button>
+            class="fa fa-play-circle-o"></span>Play</button>
         <button class="btn btn-primary btn-sm"
                 @click.prevent="playNotificationSound"><span
-            class="fa fa-play-circle-o">notification</span></button>
+            class="fa fa-play-circle-o"></span>notification</button>
     </div>
 </template>
 
