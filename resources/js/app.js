@@ -62,7 +62,7 @@ Vue.component('mtickets-counter', require('./components/MTicketsCounter.vue').de
 
 
 
-Vue.component('side-bar', require('./components/Menu/SideBar').default);
+Vue.component('side-bar', require('./components/layouts/SideBar').default);
 
 
 /**
