@@ -7,7 +7,6 @@
                     <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
                 </li>
             </ul>
-
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
@@ -55,19 +54,21 @@
                         <li class="nav-item">
                             <router-link to="/"
                                          class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <i class="nav-icon fal fa-plus-circle"></i>
                                 <p>
-                                    sample
+                                    Create Ticket &nbsp
                                 </p>
                             </router-link>
                         </li>
+
                         <li class="nav-item has-treeview">
-                            <div href="#" class="nav-link">
+                            <a class="nav-link">
                                 <i class="nav-icon fal fa-ticket-alt"></i>
                                 <p>
                                     Tickets
+                                    <i class="right fas fa-angle-left"></i>
                                 </p>
-                            </div>
+                            </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <router-link to="/" class="nav-link ">
@@ -76,12 +77,46 @@
                                     </router-link>
                                 </li>
                                 <li class="nav-item">
-                                    <router-link href="{{route('my.sort')}}" class="nav-link">
+                                    <router-link :to="{name: 'Test'}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>My Tickets</p>
                                     </router-link>
                                 </li>
                             </ul>
+                        </li>
+
+                        <li class="nav-item has-treeview">
+                            <a class="nav-link">
+                                <i class="nav-icon far fa-file-invoice"></i>
+                                <p>
+                                    Report
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <router-link to="/" class="nav-link ">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Department recieved calls</p>
+                                    </router-link>
+                                </li>
+                                <li class="nav-item">
+                                    <router-link :to="{name: 'Test'}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Cencus of tickets</p>
+                                    </router-link>
+                                </li>
+                                <li class="nav-item">
+                                    <router-link :to="{name: 'Test'}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>List of pending tickets</p>
+                                    </router-link>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-header">
+                            Endorsements
                         </li>
                     </ul>
                 </nav>
@@ -101,7 +136,7 @@
 </script>
 
 <style scoped>
-    #nav a.router-link-exact-active{
+    #nav a.router-link-exact-active {
         background-color: #007bff;
         color: #ffffff;
     }

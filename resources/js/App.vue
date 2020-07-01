@@ -1,31 +1,15 @@
 <template>
     <div>
-        <div class="wrapper">
+<!--        <div class="wrapper">-->
             <side-bar></side-bar>
             <div class="content-wrapper">
                 <section class="content">
-                    <!--                    <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">-->
-
-                    <div>
-                        <button @click="show = !show" class="btn btn-primary">
-                            Toggle render
-                        </button>
-                        <transition
-                            name="custom-classes-transition"
-                            enter-active-class="animated tada"
-                            leave-active-class="animated bounceOutRight"
-                        >
-                            <p v-if="show">hello</p>
-                        </transition>
-                    </div>
-                    <!--                    <transition enter-active-class="animated fadeInRight " leave-active-class="animated fadeOutRight" mode="out-in">-->
                     <transition name="right" mode="out-in" key="1">
                         <router-view></router-view>
                     </transition>
-                    <p>Sample Text</p>
                 </section>
             </div>
-        </div>
+<!--        </div>-->
     </div>
 </template>
 
@@ -33,14 +17,12 @@
     export default {
         name: 'App',
         data() {
-            return {
-                show: true
-            }
+            return {}
         }
     }
 </script>
 
-<style>
+<style scoped>
     .fade-enter-active {
         transform: translate(100%, 0);
         /*transition: opacity 1s ease;*/

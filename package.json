@@ -21,7 +21,7 @@
         "resolve-url-loader": "^2.3.1",
         "sass": "^1.26.8",
         "sass-loader": "^7.1.0",
-        "vue": "^2.5.17",
+        "vue": "^2.6.11",
         "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {
@@ -29,6 +29,7 @@
         "@sweetalert2/theme-bootstrap-4": "^3.2.0",
         "admin-lte": "^3.0.5",
         "animate.css": "^4.1.0",
+        "bootstrap-vue": "^2.15.0",
         "howler": "^2.2.0",
         "laravel-echo": "^1.8.0",
         "popper.js": "^1.16.1",

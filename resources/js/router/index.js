@@ -6,6 +6,11 @@ import Test from '../components/SoundNotification.vue'
 
 import Test2 from '../components/ExampleComponent.vue'
 
+//MTickets Components
+import MCreateTicket from '../components/MTickets/Create.vue'
+
+
+
 Vue.use(VueRouter)
 
 // export default new Router({
@@ -28,7 +33,10 @@ const routes = [
         path: '/',
         name: "Passport",
         component: Test2
-    }
+    },
+    {
+      path: '/MICT'
+    },
 
 
 ]

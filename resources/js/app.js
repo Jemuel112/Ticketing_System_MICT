@@ -6,11 +6,16 @@
 import App from './App.vue'
 import router from './router'
 import Swal from 'sweetalert2'
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+
 
 
 require('./bootstrap');
 window.Vue = require('vue');
-
+// Install BootstrapVue
+Vue.use(BootstrapVue)
+// Optionally install the BootstrapVue icon components plugin
+Vue.use(IconsPlugin)
 const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
