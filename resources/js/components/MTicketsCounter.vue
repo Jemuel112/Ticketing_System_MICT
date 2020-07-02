@@ -1,6 +1,5 @@
 <template>
     <div>
-        <p>{{fname}}</p>
         <h1 v-if='fname === "Jemuel"'>sample</h1>
         <h2 v-else>you're not Jemuel</h2>
         <h2 v-if='dept === "Administrator"'>you're an Administrator</h2>

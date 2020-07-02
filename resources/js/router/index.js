@@ -4,7 +4,10 @@ import VueRouter from 'vue-router'
 
 import Test from '../components/SoundNotification.vue'
 
-import Test2 from '../components/ExampleComponent.vue'
+import Test2 from '../components/MTicketsCounter'
+
+import Footer from '../components/layouts/Footer.vue'
+import FooterMTickets from "../components/layouts/FooterMTickets.vue"
 
 //MTickets Components
 import MCreateTicket from '../components/MTickets/Create.vue'
@@ -27,12 +30,12 @@ const routes = [
     {
         path: '/sample',
         name: "Test",
-        component: Test
+        components: {content: Test, footer: Footer}
     },
     {
         path: '/',
         name: "Passport",
-        component: Test2
+        components: {content: Test2, footer: FooterMTickets}
     },
     {
       path: '/MICT'

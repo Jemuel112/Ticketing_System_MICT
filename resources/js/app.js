@@ -7,11 +7,14 @@ import App from './App.vue'
 import router from './router'
 import Swal from 'sweetalert2'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import store from "./store"
 
 
-
+// Install Bootstrap Template
 require('./bootstrap');
+// Install Vue
 window.Vue = require('vue');
+
 // Install BootstrapVue
 Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
@@ -81,6 +84,7 @@ new Vue({
     components: { App },
     template: '<App/>',
     router,
+    store,
 });
 
 

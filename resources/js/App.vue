@@ -1,15 +1,19 @@
 <template>
     <div>
-<!--        <div class="wrapper">-->
-            <side-bar></side-bar>
-            <div class="content-wrapper">
-                <section class="content">
-                    <transition name="right" mode="out-in" key="1">
-                        <router-view></router-view>
-                    </transition>
-                </section>
-            </div>
-<!--        </div>-->
+        <!--        <div class="wrapper">-->
+        <side-bar></side-bar>
+        <div class="content-wrapper">
+            <section class="content">
+                <transition name="right" mode="out-in">
+                    <router-view name="content"></router-view>
+                </transition>
+
+            </section>
+        </div>
+        <!--        </div>-->
+        <transition name="right">
+            <router-view name="footer"></router-view>
+        </transition>
     </div>
 </template>
 

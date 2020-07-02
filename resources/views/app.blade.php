@@ -22,7 +22,8 @@
 </head>
 <body  class="hold-transition sidebar-mini layout-fixed layout-footer-fixed">
 <noscript><strong>We're sorry but this app doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript>
-<div id="app"></div>
+<div id="app">
+</div>
 <!-- built files will be auto injected here -->
 </body>
 </html>
