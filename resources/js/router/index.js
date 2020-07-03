@@ -16,16 +16,6 @@ import MCreateTicket from '../components/MTickets/Create.vue'
 
 Vue.use(VueRouter)
 
-// export default new Router({
-//     history: true,
-//     routes:[
-//         {
-//             path: '/sample',
-//             name: 'Test',
-//             component: Test
-//         }
-//     ]
-// })
 const routes = [
     {
         path: '/sample',

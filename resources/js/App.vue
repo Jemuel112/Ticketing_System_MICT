@@ -2,16 +2,15 @@
     <div>
         <!--        <div class="wrapper">-->
         <side-bar></side-bar>
-        <div class="content-wrapper">
-            <section class="content">
+<!--        <div class="content-wrapper">-->
+<!--            <section class="content">-->
                 <transition name="right" mode="out-in">
                     <router-view name="content"></router-view>
                 </transition>
-
-            </section>
-        </div>
+<!--            </section>-->
+<!--        </div>-->
         <!--        </div>-->
-        <transition name="right">
+        <transition name="right" mode="out-in">
             <router-view name="footer"></router-view>
         </transition>
     </div>

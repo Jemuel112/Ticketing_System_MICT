@@ -1,13 +1,16 @@
 <template>
     <div>
-        <h1 v-if='fname === "Jemuel"'>sample</h1>
-        <h2 v-else>you're not Jemuel</h2>
-        <h2 v-if='dept === "Administrator"'>you're an Administrator</h2>
-        <h2 v-else>Not Administrator</h2>
-        <span> <b>New Ticket:</b> {{newMT}}</span>
-        <br>
-        <span> <b>Active Ticket:</b> {{activeMT}}</span>
-        <button @click="playNotificationSound">Check</button>
+        <div class="content-wrapper">
+            <h1 v-if='fname === "Jemuel"'>sample</h1>
+            <h2 v-else>you're not Jemuel</h2>
+            <h2 v-if='dept === "Administrator"'>you're an Administrator</h2>
+            <h2 v-else>Not Administrator</h2>
+            <span> <b>New Ticket:</b> {{newMT}}</span>
+            <br>
+            <span> <b>Active Ticket:</b> {{activeMT}}</span>
+            <button @click="playNotificationSound">Check</button>
+        </div>
+
     </div>
 </template>
 
@@ -22,6 +25,8 @@
                 activeMT: '',
                 fname: "",
                 dept: "",
+                version: "0.1.0 (Beta)",
+                year: "2019 -" + new Date().getFullYear() + " MICT Department",
             }
         },
 
