@@ -71,6 +71,23 @@
             <span class="white--text">&copy; {{ new Date().getFullYear() }}</span>
         </v-footer>
     </v-app>
+
+    <!-- <div> -->
+        <!--        <div class="wrapper">-->
+        <!-- <side-bar></side-bar> -->
+<!--        <div class="content-wrapper">-->
+<!--            <section class="content">-->
+                <!-- <transition name="right" mode="out-in"> -->
+                    <!-- <router-view name="content"></router-view> -->
+                <!-- </transition> -->
+<!--            </section>-->
+<!--        </div>-->
+        <!--        </div>-->
+        <!-- <transition name="right" mode="out-in"> -->
+            <!-- <router-view name="footer"></router-view> -->
+        <!-- </transition> -->
+<!--     </div> -->
+
 </template>
 
 <script>

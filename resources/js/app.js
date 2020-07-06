@@ -6,12 +6,17 @@
 import App from './App.vue'
 import router from './router'
 import Swal from 'sweetalert2'
+
 import Vuetify from "../plugins/vuetify";
 
+import store from "./store"
 
+
+
+// Install Bootstrap Template
 require('./bootstrap');
+// Install Vue
 window.Vue = require('vue');
-
 
 const Toast = Swal.mixin({
     toast: true,
@@ -79,6 +84,7 @@ new Vue({
     components: { App },
     template: '<App/>',
     router,
+    store,
 });
 
 
