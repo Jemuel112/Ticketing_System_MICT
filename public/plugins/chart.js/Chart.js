@@ -1528,7 +1528,7 @@ function getAlpha(string) {
 // generators
 function hexString(rgba, a) {
    var a = (a !== undefined && rgba.length === 3) ? a : rgba[3];
-   return "#" + hexDouble(rgba[0]) 
+   return "#" + hexDouble(rgba[0])
               + hexDouble(rgba[1])
               + hexDouble(rgba[2])
               + (
@@ -7914,7 +7914,7 @@ core_defaults._set('global', {
 });
 
 /**
- * The plugin service singleton
+ * The plugins service singleton
  * @namespace Chart.plugins
  * @since 2.1.0
  */
@@ -7927,15 +7927,15 @@ var core_plugins = {
 
 	/**
 	 * This identifier is used to invalidate the descriptors cache attached to each chart
-	 * when a global plugin is registered or unregistered. In this case, the cache ID is
+	 * when a global plugins is registered or unregistered. In this case, the cache ID is
 	 * incremented and descriptors are regenerated during following API calls.
 	 * @private
 	 */
 	_cacheId: 0,
 
 	/**
-	 * Registers the given plugin(s) if not already registered.
-	 * @param {IPlugin[]|IPlugin} plugins plugin instance(s).
+	 * Registers the given plugins(s) if not already registered.
+	 * @param {IPlugin[]|IPlugin} plugins plugins instance(s).
 	 */
 	register: function(plugins) {
 		var p = this._plugins;
@@ -7949,8 +7949,8 @@ var core_plugins = {
 	},
 
 	/**
-	 * Unregisters the given plugin(s) only if registered.
-	 * @param {IPlugin[]|IPlugin} plugins plugin instance(s).
+	 * Unregisters the given plugins(s) only if registered.
+	 * @param {IPlugin[]|IPlugin} plugins plugins instance(s).
 	 */
 	unregister: function(plugins) {
 		var p = this._plugins;
@@ -7983,8 +7983,8 @@ var core_plugins = {
 	},
 
 	/**
-	 * Returns all registered plugin instances.
-	 * @returns {IPlugin[]} array of plugin objects.
+	 * Returns all registered plugins instances.
+	 * @returns {IPlugin[]} array of plugins objects.
 	 * @since 2.1.5
 	 */
 	getAll: function() {
@@ -7993,10 +7993,10 @@ var core_plugins = {
 
 	/**
 	 * Calls enabled plugins for `chart` on the specified hook and with the given args.
-	 * This method immediately returns as soon as a plugin explicitly returns false. The
+	 * This method immediately returns as soon as a plugins explicitly returns false. The
 	 * returned value can be used, for instance, to interrupt the current action.
 	 * @param {Chart} chart - The chart instance for which plugins should be called.
-	 * @param {string} hook - The name of the plugin method to call (e.g. 'beforeUpdate').
+	 * @param {string} hook - The name of the plugins method to call (e.g. 'beforeUpdate').
 	 * @param {Array} [args] - Extra arguments to apply to the hook call.
 	 * @returns {boolean} false if any of the plugins return false, else returns true.
 	 */
@@ -8023,7 +8023,7 @@ var core_plugins = {
 
 	/**
 	 * Returns descriptors of enabled plugins for the given chart.
-	 * @returns {object[]} [{ plugin, options }]
+	 * @returns {object[]} [{ plugins, options }]
 	 * @private
 	 */
 	descriptors: function(chart) {
@@ -8066,7 +8066,7 @@ var core_plugins = {
 	},
 
 	/**
-	 * Invalidates cache for the given chart: descriptors hold a reference on plugin option,
+	 * Invalidates cache for the given chart: descriptors hold a reference on plugins option,
 	 * but in some cases, this reference can be changed by the user when updating options.
 	 * https://github.com/chartjs/Chart.js/issues/5111#issuecomment-355934167
 	 * @private
@@ -9363,7 +9363,7 @@ helpers$1.extend(Chart.prototype, /** @lends Chart */ {
 	initialize: function() {
 		var me = this;
 
-		// Before init plugin notification
+		// Before init plugins notification
 		core_plugins.notify(me, 'beforeInit');
 
 		helpers$1.retinaScale(me, me.options.devicePixelRatio);
@@ -9377,7 +9377,7 @@ helpers$1.extend(Chart.prototype, /** @lends Chart */ {
 
 		me.initToolTip();
 
-		// After init plugin notification
+		// After init plugins notification
 		core_plugins.notify(me, 'afterInit');
 
 		return me;
@@ -9666,7 +9666,7 @@ helpers$1.extend(Chart.prototype, /** @lends Chart */ {
 	},
 
 	/**
-	 * Updates the chart layout unless a plugin returns `false` to the `beforeLayout`
+	 * Updates the chart layout unless a plugins returns `false` to the `beforeLayout`
 	 * hook, in which case, plugins will not be called on `afterLayout`.
 	 * @private
 	 */
@@ -9705,7 +9705,7 @@ helpers$1.extend(Chart.prototype, /** @lends Chart */ {
 	},
 
 	/**
-	 * Updates all datasets unless a plugin returns `false` to the `beforeDatasetsUpdate`
+	 * Updates all datasets unless a plugins returns `false` to the `beforeDatasetsUpdate`
 	 * hook, in which case, plugins will not be called on `afterDatasetsUpdate`.
 	 * @private
 	 */
@@ -9724,7 +9724,7 @@ helpers$1.extend(Chart.prototype, /** @lends Chart */ {
 	},
 
 	/**
-	 * Updates dataset at index unless a plugin returns `false` to the `beforeDatasetUpdate`
+	 * Updates dataset at index unless a plugins returns `false` to the `beforeDatasetUpdate`
 	 * hook, in which case, plugins will not be called on `afterDatasetUpdate`.
 	 * @private
 	 */
@@ -9817,7 +9817,7 @@ helpers$1.extend(Chart.prototype, /** @lends Chart */ {
 			return;
 		}
 
-		// Because of plugin hooks (before/afterDatasetsDraw), datasets can't
+		// Because of plugins hooks (before/afterDatasetsDraw), datasets can't
 		// currently be part of layers. Instead, we draw
 		// layers <= 0 before(default, backward compat), and the rest after
 		layers = me._layers;
@@ -9880,7 +9880,7 @@ helpers$1.extend(Chart.prototype, /** @lends Chart */ {
 	},
 
 	/**
-	 * Draws all datasets unless a plugin returns `false` to the `beforeDatasetsDraw`
+	 * Draws all datasets unless a plugins returns `false` to the `beforeDatasetsDraw`
 	 * hook, in which case, plugins will not be called on `afterDatasetsDraw`.
 	 * @private
 	 */
@@ -9901,7 +9901,7 @@ helpers$1.extend(Chart.prototype, /** @lends Chart */ {
 	},
 
 	/**
-	 * Draws dataset at index unless a plugin returns `false` to the `beforeDatasetDraw`
+	 * Draws dataset at index unless a plugins returns `false` to the `beforeDatasetDraw`
 	 * hook, in which case, plugins will not be called on `afterDatasetDraw`.
 	 * @private
 	 */
@@ -9923,7 +9923,7 @@ helpers$1.extend(Chart.prototype, /** @lends Chart */ {
 	},
 
 	/**
-	 * Draws tooltip unless a plugin returns `false` to the `beforeTooltipDraw`
+	 * Draws tooltip unless a plugins returns `false` to the `beforeTooltipDraw`
 	 * hook, in which case, plugins will not be called on `afterTooltipDraw`.
 	 * @private
 	 */
@@ -15707,9 +15707,9 @@ var plugin_legend = {
 	id: 'legend',
 
 	/**
-	 * Backward compatibility: since 2.1.5, the legend is registered as a plugin, making
+	 * Backward compatibility: since 2.1.5, the legend is registered as a plugins, making
 	 * Chart.Legend obsolete. To avoid a breaking change, we export the Legend as part of
-	 * the plugin, which one will be re-exposed in the chart.js file.
+	 * the plugins, which one will be re-exposed in the chart.js file.
 	 * https://github.com/chartjs/Chart.js/pull/2640
 	 * @private
 	 */
@@ -15951,9 +15951,9 @@ var plugin_title = {
 	id: 'title',
 
 	/**
-	 * Backward compatibility: since 2.1.5, the title is registered as a plugin, making
+	 * Backward compatibility: since 2.1.5, the title is registered as a plugins, making
 	 * Chart.Title obsolete. To avoid a breaking change, we export the Title as part of
-	 * the plugin, which one will be re-exposed in the chart.js file.
+	 * the plugins, which one will be re-exposed in the chart.js file.
 	 * https://github.com/chartjs/Chart.js/pull/2640
 	 * @private
 	 */

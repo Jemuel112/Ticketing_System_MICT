@@ -1,4 +1,4 @@
-/* Flot plugin for plotting error bars.
+/* Flot plugins for plotting error bars.
 
 Copyright (c) 2007-2013 IOLA and Ole Laursen.
 Licensed under the MIT license.
@@ -8,12 +8,12 @@ properties in a plot.
 
 * Created by Rui Pereira  -  rui (dot) pereira (at) gmail (dot) com
 
-This plugin allows you to plot error-bars over points. Set "errorbars" inside
+This plugins allows you to plot error-bars over points. Set "errorbars" inside
 the points series to the axis name over which there will be error values in
 your data array (*even* if you do not intend to plot them later, by setting
 "show: null" on xerr/yerr).
 
-The plugin supports these options:
+The plugins supports these options:
 
 	series: {
 		points: {

@@ -1,5 +1,5 @@
 /*! =======================================================
-                      VERSION  10.6.2              
+                      VERSION  10.6.2
 ========================================================= */
 "use strict";
 
@@ -106,7 +106,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 			// -------------------------- addOptionMethod -------------------------- //
 
 			/**
-    * adds option method -> $().plugin('option', {...})
+    * adds option method -> $().plugins('option', {...})
     * @param {Function} PluginClass - constructor class
     */
 			function addOptionMethod(PluginClass) {
@@ -125,7 +125,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				};
 			}
 
-			// -------------------------- plugin bridge -------------------------- //
+			// -------------------------- plugins bridge -------------------------- //
 
 			// helper function for logging errors
 			// $.error breaks jQuery chaining
@@ -134,15 +134,15 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 			};
 
 			/**
-    * jQuery plugin bridge, access methods like $elem.plugin('method')
-    * @param {String} namespace - plugin name
+    * jQuery plugins bridge, access methods like $elem.plugins('method')
+    * @param {String} namespace - plugins name
     * @param {Function} PluginClass - constructor class
     */
 			function bridge(namespace, PluginClass) {
 				// add to jQuery fn namespace
 				$.fn[namespace] = function (options) {
 					if (typeof options === 'string') {
-						// call plugin method when first argument is a string
+						// call plugins method when first argument is a string
 						// get arguments for method
 						var args = slice.call(arguments, 1);
 
@@ -194,9 +194,9 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 			// -------------------------- bridget -------------------------- //
 
 			/**
-    * converts a Prototypical class into a proper jQuery plugin
+    * converts a Prototypical class into a proper jQuery plugins
     *   the class must have a ._init method
-    * @param {String} namespace - plugin name, used in $().pluginName
+    * @param {String} namespace - plugins name, used in $().pluginName
     * @param {Function} PluginClass - constructor class
     */
 			$.bridget = function (namespace, PluginClass) {
@@ -838,7 +838,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 		/*************************************************
   				INSTANCE PROPERTIES/METHODS
   	- Any methods bound to the prototype are considered
-  part of the plugin's `public` interface
+  part of the plugins's `public` interface
   	**************************************************/
 		Slider.prototype = {
 			_init: function _init() {}, // NOTE: Must exist to support bridget

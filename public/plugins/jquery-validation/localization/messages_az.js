@@ -9,7 +9,7 @@
 }(function( $ ) {
 
 /*
- * Translated default messages for the jQuery validation plugin.
+ * Translated default messages for the jQuery validation plugins.
  * Locale: Az (Azeri; azərbaycan dili)
  */
 $.extend( $.validator.messages, {

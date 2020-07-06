@@ -1,6 +1,6 @@
 /*!
  *
- * Jquery Mapael - Dynamic maps jQuery plugin (based on raphael.js)
+ * Jquery Mapael - Dynamic maps jQuery plugins (based on raphael.js)
  * Requires Mapael
  *
  * Map of World by country

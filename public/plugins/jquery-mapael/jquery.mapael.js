@@ -1,6 +1,6 @@
 /*!
  *
- * Jquery Mapael - Dynamic maps jQuery plugin (based on raphael.js)
+ * Jquery Mapael - Dynamic maps jQuery plugins (based on raphael.js)
  * Requires jQuery, raphael.js and jquery.mousewheel
  *
  * Version: 2.2.0
@@ -26,7 +26,7 @@
 
     "use strict";
 
-    // The plugin name (used on several places)
+    // The plugins name (used on several places)
     var pluginName = "mapael";
 
     // Version number of jQuery Mapael. See http://semver.org/ for more information.
@@ -35,7 +35,7 @@
     /*
      * Mapael constructor
      * Init instance vars and call init()
-     * @param container the DOM element on which to apply the plugin
+     * @param container the DOM element on which to apply the plugins
      * @param options the complete options to use
      */
     var Mapael = function (container, options) {
@@ -139,7 +139,7 @@
         resizeFilteringTO: 150,
 
         /*
-         * Initialize the plugin
+         * Initialize the plugins
          * Called by the constructor
          */
         init: function () {
@@ -179,7 +179,7 @@
                 throw new Error("Can't get boundary box for text (is your container hidden? See #135)");
             }
 
-            // add plugin class name on element
+            // add plugins class name on element
             self.$container.addClass(pluginName);
 
             if (self.options.map.tooltip.css) self.$tooltip.css(self.options.map.tooltip.css);

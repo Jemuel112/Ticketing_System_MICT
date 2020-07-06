@@ -1,19 +1,19 @@
-/* Flot plugin for rendering pie charts.
+/* Flot plugins for rendering pie charts.
 
 Copyright (c) 2007-2013 IOLA and Ole Laursen.
 Licensed under the MIT license.
 
-The plugin assumes that each series has a single data value, and that each
+The plugins assumes that each series has a single data value, and that each
 value is a positive integer or zero.  Negative numbers don't make sense for a
 pie chart, and have unpredictable results.  The values do NOT need to be
-passed in as percentages; the plugin will calculate the total and per-slice
+passed in as percentages; the plugins will calculate the total and per-slice
 percentages internally.
 
 * Created by Brian Medendorp
 
 * Updated with contributions from btburnett3, Anthony Aragues and Xavi Ivars
 
-The plugin supports these options:
+The plugins supports these options:
 
 	series: {
 		pie: {
@@ -42,7 +42,7 @@ The plugin supports these options:
 			},
 			combine: {
 				threshold: 0-1 for the percentage value at which to combine slices (if they're too small)
-				color: any hexidecimal color value (other formats may or may not work, so best to stick with something like '#CCC'), if null, the plugin will automatically use the color of the first slice to be combined
+				color: any hexidecimal color value (other formats may or may not work, so best to stick with something like '#CCC'), if null, the plugins will automatically use the color of the first slice to be combined
 				label: any text value of what the combined slice should be labeled
 			}
 			highlight: {
@@ -80,7 +80,7 @@ More detail and specific examples can be found in the included HTML file.
 
 		var highlights = [];
 
-		// add hook to determine if pie plugin in enabled, and then perform necessary operations
+		// add hook to determine if pie plugins in enabled, and then perform necessary operations
 
 		plot.hooks.processOptions.push(function(plot, options) {
 			if (options.series.pie.show) {
@@ -263,11 +263,11 @@ More detail and specific examples can be found in the included HTML file.
 
 			// When combining smaller slices into an 'other' slice, we need to
 			// add a new series.  Since Flot gives plugins no way to modify the
-			// list of series, the pie plugin uses a hack where the first call
+			// list of series, the pie plugins uses a hack where the first call
 			// to processDatapoints results in a call to setData with the new
 			// list of series, then subsequent processDatapoints do nothing.
 
-			// The plugin-global 'processed' flag is used to control this hack;
+			// The plugins-global 'processed' flag is used to control this hack;
 			// it starts out false, and is set to true after the first call to
 			// processDatapoints.
 
@@ -757,7 +757,7 @@ More detail and specific examples can be found in the included HTML file.
 				octx.fill();
 			}
 		}
-	} // end init (plugin body)
+	} // end init (plugins body)
 
 	// define pie specific options and their default values
 

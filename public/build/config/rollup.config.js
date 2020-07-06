@@ -1,4 +1,4 @@
-import babel from 'rollup-plugin-babel'
+import babel from 'rollup-plugins-babel'
 
 const pkg  = require('../../package')
 const year = new Date().getFullYear()

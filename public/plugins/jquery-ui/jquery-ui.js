@@ -79,7 +79,7 @@ $.widget = function( name, base, prototype ) {
 		prototype = $.extend.apply( null, [ {} ].concat( prototype ) );
 	}
 
-	// Create selector for plugin
+	// Create selector for plugins
 	$.expr[ ":" ][ fullName.toLowerCase() ] = function( elem ) {
 		return !!$.data( elem, fullName );
 	};
@@ -9474,7 +9474,7 @@ var widgetsMouse = $.widget( "ui.mouse", {
 		return this.mouseDelayMet;
 	},
 
-	// These are placeholder methods, to be overriden by extending plugin
+	// These are placeholder methods, to be overriden by extending plugins
 	_mouseStart: function( /* event */ ) {},
 	_mouseDrag: function( /* event */ ) {},
 	_mouseStop: function( /* event */ ) {},
@@ -9484,7 +9484,7 @@ var widgetsMouse = $.widget( "ui.mouse", {
 
 
 
-// $.ui.plugin is deprecated. Use $.widget() extensions instead.
+// $.ui.plugins is deprecated. Use $.widget() extensions instead.
 var plugin = $.ui.plugin = {
 	add: function( module, option, set ) {
 		var i,
@@ -12587,7 +12587,7 @@ $.widget( "ui.dialog", {
 
 	_position: function() {
 
-		// Need to show the dialog to get the actual offset in the position plugin
+		// Need to show the dialog to get the actual offset in the position plugins
 		var isVisible = this.uiDialog.is( ":visible" );
 		if ( !isVisible ) {
 			this.uiDialog.show();

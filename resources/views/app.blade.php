@@ -17,10 +17,11 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/plugins/fontawesome-pro/css/all.min.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
 
 </head>
-<body  class="hold-transition sidebar-mini layout-fixed layout-footer-fixed">
+<body>
 <noscript><strong>We're sorry but this app doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript>
 <div id="app"></div>
 <!-- built files will be auto injected here -->

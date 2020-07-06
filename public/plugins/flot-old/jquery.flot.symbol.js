@@ -1,4 +1,4 @@
-/* Flot plugin that adds some extra symbols for plotting points.
+/* Flot plugins that adds some extra symbols for plotting points.
 
 Copyright (c) 2007-2013 IOLA and Ole Laursen.
 Licensed under the MIT license.
@@ -58,11 +58,11 @@ The symbols are accessed as strings through the standard symbol options:
         if (handlers[s])
             series.points.symbol = handlers[s];
     }
-    
+
     function init(plot) {
         plot.hooks.processDatapoints.push(processRawData);
     }
-    
+
     $.plot.plugins.push({
         init: init,
         name: 'symbols',

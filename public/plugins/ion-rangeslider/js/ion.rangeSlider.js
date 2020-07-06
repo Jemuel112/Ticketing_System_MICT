@@ -148,7 +148,7 @@
     // Core
 
     /**
-     * Main plugin constructor
+     * Main plugins constructor
      *
      * @param input {Object} link to base input element
      * @param options {Object} slider config
@@ -470,7 +470,7 @@
     IonRangeSlider.prototype = {
 
         /**
-         * Starts or updates the plugin instance
+         * Starts or updates the plugins instance
          *
          * @param [is_update] {boolean}
          */

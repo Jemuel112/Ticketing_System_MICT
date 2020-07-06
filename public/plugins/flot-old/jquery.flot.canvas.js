@@ -1,4 +1,4 @@
-/* Flot plugin for drawing all elements of a plot on the canvas.
+/* Flot plugins for drawing all elements of a plot on the canvas.
 
 Copyright (c) 2007-2013 IOLA and Ole Laursen.
 Licensed under the MIT license.
@@ -9,13 +9,13 @@ looks better, due to cross-browser canvas text inconsistencies and limitations.
 
 It can also be desirable to render the plot entirely in canvas, particularly
 if the goal is to save it as an image, or if Flot is being used in a context
-where the HTML DOM does not exist, as is the case within Node.js. This plugin
+where the HTML DOM does not exist, as is the case within Node.js. This plugins
 switches out Flot's standard drawing operations for canvas-only replacements.
 
-Currently the plugin supports only axis labels, but it will eventually allow
+Currently the plugins supports only axis labels, but it will eventually allow
 every element of the plot to be rendered directly to canvas.
 
-The plugin supports these options:
+The plugins supports these options:
 
 {
     canvas: boolean

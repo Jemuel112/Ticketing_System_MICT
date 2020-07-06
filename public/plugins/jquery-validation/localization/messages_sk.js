@@ -9,7 +9,7 @@
 }(function( $ ) {
 
 /*
- * Translated default messages for the jQuery validation plugin.
+ * Translated default messages for the jQuery validation plugins.
  * Locale: SK (Slovak; slovenčina, slovenský jazyk)
  */
 $.extend( $.validator.messages, {

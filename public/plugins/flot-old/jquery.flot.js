@@ -12,7 +12,7 @@ Licensed under the MIT license.
  *
  * Version 1.1.
  *
- * Inspiration from jQuery color animation plugin by John Resig.
+ * Inspiration from jQuery color animation plugins by John Resig.
  *
  * Released under the MIT license by Ole Laursen, October 2009.
  *
@@ -1710,7 +1710,7 @@ Licensed under the MIT license.
             // we'll add an especially friendly make sure they remembered to include it.
 
             if (opts.mode == "time" && !axis.tickGenerator) {
-                throw new Error("Time mode requires the flot.time plugin.");
+                throw new Error("Time mode requires the flot.time plugins.");
             }
 
             // Flot supports base-10 axes; any other mode else is handled by a plug-in,
@@ -2494,9 +2494,9 @@ Licensed under the MIT license.
                 radius = series.points.radius,
                 symbol = series.points.symbol;
 
-            // If the user sets the line width to 0, we change it to a very 
+            // If the user sets the line width to 0, we change it to a very
             // small value. A line width of 0 seems to force the default of 1.
-            // Doing the conditional here allows the shadow setting to still be 
+            // Doing the conditional here allows the shadow setting to still be
             // optional even with a lineWidth of 0.
 
             if( lw == 0 )

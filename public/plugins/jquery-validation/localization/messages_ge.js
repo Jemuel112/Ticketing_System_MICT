@@ -10,7 +10,7 @@
 
 /**
  * @author  @tatocaster <kutaliatato@gmail.com>
- * Translated default messages for the jQuery validation plugin.
+ * Translated default messages for the jQuery validation plugins.
  * Locale: GE (Georgian; ქართული)
  */
 $.extend( $.validator.messages, {

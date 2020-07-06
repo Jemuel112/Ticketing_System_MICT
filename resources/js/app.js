@@ -6,16 +6,13 @@
 import App from './App.vue'
 import router from './router'
 import Swal from 'sweetalert2'
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-
+import Vuetify from "../plugins/vuetify";
 
 
 require('./bootstrap');
 window.Vue = require('vue');
-// Install BootstrapVue
-Vue.use(BootstrapVue)
-// Optionally install the BootstrapVue icon components plugin
-Vue.use(IconsPlugin)
+
+
 const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
@@ -78,6 +75,7 @@ Vue.component('side-bar', require('./components/layouts/SideBar').default);
 //
 new Vue({
     el: '#app',
+    vuetify: Vuetify,
     components: { App },
     template: '<App/>',
     router,

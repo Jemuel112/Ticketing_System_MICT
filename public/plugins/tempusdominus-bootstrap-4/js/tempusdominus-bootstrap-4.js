@@ -2373,7 +2373,7 @@ var TempusDominusBootstrap4 = function ($) {
                                 return true;
                             }
                             if (expanded.collapse) {
-                                // if collapse plugin is available through bootstrap.js then use it
+                                // if collapse plugins is available through bootstrap.js then use it
                                 expanded.collapse('hide');
                                 closed.collapse('show');
                             } else {

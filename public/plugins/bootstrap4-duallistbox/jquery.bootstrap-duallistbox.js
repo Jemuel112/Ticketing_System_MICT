@@ -64,13 +64,13 @@
     // http://code.google.com/p/android/issues/detail?id=16922
     isBuggyAndroid = /android/i.test(navigator.userAgent.toLowerCase());
 
-  // The actual plugin constructor
+  // The actual plugins constructor
   function BootstrapDualListbox(element, options) {
     this.element = $(element);
     // jQuery has an extend method which merges the contents of two or
     // more objects, storing the result in the first object. The first object
     // is generally empty as we don't want to alter the default options for
-    // future instances of the plugin
+    // future instances of the plugins
     this.settings = $.extend({}, defaults, options);
     this._defaults = defaults;
     this._name = pluginName;
@@ -842,12 +842,12 @@
     }
   };
 
-  // A really lightweight plugin wrapper around the constructor,
+  // A really lightweight plugins wrapper around the constructor,
   // preventing against multiple instantiations
   $.fn[ pluginName ] = function (options) {
     var args = arguments;
 
-    // Is the first parameter an object (options), or was omitted, instantiate a new instance of the plugin.
+    // Is the first parameter an object (options), or was omitted, instantiate a new instance of the plugins.
     if (options === undefined || typeof options === 'object') {
       return this.each(function () {
         // If this is not a select
@@ -857,10 +857,10 @@
             $(item).bootstrapDualListbox(options);
           });
         } else if (!$.data(this, 'plugin_' + pluginName)) {
-          // Only allow the plugin to be instantiated once so we check that the element has no plugin instantiation yet
+          // Only allow the plugins to be instantiated once so we check that the element has no plugins instantiation yet
 
-          // if it has no instance, create a new one, pass options to our plugin constructor,
-          // and store the plugin instance in the elements jQuery data object.
+          // if it has no instance, create a new one, pass options to our plugins constructor,
+          // and store the plugins instance in the elements jQuery data object.
           $.data(this, 'plugin_' + pluginName, new BootstrapDualListbox(this, options));
         }
       });
@@ -873,9 +873,9 @@
 
       this.each(function () {
         var instance = $.data(this, 'plugin_' + pluginName);
-        // Tests that there's already a plugin-instance and checks that the requested public method exists
+        // Tests that there's already a plugins-instance and checks that the requested public method exists
         if (instance instanceof BootstrapDualListbox && typeof instance[options] === 'function') {
-          // Call the method of our plugin instance, and pass it the supplied arguments.
+          // Call the method of our plugins instance, and pass it the supplied arguments.
           returns = instance[options].apply(instance, Array.prototype.slice.call(args, 1));
         }
       });
