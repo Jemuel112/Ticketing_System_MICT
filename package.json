@@ -40,6 +40,5 @@
         "vuetify": "^2.3.3",
         "vuetify-loader": "^1.5.0",
         "vuex": "^3.5.1"
-
     }
 }
