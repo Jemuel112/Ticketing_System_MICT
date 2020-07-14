@@ -2,11 +2,16 @@
     <v-app>
         <v-navigation-drawer
             app
-            :permanent="$vuetify.breakpoint.mdOnly"
-            :temporary="$vuetify.breakpoint.smAndDown"
-            :mini-variant="drawer"
-            :expand-on-hover="drawer"
+            :permanent="dPermanent"
+            :temporary="!dPermanent"
+            :mini-variant="dMini"
+            :expand-on-hover="dMini"
         >
+            <!--            :mini-variant="drawer"-->
+            <!--            :expand-on-hover="drawer"-->
+            <!--            :permanent="$vuetify.breakpoint.mdOnly"-->
+            <!--            :temporary="$vuetify.breakpoint.smAndDown"-->
+            <!--            v-model="drawer"-->
             <v-list dense>
                 <v-list-item link>
                     <v-list-item-action>
@@ -32,8 +37,19 @@
             color="indigo"
             dark
         >
-            <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-            <v-toolbar-title>Application</v-toolbar-title>
+            <v-app-bar-nav-icon @click=""></v-app-bar-nav-icon>
+            <v-toolbar-title>System</v-toolbar-title>
+            <v-spacer></v-spacer>
+            <v-btn icon>
+                <v-icon>mdi-magnify</v-icon>
+            </v-btn>
+            <div>
+                <v-switch
+                    v-model="$vuetify.theme.dark"
+                    hide-details
+                    label="Dark Theme"
+                ></v-switch>
+            </div>
         </v-app-bar>
 
         <v-main>
@@ -58,7 +74,7 @@
                                     <v-icon large>mdi-code-tags</v-icon>
                                 </v-btn>
                             </template>
-                            <span>Source</span>
+                            <span>XD</span>
                         </v-tooltip>
                     </v-col>
                 </v-row>
@@ -73,20 +89,20 @@
     </v-app>
 
     <!-- <div> -->
-        <!--        <div class="wrapper">-->
-        <!-- <side-bar></side-bar> -->
-<!--        <div class="content-wrapper">-->
-<!--            <section class="content">-->
-                <!-- <transition name="right" mode="out-in"> -->
-                    <!-- <router-view name="content"></router-view> -->
-                <!-- </transition> -->
-<!--            </section>-->
-<!--        </div>-->
-        <!--        </div>-->
-        <!-- <transition name="right" mode="out-in"> -->
-            <!-- <router-view name="footer"></router-view> -->
-        <!-- </transition> -->
-<!--     </div> -->
+    <!--        <div class="wrapper">-->
+    <!-- <side-bar></side-bar> -->
+    <!--        <div class="content-wrapper">-->
+    <!--            <section class="content">-->
+    <!-- <transition name="right" mode="out-in"> -->
+    <!-- <router-view name="content"></router-view> -->
+    <!-- </transition> -->
+    <!--            </section>-->
+    <!--        </div>-->
+    <!--        </div>-->
+    <!-- <transition name="right" mode="out-in"> -->
+    <!-- <router-view name="footer"></router-view> -->
+    <!-- </transition> -->
+    <!--     </div> -->
 
 </template>
 
@@ -97,7 +113,28 @@
         },
         data: () => ({
             drawer: null,
+            dMini: true
         }),
+        computed: {
+            dPermanent: function () {
+                return this.$vuetify.breakpoint.mdAndUp
+            },
+        },
+        method: {
+            checkDrawer() {
+                if(this.$vuetify.breakpoint.mdAndUp){
+                    dMini
+                }
+            }
+        },
+        beforeCreate() {
+            // document.title = "XD"
+            // location.replace('http://Google.com');
+
+            // console.log('samples');
+            // :permanent="$vuetify.breakpoint.mdOnly"
+            // :temporary="$vuetify.breakpoint.smAndDown"
+        },
     }
 </script>
 
