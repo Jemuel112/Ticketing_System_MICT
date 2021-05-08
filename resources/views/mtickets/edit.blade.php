@@ -214,6 +214,11 @@
                                             value="Others" {{  ($ticket->og_status ?? old('og_status')) == 'Others' ? 'selected':''}}>
                                             Others
                                         </option>
+										                                        <option
+                                            value="Awaiting End-user" {{  ($ticket->og_status ?? old('og_status')) == 'Awaiting End-user' ? 'selected':''}}>
+											Awaiting-End-user
+                                            
+                                        </option>
                                     </select>
                                 </div>
                             </div>

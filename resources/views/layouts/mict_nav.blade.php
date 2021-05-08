@@ -124,57 +124,6 @@
                         </a>
                     </li>
                 @endif
-
-                <li class="nav-header">
-                    ENGINEERING
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>
-                            Dashboard
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('Engineering-Tickets.create')}}"
-                       class="nav-link {{ Request::routeIs('Engineering-Tickets.create') ? 'active' : '' }}">
-                        <i class="nav-icon fal fa-plus-circle"></i>
-                        <p>
-                            Create Ticket
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fal fa-ticket-alt"></i>
-                        <p>
-                            Tickets
-                            <i class="right fas fa-angle-left"></i>
-                            <span class="right">
-                                    @widget('my_ticket_counter')
-                                    @widget('is_new_counter')
-                                </span>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{route('MICT-Tickets.index')}}" class="nav-link ">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>All Tickets</p>
-                                <span class="right">@widget('is_new_counter')</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('my.sort')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>My Tickets</p>
-                                <span class="right"> @widget('my_ticket_counter')</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
                 @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
                     <li class="nav-header">
                         ENDORSEMENTS
@@ -196,7 +145,7 @@
                                 Endorsements
                             </p>
                             <div id="endo" class="d-inline-flex">
-                                <span class="badge badge-danger">@{{ newE }}</span>
+                                <span class="badge badge-danger" v-if="newE > 0">@{{ newE }}</span>
                             </div>
                         </a>
                     </li>
