@@ -82,6 +82,14 @@
                                                 <td>{{$nclosed}}</td>
                                                 <td>{{ $nactive + $non_going + $nresolved + $nclosed }}</td>
                                             </tr>
+                                            <tr style="font-weight: bolder">
+                                                <td>Grand Total</td>
+                                                <td>{{$nactive + $t_active}}</td>
+                                                <td>{{$non_going + $t_on_going}}</td>
+                                                <td>{{$nresolved + $t_resolved}}</td>
+                                                <td>{{$nclosed + $t_closed}}</td>
+                                                <td>{{ $nactive + $non_going + $nresolved + $nclosed + $t_active + $t_on_going + $t_resolved + $t_closed}}</td>
+                                            </tr>
                                             </tbody>
                                         </table>
                                         <a href="{{route('print.census')}}" target="_blank">

@@ -11,25 +11,25 @@
     },
     "devDependencies": {
         "axios": "^0.19",
-        "bootstrap": "^4.1.0",
-        "browser-sync": "^2.26.7",
-        "browser-sync-webpack-plugin": "^2.2.2",
+        "bootstrap": "^4.6.0",
+        "browser-sync": "^2.26.14",
+        "browser-sync-webpack-plugin": "^2.3.0",
         "cross-env": "^5.1",
-        "jquery": "^3.5.1",
+        "jquery": "^3.6.0",
         "laravel-mix": "^4.0.7",
-        "lodash": "^4.17.13",
+        "lodash": "^4.17.21",
         "resolve-url-loader": "^2.3.1",
-        "sass": "^1.26.5",
+        "sass": "^1.32.12",
         "sass-loader": "^7.1.0",
-        "vue": "^2.5.17",
-        "vue-template-compiler": "^2.6.11"
+        "vue": "^2.6.12",
+        "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
-        "@sweetalert2/theme-bootstrap-4": "^3.1.4",
-        "laravel-echo": "^1.7.0",
+        "@sweetalert2/theme-bootstrap-4": "^3.2.0",
+        "laravel-echo": "^1.10.0",
         "popper.js": "^1.16.1",
         "pusher-js": "^5.1.1",
-        "sweetalert2": "^9.10.13",
-        "vee-validate": "^3.3.1"
+        "sweetalert2": "^9.17.2",
+        "vee-validate": "^3.4.5"
     }
 }

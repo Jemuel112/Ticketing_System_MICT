@@ -8,7 +8,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Department Received Calls</h1>
+                        <h1>List of Pending Tickets</h1>
                     </div>
                 </div>
             </div>
@@ -23,7 +23,7 @@
                             {{--                                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i--}}
                             {{--                                            class="fas fa-minus"></i></button>--}}
                             {{--                                </div>--}}
-                            <form action="{{route('report.received.calls')}}" class="" autocomplete="off" method="POST">
+                            <form action="{{route('report.pending')}}" class="" autocomplete="off" method="POST">
                                 @csrf
                                 @method('POST')
                                 <div class="row">
@@ -63,8 +63,7 @@
                                         $range0 = date('F d, Y', strtotime($range[0]));
                                         $range1 = date('F d, Y', strtotime($range[1]));
                                     @endphp
-                                    <h2 style="text-align: center;">Department Recieved
-                                        Calls ({{$range0 ." - ".$range1}})</h2>
+                                    <h2 style="text-align: center;">List of Pending Tickets ({{$range0 ." - ".$range1}})</h2>
                                     <div class="container">
                                         <table
                                             class="compact table table-sm table-responsive-sm table-hover table-borderedless table-striped "
@@ -74,10 +73,7 @@
                                                 <th>Department</th>
                                                 <th>Active Tickets</th>
                                                 <th>On-Going Tickets</th>
-                                                <th>Resolved Tickets</th>
-                                                <th>Duplicate Tickets</th>
-                                                <th>Closed Tickets</th>
-                                                <th>Number of Call</th>
+                                                <th>Total Of Tickets</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -86,14 +82,11 @@
                                                     <td>{{$ticket}}</td>
                                                     <td>{{$call[0]}}</td>
                                                     <td>{{$call[1]}}</td>
-                                                    <td>{{$call[2]}}</td>
-                                                    <td>{{$call[3]}}</td>
-                                                    <td>{{$call[4]}}</td>
-                                                    <td>{{$call[0]+$call[1]+$call[2]+$call[3]+$call[4]}}</td>
+                                                    <td>{{$call[0]+$call[1]}}</td>
                                                 </tr>
                                             @empty
                                                 <tr>
-                                                    <td colspan="7"> No Results for {{request()->input('datefilter')}}</td>
+                                                    <td colspan="4"> No Results for {{request()->input('datefilter')}}</td>
                                                 </tr>
                                             @endforelse
                                             </tbody>
@@ -102,14 +95,11 @@
                                                 <td>Grand Total</td>
                                                 <td>{{$g_active}}</td>
                                                 <td>{{$g_on_going}}</td>
-                                                <td>{{$g_resolved}}</td>
-                                                <td>{{$g_dublicate}}</td>
-                                                <td>{{$g_closed}}</td>
-                                                <td>{{$g_active +  $g_on_going + $g_resolved + $g_dublicate + $g_closed}}</td>
+                                                <td>{{$g_active +  $g_on_going}}</td>
                                             </tr>
                                             </tfoot>
                                         </table>
-                                        <a href="{{route('print.received.calls')}}" target="_blank">
+                                        <a href="{{route('print.pending')}}" target="_blank">
                                             <button class="btn btn-info float-right">Print Report</button>
                                         </a>
                                     </div>

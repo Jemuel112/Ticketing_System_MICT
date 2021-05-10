@@ -214,10 +214,10 @@
                                             value="Others" {{  ($ticket->og_status ?? old('og_status')) == 'Others' ? 'selected':''}}>
                                             Others
                                         </option>
-										                                        <option
+                                        <option
                                             value="Awaiting End-user" {{  ($ticket->og_status ?? old('og_status')) == 'Awaiting End-user' ? 'selected':''}}>
-											Awaiting-End-user
-                                            
+                                            Awaiting-End-user
+
                                         </option>
                                     </select>
                                 </div>
@@ -641,6 +641,10 @@
                                                             &nbsp;</label>
                                                     </div>
                                                     <span class="time"><i class="fas fa-clock"></i> {{date(' h:i A', strtotime($content->created_at))}}</span>
+                                                    <div class="custom-control custom-switch float-right">
+                                                        <input type="checkbox" class="custom-control-input" name="action_id_edit[]" id="action_id_edit[{{$content->id}}]" value="{{$content->id}}" form="myForm">
+                                                        <label class="custom-control-label" for="action_id_edit[{{$content->id}}]">@if($content->shared == "1") Sharred @else Not Sharred @endif</label>
+                                                    </div>
                                                     <h3 class="timeline-header"><a
                                                             href="#">{{app\User::findOrFail($content->id_user)->fname}} {{app\User::findOrFail($content->id_user)->lname}}</a>
                                                     </h3>
@@ -667,8 +671,6 @@
                         </div>
                         <!-- /.col -->
                     </div>
-
-
                 </form>
             </section>
         @endif
@@ -685,7 +687,9 @@
             <div class="float-right">
                 <b>Version</b> @{{ version }}
 
-                <button type="submit" style="margin-left: 10px" class="btn btn-primary" form="myForm" onclick="mySubmit()">Submit</button>
+                <button type="submit" style="margin-left: 10px" class="btn btn-primary" form="myForm"
+                        onclick="mySubmit()">Submit
+                </button>
             </div>
             <strong>Copyright &copy; @{{ year }} <a href="https://www.mcuhospital.org/">MCU Hospital</a>.</strong> All
             rights

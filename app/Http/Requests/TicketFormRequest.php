@@ -25,13 +25,13 @@ class TicketFormRequest extends FormRequest
      */
     public function rules(Request $request)
     {
-        if(Auth::user()->department == 'Administrator' || Auth::user()->department == 'MICT'){
-            if ($request->category == 'System'){
-                    $data = request()->validate([
-                        'sys_category' => 'required',
-                    ],[
-                        'sys_category.required' => 'System Category is required'
-                    ]);
+        if (Auth::user()->department == 'Administrator' || Auth::user()->department == 'MICT') {
+            if ($request->category == 'System') {
+                $data = request()->validate([
+                    'sys_category' => 'required',
+                ], [
+                    'sys_category.required' => 'System Category is required'
+                ]);
             }
         }
         if (Auth::user()->department == 'Administrator') {
@@ -150,6 +150,5 @@ class TicketFormRequest extends FormRequest
                 ])];
         }
     }
-
 
 }

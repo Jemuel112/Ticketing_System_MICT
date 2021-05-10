@@ -33,6 +33,7 @@ Route::post('/MICT-Tickets/report', 'mTicketsController@report');
 Route::GET('/All_Sort', 'mTicketsController@index')->name('ticket.sort');
 Route::GET('/My_Sort', 'mTicketsController@myTickets')->name('my.sort');
 Route::GET('/Set_Date','mTicketsController@dashboard')->name('dash.date');
+Route::post('/MICT-Tickets/update/actions', 'ReportsController@actionsUpdate');
 
 Route::resource('/Engineering-Tickets','ETicketController',['except' => ['delete']]);
 
@@ -45,6 +46,9 @@ Route::get('/Census_MICT', 'ReportsController@census')->name('census');
 Route::POST('/Census_MICT/Report', 'ReportsController@reportCensus')->name('report.census');
 Route::get('/Census_MICT/Report/Print', 'ReportsController@printCensus')->name('print.census');
 
+Route::get('/Pending_MICT', 'ReportsController@Pending')->name('pending');
+Route::POST('/Pending_MICT/Report', 'ReportsController@reportPending')->name('report.pending');
+Route::get('/Pending_MICT/Report/Print', 'ReportsController@printPending')->name('print.pending');
 
 
 

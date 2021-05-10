@@ -15,6 +15,7 @@ use App\Http\Requests\TicketFormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Str;
 
 class MTicketsController extends Controller
 {
@@ -24,7 +25,7 @@ class MTicketsController extends Controller
 
         $this->middleware('disablepreventback');
         $this->middleware('auth');
-        $this->middleware('auth.am')->except('index', 'store', 'create', 'show', 'comment','dashboard','myTickets');
+        $this->middleware('auth.am')->except('index', 'store', 'create', 'show', 'comment', 'dashboard', 'myTickets');
         $this->middleware('editvalid')->only('show');
 
 //        $this->middleware('auth.admin')->only('index', 'store', 'allticket');
@@ -69,8 +70,8 @@ class MTicketsController extends Controller
                 ]);
                 $title = 'My Sorted Tickets';
             }
-        }else{
-            $tickets = mTicket::where('request_by','=', Auth::user()->department);
+        } else {
+            $tickets = mTicket::where('request_by', '=', Auth::user()->department);
             if (!is_null($request->datefilter)) {
                 $range = explode(' - ', $request->datefilter);
                 if (DateTime::createFromFormat('m/d/Y', $range[0]) == FALSE) {
@@ -153,7 +154,7 @@ class MTicketsController extends Controller
         $tickets = $tickets->orderBy('id', 'DESC')->get();
 //        alert()->info('Post Created', 'Successfully');
 
-        return view('mtickets.index', compact('tickets', 'title', 'departments'))->with('success','test');
+        return view('mtickets.index', compact('tickets', 'title', 'departments'))->with('success', 'test');
     }
 
     public function create()
@@ -194,13 +195,10 @@ class MTicketsController extends Controller
     public function edit($id)
     {
         $ticket = mTicket::findOrFail($id);
-//        dd($ticket->category);
         if (is_null($ticket->acknowledge_by)) {
             $ticket->acknowledge_by = Auth::user()->fname;
-            $ticket->save();
         }
         $ticket->is_new = 0;
-        $ticket->save();
         $comments = mcomments::Where([['id_mticket', '=', $id]])->orderBy('created_at', 'DESC')->get();
         $actions = mactions::Where([['id_mticket', '=', $id]])->orderBy('created_at', 'DESC')->get()->groupBy(function ($item) {
             return $item->created_at->format('Y-m-d');
@@ -214,7 +212,7 @@ class MTicketsController extends Controller
                 ['department', '=', 'Administrator']
             ])
             ->get();
-//        dd($actions->count());
+        $ticket->save();
         return view('mtickets.edit', compact('ticket', 'micts', 'departments', 'comments', 'actions'));
     }
 
@@ -331,8 +329,19 @@ class MTicketsController extends Controller
 
     public function update(TicketFormRequest $request, $id)
     {
+        if ($request->action_id_edit) {
+            $action_id = $request->action_id_edit;
+            foreach ($action_id as $id) {
+                $action = mactions::find($id);
+                if (Str::contains($action->shared, '0')) {
+                    $action->shared = 1;
+                } else {
+                    $action->shared = 0;
+                }
+                $action->save();
+            }
+        }
         $ticket = mTicket::findOrFail($id);
-//        dd($request);
         if ($request->status == "Closed" || $request->status == "Resolve") {
             if (!is_null($request->finished_at)) {
                 $ticket->finished_at = date('Y-m-d H:i:s', strtotime($request->finished_at));
@@ -417,7 +426,6 @@ class MTicketsController extends Controller
         $ticket = mTicket::findOrFail($request->ticket_id);
         $actions = $request->action_id;
         if (is_null($actions)) {
-//        dd('suc');
             return redirect()->back()->with('alert', 'Unable to proceed no Action is selected');
         }
         $micts = User::select('fname')
@@ -438,7 +446,6 @@ class MTicketsController extends Controller
         $date = $request->date;
 
         if (DateTime::createFromFormat('m/Y', $date) == FALSE) {
-//            dd('sad');
             $error = \Illuminate\Validation\ValidationException::withMessages([
                 'field_name_1' => ['Month format is invalid'],
             ]);
@@ -446,10 +453,10 @@ class MTicketsController extends Controller
         }
 
         $date = explode('/', $date);
-        $request->session()->put('month',$date[0]);
-        $request->session()->put('year',$date[1]);
-        $date = $date[0]. "/01/" . $date[1];
-        $request->session()->put('date',$date);
+        $request->session()->put('month', $date[0]);
+        $request->session()->put('year', $date[1]);
+        $date = $date[0] . "/01/" . $date[1];
+        $request->session()->put('date', $date);
 
         return redirect('/dashboard');
     }

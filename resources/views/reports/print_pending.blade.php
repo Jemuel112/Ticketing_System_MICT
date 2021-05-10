@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Received Calls Report | MCU Ticketing System</title>
+    <title>List of Pending Tickets | MCU Ticketing System</title>
 </head>
 <body>
 @include('layouts.css')
@@ -18,6 +18,12 @@
     u {
         text-decoration: none;
         border-bottom: 3px solid black;
+    }
+    @media print{
+        body{ background-color:#FFFFFF; background-image:none; color:#000000 }
+        #ad{ display:none;}
+        #leftbar{ display:none;}
+        #contentarea{ width:100%;}
     }
 </style>
 <script>
@@ -38,7 +44,7 @@
                         <img src="../../img/MCU.png"
                              alt="MCU Logo"
                              class=" img-circle elevation-3"
-                             style="opacity: .8; width: 50px"> MICT Received Calls Report
+                             style="opacity: .8; width: 50px"> List of Pending Report
                         {{--                                <small class="pull-right"></small>--}}
                     </h2>
                 </div>
@@ -49,7 +55,7 @@
             <!-- <div class="row invoice-info"> -->
             <div class="container">
 
-                <h3 class="p-2" style="text-align: center;"><strong>Department Recieved Calls ({{$range}})</strong></h3>
+                <h3 class="p-2" style="text-align: center;"><strong>List of Pending Reports ({{$range}})</strong></h3>
 
                 <table
                     class="main_print compact table table-sm table-responsive-sm table-hover table-borderedless table-striped "
@@ -59,10 +65,8 @@
                         <th>Department</th>
                         <th>Active Tickets</th>
                         <th>On-Going Tickets</th>
-                        <th>Resolved Tickets</th>
-                        <th>Duplicate Tickets</th>
-                        <th>Closed Tickets</th>
-                        <th>Number of Call</th>
+                        <th>Total Of Tickets</th>
+
                     </tr>
                     </thead>
                     <tbody>
@@ -71,14 +75,11 @@
                             <td>{{$ticket}}</td>
                             <td>{{$call[0]}}</td>
                             <td>{{$call[1]}}</td>
-                            <td>{{$call[2]}}</td>
-                            <td>{{$call[3]}}</td>
-                            <td>{{$call[4]}}</td>
-                            <td>{{$call[0]+$call[1]+$call[2]+$call[3]+$call[4]}}</td>
+                            <td>{{$call[0]+$call[1]}}</td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7"> No Results for {{$range}}</td>
+                            <td colspan="10"> No Results for {{$range}}</td>
                         </tr>
                     @endforelse
                     </tbody>
@@ -87,10 +88,7 @@
                         <td>Grand Total</td>
                         <td>{{$g_active}}</td>
                         <td>{{$g_on_going}}</td>
-                        <td>{{$g_resolved}}</td>
-                        <td>{{$g_dublicate}}</td>
-                        <td>{{$g_closed}}</td>
-                        <td>{{$g_active +  $g_on_going + $g_resolved + $g_dublicate + $g_closed}}</td>
+                        <td>{{$g_active +  $g_on_going}}</td>
                     </tr>
                     </tfoot>
                 </table>
