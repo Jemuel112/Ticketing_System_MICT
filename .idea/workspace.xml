@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e46f795c-50de-4821-94e9-0a47af70672e" name="Default Changelist" comment="Innitial Commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/For clearing &amp; Cache config.bat" beforeDir="false" afterPath="$PROJECT_DIR$/For clearing &amp; Cache config.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -344,7 +343,7 @@
       <workItem from="1590942365087" duration="739000" />
       <workItem from="1590978214734" duration="2395000" />
       <workItem from="1590987359125" duration="9480000" />
-      <workItem from="1620620687366" duration="23668000" />
+      <workItem from="1620620687366" duration="23974000" />
     </task>
     <servers />
   </component>

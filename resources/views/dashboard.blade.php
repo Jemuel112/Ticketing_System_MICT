@@ -98,7 +98,7 @@
                             <i class="fas fa-clipboard-check"></i>
                         </div>
                         <form action="{{route('ticket.sort')}}" method="GET" class="small-box-footer">
-                            <input type="text" name="status" value="Resolve" hidden>
+                            <input type="text" name="status" value="Resolved" hidden>
                             <button class="btn btn-link"><span class="text-white">More Info <i
                                         class="fas fa-arrow-circle-right"></i></span></button>
                         </form>
