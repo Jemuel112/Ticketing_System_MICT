@@ -89,15 +89,15 @@
                                                     <td colspan="4"> No Results for {{request()->input('datefilter')}}</td>
                                                 </tr>
                                             @endforelse
-                                            </tbody>
-                                            <tfoot>
+                                            @empty(!$data)
                                             <tr style="font-weight: bolder">
                                                 <td>Grand Total</td>
                                                 <td>{{$g_active}}</td>
                                                 <td>{{$g_on_going}}</td>
                                                 <td>{{$g_active +  $g_on_going}}</td>
                                             </tr>
-                                            </tfoot>
+                                            </tbody>
+                                            @endempty
                                         </table>
                                         <a href="{{route('print.pending')}}" target="_blank">
                                             <button class="btn btn-info float-right">Print Report</button>

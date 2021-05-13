@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Department;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class UsersController extends Controller
@@ -13,8 +14,11 @@ class UsersController extends Controller
     {
         $this->middleware('disablepreventback');
         $this->middleware('auth');
-        $this->middleware('auth.am');
+        $this->middleware('useronly')->only('update', 'edit');
+        $this->middleware('auth.am')->only('index');
+
     }
+
 
     public function index()
     {
@@ -33,14 +37,14 @@ class UsersController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 //        $task->start_date = Carbon::now();
-        User::create([
+        $user = User::create([
             'username' => $data['username'],
             'fname' => $data['fname'],
             'lname' => $data['lname'],
             'department' => $data['department'],
             'password' => bcrypt($data['password']),
         ]);
-        return redirect('/users');
+        return redirect('/users')->with('message', 'Username "' . $user->username . '" has been Added!');
     }
 
 
@@ -62,8 +66,28 @@ class UsersController extends Controller
     {
         $id = $user->id;
 
+        if (Auth::user()->department != "Administrator") {
+            if (Auth::user()->department != "MICT") {
+                if ($request->password == null) {
+                    $data = request()->validate([
+                        'username' => "required|unique:users,username,$id|max:255",
+                        'fname' => 'required|max:255',
+                        'lname' => 'required|max:255',
+                    ]);
+                } else {
+                    $data = request()->validate([
+                        'username' => "required|unique:users,username,$id|max:255",
+                        'fname' => 'required|max:255',
+                        'lname' => 'required|max:255',
+                        'department' => 'required',
+                        'password' => ['required', 'string', 'min:8', 'confirmed'],
+                    ]);
+                }
+                $user->update($data);
+                return redirect('/users/' . Auth::user()->id)->with('message', 'User Updated!');
+            }
+        }
         if ($request->password == null) {
-//            dd($request->password);
             $data = request()->validate([
                 'username' => "required|unique:users,username,$id|max:255",
                 'fname' => 'required|max:255',
@@ -71,7 +95,6 @@ class UsersController extends Controller
                 'department' => 'required',
             ]);
             $user->update($data);
-            return redirect('/users');
         } else {
             $data = request()->validate([
                 'username' => "required|unique:users,username,$id|max:255",
@@ -80,19 +103,21 @@ class UsersController extends Controller
                 'department' => 'required',
                 'password' => ['required', 'string', 'min:8', 'confirmed'],
             ]);
-//            dd($user);
             $user->update($data);
             $user->update([
                 'password' => bcrypt($data['password']),
             ]);
-            return redirect('/users');
         }
+        if ($user->id == 1){
+            $user->department == "Administrator";
+        }
+        return redirect('/users')->with('message', 'Username "' . $user->username . '" has been updated!');
 
     }
 
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect('/users');
+        return redirect('/users')->with('message bad', 'Department Name "' . $user->username . '" has been Deleted Successfully!');
     }
 }

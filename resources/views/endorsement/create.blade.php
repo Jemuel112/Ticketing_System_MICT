@@ -108,7 +108,7 @@
                                 <!-- /.card-body -->
                                 <div class="card-footer">
                                     <div class="float-right">
-                                        <button type="submit" class="btn btn-primary"><i class="far fa-envelope"></i>
+                                        <button type="submit" class="btn btn-primary" id="btn-submit"><i class="far fa-envelope"></i>
                                             Send
                                         </button>
                                     </div>
@@ -162,6 +162,14 @@
                 ],
             })
         })
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#myForm").submit(function (e) {
+                $("#btn-submit").attr("disabled", true);
+                return true;
+            });
+        });
     </script>
 @endsection
 

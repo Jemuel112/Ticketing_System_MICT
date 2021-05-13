@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="eng">
 <head>
+    <!-- This System is created by Team MICT -->
+    <!-- Special Thanks to Jemuel Amerila former MICT Staff (November 11, 2019 - May 24, 2021) ＼（＾○＾）人（＾○＾）／-->
+    <!-- To God be the Glory -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>@yield('title')MCU Ticketing System</title>
@@ -63,7 +66,7 @@
         el: '#ver',
         data: {
             version: "0.1.0 (Beta)",
-            year: new Date().getFullYear() + " MICT Department",
+            year: "2019 - " + new Date().getFullYear() + " MICT Department",
         },
     });
     new Vue({

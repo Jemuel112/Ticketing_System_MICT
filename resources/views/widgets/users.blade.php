@@ -2,7 +2,7 @@
     <table id="department1" class="nowrap compact table table-bordered table-striped">
         <thead>
         <tr>
-            <th width="5%">No.</th>
+            <th width="5%">ID no.</th>
             <th>Username</th>
             <th>First Name</th>
             <th>Last Name</th>
@@ -31,7 +31,7 @@
                         <form action="/users/{{$user->id}}" method="POST">
                             @method('DELETE')
                             @csrf
-                            <button style="margin: 2px" type="submit" class="  col-lg-6 btn btn-sm btn-outline-danger">
+                            <button style="margin: 2px" type="submit" class="col-lg-6 btn btn-sm btn-outline-danger" onclick='return confirm("Sure Want Delete Username: {!! $user->username !!}?")'>
                                 Delete
                             </button>
                         </form>

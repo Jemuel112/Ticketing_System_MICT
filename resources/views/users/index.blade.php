@@ -19,6 +19,17 @@
                     @endforeach
                 </div>
             @endif
+            @if(session('message'))
+                <div style="" class="alert alert-success">
+                    {{session('message')}}
+                </div>
+            @endif
+            @if(session('message bad'))
+                <div style="" class="alert alert-default-danger">
+                    {{session('message bad')}}
+                </div>
+            @endif
+
             <div class="card-body">
                 <div class="card">
                     <div class="card-header">
@@ -46,7 +57,7 @@
                     <h5 class="modal-title" id="AddModal">Add User</h5>
                 </div>
                 <div class="modal-body">
-                    <form action="/users" method="POST" autocomplete="off">
+                    <form action="/users" method="POST" autocomplete="off" id="myForm">
                         @csrf
                         {{--Username--}}
                         <div class="row">
@@ -111,7 +122,7 @@
                         <hr>
                         <button type="button" class="btn btn-secondary float-left" data-dismiss="modal">Close
                         </button>
-                        <button type="submit" class="btn btn-primary float-right">Add User</button>
+                        <button type="submit" class="btn btn-primary float-right" id="btn-submit">Add User</button>
                     </form>
                 </div>
             </div>
@@ -131,6 +142,14 @@
                 theme: 'bootstrap4'
             });
             $("#department1").DataTable();
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#myForm").submit(function (e) {
+                $("#btn-submit").attr("disabled", true);
+                return true;
+            });
         });
     </script>
 @endsection

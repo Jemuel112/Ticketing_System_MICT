@@ -70,6 +70,7 @@ class Kernel extends HttpKernel
         'editvalid' => \App\Http\Middleware\EditValidator::class,
         'sreport' => \App\Http\Middleware\ServiceReportValidator::class,
         'endorsed' => \App\Http\Middleware\Endorsment::class,
+        'useronly' => \App\Http\Middleware\UserEditOnly::class,
 //        'Edl' => \App\Http\Middleware\EndorsmentDownload::class,
     ];
 

@@ -163,7 +163,7 @@ class EndorsementController extends Controller
                 $end_file->save();
             }
         }
-        return redirect('/Endorsement');
+        return redirect('/Sent_Endorsement')->with('message', 'Endorsment "' . $endorse->title .'" has been Created!');;
     }
 
     /**
@@ -285,7 +285,7 @@ class EndorsementController extends Controller
                 $end_file->save();
             }
         }
-        return redirect()->route('Endorsement.index');
+        return redirect()->route('Endorsement.sent')->with('message', 'Endorsment #'. $endorse->id .' "' . $endorse->title .'" has been Updated!');;;
     }
 
     /**

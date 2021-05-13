@@ -512,8 +512,8 @@
 
                     <div class="float-right">
                         <b>Version</b> @{{ version }}
-                        <button type="submit" form="myForm" style="margin-left: 10px" class="btn btn-primary"><i
-                                class="nav-icon fal fa-plus-circle"></i>
+                        <button type="submit" form="myForm" style="margin-left: 10px" class="btn btn-primary" id="btn-submit"><i
+                                class="nav-icon fal fa-plus-circle" ></i>
                             Submit
                         </button>
 
@@ -581,7 +581,9 @@
         $("#datetimepicker8").on("change.datetimepicker", function (e) {
             $('#datetimepicker7').datetimepicker('maxDate', e.date);
         });
-
+        $("#submit").click(function(){
+            $(this).attr('disabled');
+        });
     </script>
     <script>
         //Initialize Select2 Elements
@@ -735,5 +737,13 @@
                 $("#act").prop("disabled", true);
             }
         }
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#myForm").submit(function (e) {
+                $("#btn-submit").attr("disabled", true);
+                return true;
+            });
+        });
     </script>
 @endsection

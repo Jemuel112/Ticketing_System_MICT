@@ -12,6 +12,11 @@
                     @endforeach
                 </div>
             @endif
+            @if(session('message'))
+                <div style="" class="alert alert-success">
+                    {{session('message')}}
+                </div>
+            @endif
             <div class="card card-info">
                 <div class="card-header">
                     <h4>{{$title}}</h4>
@@ -19,7 +24,8 @@
                 <div class="card-body">
 
 
-                    <form @if($title == "All Tickets" || $title == "All Sorted Tickets") action="/All_Sort" @else action="/My_Sort" @endif class="container-fluid" autocomplete="off" method="GET">
+                    <form @if($title == "All Tickets" || $title == "All Sorted Tickets") action="/All_Sort"
+                          @else action="/My_Sort" @endif class="container-fluid" autocomplete="off" method="GET">
                         @csrf
                         <div class="row float-right" style="width: 100%;">
                             <div class="col-sm-3 col-lg-3" style="width: 100%;">
@@ -37,7 +43,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                @else
+                            @else
                             @endif
                             <div class="col-sm-3 col-lg-3">
                                 <select class="form-control select2 col-md-7"
@@ -159,47 +165,47 @@
 @endsection
 
 @section('p-script')
-<script>
-    $("#department1").DataTable({
-        'processing': true,
-        "order": [[0, "desc"]]
-    });
+    <script>
+        $("#department1").DataTable({
+            'processing': true,
+            "order": [[0, "desc"]]
+        });
 
-    //Date range picker
-    $('input[name="datefilter"]').daterangepicker({
-        showDropdowns: true,
-        minYear: 2020,
-        autoUpdateInput: false,
-        autoclose: true,
-        locale: {
-            cancelLabel: 'Clear'
-        }
-    });
+        //Date range picker
+        $('input[name="datefilter"]').daterangepicker({
+            showDropdowns: true,
+            minYear: 2020,
+            autoUpdateInput: false,
+            autoclose: true,
+            locale: {
+                cancelLabel: 'Clear'
+            }
+        });
 
-    $('input[name="datefilter"]').on('apply.daterangepicker', function (ev, picker) {
-        $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
-    });
+        $('input[name="datefilter"]').on('apply.daterangepicker', function (ev, picker) {
+            $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+        });
 
-    $('input[name="datefilter"]').on('cancel.daterangepicker', function (ev, picker) {
-        $(this).val('');
-    });
+        $('input[name="datefilter"]').on('cancel.daterangepicker', function (ev, picker) {
+            $(this).val('');
+        });
 
-    // $('.select2').select2({
-    //     theme: 'bootstrap4'
-    // });
-    // $('.select2bs4').select2({
-    //     theme: 'bootstrap4'
-    // });
-    $selectElement = $('#deps').select2({
-        theme: 'bootstrap4',
-        placeholder: "Department",
-        allowClear: true
-    });
-    $selectElement = $('#stats').select2({
-        theme: 'bootstrap4',
-        placeholder: "Status",
-        allowClear: true
-    });
-</script>
+        // $('.select2').select2({
+        //     theme: 'bootstrap4'
+        // });
+        // $('.select2bs4').select2({
+        //     theme: 'bootstrap4'
+        // });
+        $selectElement = $('#deps').select2({
+            theme: 'bootstrap4',
+            placeholder: "Department",
+            allowClear: true
+        });
+        $selectElement = $('#stats').select2({
+            theme: 'bootstrap4',
+            placeholder: "Status",
+            allowClear: true
+        });
+    </script>
 
 @endsection

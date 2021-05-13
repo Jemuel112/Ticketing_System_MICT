@@ -1,6 +1,9 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <!-- This System is created by Team MICT -->
+    <!-- Special Thanks to Jemuel Amerila former MICT Staff (November 11, 2019 - May 24, 2021) ＼（＾○＾）人（＾○＾）／-->
+    <!-- To God be the Glory -->
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -15,6 +18,7 @@
         border: 3px solid black;
         font-size: 18px;
     }
+
     u {
         text-decoration: none;
         border-bottom: 3px solid black;
@@ -81,17 +85,20 @@
                             <td colspan="7"> No Results for {{$range}}</td>
                         </tr>
                     @endforelse
+                    @empty(!$data)
+                        <tr style="font-weight: bolder">
+                            <td>Grand Total</td>
+                            <td>{{$g_active}}</td>
+                            <td>{{$g_on_going}}</td>
+                            <td>{{$g_resolved}}</td>
+                            <td>{{$g_dublicate}}</td>
+                            <td>{{$g_closed}}</td>
+                            <td>{{$g_active +  $g_on_going + $g_resolved + $g_dublicate + $g_closed}}</td>
+                        </tr>
+                    @endempty
                     </tbody>
                     <tfoot>
-                    <tr style="font-weight: bolder">
-                        <td>Grand Total</td>
-                        <td>{{$g_active}}</td>
-                        <td>{{$g_on_going}}</td>
-                        <td>{{$g_resolved}}</td>
-                        <td>{{$g_dublicate}}</td>
-                        <td>{{$g_closed}}</td>
-                        <td>{{$g_active +  $g_on_going + $g_resolved + $g_dublicate + $g_closed}}</td>
-                    </tr>
+
                     </tfoot>
                 </table>
                 {{--                    <table class="">--}}
@@ -100,7 +107,7 @@
                 <table class="p-2 float-right">
                     <tbody style="font-size: 20px">
                     <tr>
-                        <td><u>&nbsp;   {{Auth::user()->fname." ".Auth::user()->lname}}  &nbsp;</u></td>
+                        <td><u>&nbsp; {{Auth::user()->fname." ".Auth::user()->lname}} &nbsp;</u></td>
                     </tr>
                     </tbody>
                     <tfoot style="font-weight: bolder; font-size: 20px; text-align: center">

@@ -264,7 +264,7 @@ class MTicketsController extends Controller
         $tickets->sys_category = $request->sys_category;
         $tickets->concerns = $request->concerns;
         $tickets->lop = $request->lop;
-        $tickets->created_by = Auth::user()->fname;
+        $tickets->created_by = Auth::user()->fname . " ( " . Auth::user()->id . " )";
         $tickets->recommendation = $request->recommendation;
 
 
@@ -296,7 +296,7 @@ class MTicketsController extends Controller
 
 //        event(new MTicket());
 
-        return redirect('/MICT-Tickets');
+        return redirect('/MICT-Tickets')->with('message', 'Ticket #' . $tickets->id . ' has been Created!');
     }
 
     public function comment(Request $request, $id)
@@ -417,7 +417,7 @@ class MTicketsController extends Controller
         // example:
         event(new MTicket());
 
-        return redirect('/MICT-Tickets');
+        return redirect('/MICT-Tickets')->with('message', 'Ticket #' . $ticket->id . ' has been Updated!');
 
     }
 

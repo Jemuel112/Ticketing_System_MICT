@@ -87,9 +87,12 @@
                     <div class="card-header">
                         <h3 class="card-title">Ticket Info</h3>
 
+
                         {{--Date--}}
                         <div class="card-tools">
-                            &nbsp;
+                            &nbsp; @if(Auth::user()->department == "Administrator")
+                                <h3 class="card-title"> Created by: {{$ticket->created_by}}</h3>
+                            @endif
                             <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
                                     class="fas fa-minus"></i></button>
                         </div>
@@ -642,8 +645,13 @@
                                                     </div>
                                                     <span class="time"><i class="fas fa-clock"></i> {{date(' h:i A', strtotime($content->created_at))}}</span>
                                                     <div class="custom-control custom-switch float-right">
-                                                        <input type="checkbox" class="custom-control-input" name="action_id_edit[]" id="action_id_edit[{{$content->id}}]" value="{{$content->id}}" form="myForm">
-                                                        <label class="custom-control-label" for="action_id_edit[{{$content->id}}]">@if($content->shared == "1") Sharred @else Not Sharred @endif</label>
+                                                        <input type="checkbox" class="custom-control-input"
+                                                               name="action_id_edit[]"
+                                                               id="action_id_edit[{{$content->id}}]"
+                                                               value="{{$content->id}}" form="myForm">
+                                                        <label class="custom-control-label"
+                                                               for="action_id_edit[{{$content->id}}]">@if($content->shared == "1")
+                                                                Sharred @else Not Sharred @endif</label>
                                                     </div>
                                                     <h3 class="timeline-header"><a
                                                             href="#">{{app\User::findOrFail($content->id_user)->fname}} {{app\User::findOrFail($content->id_user)->lname}}</a>
@@ -688,7 +696,7 @@
                 <b>Version</b> @{{ version }}
 
                 <button type="submit" style="margin-left: 10px" class="btn btn-primary" form="myForm"
-                        onclick="mySubmit()">Submit
+                        id="btn-submit">Submit
                 </button>
             </div>
             <strong>Copyright &copy; @{{ year }} <a href="https://www.mcuhospital.org/">MCU Hospital</a>.</strong> All
@@ -907,6 +915,14 @@
                 $("#act").prop("disabled", true);
             }
         }
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#myForm").submit(function (e) {
+                $("#btn-submit").attr("disabled", true);
+                return true;
+            });
+        });
     </script>
 @endsection
 <!-- /.content -->

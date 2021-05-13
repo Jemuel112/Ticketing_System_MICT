@@ -55,6 +55,7 @@ Route::get('/Pending_MICT/Report/Print', 'ReportsController@printPending')->name
 Route::resource('/departments', 'DepartmentsController');
 
 Route::resource('/users', 'UsersController');
+Route::POST('/Pending_MICT/Report', 'ReportsController@reportPending')->name('report.pending');
 
 //Route::get('/Endorsement/{Endorsement}','EndorsementController@show');
 Route::resource('/Endorsement', 'EndorsementController');

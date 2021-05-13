@@ -21,6 +21,11 @@
                     @endforeach
                 </div>
             @endif
+            @if(session('message'))
+                <div style="" class="alert alert-default-success">
+                    {{session('message')}}
+                </div>
+            @endif
             {{--            END SHOW USERS ERRORS--}}
 
 
@@ -56,14 +61,22 @@
                                 <label for="department">Department</label>
                                 <select name="department"
                                         class="select2bs4 form-control  @error('Department') is-invalid @enderror"
-                                        required>
-                                    @if(Auth::user()->id == 1)
+                                        required
+                                        @if(Auth::user()->department != "Administrator") @if(Auth::user()->department != "MICT") disabled @endif @endif>
+                                    @if(Auth::user()->id == 1 && $user->id != 1 )
                                         <option value="Administrator">Administrator</option>
                                     @endif
-                                    @foreach($departments as $department)
-                                        <option
-                                            value="{{$department->dept_name}}" {{$department->dept_name == $user->department  ? 'selected' : ''}}>{{$department->dept_name}}</option>
-                                    @endforeach
+                                    @if(Auth::user()->department == "Administrator" && Auth::user()->id != 1)
+                                        <option value="Administrator">Administrator</option>
+                                    @elseif($user->id == 1)
+                                        <option value="Administrator">Administrator</option>
+                                    @endif
+                                    @if($user->id != 1)
+                                        @foreach($departments as $department)
+                                            <option
+                                                value="{{$department->dept_name}}" {{$department->dept_name == $user->department  ? 'selected' : ''}}>{{$department->dept_name}}</option>
+                                        @endforeach
+                                    @endif
                                 </select>
                             </div>
                             <div class="col-md-6">
@@ -88,25 +101,27 @@
             </form>
 
             {{--            SHOW DAPARTMENTS--}}
-            <div class="card card-default">
-                <div class="card-header">
-                    <h3 class="card-title">Departments</h3>
-                    <div class="card-tools">
-                        <button class="btn btn-success " data-toggle="modal" data-target="#AddModal">Add
-                            User
-                        </button>
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
-                                class="fas fa-minus"></i></button>
+            @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
+                <div class="card card-default">
+                    <div class="card-header">
+                        <h3 class="card-title">Users</h3>
+                        <div class="card-tools">
+                            <button class="btn btn-success " data-toggle="modal" data-target="#AddModal">Add
+                                User
+                            </button>
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
+                                    class="fas fa-minus"></i></button>
 
+                        </div>
                     </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        {{--                    DEPARTMENT TABLE WIDGET--}}
+                        @asyncWidget('users')
+                    </div>
+                    <!-- /.card-body -->
                 </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                    {{--                    DEPARTMENT TABLE WIDGET--}}
-                    @asyncWidget('users')
-                </div>
-                <!-- /.card-body -->
-            </div>
+            @endif
             {{--            END SHOW DEPARTMENTS--}}
         </section>
     </div>
@@ -210,4 +225,4 @@
             });
         });
     </script>
-    @endsection
+@endsection

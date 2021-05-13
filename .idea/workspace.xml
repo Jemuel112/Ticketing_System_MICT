@@ -2,10 +2,45 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e46f795c-50de-4821-94e9-0a47af70672e" name="Default Changelist" comment="Innitial Commit">
+      <change afterPath="$PROJECT_DIR$/app/Http/Middleware/UserEditOnly.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/MCU_MICT.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/MCU_MICT.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PHPManagerForIIS_V1.5.0 (1).msi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DepartmentsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DepartmentsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/EndorsementController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/EndorsementController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MTicketsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MTicketsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/web.config" beforeDir="false" afterPath="$PROJECT_DIR$/public/web.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/department/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/department/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/endorsement/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/endorsement/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/endorsement/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/endorsement/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/endorsement/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/endorsement/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/endorsement/sent.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/endorsement/sent.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/master.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/mict_nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/mict_nav.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mtickets/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mtickets/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mtickets/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mtickets/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mtickets/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mtickets/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/reports/pending.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/reports/pending.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/reports/print_census.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/reports/print_census.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/reports/print_pending.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/reports/print_pending.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/reports/print_received_calls.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/reports/print_received_calls.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/reports/received_calls.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/reports/received_calls.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/users/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/users/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/users/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/widgets/departments.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/widgets/departments.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/widgets/users.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/widgets/users.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,9 +48,7 @@
   </component>
   <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
-    <execution>
-      <executable />
-    </execution>
+    <execution />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -208,18 +241,6 @@
       <recent name="C:\Users\Jemuel\Desktop\New folder (10)\public\plugins\tempusdominus-bootstrap-4\js" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
   <component name="RunManager">
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner scope="XML" />
@@ -344,11 +365,13 @@
       <workItem from="1590978214734" duration="2395000" />
       <workItem from="1590987359125" duration="9480000" />
       <workItem from="1620620687366" duration="23974000" />
+      <workItem from="1620753003268" duration="848000" />
+      <workItem from="1620799633096" duration="20074000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.env" />
@@ -358,13 +381,12 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -375,38 +397,13 @@
     <option name="LAST_COMMIT_MESSAGE" value="Innitial Commit" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="584" y="181" key="#Plugins" timestamp="1589731375654">
-      <screen x="64" y="0" width="1856" height="1080" />
+    <state x="767" y="435" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1620841699499">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="584" y="181" key="#Plugins/64.0.1856.1080@64.0.1856.1080" timestamp="1589731375654" />
-    <state x="700" y="276" key="#Servers" timestamp="1590840742909">
-      <screen x="64" y="0" width="1856" height="1080" />
+    <state x="767" y="435" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1050@0.0.1920.1050" timestamp="1620841699499" />
+    <state x="848" y="241" width="583" height="562" key="find.popup" timestamp="1620922888509">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="700" y="276" key="#Servers/64.0.1856.1080@64.0.1856.1080" timestamp="1590840742909" />
-    <state x="722" y="295" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1590844775877">
-      <screen x="64" y="0" width="1856" height="1080" />
-    </state>
-    <state x="722" y="295" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/64.0.1856.1080@64.0.1856.1080" timestamp="1590844775877" />
-    <state x="810" y="159" key="RollbackChangesDialog" timestamp="1589733350100">
-      <screen x="64" y="0" width="1856" height="1080" />
-    </state>
-    <state x="810" y="159" key="RollbackChangesDialog/64.0.1856.1080@64.0.1856.1080" timestamp="1589733350100" />
-    <state x="493" y="185" key="SettingsEditor" timestamp="1590840874204">
-      <screen x="64" y="0" width="1856" height="1080" />
-    </state>
-    <state x="493" y="185" key="SettingsEditor/64.0.1856.1080@64.0.1856.1080" timestamp="1590840874204" />
-    <state x="378" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1583944140755">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="378" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1583944140755" />
-    <state x="648" y="250" key="run.anything.popup" timestamp="1590757643675">
-      <screen x="64" y="0" width="1856" height="1080" />
-    </state>
-    <state x="648" y="250" key="run.anything.popup/64.0.1856.1080@64.0.1856.1080" timestamp="1590757643675" />
-    <state x="722" y="112" width="914" height="1006" key="search.everywhere.popup" timestamp="1590855355837">
-      <screen x="64" y="0" width="1856" height="1080" />
-    </state>
-    <state x="458" y="79" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1583865616007" />
-    <state x="722" y="112" width="914" height="1006" key="search.everywhere.popup/64.0.1856.1080@64.0.1856.1080" timestamp="1590855355836" />
+    <state x="848" y="241" width="583" height="562" key="find.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1620922888509" />
   </component>
 </project>

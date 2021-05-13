@@ -21,7 +21,7 @@
                     <form action="/departments/{{$department->id}}" method="POST">
                         @method('DELETE')
                         @csrf
-                        <button style="margin: 2px" type="submit" class="col-lg-6 btn btn-sm btn-outline-danger">
+                        <button style="margin: 2px" type="submit" class="col-lg-6 btn btn-sm btn-outline-danger"  onclick='return confirm("Sure Want Delete Department: {!! $department->dept_name !!}?")'>
                             Delete
                         </button>
                     </form>

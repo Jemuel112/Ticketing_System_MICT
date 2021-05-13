@@ -28,8 +28,8 @@ class DepartmentsController extends Controller
             'dept_name' => 'required|unique:departments,dept_name',
         ]);
 //        $task->start_date = Carbon::now();
-        Department::create($data);
-        return redirect('/departments');
+        $department = Department::create($data);
+        return redirect('/departments')->with('message', 'Department Name "' . $department->dept_name .'" has been Added!');
     }
 
     public function edit(Department $department)
@@ -51,12 +51,12 @@ class DepartmentsController extends Controller
         ]);
         $department->update($data);
 
-        return redirect('/departments');
+        return redirect('/departments')->with('message', 'Department Name "' . $department->dept_name .'" has been Updated!');
 
     }
     public function destroy(Department $department)
     {
         $department -> delete();
-        return redirect('/departments');
+        return redirect('/departments')->with('message bad', 'Department Name "' . $department->dept_name .'" has been Deleted!');
     }
 }

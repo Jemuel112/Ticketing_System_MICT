@@ -1,6 +1,9 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <!-- This System is created by Team MICT -->
+    <!-- Special Thanks to Jemuel Amerila former MICT Staff (November 11, 2019 - May 24, 2021) ＼（＾○＾）人（＾○＾）／-->
+    <!-- To God be the Glory -->
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">

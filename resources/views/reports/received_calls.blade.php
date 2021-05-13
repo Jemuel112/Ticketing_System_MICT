@@ -96,17 +96,20 @@
                                                     <td colspan="7"> No Results for {{request()->input('datefilter')}}</td>
                                                 </tr>
                                             @endforelse
+                                            @empty(!$data)
+                                                <tr style="font-weight: bolder">
+                                                    <td>Grand Total</td>
+                                                    <td>{{$g_active}}</td>
+                                                    <td>{{$g_on_going}}</td>
+                                                    <td>{{$g_resolved}}</td>
+                                                    <td>{{$g_dublicate}}</td>
+                                                    <td>{{$g_closed}}</td>
+                                                    <td>{{$g_active +  $g_on_going + $g_resolved + $g_dublicate + $g_closed}}</td>
+                                                </tr>
+                                            @endempty
                                             </tbody>
                                             <tfoot>
-                                            <tr style="font-weight: bolder">
-                                                <td>Grand Total</td>
-                                                <td>{{$g_active}}</td>
-                                                <td>{{$g_on_going}}</td>
-                                                <td>{{$g_resolved}}</td>
-                                                <td>{{$g_dublicate}}</td>
-                                                <td>{{$g_closed}}</td>
-                                                <td>{{$g_active +  $g_on_going + $g_resolved + $g_dublicate + $g_closed}}</td>
-                                            </tr>
+
                                             </tfoot>
                                         </table>
                                         <a href="{{route('print.received.calls')}}" target="_blank">

@@ -181,6 +181,16 @@
                             </p>
                         </a>
                     </li>
+                    @else
+                    <li class="nav-item">
+                        <a href="/users/{{Auth::user()->id}}"
+                           class="nav-link {{ Request::routeIs('users.index') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>
+                                Edit Account
+                            </p>
+                        </a>
+                    </li>
                 @endif
                 <li class="nav-item" id="logout" style="cursor: pointer">
                     {{--                    <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();--}}

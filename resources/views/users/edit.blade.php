@@ -60,10 +60,15 @@
                                     @if(Auth::user()->id == 1)
                                         <option value="Administrator">Administrator</option>
                                     @endif
-                                    @foreach($departments as $department)
-                                        <option
-                                            value="{{$department->dept_name}}" {{$department->dept_name == $user->department  ? 'selected' : ''}}>{{$department->dept_name}}</option>
-                                    @endforeach
+                                    @if($user->id == 1)
+                                        <option value="Administrator">Administrator</option>
+                                    @else
+                                        @foreach($departments as $department)
+                                            <option
+                                                value="{{$department->dept_name}}" {{$department->dept_name == $user->department  ? 'selected' : ''}}>{{$department->dept_name}}</option>
+                                        @endforeach
+                                    @endif
+
                                 </select>
                             </div>
                             <div class="col-md-6">

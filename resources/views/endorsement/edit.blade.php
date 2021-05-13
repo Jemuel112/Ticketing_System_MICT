@@ -148,7 +148,7 @@
         <div id="ver">
             <div class="float-right">
                 <b>Version</b> @{{ version }} &nbsp;
-                <button type="submit" form="myForm" class="btn btn-primary"><i class="far fa-save"></i>
+                <button type="submit" form="myForm" class="btn btn-primary" id="btn-submit"><i class="far fa-save"></i>
                     Update
                 </button>
 
@@ -195,5 +195,13 @@
                 ],
             })
         })
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#myForm").submit(function (e) {
+                $("#btn-submit").attr("disabled", true);
+                return true;
+            });
+        });
     </script>
 @endsection
