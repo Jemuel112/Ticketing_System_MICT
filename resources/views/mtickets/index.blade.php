@@ -28,7 +28,7 @@
                           @else action="/My_Sort" @endif class="container-fluid" autocomplete="off" method="GET">
                         @csrf
                         <div class="row float-right" style="width: 100%;">
-                            <div class="col-sm-3 col-lg-3" style="width: 100%;">
+                            <div @if(Auth::user()->department == 'Administrator' || Auth::user()->department == 'MICT') class="col-sm-3 col-lg-3" @else class="col-sm-4 col-lg-4" @endif style="width: 100%;">
                                 <input type="text" class="form-control float-right" name="datefilter"
                                        placeholder="Date Range" value="{{request()->input('datefilter')}}">
                             </div>
@@ -45,7 +45,7 @@
                                 </div>
                             @else
                             @endif
-                            <div class="col-sm-3 col-lg-3">
+                            <div @if(Auth::user()->department == 'Administrator' || Auth::user()->department == 'MICT') class="col-sm-3 col-lg-3" @else class="col-sm-4 col-lg-4" @endif>
                                 <select class="form-control select2 col-md-7"
                                         name="status" id="stats"
                                         style="width: 100%;">
@@ -71,7 +71,7 @@
                                 </select>
                             </div>
 
-                            <div class="col-sm-3 col-lg-3">
+                            <div @if(Auth::user()->department == 'Administrator' || Auth::user()->department == 'MICT') class="col-sm-3 col-lg-3" @else class="col-sm-4 col-lg-4" @endif>
                                 <button type="submit" class="btn btn-info col-12">Apply</button>
                             </div>
                         </div>

@@ -11,6 +11,12 @@ use Illuminate\Support\Facades\Session;
 
 class ReportsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('disablepreventback');
+        $this->middleware('auth');
+        $this->middleware('auth.am');
+    }
     public function actionsUpdate(Request $request)
     {
         dd($request->action_id);

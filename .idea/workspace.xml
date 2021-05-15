@@ -3,6 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="e46f795c-50de-4821-94e9-0a47af70672e" name="Default Changelist" comment="Innitial Commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReportsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReportsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/AccessAM.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/AccessAM.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mtickets/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mtickets/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mtickets/mytickets.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mtickets/mytickets.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -189,19 +196,19 @@
     <property name="settings.editor.selected.configurable" value="configurable.group.language" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Github\Ticketing_System_MICT_06-01-2020 (Live)\resources\views\reports" />
-      <recent name="D:\Github\Ticketing_System_MICT\resources\views\mtickets" />
-      <recent name="D:\Github\Ticketing_System_MICT\resources\views\reports" />
-      <recent name="D:\Github\Ticketing_System_MICT\resources\views\endorsement" />
-      <recent name="E:\Github\Ticketing_System_MICT\resources\views\endorsement" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Github\Ticketing_System_MICT\app\Http\Controllers\API" />
       <recent name="D:\Github\Ticketing_System_MICT\resources\views" />
       <recent name="D:\Github\Ticketing_System_MICT\public" />
       <recent name="D:\Github\Ticketing_System_MICT\public\notification" />
       <recent name="C:\Users\Jemuel\Desktop\New folder (10)\public\plugins\tempusdominus-bootstrap-4\js" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Github\Ticketing_System_MICT_06-01-2020 (Live)\resources\views\reports" />
+      <recent name="D:\Github\Ticketing_System_MICT\resources\views\mtickets" />
+      <recent name="D:\Github\Ticketing_System_MICT\resources\views\reports" />
+      <recent name="D:\Github\Ticketing_System_MICT\resources\views\endorsement" />
+      <recent name="E:\Github\Ticketing_System_MICT\resources\views\endorsement" />
     </key>
   </component>
   <component name="RunManager">
