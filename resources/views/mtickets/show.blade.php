@@ -445,7 +445,7 @@
                 </div>
             </section>
 
-            @if($shared > 0)
+            
                 <section class="container-fluid">
                     <input type="text" name="ticket_id" value="{{$ticket->id}}" hidden>
                     @csrf
@@ -463,14 +463,15 @@
                             <!-- The time line -->
                             <div class="timeline">
                                 <!-- timeline time label -->
+                                @if($shared > 0)
                                 @forelse($actions as $action => $contents)
+                                <div class="time-label">
+                                    <span
+                                        class="bg-gradient-indigo">{{date('M d, Y', strtotime($action))}}</span>
+                                </div>
                                     @foreach($contents as $key => $content)
                                         @if($content->shared == 1 || Auth::user()->department == 'Administrator' || Auth::user()->department == 'MICT')
-                                            <div class="time-label">
 
-                                            <span
-                                                class="bg-gradient-indigo">{{date('M d, Y', strtotime($action))}}</span>
-                                            </div>
                                             <!-- /.timeline-label -->
                                             <!-- timeline item -->
 
@@ -480,9 +481,15 @@
                                                     <div class="icheck-danger float-right">
                                                     </div>
                                                     <span class="time"><i class="fas fa-clock"></i> {{date(' h:i A', strtotime($content->created_at))}}</span>
+                                                    @if($content->id_user == 0)
+                                                    <h3 class="timeline-header"><a
+                                                            >SYSTEM GENERATED</a>
+                                                    </h3>
+                                                    @else
                                                     <h3 class="timeline-header"><a
                                                             href="#">{{app\User::findOrFail($content->id_user)->fname}} {{app\User::findOrFail($content->id_user)->lname}}</a>
                                                     </h3>
+                                                    @endif
                                                     <div class="timeline-body">
                                                         {{--                                                    echo strip_tags($content->actions)--}}
                                                         {!! $content->actions !!}
@@ -495,16 +502,24 @@
                                 @endforeach
                             @empty
                             @endforelse
+                            @endif
                             <!-- END timeline item -->
+                                <div class="time-label">
+                                    <span class="bg-gradient-indigo">{{date('M d, Y  h:i A', strtotime($ticket->created_at))}}</span>
+                                </div>
                                 <div>
                                     <i class="fas fa-clock bg-gray"></i>
+                                    <div class="timeline-item">
+                                        <h3 class="timeline-header">
+                                            <a>Ticket has been Created</a>
+                                        </h3>
+                                    </div>          
                                 </div>
                             </div>
                         </div>
                         <!-- /.col -->
                     </div>
                 </section>
-            @endif
 
         </div>
         <!-- /.content -->

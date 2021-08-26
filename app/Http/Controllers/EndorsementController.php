@@ -174,6 +174,7 @@ class EndorsementController extends Controller
      */
     public function show($id)
     {
+        $users = null;
         $endorse = Endorsement::findOrFail($id);
         $user = User::findOrFail($endorse->created_by_id);
         $files = EndorsmentFiles::where('endorse_id', $id)->get();
@@ -206,6 +207,7 @@ class EndorsementController extends Controller
             $stamp->save();
             $seens[] = $stamp;
         }
+        // dd($users);
         return view('endorsement.show', compact('endorse', 'user', 'users', 'files', 'to', 'departments', 'files', 'seens'));
     }
 

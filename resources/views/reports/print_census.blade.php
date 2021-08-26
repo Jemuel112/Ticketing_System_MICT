@@ -71,19 +71,19 @@
                     @foreach( $micts as $key => $mict )
                         <tr>
                             <td>{{$mict->fname}}</td>
-                            <td>{{$active[$key]}}</td>
-                            <td>{{$on_going[$key]}}</td>
-                            <td>{{$resolved[$key]}}</td>
-                            <td>{{$closed[$key]}}</td>
+                            <td>@if($active[$key] != 0) {{$active[$key]}} @endif</td>
+                            <td>@if($on_going[$key] !=0) {{$on_going[$key]}} @endif</td>
+                            <td>@if($resolved[$key] !=0) {{$resolved[$key]}} @endif</td>
+                            <td>@if($closed[$key] !=0) {{$closed[$key]}} @endif</td>
                             <td>{{ $active[$key] + $on_going[$key] + $resolved[$key] + $closed[$key] }}</td>
                         </tr>
                     @endforeach
                     <tr>
                         <td>Unassigned</td>
-                        <td>{{$nactive}}</td>
-                        <td>{{$non_going}}</td>
-                        <td>{{$nresolved}}</td>
-                        <td>{{$nclosed}}</td>
+                        <td>@if($nactive !=0) {{$nactive}} @endif</td>
+                        <td>@if($non_going !=0) {{$non_going}} @endif</td>
+                        <td>@if($nresolved !=0) {{$nresolved}} @endif</td>
+                        <td>@if($nclosed !=0) {{$nclosed}} @endif</td>
                         <td>{{ $nactive + $non_going + $nresolved + $nclosed }}</td>
                     </tr>
                     <tr style="font-weight: bolder">

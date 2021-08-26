@@ -84,11 +84,11 @@
                                             @forelse($data as $ticket => $call)
                                                 <tr>
                                                     <td>{{$ticket}}</td>
-                                                    <td>{{$call[0]}}</td>
-                                                    <td>{{$call[1]}}</td>
-                                                    <td>{{$call[2]}}</td>
-                                                    <td>{{$call[3]}}</td>
-                                                    <td>{{$call[4]}}</td>
+                                                    <td>@if($call[0]!=0) {{$call[0]}} @endif</td>
+                                                    <td>@if($call[1]!=0) {{$call[1]}} @endif</td>
+                                                    <td>@if($call[2]!=0) {{$call[2]}} @endif</td>
+                                                    <td>@if($call[3]!=0) {{$call[3]}} @endif</td>
+                                                    <td>@if($call[4]!=0) {{$call[4]}} @endif</td>
                                                     <td>{{$call[0]+$call[1]+$call[2]+$call[3]+$call[4]}}</td>
                                                 </tr>
                                             @empty

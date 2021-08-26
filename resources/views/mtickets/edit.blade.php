@@ -589,9 +589,7 @@
                                     <textarea id="remarks" name="recommendation"
                                               placeholder="Enter Recommendation here"
                                               style="resize: none ;width: 100%; height: 75px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
-                                              @if($ticket->status == "Closed" && Auth::user()->department != "Administrator")
-                                              disabled @endif>
-                                        {{old('recommendation') ?? $ticket->recommendation}}</textarea>
+                                              @if($ticket->status == "Closed" && Auth::user()->department != "Administrator") disabled @endif >  {{old('recommendation') ?? $ticket->recommendation}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -606,7 +604,7 @@
             </form>
         </section>
 
-        @if($actions->count() >0)
+        
             <section class="container-fluid pb-3 px-5">
                 <form action="/MICT-Tickets/report" method="POST" id="myForm2">
                     <input type="text" name="ticket_id" value="{{$ticket->id}}" hidden>
@@ -623,6 +621,7 @@
                             <!-- The time line -->
                             <div class="timeline">
                                 <!-- timeline time label -->
+                                @if($actions->count() >0)
                                 @forelse($actions as $action => $contents)
                                     <div class="time-label">
 
@@ -637,7 +636,7 @@
                                                 <i class="fas fa-envelope bg-blue"></i>
                                                 <div class="timeline-item">
                                                     <div class="icheck-danger float-right">
-                                                        <input type="checkbox" name="action_id[]"
+                                                        <input @if($content->id_user == 0) disabled @endif type="checkbox" name="action_id[]"
                                                                value="{{$content->id}}"
                                                                id="checkboxDanger[{{$content->id}}]">
                                                         <label for="checkboxDanger[{{$content->id}}]">Add to report
@@ -653,9 +652,15 @@
                                                                for="action_id_edit[{{$content->id}}]">@if($content->shared == "1")
                                                                 Sharred @else Not Sharred @endif</label>
                                                     </div>
+                                                    @if($content->id_user == 0)
+                                                    <h3 class="timeline-header"><a
+                                                            >SYSTEM GENERATED</a>
+                                                    </h3>
+                                                    @else
                                                     <h3 class="timeline-header"><a
                                                             href="#">{{app\User::findOrFail($content->id_user)->fname}} {{app\User::findOrFail($content->id_user)->lname}}</a>
                                                     </h3>
+                                                    @endif
                                                     <div class="timeline-body">
                                                         {{--                                                        <div class="container">--}}
                                                         {!!$content->actions!!}
@@ -670,10 +675,21 @@
                                 @endforeach
                             @empty
                             @endforelse
+                            @endif
                             <!-- END timeline item -->
+                                <div class="time-label">
+                                    <span class="bg-gradient-indigo">{{date('M d, Y  h:i A', strtotime($ticket->created_at))}}</span>
+                                @if($actions->count() >0)
+                                <button type="submit" class="btn btn-info float-right" >Generate Report</button>
+                                @endif
+                                </div>
                                 <div>
                                     <i class="fas fa-clock bg-gray"></i>
-                                    <button type="submit" class="btn btn-info float-right">Generate Report</button>
+                                    <div class="timeline-item">
+                                        <h3 class="timeline-header">
+                                            <a>Ticket has been Created</a>
+                                        </h3>
+                                    </div> 
                                 </div>
                             </div>
                         </div>
@@ -681,7 +697,6 @@
                     </div>
                 </form>
             </section>
-        @endif
 
     </div>
 

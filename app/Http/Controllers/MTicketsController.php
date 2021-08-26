@@ -195,11 +195,19 @@ class MTicketsController extends Controller
     public function edit($id)
     {
         $ticket = mTicket::findOrFail($id);
-        if (is_null($ticket->acknowledge_by)) {
+        if (is_null($ticket->acknowledge_by) && $ticket->is_new == 1) {
             $ticket->acknowledge_by = Auth::user()->fname;
         }
         $ticket->is_new = 0;
         $comments = mcomments::Where([['id_mticket', '=', $id]])->orderBy('created_at', 'DESC')->get();
+        if($ticket->getOriginal('acknowledge_by') != $ticket->acknowledge_by){
+            $action = new mactions();
+            $action->shared = 0;       
+            $action->actions = "User: ".Auth::user()->fname." ".Auth::user()->lname. " ID: ".Auth::user()->id."<br/> Change the Acknowledge by from ". $ticket->getOriginal('acknowledge_by') . " to " . $ticket->acknowledge_by;
+            $action->id_mticket = $id;
+            $action->id_user = 0;
+            $action->save();
+        }
         $actions = mactions::Where([['id_mticket', '=', $id]])->orderBy('created_at', 'DESC')->get()->groupBy(function ($item) {
             return $item->created_at->format('Y-m-d');
         });
@@ -212,6 +220,7 @@ class MTicketsController extends Controller
                 ['department', '=', 'Administrator']
             ])
             ->get();
+
         $ticket->save();
         return view('mtickets.edit', compact('ticket', 'micts', 'departments', 'comments', 'actions'));
     }
@@ -295,7 +304,7 @@ class MTicketsController extends Controller
         }
 
 //        event(new MTicket());
-
+        
         return redirect('/MICT-Tickets')->with('message', 'Ticket #' . $tickets->id . ' has been Created!');
     }
 
@@ -329,18 +338,7 @@ class MTicketsController extends Controller
 
     public function update(TicketFormRequest $request, $id)
     {
-        if ($request->action_id_edit) {
-            $action_id = $request->action_id_edit;
-            foreach ($action_id as $id) {
-                $action = mactions::find($id);
-                if (Str::contains($action->shared, '0')) {
-                    $action->shared = 1;
-                } else {
-                    $action->shared = 0;
-                }
-                $action->save();
-            }
-        }
+
         $ticket = mTicket::findOrFail($id);
         if ($request->status == "Closed" || $request->status == "Resolve") {
             if (!is_null($request->finished_at)) {
@@ -392,32 +390,103 @@ class MTicketsController extends Controller
             $comment->id_mticket = $id;
             $comment->save();
         }
-        if (!is_null($request->recommendation)) {
-            $ticket = mTicket::findOrFail($id);
-            $ticket->recommendation = $request->recommendation;
-            $ticket->save();
-        }
 
         $ticket->og_status = $request->og_status;
+        $ticket->sys_category = $request->sys_category;
         $ticket->reported_by = $request->reported_by;
         $ticket->request_by = $request->request_by;
         $ticket->acknowledge_by = $request->acknowledge_by;
         $ticket->status = $request->status;
         $ticket->category = $request->category;
-        $ticket->sys_category = $request->sys_category;
         $ticket->concerns = $request->concerns;
         $ticket->lop = $request->lop;
         $ticket->updated_by = Auth::user()->fname;
         $ticket->recommendation = $request->recommendation;
-
+        
+        if($ticket->isDirty()){
+            $action = new mactions();
+            $action->shared = 0;   
+            $action->actions = "User: <b>".Auth::user()->fname." ".Auth::user()->lname."</b>    ID: <b>".Auth::user()->id. "</b> <br> <b>Has Changed the following details below</b>";
+            if($ticket->isDirty('reported_by')){
+                $action->actions .= "<br> Reported by from <b>'". $ticket->getOriginal('reported_by')."'</b> to <b>'". $ticket->reported_by."'</b>";
+            }
+            if($ticket->isDirty('request_by')){
+                $action->actions .= "<br> Requested by from <b>'". $ticket->getOriginal('request_by')."'</b> to <b>'". $ticket->request_by."'</b>";
+            }
+            if($ticket->isDirty('status')){
+                $action->actions .= "<br> Status from <b>'". $ticket->getOriginal('status')."'</b> to <b>'". $ticket->status."'</b>";
+            }
+            if($ticket->isDirty('og_status')){
+                $action->actions .= "<br> On-Going Status from <b>'". $ticket->getOriginal('og_status')."'</b> to <b>'". $ticket->og_status."'</b>";
+            }
+            if($ticket->isDirty('start_at')){
+                $action->actions .= "<br> Date to Start from <b>'". $ticket->getOriginal('start_at')."'</b> to <b>'". $ticket->start_at."'</b>";
+            }
+            if($ticket->isDirty('end_at')){
+                $action->actions .= "<br> Deadline from <b>'". $ticket->getOriginal('end_at')."'</b> to <b>'". $ticket->end_at."'</b>";
+            }
+            if($ticket->isDirty('acknowledge_by')){
+                $action->actions .= "<br> Acknowledge by from <b>'". $ticket->getOriginal('acknowledge_by')."'</b> to <b>'". $ticket->acknowledge_by."'</b>";
+            }
+            if($ticket->isDirty('assigned_to')){
+                $action->actions .= "<br> Assigned to from <b>'". $ticket->getOriginal('assigned_to')."'</b> to <b>'". $ticket->assigned_to."'</b>";
+            }
+            if($ticket->isDirty('assisted_by')){
+                $action->actions .= "<br> Assisted by from <b>'". $ticket->getOriginal('assisted_by')."'</b> to <b>'". $ticket->assisted_by."'</b>";
+            }
+            if($ticket->isDirty('accomplished_by')){
+                $action->actions .= "<br> Accomplished by from <b>'". $ticket->getOriginal('accomplished_by')."'</b> to <b>'". $ticket->accomplished_by."'</b>";
+            }
+            if($ticket->isDirty('category')){
+                $action->actions .= "<br> Category from <b>'". $ticket->getOriginal('category')."'</b> to <b>'". $ticket->category."'</b>";
+            }
+            if($ticket->isDirty('sys_category')){
+                $action->actions .= "<br> System Category from <b>'". $ticket->getOriginal('sys_category')."'</b> to <b>'". $ticket->sys_category."'</b>";
+            }
+            if($ticket->isDirty('lop')){
+                $action->actions .= "<br> Level of Priority from <b>'". $ticket->getOriginal('lop')."'</b> to <b>'". $ticket->lop."'</b>";
+            }
+            if($ticket->isDirty('concerns')){
+                $action->actions .= "<br> Concern from <b>'". $ticket->getOriginal('concerns')."'</b> to <b>'". $ticket->concerns."'</b>";
+            }
+            if($ticket->isDirty('recommendation')){
+                $action->actions .= "<br> Recommendation from <b>'". $ticket->getOriginal('recommendation')."'</b> to <b>'". $ticket->recommendation."'</b>";
+            }
+            $action->id_mticket = $id;
+            $action->id_user = 0;
+            $action->save();
+        }
+        // if($ticket->getOriginal('acknowledge_by') != $ticket->acknowledge_by){
+        //     $action = new mactions();
+        //     $action->shared = 0;       
+        //     $action->actions = "User: ".Auth::user()->fname." ".Auth::user()->lname. " ID: ".
+        //     Auth::user()->id."<br/> Change the Acknowledge by from ". $ticket->getOriginal('acknowledge_by') . " to " . $ticket->acknowledge_by;
+        //     $action->id_mticket = $id;
+        //     $action->id_user = 0;
+        //     $action->save();
+        // }
+        if ($request->action_id_edit) {
+            $action_id = $request->action_id_edit;
+            foreach ($action_id as $id) {
+                $action = mactions::find($id);
+                if (Str::contains($action->shared, '0')) {
+                    $action->shared = 1;
+                } else {
+                    $action->shared = 0;
+                }
+                $action->save();
+            }
+        }
         $ticket->save();
+
+        return redirect('/MICT-Tickets')->with('message', 'Ticket #' . $ticket->id . ' has been Updated!');
+
 //        alert()->success('SuccessAlert','Lorem ipsum dolor sit amet.');
 //        alert()->success('SuccessAlert','Lorem ipsum dolor sit amet.');
 //        alert()->success('Post Created', '<strong>Successfully</strong>')->toHtml();
         // example:
-        event(new MTicket());
+        // event(new MTicket());
 
-        return redirect('/MICT-Tickets')->with('message', 'Ticket #' . $ticket->id . ' has been Updated!');
 
     }
 

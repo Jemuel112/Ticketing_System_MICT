@@ -124,7 +124,7 @@
                         </a>
                     </li>
                 @endif
-                @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT")
+                {{-- @if(Auth::user()->department == "Administrator" || Auth::user()->department == "MICT") --}}
                     <li class="nav-header">
                         ENDORSEMENTS
                     </li>
@@ -158,7 +158,7 @@
                             </p>
                         </a>
                     </li>
-                @endif
+                {{--@endif--}}
                 <li class="nav-header">
                     SETTINGS
                 </li>
