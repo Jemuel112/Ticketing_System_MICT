@@ -80,8 +80,8 @@
                                             @forelse($data as $ticket => $call)
                                                 <tr>
                                                     <td>{{$ticket}}</td>
-                                                    <td>@(if$call[0] != 0){{$call[0]}} @endif</td>
-                                                    <td>@(if$call[1] != 0){{$call[1]}} @endif</td>
+                                                    <td>@if($call[0] != 0){{$call[0]}} @endif</td>
+                                                    <td>@if($call[1] != 0){{$call[1]}} @endif</td>
                                                     <td>{{$call[0]+$call[1]}}</td>
                                                 </tr>
                                             @empty
