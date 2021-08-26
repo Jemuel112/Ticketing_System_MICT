@@ -51,7 +51,11 @@ class EndorsementController extends Controller
             }
         } else {
             $user = Auth::user()->id;
-            $dept = Department::select('id')->where('dept_name', Auth::user()->department)->first();
+            if(Auth::user()->department == "Administrator"){
+                $dept = Department::select('id')->where('dept_name', "MICT")->first();
+            }else{
+                $dept = Department::select('id')->where('dept_name', Auth::user()->department)->first();
+            }       
             $endors = Endorsement::all();
             $endorsements = null;
             foreach ($endors as $endor) {
